@@ -68,6 +68,16 @@
 \renewcommand*{\fps@table}{htb}
 \makeatother
 
+% command für einfacheres Einfügen von einzelnen Bildern
+\newcommand{\bild}[4]{%
+  \begin{figure}
+    \centering
+    \includegraphics[width=#1\textwidth]{#2}%
+    \caption{#3}%
+    \label{#4}%
+  \end{figure}
+}%
+
 \addto{\captionsngerman}{	% Renew some Captions
 % \renewcommand*{\contentsname}{Inhalt}
   \renewcommand*{\listfigurename}{Abbildungen}
@@ -115,7 +125,7 @@
 \center
 
 \textsc{\LARGE Hochschule Luzern\\Informatik}\\[1.5cm] % Name of your university/college
-\textsc{\Large Informatikprojekt PAWI}\\[1.5cm] % Major heading such as course name
+\textsc{\Large Informatikprojekt PAWI, FS 2018}\\[1.5cm] % Major heading such as course name
 
 \HRule \\[1cm]
 {\huge \bfseries iOS App mit Machine Learning und Augmented Reality}\\[0.6cm] % Title of your document
@@ -123,11 +133,23 @@
 
 \vspace{30pt}
 
-\emph{Autoren:}\\
-Dorus \textsc{Janssens}\\
-Lucas \textsc{Schnüriger}\\
-% Rafael \textsc{Stalder}\\
-% Dominik \textsc{Zgraggen}
+\begin{minipage}{0.4\textwidth}
+  \begin{flushleft} \large
+    \emph{Autoren:}\\
+    Dorus \textsc{Janssens}\\
+    Lucas \textsc{Schnüriger}\\
+    ~\\~ % for vertical alignment
+  \end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+  \begin{flushleft} \large
+    \emph{Dozent:}\\
+    Prof. Dr. Ruedi \textsc{Arnold}\\~\\
+    \emph{Projektpartner:}\\
+    Prof. Dr. Thomas \textsc{Koller}
+  \end{flushleft}
+\end{minipage}\\[1cm]
+
 
 \vspace{30pt}
 
