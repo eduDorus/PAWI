@@ -2,7 +2,7 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[10pt]{article} % Default font size is 12pt, it can be changed here
+\documentclass[11pt]{article} % Default font size is 12pt, it can be changed here
 \pagestyle{headings}
 
 \usepackage{geometry} % Required to change the page size to A4
@@ -157,15 +157,40 @@
 
 \end{titlepage}
 
+
+%----------------------------------------------------------------------------------------
+%	Vor-Zeugs
+%----------------------------------------------------------------------------------------
+\pagenumbering{Roman}
+\pagestyle{plain}
+
+\IfFileExists{01-Selbststaendigkeitserklaerung}{
+  \input{01-Selbststaendigkeitserklaerung}
+}
+
+\newpage
+\IfFileExists{02-Abstract}{
+  \input{02-Abstract}
+}
+
+\newpage
+\IfFileExists{03-Begriffe}{
+  \input{03-Begriffe}
+}
+
 %----------------------------------------------------------------------------------------
 %	TOC
 %----------------------------------------------------------------------------------------
+\newpage
 \tableofcontents % Include a table of contents
 
 %----------------------------------------------------------------------------------------
 %	Content
 %----------------------------------------------------------------------------------------
 \newpage % Begins the essay on a new page instead of on the same page as the table of contents
+\pagenumbering{arabic}
+
+\pagestyle{fancy}
 \lhead{I.BA\_PAWI.F18}
 \chead{Hochschule Luzern – Informatik}
 \rhead{\nouppercase{\leftmark}}
@@ -173,11 +198,26 @@
 \cfoot{}
 \rfoot{\thepage\ von \pageref{LastPage}}
 
-\section{Titel 1}
+\section{Einleitung}
 
-% \IfFileExists{01}
-            % {\input{01}}
-            % {\typeout{Hinweis: Datei "01" fehlt und wird ausgelassen.}}
+\section{Problemstellung}
+\subsection{Ausgangslage}
+\subsection{Ziele}
+\subsection{Abgrenzung (Scope)}
+\subsection{Anforderungen}
+\subsection{Lösungsskizze}
+
+\section{Stand der Technik}
+
+\section{Lösungsentwicklung}
+
+\section{Umsetzung}
+
+\section{Validierung}
+
+\section{Schlussfolgerungen}
+\subsection{Lessons Learned}
+\subsection{Ausblick}
 
 
 %----------------------------------------------------------------------------------------
