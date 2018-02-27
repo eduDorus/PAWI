@@ -1,0 +1,194 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt]{article} % Default font size is 12pt, it can be changed here
+\pagestyle{headings}
+
+\usepackage{geometry} % Required to change the page size to A4
+\geometry{a4paper, total={6.4in, 9in}} % Set the page size to be A4 as opposed to the default US Letter
+\usepackage{graphicx} % Required for including pictures
+\usepackage{subcaption} % to use subfigure
+\usepackage{wrapfig} % Allows in-line images such as the example fish picture
+\usepackage[natbibapa]{apacite}  % APA Standard citing
+\usepackage[ngerman]{babel}
+\usepackage[utf8x]{inputenc} % utf8x instead of utf8 becuase "breaks" are not recognized in utf8
+\usepackage{parskip} % For auto-paragraphs
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{lscape} % For landscape content
+\usepackage[hyphens]{url} % for linebreaking url's in sources MUSS VOR HYPERREF PACKAGE KOMMEN
+\usepackage{hyperref} % For clickable table of contents
+\usepackage[bottom]{footmisc} % For footnotes at them bottom
+\usepackage{enumitem} % no separation between list items
+\usepackage{soulutf8}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{multicol}
+\setlength{\columnsep}{0.6cm}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage} % have sections start a new page
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\oddsidemargin = 0pt
+
+\makeatletter % Quellen in Abbildungsverzeichnis
+\newcommand{\figsourcefont}{\footnotesize Quelle: }
+\newcommand{\figsource}[1]{%
+  \addtocontents{lof}{%
+    {\leftskip\cftfigindent
+     \advance\leftskip\cftfignumwidth
+     \rightskip\@tocrmarg
+     \figsourcefont#1\protect\par}%
+  }%
+ }
+\makeatother
+
+% alle Figures automatisch \centering
+\makeatletter
+\g@addto@macro\@floatboxreset\centering
+\makeatother
+
+% alle Figures und Tabellen automatisch an Position [htb]
+\makeatletter
+\renewcommand*{\fps@figure}{htb}
+\renewcommand*{\fps@table}{htb}
+\makeatother
+
+\addto{\captionsngerman}{	% Renew some Captions
+% \renewcommand*{\contentsname}{Inhalt}
+  \renewcommand*{\listfigurename}{Abbildungen}
+  \renewcommand*{\listtablename}{Tabellen}
+  \renewcommand*{\figurename}{Abb.}
+  \renewcommand*{\tablename}{Tab.}
+}
+
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+%\usepackage{fixltx2e} % for upper / subscript
+
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+
+\usepackage[breakwords]{truncate}
+\usepackage{tcolorbox}
+\newtcolorbox[auto counter, number within=section, list inside=lernziel.toc]{lernziel}[2][]{%
+  colback=black!5!white, colframe=black!50!white,
+  fonttitle=\bfseries, fontupper=\bfseries #2 \tcblower,
+  boxrule=0.3mm,
+  boxsep=2mm, left=1mm, right=1mm,
+  title=Lernziel~\thetcbcounter, list text=#2, #1
+}
+
+\newenvironment{italicquotes} % Long quotes italic
+{\begin{quote}\itshape}
+{\end{quote}}
+
+\linespread{1.2} % Line spacing
+\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs "Umfang ca..."
+\setcounter{tocdepth}{2}
+
+\graphicspath{{images/}} % Specifies the directory where pictures are stored
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center
+
+\textsc{\LARGE Hochschule Luzern\\Informatik}\\[1.5cm] % Name of your university/college
+\textsc{\Large Informatikprojekt PAWI}\\[1.5cm] % Major heading such as course name
+
+\HRule \\[1cm]
+{\huge \bfseries iOS App mit Machine Learning und Augmented Reality}\\[0.6cm] % Title of your document
+\HRule \\[1cm]
+
+\vspace{30pt}
+
+\emph{Autoren:}\\
+Dorus \textsc{Janssens}\\
+Lucas \textsc{Schnüriger}\\
+% Rafael \textsc{Stalder}\\
+% Dominik \textsc{Zgraggen}
+
+\vspace{30pt}
+
+{\large \today }\\[1cm] % Date, change the \today to a set date if you want to be precise
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	TOC
+%----------------------------------------------------------------------------------------
+\tableofcontents % Include a table of contents
+
+%----------------------------------------------------------------------------------------
+%	Content
+%----------------------------------------------------------------------------------------
+\newpage % Begins the essay on a new page instead of on the same page as the table of contents
+\lhead{I.BA\_PAWI.F18}
+\chead{Hochschule Luzern – Informatik}
+\rhead{\nouppercase{\leftmark}}
+\lfoot{\today}
+\cfoot{}
+\rfoot{\thepage\ von \pageref{LastPage}}
+
+\section{Titel 1}
+
+% \IfFileExists{01}
+            % {\input{01}}
+            % {\typeout{Hinweis: Datei "01" fehlt und wird ausgelassen.}}
+
+
+%----------------------------------------------------------------------------------------
+%	Bibliography
+%----------------------------------------------------------------------------------------
+\newpage
+\section{Quellen und Verzeichnisse}
+\bibliographystyle{apacite}
+\bibliography{Quellen}
+%------------------------------------------------
+\newpage
+%\section{Abbildungsverzeichnis}
+\listoffigures
+\addtocontents{lof}{\protect\thispagestyle{headings}}
+%------------------------------------------------
+\newpage
+%\section{Tabellenverzeichnis}
+\listoftables
+\addtocontents{lot}{\protect\thispagestyle{headings}}
+
+%----------------------------------------------------------------------------------------
+%	Appendix
+%----------------------------------------------------------------------------------------
+\newpage
+\appendix
+\setcounter{figure}{0}
+\setcounter{secnumdepth}{0}
+\newgeometry{
+ total={170mm,257mm},
+ left=25mm,
+ top=25mm,}
+\IfFileExists{20_Appendix}{
+\input{20_Appendix}
+}
+
+\end{document}
