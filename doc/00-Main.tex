@@ -198,7 +198,10 @@
 \cfoot{}
 \rfoot{\thepage\ von \pageref{LastPage}}
 
-\section{Einleitung}
+\newpage
+\IfFileExists{04-Einleitung}{
+  \input{04-Einleitung}
+}
 
 \section{Problemstellung}
 \subsection{Ausgangslage}
