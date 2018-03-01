@@ -93,4 +93,5 @@ fastlane/test_output
 *.fdb_latexmk
 *.fls
 *.swp
+doc/*.pdf
 
