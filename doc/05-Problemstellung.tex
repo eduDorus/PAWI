@@ -19,17 +19,29 @@ In dieser Arbeit gibt es einige Freiheitsgrade, sprich viele funktionale und tec
 \subsection{Fragestellungen}
 
 \subsection{Anforderungen}
-M = Muss (Festanforderung), S = Soll (Wunschanforderung), K = Kann (Zusatzanforderung).
+Im diesem Kapitel sind alle funktionalen und nichtfunktionalen Anforderungen des Projekts festgehalten. Jede Anforderung ist in eine der folgenden drei Kategorien priorisiert:
+\begin{itemize}
+	\item Muss (M): Dies sind Festanforderungen, die zwingend vom Projekt erfüllt werden müssen.
+	\item Soll (S): Dies sind Wunschanforderungen, die umgesetzt werden sollen, sobald die Muss-Anforderungen erfüllt sind oder erfüllt werden können.
+	\item Kann (K): Diese Zusatzanforderungen haben die niedrigste Priorität und können umgesetzt werden, sofern keine anderen (wichtigeren) Anforderungen beeinträchtigt werden und der erfolgreiche Projektablauf nicht gefährdet wird.
+\end{itemize}
 
 \subsubsection{Funktionale Anforderungen}
+In Tabelle \ref{tab:funktionale-anforderungen} sind die funktionalen Anforderungen an die zu entwickelnde App aufgelistet. Diese Anforderungen beschreiben die gewünschten Funktionen und Leistungen der fertigen Anwendung.
 
 \begin{table}
-	\begin{tabular}{l c p{5cm} p{9cm}}
+	\begin{tabular}{l l p{4.7cm} p{8cm}}
 		\hline
-		Nr. & Prio. & Bezeichnung & Erläuterungen \\
+		\textbf{Nr.} & \textbf{Prio.} & \textbf{Bezeichnung} & \textbf{Erläuterungen} \\
 		\hline
 		01 & M & Erkennen einer Kugelbahn & Die App muss eine physisch aufgebaute Kugelbahn as solche erkennen. \\
-		02 & S & Digitale Erfassung einer Kugelbahn & Mit der App kann eine physisch aufgebaute Kugelbahn erfasst und so digitalisiert werden. \\
+		02 & S & Digitale Erfassung einer Kugelbahn & Mit der App können verschiedene physisch aufgebaute Kugelbahnen erfasst und so digitalisiert werden (CV). \\
+		03 & S & Virtuelle Darstellung einer Kugelbahn & Die App kann eine Kugelbahn virtuell darstellen (VR). \\
+		04 & S & virtuelle Überlagerungen einer Kugelbahn & Ein physisches Modell einer Kugelbahn kann in Echtzeit mit virtuellen Überlagerungen auf der App angereichert werden (AR). \\
+		05 & S & Mehrere Kugelbahnen erfassen & Mehrere unterschiedliche Kugelbahnen können in der App erfasst, bzw. hinterlegt, werden. \\
+		06 & K & Import von cuboro-Webkit & Kugelbahnen auf dem cuboro-Webkit können in der App importiert werden. \\
+		07 & K & Virtuelle Kugeln simulieren & Es können virtuelle Kugeln auf einer physischen Kugelbahn simuliert werden. \\
+		08 & K & Kugelbahn virtuell platzieren & Erfasste virtuelle Kugelbahnen können mittels AR auf eine physische Fläche platziert und betrachtet werden. \\
 		\hline
 	\end{tabular}
 	\caption{Funktionale Anforderungen}
@@ -37,15 +49,16 @@ M = Muss (Festanforderung), S = Soll (Wunschanforderung), K = Kann (Zusatzanford
 \end{table}
 
 \subsubsection{Nichtfunktionale Anforderungen}
+In Tabelle \ref{tab:nichtfunktionale-anforderungen} sind die nichtfunktionalen Anforderungen an das Projekt aufgelistet. Nichtfunktionale Anforderungen betreffen einerseits die Qualität (während und ausserhalb der Laufzeit) sowie die Einschränkungen (aus der Technologie und aus Randbedingungen des Moduls PAWI) des Projekts. Dies betrifft sowohl die Applikation als solches, als auch die Dokumentation.
 
 \begin{table}
-	\begin{tabular}{l c p{5cm} p{9cm}}
+	\begin{tabular}{l l p{4.7cm} p{8cm}}
 		\hline
-		Nr. & Prio. & Bezeichnung & Erläuterungen \\
+		\textbf{Nr.} & \textbf{Prio.} & \textbf{Bezeichnung} & \textbf{Erläuterungen} \\
 		\hline
-		01 & M & Lauffähige Demo & Die App ist lauffähig. \\
-		02 & M & iOS und Swift & Die App ist in Swift für iOS programmiert. \\
-		03 & M & Recherche ARKit, Core ML, Vision & Die Dokumentation enthält Informationen zu den iOS Frameworks ARKit, Core ML und Vision. \\
+		01 & M & iOS und Swift & Die App ist in Swift für iOS programmiert. \\
+		02 & M & Lauffähige App & Die App läuft auf einem iOS Gerät. \\
+		03 & M & Recherche von iOS Frameworks & Die Dokumentation enthält Informationen zu den iOS Frameworks ARKit, Core ML und Vision. \\
 		\hline
 	\end{tabular}
 	\caption{Nichtfunktionale Anforderungen}
