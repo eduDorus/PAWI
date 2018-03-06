@@ -69,12 +69,12 @@
 \makeatother
 
 % command für einfacheres Einfügen von einzelnen Bildern
-\newcommand{\bild}[4]{%
+\newcommand{\bild}[3]{%
   \begin{figure}
     \centering
     \includegraphics[width=#1\textwidth]{#2}%
     \caption{#3}%
-    \label{#4}%
+    \label{fig:{#2}}%
   \end{figure}
 }%
 
@@ -207,8 +207,10 @@
   \input{05-Problemstellung}
 }
 
+\IfFileExists{06-Stand-der-Technik}{
+  \input{06-Stand-der-Technik}
+}
 
-\section{Stand der Technik}
 
 \section{Lösungsentwicklung}
 
@@ -219,6 +221,12 @@
 \section{Schlussfolgerungen}
 \subsection{Lessons Learned}
 \subsection{Ausblick}
+
+
+% Temporary Appendix
+\IfFileExists{99-Appendix}{
+  \input{99-Appendix}
+}
 
 
 %----------------------------------------------------------------------------------------
@@ -250,8 +258,4 @@
  total={170mm,257mm},
  left=25mm,
  top=25mm,}
-\IfFileExists{20_Appendix}{
-\input{20_Appendix}
-}
-
 \end{document}
