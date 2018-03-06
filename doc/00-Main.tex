@@ -224,12 +224,6 @@
 \subsection{Ausblick}
 
 
-% Temporary Appendix
-\IfFileExists{99-Appendix}{
-  \input{99-Appendix}
-}
-
-
 %----------------------------------------------------------------------------------------
 %	Bibliography
 %----------------------------------------------------------------------------------------
@@ -252,11 +246,17 @@
 %	Appendix
 %----------------------------------------------------------------------------------------
 \newpage
+\pagestyle{headings}
 \appendix
 \setcounter{figure}{0}
-\setcounter{secnumdepth}{0}
-\newgeometry{
- total={170mm,257mm},
- left=25mm,
- top=25mm,}
+\setcounter{table}{0}
+\renewcommand{\thefigure}{A\arabic{figure}}
+\renewcommand{\thetable}{A\arabic{table}}
+\renewcommand{\thesubsection}{A\arabic{subsection}}
+
+
+\IfFileExists{99-Appendix}{
+  \input{99-Appendix}
+}
+
 \end{document}
