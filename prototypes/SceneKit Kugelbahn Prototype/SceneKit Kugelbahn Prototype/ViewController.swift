@@ -17,7 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var configuration : ARWorldTrackingConfiguration?
     let planeIdentifiers = [UUID]()
     var anchors = [ARAnchor]()
-    var nodes = [SCNNode]()
+    var boxes = [SCNNode]()
     let cubeSize : CGFloat = 0.05
     let edgeWidth : CGFloat = 0.001
     
@@ -69,12 +69,39 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             edgeBox.firstMaterial?.isDoubleSided = true
             boxNode.addChildNode(SCNNode(geometry: edgeBox))
             boxNode.position = SCNVector3Make(planeAnchor.center.x, Float(cubeSize / 2), planeAnchor.center.z)
+            boxNode.castsShadow = true
             node?.addChildNode(boxNode)
+            boxes.append(boxNode)
             anchors.append(planeAnchor)
         } else {
             print("not plane anchor \(anchor)")
         }
         return node
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let location = touch.location(in: sceneView)
+        selectCube(location: location)
+    }
+    
+    func selectCube(location: CGPoint) {
+        let hitResults = sceneView.hitTest(location, options: [:])
+        if hitResults.count > 0 {
+            let result = hitResults.first!
+            if let box : SCNBox = result.node.geometry as? SCNBox {
+                for var index in 0...boxes.count - 1 {
+                    if (boxes[index].geometry!.isEqual(box)) {
+                        boxes[index].geometry?.firstMaterial?.specular.contents = UIColor.green
+                        boxes[index].geometry?.firstMaterial?.diffuse.contents = UIColor.green
+                    } else {
+                        boxes[index].geometry?.firstMaterial?.specular.contents = UIColor.red
+                        boxes[index].geometry?.firstMaterial?.diffuse.contents = UIColor.red
+                    }
+                    index += 1
+                }
+            }
+        }
     }
     
 
