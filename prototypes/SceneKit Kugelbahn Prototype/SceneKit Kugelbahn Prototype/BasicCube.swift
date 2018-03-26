@@ -37,6 +37,11 @@ class BasicCube: SCNNode {
         castsShadow = true
     }
     
+    convenience init(withColor color: UIColor) {
+        self.init()
+        set(color: color)
+    }
+    
     public func set(color: UIColor) {
         self.geometry?.firstMaterial?.diffuse.contents = color
         self.geometry?.firstMaterial?.specular.contents = color
