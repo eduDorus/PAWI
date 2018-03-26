@@ -20,9 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var boxes = [SCNNode]()
     let cubeSize : CGFloat = 0.05
     let edgeWidth : CGFloat = 0.001
-    
-    var boxNode : SCNNode?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the view's delegate
@@ -44,35 +42,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         var node: SCNNode?
         if let planeAnchor = anchor as? ARPlaneAnchor {
-            node = SCNNode()
-            
-            // this shader makes the (edge-)cube only show the lines on the sides and no diagonals
-            let sm = "float u = _surface.diffuseTexcoord.x; \n" +
-                "float v = _surface.diffuseTexcoord.y; \n" +
-                "int u100 = int(u * 100); \n" +
-                "int v100 = int(v * 100); \n" +
-                "if (u100 % 99 == 0 || v100 % 99 == 0) { \n" +
-                "  // do nothing \n" +
-                "} else { \n" +
-                "    discard_fragment(); \n" +
-            "} \n"
-            
-            let boxGeometry = SCNBox(width: cubeSize, height: cubeSize, length: cubeSize, chamferRadius: 0.001)
-            boxGeometry.firstMaterial?.diffuse.contents = UIColor.red
-            boxGeometry.firstMaterial?.specular.contents = UIColor.red
-            boxGeometry.firstMaterial?.transparency = 0.2
-            let boxNode = SCNNode(geometry: boxGeometry)
-            let edgeBox = SCNBox(width: cubeSize, height: cubeSize, length: cubeSize, chamferRadius: 0.0)
-            edgeBox.firstMaterial?.emission.contents = UIColor.red
-            edgeBox.firstMaterial?.diffuse.contents = UIColor.red
-            edgeBox.firstMaterial?.shaderModifiers = [SCNShaderModifierEntryPoint.surface: sm]
-            edgeBox.firstMaterial?.isDoubleSided = true
-            boxNode.addChildNode(SCNNode(geometry: edgeBox))
-            boxNode.position = SCNVector3Make(planeAnchor.center.x, Float(cubeSize / 2), planeAnchor.center.z)
-            boxNode.castsShadow = true
-            node?.addChildNode(boxNode)
-            boxes.append(boxNode)
+            let cube = BasicCube()
+            cube.position = SCNVector3Make(planeAnchor.center.x, Float(cube.sidelength / 2), planeAnchor.center.z)
+            boxes.append(cube)
             anchors.append(planeAnchor)
+            node = cube
         } else {
             print("not plane anchor \(anchor)")
         }
@@ -89,17 +63,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let hitResults = sceneView.hitTest(location, options: [:])
         if hitResults.count > 0 {
             let result = hitResults.first!
-            if let box : SCNBox = result.node.geometry as? SCNBox {
-                for var index in 0...boxes.count - 1 {
-                    if (boxes[index].geometry!.isEqual(box)) {
-                        boxes[index].geometry?.firstMaterial?.specular.contents = UIColor.green
-                        boxes[index].geometry?.firstMaterial?.diffuse.contents = UIColor.green
-                    } else {
-                        boxes[index].geometry?.firstMaterial?.specular.contents = UIColor.red
-                        boxes[index].geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            if let box : BasicCube = result.node as? BasicCube {
+                for index in 0...boxes.count - 1 {
+                    if let node = boxes[index] as? BasicCube {
+                        node.set(color: UIColor.red)
                     }
-                    index += 1
                 }
+                box.set(color: UIColor.green)
             }
         }
     }
