@@ -1,2 +1,9 @@
 # PAWI
-IOS App with Machine Learning and Augmented Reality
+IT Project by bachelor's students Dorus Janssens and Lucas Schnüriger at the [Lucerne School of Information Technology](https://www.hslu.ch/en/lucerne-school-of-information-technology/). The goal is an iOS App to augment marble tracks by [cuboro](https://cuboro.ch) with ARKit, CoreML and Vision. Find out more about the project in the [wiki](https://github.com/eduDorus/PAWI/wiki). All documentation is in German.
+
+## Documentation
+The documentation is written with LaTeX. For code examples the `minted` package is used, which requires the Python packaged `Pygments`. Go through the following steps to be able to compile the documentation (uses VS Code and the LaTeX Workshop Extension):
+1. Install Pygments with `pip install Pygments`, it might already be installed
+2. Add `-shell-escape` to `latexmk` arguments in the setting `latex-workshop.latex.tools`
+3. Add `*.lol` to the filetypes to clean in the setting `latex-workshop.latex.clean.fileTypes`
+
