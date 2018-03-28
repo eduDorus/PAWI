@@ -85,8 +85,10 @@
 % \renewcommand*{\contentsname}{Inhalt}
   \renewcommand*{\listfigurename}{Abbildungen}
   \renewcommand*{\listtablename}{Tabellen}
+  \renewcommand*{\listoflistingscaption}{Codeblöcke}
   \renewcommand*{\figurename}{Abb.}
   \renewcommand*{\tablename}{Tab.}
+  \renewcommand*{\listingscaption}{Code}
 }
 
 \usepackage[export]{adjustbox}
@@ -97,14 +99,34 @@
 \usepackage[T1]{fontenc}
 
 \usepackage[breakwords]{truncate}
-\usepackage{tcolorbox}
-\newtcolorbox[auto counter, number within=section, list inside=lernziel.toc]{lernziel}[2][]{%
-  colback=black!5!white, colframe=black!50!white,
-  fonttitle=\bfseries, fontupper=\bfseries #2 \tcblower,
-  boxrule=0.3mm,
-  boxsep=2mm, left=1mm, right=1mm,
-  title=Lernziel~\thetcbcounter, list text=#2, #1
+
+
+% Swift syntax highlighting code snippets
+\usepackage{minted}
+\newminted{swift}{ % define a custom minted environment, called with "swiftcode"
+  autogobble,     % automatically removes unnecessary indentation
+  breaklines,     % automatically breaks long lines on whitespace
+  fontsize=\footnotesize, % self explanatory, it's the code's font size
+  frame=single,   % add a single line for a frame around the code
+  % gobble=2,       % remove first level of indentation (activate in case autogobble fails)
+  linenos,        % show line numbers
+  numbersep=6pt,  % smaller distance between linenumbers and frame
+  style=xcode,    % use Xcode colorscheme
+  xleftmargin=15pt, % set left margin, so that the numbers don't hang outside
 }
+% styling of line number (gray, small, ttfamily)
+\renewcommand{\theFancyVerbLine}{\textcolor[rgb]{0.6,0.6,0.6}{\scriptsize \ttfamily{\arabic{FancyVerbLine}}}}
+% make inserting code even easier and enable label and caption
+\newenvironment{code}[2]
+{\VerbatimEnvironment
+  \begin{listing}
+    \caption{#1}\label{code:#2}
+    \begin{swiftcode}%
+}{
+    \end{swiftcode}
+  \end{listing}
+}
+
 
 \newenvironment{italicquotes} % Long quotes italic
 {\begin{quote}\itshape}
@@ -247,6 +269,12 @@
 %\section{Tabellenverzeichnis}
 \listoftables
 \addtocontents{lot}{\protect\thispagestyle{headings}}
+%------------------------------------------------
+\newpage
+%\section{Codeverzeichnis}
+\listoflistings
+\addtocontents{lol}{\protect\thispagestyle{headings}}
+
 
 %----------------------------------------------------------------------------------------
 %	Appendix
