@@ -85,6 +85,7 @@ fastlane/test_output
 *.ind
 *.lof
 *.lot
+*.lol
 *.maf
 *.mtc
 *.mtc1
@@ -93,5 +94,6 @@ fastlane/test_output
 *.fdb_latexmk
 *.fls
 *.swp
+_minted*
 doc/*.pdf
 
