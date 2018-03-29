@@ -97,3 +97,5 @@ fastlane/test_output
 _minted*
 doc/*.pdf
 
+# VSCode
+.vscode
