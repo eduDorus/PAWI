@@ -1,0 +1,18 @@
+\subsubsection{Physischen Würfel als virtuelles Objekt erfassen}
+\begin{description}
+	\item[Fragestellung:] Wie kann ein physischer Würfel mittels den Frameworks Vision oder CoreML als virtuelles Objekt erfassen werden?
+	\item[Resultat:] Vision bietet die Erkennung zwei Dimensioneler Elemente. Es verwendet dabei praktiken wie beim bekannten Bilderkennungsframework OpenCV, wobei ein Referenzbild hinterlegt werden muss. CoreML kann ein beliebig trainiertes Neural Network Model verwenden. Es konnte leider keine Möglichkeit gefunden werden 3D Objekte zu erfassen damit Sie für eine spätere Augmentierung verwendet werden können. 
+	\item[Versuchsaufbau:] Für den Versuchsaufbau wurden zwei Beispielprojekte von der Apple Developer Dokumentation verwendet. Das erste Projekt "`Recognizing Images in an AR Experience"' \cite{arkit-recognize-images} verspricht bekannte 2D Bilder zu Erkennen. Anschliessend können die erkannten Koordinaten verwendet werden um AR Inhalt zu platzieren.
+	Beim zweiten Projekt handelt es sich um das Thema "`Using Vision in Real Time with ARKit"' \cite{vision-real-time-with-arkit} bei dem die Frameworks Vision und CoreML zum Einsatz kommen.
+
+	\textbf{Beispielprojekt "`Recognizing Images in an AR Experience"'}
+	Das Beispielprojekt kann von der Apple Developer Website heruntergeladen werden. Anschliessen lässt sich das Projekt in XCode öffnen und muss vor der Verwendung auf dem eigenen Gerät signiert werden. Das Verzeichnis Ressources befinden sich bereits einige Demobilder die als Testversuch verwendet werden können. Bei versuch wurden die Demobilder am Laptop geöffnet und anschliessend mit dem IPhone gescannt. Die Bilder wurden sehr gut erkannt und die augmentierte Fläche in der sich das Bild befinden sollte wurde korrekt angezeigt. Es wurde festgestellt, dass beim bewegen des IPhones die Fläche die Koordinaten nicht halten kann und diese Ständig neu platzieren muss.
+
+	Darauf Folgend wurde ein eigenes Bild für die Erkennung eines cuboro Elements hinterlegt. Dies wird in dem beigelegten README.md des Beispielprojektes gut erklärt. Beim Versuch wurde wie folgt vorgegangen: 
+
+	\begin{enumerate}
+		\item Es wurde bei guter Belichtung ein frontal Bild des cuboro Elements mit dem IPhone aufgebommen. 
+		\item Das Bild wurde auf  
+		\end{enumerate}
+
+\end{description}
