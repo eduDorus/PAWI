@@ -22,7 +22,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     let edgeWidth : CGFloat = 0.001
     var isPlaneSelected = false
     let planeHeight : CGFloat = 0.001
-    var trackingCube : BasicCube?
+    var positioningCube : BasicCube?
     var screenCenter : CGPoint?
 
     override func viewDidLoad() {
@@ -98,7 +98,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 // set isPlaneSelected to true
                 isPlaneSelected = true
                 setPlaneTexture(node: sceneView.node(for: planeAnchor)!)
-                addTrackingCube()
+                addPositioningCube()
             }
         }
     }
@@ -145,38 +145,39 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func addTrackingCube() {
-        trackingCube = BasicCube(withColor: UIColor.white)
-        sceneView.scene.rootNode.addChildNode(trackingCube!)
-        updateTrackingCube()
+    func addPositioningCube() {
+        positioningCube = BasicCube(withColor: UIColor.white)
+        sceneView.scene.rootNode.addChildNode(positioningCube!)
+        updatePositioningCube()
     }
     
-    func updateTrackingCube() {
+    func updatePositioningCube() {
         let hitResults = sceneView.hitTest(screenCenter!, types: .existingPlane)
         if hitResults.count > 0 {
             let result : ARHitTestResult = hitResults.first!
-            let newLocation = SCNVector3Make(result.worldTransform.columns.3.x, (result.worldTransform.columns.3.y + Float(trackingCube!.sidelength/2)), result.worldTransform.columns.3.z)
-            trackingCube!.position = newLocation
+            let coords = result.worldTransform.columns.3
+            let newLocation = SCNVector3Make(coords.x, (coords.y + Float(positioningCube!.sidelength/2)), coords.z)
+            positioningCube!.position = newLocation
             let cameraRotation = sceneView.pointOfView!.eulerAngles
-            trackingCube!.eulerAngles = SCNVector3(0, cameraRotation.y, 0)
+            positioningCube!.eulerAngles = SCNVector3(0, cameraRotation.y, 0)
         }
     }
     
     func placeCube() {
-        if trackingCube != nil {
+        if positioningCube != nil {
             let cube = BasicCube(withColor: UIColor.green)
-            cube.position = trackingCube!.position
-            cube.eulerAngles = trackingCube!.eulerAngles
+            cube.position = positioningCube!.position
+            cube.eulerAngles = positioningCube!.eulerAngles
             sceneView.scene.rootNode.addChildNode(cube)
             boxes.append(cube)
         }
     }
     
     func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
-        guard trackingCube != nil else {
+        guard positioningCube != nil else {
             return
         }
-        updateTrackingCube()
+        updatePositioningCube()
     }
 
     override func viewWillAppear(_ animated: Bool) {
