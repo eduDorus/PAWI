@@ -1,6 +1,84 @@
 \subsubsection{Overlay auf einem Würfel mit SceneKit}
 \begin{description}
 	\item[Fragestellung:] Wie kann ein physischer Würfel (ein cuboro Element) mittels AR mit einer Art Overlay hervorgehoben werden? Eignet sich SceneKit dazu?
-	\item[Resultat:] Ein mittels SceneKit modellierter Würfel lässt sich an der Stelle eines physischen Würfels platzieren und kann so als eine Art, diesen hervorzuheben, eingesetzt werden.
-	\item[Erkenntnisse:]
+	\item[Resultat:] Ein mittels SceneKit modellierter Würfel lässt sich an der Stelle eines physischen Würfels platzieren und kann so als eine Art diesen hervorzuheben eingesetzt werden. % TODO: Verweis auf entsprechenden Prototyp (Xcode Projekt) im Repo, bzw. vollständigen Code im Anhang(?)
+	\item[Versuchsaufbau:] Dieser Versuch wurde noch mit ARKit 1.0 umgesetzt. Der Ansatz dieses Prototyps ist es, mittels ARKit einen halbtransparenten SceneKit Würfel an die Stelle eines physischen Würfels zu positionieren. Die Positionierung des Würfels wird in diesem Versuch manuell gemacht. Die Basis dieses Versuchs bildet der Beitrag "`Detecting Planes and Placing Objects"' auf dem Blog Machinethinks (\cite{arkit-dectingplanes-placingobjects}) und dem zugehörigen Projekt auf GitHub. Zuerst soll die richtige Ebene der realen Welt definiert werden und im zweiten Schritt wird dann der Würfel darauf platziert.
+
+	\textbf{Flächenerkennung}\\
+	Beim Erstellen eines neuen AR Projekts in Xcode kann die gewünschte Technologie für den Inhalt ausgewählt werden. Zur Verfügung stehen neben SceneKit auch SpriteKit und Metal. Die Basis bildet \texttt{ARSCNView}, ein ViewController, der ARKit mit dem SceneKit vereint. In Code \ref{code:prot-overlay-viewdidload} wird die Konfiguration und der Start der \texttt{ARSession} vorgenommen. Da der Würfel auf eine Fläche gestellt werden soll, wird die horizontale Flächenerkennung (\texttt{PlaneDetection}, Zeile 2) aktiviert.
+
+	\begin{code}{prot-overlay-viewdidload}{Konfiguration und Start der \texttt{ARSession}}
+		configuration = ARWorldTrackingConfiguration()
+		configuration!.planeDetection = ARWorldTrackingConfiguration.PlaneDetection.horizontal
+		sceneView.session.run(configuration!, options: [ARSession.RunOptions.removeExistingAnchors, ARSession.RunOptions.resetTracking])
+	\end{code}
+
+	Sobald ARKit eine Fläche detektiert hat, wird die Methode \texttt{renderer(\_:nodeFor:)} des Protokolls \texttt{ARSCNViewDelegate} aufgerufen, die als Rückgabe eine SceneKit Node (\texttt{SCNNode}) für den gefundenen Anker erwartet. Um die erkannte Fläche in der Szene anzuzeigen, wird eine \texttt{SCNBox} mit den geometrischen Ausmassen der Fläche erstellt. Diese Werte sind als Ausdehnung in den X- und Z-Achsen im Attribut \texttt{planeAnchor.extent} enthalten (Code \ref{code:prot-overlay-renderer}, Zeile 4). So wird jede erkannte Ebene dem Benutzer als halbtransparenten Fläche angezeigt.
+
+	\begin{code}{prot-overlay-renderer}{Implementation der \texttt{renderer(\_:nodeFor:)} Methode zur Darstellung von Flächen}
+		var node:  SCNNode?
+		if let planeAnchor = anchor as? ARPlaneAnchor {
+			node = SCNNode()
+			let planeGeometry = SCNBox(width: CGFloat(planeAnchor.extent.x), height: planeHeight, length: CGFloat(planeAnchor.extent.z), chamferRadius: 0.0)
+			planeGeometry.firstMaterial?.diffuse.contents = UIColor.green
+			planeGeometry.firstMaterial?.specular.contents = UIColor.white
+			planeGeometry.firstMaterial?.transparency = 0.1
+			let planeNode = SCNNode(geometry: planeGeometry)
+			planeNode.position = SCNVector3Make(planeAnchor.center.x, Float(planeHeight / 2), planeAnchor.center.z)
+			node?.addChildNode(planeNode)
+			anchors.append(planeAnchor)
+		}
+		return node
+	\end{code}
+
+	\textbf{Würfel modellieren}\\
+	Jedes SceneKit Element ist eine \texttt{SCNNode} mit einer bestimmten Geometrie und Position. Für Würfelförmige Körper bietet sich als Geometrie eine \texttt{SCNBox} an. Die Definition kann so einfach wie folgt sein:
+	\mint[style=xcode,breaklines]{swift}{let node = SCNNode(geometry: SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0.0))}
+	Damit der Würfel als Overlay wirken kann, soll er halbtransparent sein, die Ränder aber hervorgehoben. Zur einfacheren Kontrolle über diese Eigenschaften implementieren wir daher in diesem Versuch die Klasse \texttt{BasicCube} vom Typ \texttt{SCNNode}, bestehend aus einem halbtransparenten Würfel und einem Kindknoten mit nur den Kanten als Textur. Die Darstellung nur der Kanten wird mit einem Shader Modifier erzielt (von \cite{so-shader-modifier}).
+
+	\textbf{Würfel platzieren}\\
+	In einem ersten Test wurde beim Erkennen einer Fläche direkt ein \texttt{BasicCube} im Zentrum der Fläche (\texttt{planeAnchor}) gestellt, indem dem \texttt{position} Attribut der Würfel-Node folgendes Statement zugewiesen wurde:
+	\mint[style=xcode,breaklines]{swift}{SCNVector3Make(planeAnchor.center.x, Float(cubeSize / 2), planeAnchor.center.z)}
+	Der Ausgangspunkt der Node befindet sich in ihrem Zentrum, weshalb die Höhenkoordinate Y auf die halbe Würfelhöhe gesetzt werden muss, um den Würfel direkt auf die Fläche zu stellen.
+
+	\textbf{Würfel auswählen}\\
+	Aus den so in die Mitte aller erkannten Flächen platzierten Boxen soll eine vom Benutzer ausgewählt werden. Beim Überschreiben der Methode \texttt{touchesBegan(\_:with:)} erhalten wir die Position eines Taps des Benutzers in \texttt{touches.first!.location(in:)} als \texttt{CGPoint}. Mit diesem Wert lässt sich auf die \texttt{ARSCNView} ein SceneKit-Hittest machen:
+	\mint[style=xcode,breaklines]{swift}{let hitResults = sceneView.hitTest(location, options: [:])}
+	Die Rückgabe enthält alle Nodes der Szene, die sich an diesem 2D-Punkt auf dem Bildschirm befinden, in der Reihenfolge, wie sie dargestellt sind. Der erste \texttt{BasicCube} entspricht also dem ausgewählten Würfel und so kann dessen Farbe verändert werden um die Auswahl zu visualisieren.
+
+	\textbf{Fläche bestimmen}\\
+	Um eine alternative Methode der Würfel-Platzierung auszuprobieren soll zunächst durch Benutzereingabge eine bestimmte Fläche bestimmt werden. Dies wird wiederum mittels eines Hittest realisiert, doch diesmal von ARKit:
+	\mint[style=xcode,breaklines]{swift}{let hitResults = sceneView.hitTest(location, types: .existingPlaneUsingExtent)}
+	Der zweite Parameter vom Typ \texttt{ARHitTestResult.ResultTypes} definiert, worauf der Hittest gemacht wird. Hier sollen bereits detektierte Flächen unter Berücksichtigung ihrer Ausmasse betrachtet werden, damit der Nutzer eine der erkannten Flächen auswählen kann. Von allen anderen Flächenanker werden die Nodes mit \texttt{removeFromParentNode()} der Szene entfernt und die Anker selber mit \texttt{sceneView.session.remove(anchor:)} aus der Session gelöscht, sodass sie nicht mehr weiter von ARKit getrackt werden.
+
+	\textbf{Manuelle Platzierung von Würfeln}\\
+	% TODO: Screenshots einfügen
+	Sobald eine Fläche bestätigt wurde, wird nun ein Positionierungswürfel in der Mitte des Bildschirms angezeigt. Dieser Würfel befindet sich immer auf der bestimmten horizontalen Ebene und dreht sich mit der Kamera. Ein Tap auf den Bildschirm platziert dann eine Kopie des Würfels fix an der aktuellen Position. Damit kann der Positionierungswürfel genau deckungsgleich mit einem physischen Würfel gebracht und dann eine Kopie davon als Overlay hinterlassen werden. Code \ref{code:prot-overlay-positioningcube} zeigt die beiden dazu verwendeten Methoden \texttt{updatePositioningCube()} und \texttt{placeCube()}. Erstere wird stets in der Methode \texttt{renderer(\_:willRenderScene:atTime:)} aufgerufen, sodass er sich mit der Kamera bewegt. Als erstes wird erneut ein AR-Hittest vom Zentrum des Bildschirms gemacht (Zeile 2, \texttt{screenCenter}, Attribut, dem \texttt{sceneView.center} zugewiesen wurde). Auf die erhaltenen Stelle wird die Position des Würfels gesetzt (Zeilen 4-7). Die Rotation erhält man von \texttt{sceneView.pointOfView} als Euler Winkel (Zeilen 8-9). Jedoch schien dies im Versuch nur für zirka 180° zu funktionieren. Das seitliche Drehen des Geräts und somit des Blickwinkels um mehr als einen Viertelkreis in die eine oder andere Richtung lässt den Würfel dann in die falsche Richtung herum rotieren. Wie sich dies korrigieren lässt, wurde in diesem Versuch nicht mehr herausgefunden.
+
+	\begin{code}{prot-overlay-positioningcube}{Positionierungswürfel in der Mitte des Bildschirms}
+		func updatePositioningCube() {
+			let hitResults = sceneView.hitTest(screenCenter!, types: .existingPlane)
+			if hitResults.count > 0 {
+				let result : ARHitTestResult = hitResults.first!
+				let coords = result.worldTransform.columns.3
+				let newLocation = SCNVector3Make(coords.x, (coords.y + Float(positioningCube!.sidelength/2)), coords.z)
+				positioningCube!.position = newLocation
+				let cameraRotation = sceneView.pointOfView!.eulerAngles
+				positioningCube!.eulerAngles = SCNVector3(0, cameraRotation.y, 0)
+			}
+		}
+		
+		func placeCube() {
+			if positioningCube != nil {
+				let cube = BasicCube(withColor: UIColor.green)
+				cube.position = positioningCube!.position
+				cube.eulerAngles = positioningCube!.eulerAngles
+				sceneView.scene.rootNode.addChildNode(cube)
+				boxes.append(cube)
+			}
+		}
+	\end{code}
+
+	Um nun einen Würfel an der gewünschten Stelle zu positionieren, wurde aus der Methode \texttt{touchesBegan(\_:with:)} heraus \texttt{placeCube()} aufgerufen. Dort wird ein neuer \texttt{BasicCube} erstellt (Code \ref{code:prot-overlay-positioningcube}, Zeile 15) und mit den Positions- und Winkeleigenschaften des Positionierungswürfel beschrieben (Zeilen 16-17).
+
 \end{description}
