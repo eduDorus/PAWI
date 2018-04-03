@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A006BF8920736845001D0FF7 /* MarbleTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A006BF8820736845001D0FF7 /* MarbleTrack.swift */; };
 		A02605B62073642B0056BEB7 /* BasicCube.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02605B52073642B0056BEB7 /* BasicCube.swift */; };
 		A04D34A82073608200E55F9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04D34A72073608200E55F9A /* AppDelegate.swift */; };
 		A04D34AA2073608200E55F9A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A04D34A92073608200E55F9A /* art.scnassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A006BF8820736845001D0FF7 /* MarbleTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleTrack.swift; sourceTree = "<group>"; };
 		A02605B52073642B0056BEB7 /* BasicCube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCube.swift; sourceTree = "<group>"; };
 		A04D34A42073608200E55F9A /* virtuelle-kugelbahn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "virtuelle-kugelbahn.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A04D34A72073608200E55F9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		A04D34A62073608200E55F9A /* virtuelle-kugelbahn */ = {
 			isa = PBXGroup;
 			children = (
+				A006BF8820736845001D0FF7 /* MarbleTrack.swift */,
 				A02605B52073642B0056BEB7 /* BasicCube.swift */,
 				A04D34A72073608200E55F9A /* AppDelegate.swift */,
 				A04D34A92073608200E55F9A /* art.scnassets */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A006BF8920736845001D0FF7 /* MarbleTrack.swift in Sources */,
 				A04D34AC2073608200E55F9A /* ViewController.swift in Sources */,
 				A02605B62073642B0056BEB7 /* BasicCube.swift in Sources */,
 				A04D34A82073608200E55F9A /* AppDelegate.swift in Sources */,
