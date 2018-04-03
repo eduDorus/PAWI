@@ -33,7 +33,7 @@ class BasicCube: SCNNode {
         edgeBox.firstMaterial?.shaderModifiers = [SCNShaderModifierEntryPoint.surface: sm]
         edgeBox.firstMaterial?.isDoubleSided = true
         addChildNode(SCNNode(geometry: edgeBox))
-        set(color: UIColor.red)
+        set(color: UIColor.white)
         castsShadow = true
     }
     
