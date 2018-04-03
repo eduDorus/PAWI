@@ -14,6 +14,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     var isPlaneSelected = false
+    var isTrackPlaced = false
     var anchors = [ARAnchor]()
     var track : MarbleTrack?
     var screenCenter : CGPoint?
@@ -95,6 +96,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let touch = touches.first!
             let location = touch.location(in: sceneView)
             selectExistingPlane(location: location)
+        } else if !isTrackPlaced {
+            placeMarbleTrack()
         }
     }
 
@@ -137,8 +140,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    func placeMarbleTrack() {
+        isTrackPlaced = true
+        for a in anchors {
+            sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0
+        }
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
-        guard track != nil else {
+        guard track != nil && !isTrackPlaced else {
             return
         }
         updateMarbleTrackLocation()
