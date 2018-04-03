@@ -14,7 +14,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     var isPlaneSelected = false
-    var isTrackPlaced = false
+    var isTrackLocked = false
     var anchors = [ARAnchor]()
     var track : MarbleTrack?
     var screenCenter : CGPoint?
@@ -96,8 +96,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let touch = touches.first!
             let location = touch.location(in: sceneView)
             selectExistingPlane(location: location)
-        } else if !isTrackPlaced {
-            placeMarbleTrack()
+        } else if !isTrackLocked {
+            lockMarbleTrack()
+        } else {
+            unlockMarbleTrack()
         }
     }
 
@@ -139,16 +141,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func placeMarbleTrack() {
-        isTrackPlaced = true
+    func lockMarbleTrack() {
+        isTrackLocked = true
         track!.removeConstraints()
         for a in anchors {
             sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0
         }
     }
     
+    func unlockMarbleTrack() {
+        isTrackLocked = false
+        track!.contstraintToCamera()
+        for a in anchors {
+            sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0.1
+        }
+        updateMarbleTrackLocation()
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
-        guard track != nil && !isTrackPlaced else {
+        guard track != nil && !isTrackLocked else {
             return
         }
         updateMarbleTrackLocation()
