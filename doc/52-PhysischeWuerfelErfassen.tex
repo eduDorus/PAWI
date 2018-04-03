@@ -1,8 +1,9 @@
 \subsubsection{Physischen Würfel als virtuelles Objekt erfassen}
 \begin{description}
-	\item[Fragestellung:] Wie kann ein physischer Würfel mittels den Frameworks Vision oder CoreML als virtuelles Objekt erfassen werden?
-	\item[Resultat:] Vision bietet die Erkennung zweidimensonaler Elemente. Es verwendet dabei praktiken wie beim bekannten Bilderkennungsframework OpenCV, wobei ein Referenzbild hinterlegt werden muss. CoreML kann ein beliebig trainiertes Neural Network Model verwenden. Es konnte leider keine solide Möglichkeit gefunden werden 3D Objekte zu erfassen damit Sie für eine spätere Augmentierung verwendet werden können. 
-	\item[Versuchsaufbau:] Für den Versuchsaufbau wurden zwei Beispielprojekte von der Apple Developer Dokumentation verwendet. Das erste Projekt "`Recognizing Images in an AR Experience"' \cite{arkit-recognize-images} verspricht bekannte 2D Bilder zu Erkennen. Anschliessend können die erkannten Koordinaten verwendet werden um AR Inhalt zu platzieren.
+	\item[Fragestellung:] Wie kann ein physischer Würfel mittels den Frameworks ARKit, Vision oder CoreML als virtuelles Objekt erfassen werden?
+	\item[Resultat:] ARKit bietet die Erkennung zweidimensonaler Elemente. Es verwendet dabei praktiken wie beim bekannten Bilderkennungsframework OpenCV, wobei ein Referenzbild hinterlegt werden muss.
+	Mit Vision und CoreML kann ein beliebig trainiertes Neural Network Model verwenden um die Klassifikation durchzuführen. Es konnte leider keine solide Möglichkeit gefunden werden 3D Objekte zu erfassen damit Sie für eine spätere Augmentierung verwendet werden können. 
+	\item[Versuchsaufbau:] Für den Versuchsaufbau wurden zwei Beispielprojekte von der Apple Developer Dokumentation verwendet. Das erste Projekt "`Recognizing Images in an AR Experience"' \cite{arkit-recognize-images} verspricht bekannte 2D Bilder mittels ARKit zu Erkennen. Anschliessend können die erkannten Koordinaten verwendet werden um AR Inhalte zu platzieren.
 	Beim zweiten Projekt handelt es sich um das Thema "`Using Vision in Real Time with ARKit"' \cite{vision-real-time-with-arkit} bei dem die Frameworks Vision und CoreML zum Einsatz kommen.
 
 	\textbf{Beispielprojekt "`Recognizing Images in an AR Experience"'}
@@ -56,6 +57,50 @@
 
 
 	\textbf{Beispielprojekt "`Using Vision in Real Time with ARKit"'}
-	
+	Das zweite Beispiel bei diesem Versuch beschäftigt sich mit Vision, CoreML und ARKit. Die Bildaufnahmen von ARKit werden an Vision weitergegeben und anschliessend mittels einem trainierten neuralen Netzwerk(Inception v3) in CoreML ausgewertet. 
+
+	Der folgende Code ausschnitt startet die ARSession sowie den Klassifizierungsprozess. Da dieser Task performance intensive ist können nur eine gewisse Anzahl Bilder analisiert werden. Es wird stehts geprüft ob sich bereits ein Bild im Buffer befindet bevor ein neues Bild zur Auswertung freigegeben wird.
+	\begin{code}{arkit-recognition-configuration}{Startet die ARSession und den Klassifizierungsprozess}
+	func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        guard currentBuffer == nil, case .normal = frame.camera.trackingState else {
+            return
+        }
+        self.currentBuffer = frame.capturedImage
+        classifyCurrentImage()
+	}
+	\end{code}
+
+	In diesem Code ausschnitt wird ein bereits trainiertes neurales Netzwerk in das CoreML Framework geladen. Es kann somit auch ein beliebig selbst trainiertes Netwerk verwendet werden.
+	\begin{code}{CoreML-request}{Initialisierung der Klassifizierung mittels CoreML}
+	private lazy var classificationRequest: VNCoreMLRequest = {
+		do {
+			let model = try VNCoreMLModel(for: Inceptionv3().model)
+			let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
+				self?.processClassifications(for: request, error: error)
+			})
+			request.imageCropAndScaleOption = .centerCrop
+			request.usesCPUOnly = true
+			return request
+		} catch {
+			fatalError("Failed to load Vision ML model: \(error)")
+		}
+	}()
+	\end{code}
+
+	Das Antippen eines klassifizierten Objektes erstellt ein Label mit SpriteKit. Dies erfolgt mittels einem Hit Test der die genauen Koordinaten ausfindig macht und an dieser Stelle ein \texttt{ARAnchor} setzt. Dieser \texttt{ARAnchor} wird dazu verwendet das Label and dieser Stelle einzublenden.
+	\begin{code}{hit-test-klassifizierte-objekte}{Erstellt ein Label beim Antippen von klassifizierten Objekten}
+	@IBAction func placeLabelAtLocation(sender: UITapGestureRecognizer) {
+		let hitLocationInView = sender.location(in: sceneView)
+		let hitTestResults = sceneView.hitTest(hitLocationInView, types: [.featurePoint, .estimatedHorizontalPlane])
+		if let result = hitTestResults.first {
+			
+			let anchor = ARAnchor(transform: result.worldTransform)
+			sceneView.session.add(anchor: anchor)
+			
+			// Track anchor ID to associate text with the anchor after ARKit creates a corresponding SKNode.
+			anchorLabels[anchor.identifier] = identifierString
+		}
+	}
+	\end{code}
 
 \end{description}
