@@ -135,13 +135,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let result : ARHitTestResult = hitResults.first!
             let coords = result.worldTransform.columns.3
             track!.set(position: SCNVector3(coords.x, coords.y, coords.z))
-            let cameraRotation = sceneView.pointOfView!.eulerAngles
-            track!.set(rotation: SCNVector3(0, cameraRotation.y, 0))
+            track!.contstraintToCamera()
         }
     }
     
     func placeMarbleTrack() {
         isTrackPlaced = true
+        track!.removeConstraints()
         for a in anchors {
             sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0
         }

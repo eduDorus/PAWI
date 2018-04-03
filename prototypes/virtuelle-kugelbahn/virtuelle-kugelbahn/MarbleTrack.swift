@@ -21,16 +21,19 @@ class MarbleTrack: SCNNode {
 
     override public init() {
         super.init()
-        addCube(x: 0, y: 0, z: 0)
+        let cube = addCube(x: 0, y: 0, z: 0)
+        cube.set(color: UIColor.yellow)
         loadTrack(number: 0)
     }
     
     // Positions a new BasicCube at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
-    public func addCube(x: Int, y: Int, z: Int) {
+    @discardableResult
+    public func addCube(x: Int, y: Int, z: Int) -> BasicCube {
         let cube = BasicCube()
         let pos = SCNVector3(CGFloat(x) * cube.sidelength, CGFloat(y) * cube.sidelength, CGFloat(z) * cube.sidelength)
         cube.set(position: pos)
         addChildNode(cube)
+        return cube
     }
     
     public func set(position vector: SCNVector3) {
@@ -41,11 +44,24 @@ class MarbleTrack: SCNNode {
         eulerAngles = vector
     }
     
+    // Makes the track always facing the camera by rotating around the Y axis
+    public func contstraintToCamera() {
+        let constraint = SCNBillboardConstraint()
+        constraint.freeAxes = SCNBillboardAxis.Y
+        constraints = [constraint]
+    }
+    
+    public func removeConstraints() {
+        constraints = []
+    }
+    
     func loadTrack(number index: Int) {
-        if tracks.count > index {
+        if tracks.indices.contains(index) {
             for block in tracks[index] {
                 addCube(x: block.0, y: block.1, z: block.2)
             }
+        } else {
+            print("track \(index) does not exist")
         }
     }
     
