@@ -60,6 +60,15 @@ class BasicCube: SCNNode {
         eulerAngles = vector
     }
     
+    public func remove() {
+        // apparently it's not enough for the node to be removed itself, all its child nodes have to be removed as well
+        // maybe there is another way, a different way to build these node so to make it work simpler
+        enumerateChildNodes { (node, stop) in
+            node.removeFromParentNode()
+        }
+        removeFromParentNode()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
