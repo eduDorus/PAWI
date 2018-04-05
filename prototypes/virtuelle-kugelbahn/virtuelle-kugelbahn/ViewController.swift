@@ -14,8 +14,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var startButton: UIButton!
     var isPlaneSelected = false
     var isTrackLocked = false
+    var isBuildingPhase = false
     var anchors = [ARAnchor]()
     var track : MarbleTrack?
     var screenCenter : CGPoint?
@@ -101,11 +103,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             selectExistingPlane(location: location)
         } else if !isTrackLocked {
             lockMarbleTrack()
-        } else {
+        } else if !isBuildingPhase {
             unlockMarbleTrack()
         }
     }
 
+    @IBAction func startButtonTouched(_ sender: Any) {
+        if isTrackLocked {
+            showNextBuildingStep()
+        }
+    }
+    
     func selectExistingPlane(location: CGPoint) {
         let hitResults = sceneView.hitTest(location, types: .existingPlaneUsingExtent)
         if hitResults.count > 0 {
@@ -146,6 +154,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func lockMarbleTrack() {
         isTrackLocked = true
+        startButton.isEnabled = true
         track!.removeConstraints()
         for a in anchors {
             sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0
@@ -154,6 +163,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func unlockMarbleTrack() {
         isTrackLocked = false
+        startButton.isEnabled = false
         track!.contstraintToCamera()
         for a in anchors {
             sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0.1
@@ -166,6 +176,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             return
         }
         updateMarbleTrackLocation()
+    }
+    
+    func showNextBuildingStep() {
+        if !isBuildingPhase {
+            isBuildingPhase = true
+            startButton.setTitle("Next step …", for: .normal)
+        }
+        track?.increaseBuildingStep()
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
@@ -201,4 +219,5 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+    
 }
