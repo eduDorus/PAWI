@@ -13,6 +13,7 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var label: UILabel!
     var isPlaneSelected = false
     var isTrackLocked = false
     var anchors = [ARAnchor]()
@@ -37,6 +38,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.automaticallyUpdatesLighting = true
         
         screenCenter = sceneView.center
+        
+        label.backgroundColor = UIColor.white.withAlphaComponent(0.5)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -163,6 +166,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             return
         }
         updateMarbleTrackLocation()
+    }
+    
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        var text = "current camera tracking state: "
+        switch camera.trackingState {
+        case .limited(.insufficientFeatures):
+            text.append("limited, insufficient features")
+        case .limited(.excessiveMotion):
+            text.append("limited, excessive motion")
+        case .limited(.initializing):
+            text.append("limited, initializing")
+        case .limited(.relocalizing):
+            text.append("limited, relocalizing")
+        case .normal:
+            text.append("normal")
+        case .notAvailable:
+            text.append("not available")
+        }
+        label.text = text
     }
 
     func session(_ session: ARSession, didFailWithError error: Error) {
