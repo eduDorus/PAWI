@@ -22,7 +22,7 @@ Die Session benötigt eine Konfiguration mit \texttt{ARConfiguration} oder einer
 
 Bei der standardmässigen Verwendung von \texttt{ARWorldTrackingConfiguration} als Session Konfiguration wird die Position und Ausrichtung des Geräts beim Start der Session als Nullpunkt des dreidimensionalen Koordinatensystems definiert ("`World Coordinate Space"'). Abbildung \ref{fig:arkit-worldalignment-gravity} aus der Apple Dokumentation zeigt diese Einstellung. Es entspricht der manuellen Konfiguration der Session-Option \texttt{worldAlignment} auf \texttt{gravity}.
 
-\bild{0.4}{arkit-worldalignment-gravity}{AR-Koordinatensystem mit Gravity als World Alignment (\cite{arkit-gravity-coordinatesystem})}
+\bild[https://developer.apple.com/documentation/arkit/arconfiguration.worldalignment/2873778-gravity]{0.4}{arkit-worldalignment-gravity}{AR-Koordinatensystem mit Gravity als World Alignment}
 
 \subsubsection{Anker}
 Dem Modell müssen Anker vom Typ \texttt{ARAnchor} hinzugefügt werden, damit Objekte platziert werden können. Wenn die automatische Flächendetektion mit \texttt{planeDetection} aktiviert ist, fügt ARKit der Session automatisch \texttt{ARPlaneAnchor}s hinzu. Bei der Gesichtserkennung werden \texttt{ARFaceAnchor} verwendet und bei Bilderkennung \texttt{ARImageAnchor}. Jeder Anker definiert sein eigenes lokales Koordinatensystem, das zur Platzierung von Objekten verwendet werden kann.

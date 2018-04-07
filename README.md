@@ -8,7 +8,11 @@ The documentation is written with LaTeX. For code examples the `minted` package 
 3. Add `*.lol` to the filetypes to clean in the setting `latex-workshop.latex.clean.fileTypes`
 
 ### Usage
-- Insert images with the command: `\bild{WIDTH}{FILENAME}{CAPTION}`. The width is relative to textwidth (1=fullsize, 0.5=half). Ignore the filetype (e.g. ".png") for the filename. To reference an image use `\ref{fig:FILENAME}`.
+- Insert images with the command: `\bild[SOURCEURL]{WIDTH}{FILENAME}{CAPTION}`.
+  - The argument SOURCEURL is optional and can be used to add a URL source for the image. It will be shown in the list of figures.
+  - The width is relative to textwidth (1=fullsize, 0.5=half).
+  - Ignore the filetype (e.g. ".png") for the filename.
+  - To reference an image use `\ref{fig:FILENAME}`.
 - Insert Swift code blocks with the `code` environment, to reference it use `\ref{code:LABEL}`.
   ```
   \begin{code}{LABEL}{CAPTION}

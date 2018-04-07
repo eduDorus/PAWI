@@ -28,6 +28,7 @@
 \usepackage{multicol}
 \usepackage{multirow}
 \usepackage{longtable}
+\usepackage{tocloft} % allows for sources on figures in the list of figures
 \setlength{\columnsep}{0.6cm}
 
 \pagestyle{fancy}
@@ -72,12 +73,13 @@
 \makeatother
 
 % command für einfacheres Einfügen von einzelnen Bildern
-\newcommand{\bild}[3]{%
+\newcommand{\bild}[4][]{%
   \begin{figure}
     \centering
-    \includegraphics[width=#1\textwidth]{#2}%
-    \caption{#3}%
-    \label{fig:#2}%
+    \includegraphics[width=#2\textwidth]{#3}%
+    \caption{#4}%
+    \ifthenelse{\equal{#1}{}}{}{\figsource{\url{#1}}}%
+    \label{fig:#3}%
   \end{figure}
 }%
 
