@@ -13,8 +13,12 @@ struct Triple<T:Hashable,U:Hashable,V:Hashable> : Hashable {
 
     var hashValue: Int {
         get {
-            let (a, b, c) = values
-            return a.hashValue ^ b.hashValue ^ c.hashValue
+            // based on: https://stackoverflow.com/a/5730232
+            let (x, y, z) = values
+            var result = Int(x.hashValue ^ (x.hashValue >> 32))
+            result = 31 * result + Int(y.hashValue ^ (y.hashValue >> 32))
+            result = 31 * result + Int(z.hashValue ^ (z.hashValue >> 32))
+            return result;
         }
     }
     

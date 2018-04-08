@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import virtuelle_kugelbahn
 
 class TripleTests: XCTestCase {
     
@@ -20,16 +21,49 @@ class TripleTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testNullValues() {
+        XCTAssertNoThrow(Triple(0,0,0))
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testMaxValues() {
+        XCTAssertNoThrow(Triple(Int.max,Int.max,Int.max))
+    }
+
+    func testMinValues() {
+        XCTAssertNoThrow(Triple(Int.min,Int.min,Int.min))
     }
     
+    func testEquality() {
+        XCTAssertEqual(Triple(1,2,3), Triple(1,2,3))
+    }
+
+    func testComparability() {
+        XCTAssertTrue(Triple(1,2,3) == Triple(1,2,3))
+    }
+    
+    func testEqualityZero() {
+        XCTAssertEqual(Triple(0,0,0), Triple(0,0,0))
+    }
+    
+    func testUnequality() {
+        XCTAssertNotEqual(Triple(0,0,0), Triple(1,0,0))
+    }
+    
+    func testUnequalityOnDifferentOrder() {
+        XCTAssertNotEqual(Triple(0,1,0), Triple(1,0,0))
+    }
+    
+    func testHashvaluesEquality() {
+        XCTAssertEqual(Triple(0,0,0).hashValue, Triple(0,0,0).hashValue)
+    }
+    
+    func testHashvaluesUnequality() {
+        XCTAssertNotEqual(Triple(0,0,0).hashValue, Triple(0,1,0).hashValue)
+    }
+    
+    func testHashvaluesUnequalityOnDifferentOrder() {
+        XCTAssertNotEqual(Triple(0,1,0).hashValue, Triple(1,0,0).hashValue)
+    }
+    
+
 }
