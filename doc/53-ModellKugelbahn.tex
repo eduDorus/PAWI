@@ -1,7 +1,11 @@
 \subsubsection{Virtuelles Modell einer Kugelbahn projizieren}
 \begin{description}
-	\item[Fragestellung:] 
-	\item[Resultat:] % TODO: Verweis auf entsprechenden Prototyp (Xcode Projekt) im Repo, bzw. vollständigen Code im Anhang(?)
-	\item[Versuchsaufbau:] 
+	\item[Fragestellung:] Wie kann eine gesamte Kugelbahn modelliert und als Ganzes in Augmented Reality auf eine Fläche projiziert werden?
+	\item[Resultat:] Durch einen hierarchischen Aufbau von SceneKit Nodes, kann eine Bahn aus mehreren einzelnen Blöcken modelliert und als Ganzes modifiziert werden (bspw. verschieben, drehen). Eine \texttt{MarbleTrack} Klasse, die von \texttt{SCNNode} erbt, enthält die \texttt{BasicCube}-Würfle als Kindknoten. % TODO: Verweis auf entsprechenden Prototyp (Xcode Projekt) im Repo, bzw. vollständigen Code im Anhang(?)
+	\item[Versuchsaufbau:] Da zum Zeitpunkt dieses Versuchs keine vollständige 3D Modelle von echten cuboro Elemente vorhanden waren, wurde der Versuch mit einer \texttt{BasicCube} Klasse auf der Grundlage von dem Versuch aus Abschnitt \ref{subsub:prot-overlay} aufgebaut.
+
+	\textbf{Kugelbahn modellieren}
+
+	\textbf{Kugelbahn projizieren}
 
 \end{description}
