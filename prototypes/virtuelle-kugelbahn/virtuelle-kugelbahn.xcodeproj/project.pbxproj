@@ -15,7 +15,22 @@
 		A04D34AF2073608200E55F9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A04D34AD2073608200E55F9A /* Main.storyboard */; };
 		A04D34B12073608300E55F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A04D34B02073608300E55F9A /* Assets.xcassets */; };
 		A04D34B42073608300E55F9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A04D34B22073608300E55F9A /* LaunchScreen.storyboard */; };
+		A0A34AE8207A89F200AF7EFF /* TrackMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A34AE6207A89F200AF7EFF /* TrackMap.swift */; };
+		A0A34AE9207A89F200AF7EFF /* Triple.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A34AE7207A89F200AF7EFF /* Triple.swift */; };
+		A0A34AF3207A8A6A00AF7EFF /* virtuelle_kugelbahnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A34AF2207A8A6A00AF7EFF /* virtuelle_kugelbahnTests.swift */; };
+		A0A34AFC207A8A7500AF7EFF /* TrackMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A34AFA207A8A7500AF7EFF /* TrackMapTests.swift */; };
+		A0A34AFD207A8A7500AF7EFF /* TripleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A34AFB207A8A7500AF7EFF /* TripleTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A0A34AF5207A8A6A00AF7EFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A04D349C2073608200E55F9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A04D34A32073608200E55F9A;
+			remoteInfo = "virtuelle-kugelbahn";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A006BF8820736845001D0FF7 /* MarbleTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleTrack.swift; sourceTree = "<group>"; };
@@ -28,10 +43,24 @@
 		A04D34B02073608300E55F9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A04D34B32073608300E55F9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A04D34B52073608300E55F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0A34AE6207A89F200AF7EFF /* TrackMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackMap.swift; sourceTree = "<group>"; };
+		A0A34AE7207A89F200AF7EFF /* Triple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triple.swift; sourceTree = "<group>"; };
+		A0A34AF0207A8A6A00AF7EFF /* virtuelle-kugelbahnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "virtuelle-kugelbahnTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0A34AF2207A8A6A00AF7EFF /* virtuelle_kugelbahnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = virtuelle_kugelbahnTests.swift; sourceTree = "<group>"; };
+		A0A34AF4207A8A6A00AF7EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0A34AFA207A8A7500AF7EFF /* TrackMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackMapTests.swift; sourceTree = "<group>"; };
+		A0A34AFB207A8A7500AF7EFF /* TripleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripleTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A04D34A12073608200E55F9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0A34AED207A8A6A00AF7EFF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				A04D34A62073608200E55F9A /* virtuelle-kugelbahn */,
+				A0A34AF1207A8A6A00AF7EFF /* virtuelle-kugelbahnTests */,
 				A04D34A52073608200E55F9A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				A04D34A42073608200E55F9A /* virtuelle-kugelbahn.app */,
+				A0A34AF0207A8A6A00AF7EFF /* virtuelle-kugelbahnTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +91,8 @@
 		A04D34A62073608200E55F9A /* virtuelle-kugelbahn */ = {
 			isa = PBXGroup;
 			children = (
+				A0A34AE6207A89F200AF7EFF /* TrackMap.swift */,
+				A0A34AE7207A89F200AF7EFF /* Triple.swift */,
 				A006BF8820736845001D0FF7 /* MarbleTrack.swift */,
 				A02605B52073642B0056BEB7 /* BasicCube.swift */,
 				A04D34A72073608200E55F9A /* AppDelegate.swift */,
@@ -71,6 +104,17 @@
 				A04D34B52073608300E55F9A /* Info.plist */,
 			);
 			path = "virtuelle-kugelbahn";
+			sourceTree = "<group>";
+		};
+		A0A34AF1207A8A6A00AF7EFF /* virtuelle-kugelbahnTests */ = {
+			isa = PBXGroup;
+			children = (
+				A0A34AFA207A8A7500AF7EFF /* TrackMapTests.swift */,
+				A0A34AFB207A8A7500AF7EFF /* TripleTests.swift */,
+				A0A34AF2207A8A6A00AF7EFF /* virtuelle_kugelbahnTests.swift */,
+				A0A34AF4207A8A6A00AF7EFF /* Info.plist */,
+			);
+			path = "virtuelle-kugelbahnTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,6 +137,24 @@
 			productReference = A04D34A42073608200E55F9A /* virtuelle-kugelbahn.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A0A34AEF207A8A6A00AF7EFF /* virtuelle-kugelbahnTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0A34AF7207A8A6A00AF7EFF /* Build configuration list for PBXNativeTarget "virtuelle-kugelbahnTests" */;
+			buildPhases = (
+				A0A34AEC207A8A6A00AF7EFF /* Sources */,
+				A0A34AED207A8A6A00AF7EFF /* Frameworks */,
+				A0A34AEE207A8A6A00AF7EFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A0A34AF6207A8A6A00AF7EFF /* PBXTargetDependency */,
+			);
+			name = "virtuelle-kugelbahnTests";
+			productName = "virtuelle-kugelbahnTests";
+			productReference = A0A34AF0207A8A6A00AF7EFF /* virtuelle-kugelbahnTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -105,6 +167,10 @@
 				TargetAttributes = {
 					A04D34A32073608200E55F9A = {
 						CreatedOnToolsVersion = 9.3;
+					};
+					A0A34AEF207A8A6A00AF7EFF = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = A04D34A32073608200E55F9A;
 					};
 				};
 			};
@@ -122,6 +188,7 @@
 			projectRoot = "";
 			targets = (
 				A04D34A32073608200E55F9A /* virtuelle-kugelbahn */,
+				A0A34AEF207A8A6A00AF7EFF /* virtuelle-kugelbahnTests */,
 			);
 		};
 /* End PBXProject section */
@@ -138,6 +205,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A0A34AEE207A8A6A00AF7EFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -147,12 +221,32 @@
 			files = (
 				A006BF8920736845001D0FF7 /* MarbleTrack.swift in Sources */,
 				A04D34AC2073608200E55F9A /* ViewController.swift in Sources */,
+				A0A34AE8207A89F200AF7EFF /* TrackMap.swift in Sources */,
+				A0A34AE9207A89F200AF7EFF /* Triple.swift in Sources */,
 				A02605B62073642B0056BEB7 /* BasicCube.swift in Sources */,
 				A04D34A82073608200E55F9A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A0A34AEC207A8A6A00AF7EFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0A34AFC207A8A7500AF7EFF /* TrackMapTests.swift in Sources */,
+				A0A34AF3207A8A6A00AF7EFF /* virtuelle_kugelbahnTests.swift in Sources */,
+				A0A34AFD207A8A7500AF7EFF /* TripleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A0A34AF6207A8A6A00AF7EFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A04D34A32073608200E55F9A /* virtuelle-kugelbahn */;
+			targetProxy = A0A34AF5207A8A6A00AF7EFF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A04D34AD2073608200E55F9A /* Main.storyboard */ = {
@@ -324,6 +418,46 @@
 			};
 			name = Release;
 		};
+		A0A34AF8207A8A6A00AF7EFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QN4T2H2RS6;
+				INFOPLIST_FILE = "virtuelle-kugelbahnTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.hslu.pawi.virtuelle-kugelbahnTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/virtuelle-kugelbahn.app/virtuelle-kugelbahn";
+			};
+			name = Debug;
+		};
+		A0A34AF9207A8A6A00AF7EFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QN4T2H2RS6;
+				INFOPLIST_FILE = "virtuelle-kugelbahnTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.hslu.pawi.virtuelle-kugelbahnTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/virtuelle-kugelbahn.app/virtuelle-kugelbahn";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -341,6 +475,15 @@
 			buildConfigurations = (
 				A04D34B92073608300E55F9A /* Debug */,
 				A04D34BA2073608300E55F9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0A34AF7207A8A6A00AF7EFF /* Build configuration list for PBXNativeTarget "virtuelle-kugelbahnTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0A34AF8207A8A6A00AF7EFF /* Debug */,
+				A0A34AF9207A8A6A00AF7EFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

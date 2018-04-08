@@ -11,7 +11,8 @@ import SceneKit
 
 class BasicCube: SCNNode {
     open let sidelength : CGFloat = 0.05
-    let edgeWidth : CGFloat = 0.001
+    private let edgeWidth : CGFloat = 0.001
+    private let transparency : CGFloat = 0.3
     
     override public init() {
         super.init()
@@ -27,7 +28,7 @@ class BasicCube: SCNNode {
         "} \n"
         
         let boxGeometry = SCNBox(width: sidelength, height: sidelength, length: sidelength, chamferRadius: 0.001)
-        boxGeometry.firstMaterial?.transparency = 0.2
+        boxGeometry.firstMaterial?.transparency = transparency
         geometry = boxGeometry
         let edgeBox = SCNBox(width: sidelength, height: sidelength, length: sidelength, chamferRadius: 0.0)
         edgeBox.firstMaterial?.shaderModifiers = [SCNShaderModifierEntryPoint.surface: sm]
@@ -67,6 +68,20 @@ class BasicCube: SCNNode {
             node.removeFromParentNode()
         }
         removeFromParentNode()
+    }
+    
+    func hide() {
+        self.geometry?.firstMaterial?.transparency = 0.1
+        enumerateChildNodes { (node, _) in
+            node.geometry?.firstMaterial?.transparency = 0.1
+        }
+    }
+    
+    func show() {
+        self.geometry?.firstMaterial?.transparency = transparency
+        enumerateChildNodes { (node, _) in
+            node.geometry?.firstMaterial?.transparency = 1
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

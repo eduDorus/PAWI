@@ -11,15 +11,16 @@ import SceneKit
 
 class MarbleTrack: SCNNode {
 
-    let tracks = [
+    private let tracks = [
         [(-1,0,0), (-1,0,-1), (0,0,-1), (-3,0,-2), (-2,0,-2), (-1,0,-2), (0,0,-2), (1,0,-2), (2,0,-2), (3,0,-2), (4,0,-2), (3,0,-1), (2,0,0), (3,0,0), (4,0,0), (3,0,1), (4,0,1), (-1,0,-3), (-1,0,-4),
         (0,1,0), (-1,1,0), (-1,1,-1), (0,1,-1), (-3,1,-2), (-2,1,-2), (-1,1,-2), (0,1,-2), (1,1,-2), (2,1,-2), (3,1,-2), (4,1,-2), (-1,1,-3), (-1,1,-4),
         (0,2,0), (-1,2,0), (-1,2,-1), (0,2,-1), (-3,2,-2), (-2,2,-2), (-1,2,-2), (0,2,-2), (-1,2,-3), (-1,2,-4),
         (-3,3,-2), (-2,3,-2), (-1,3,-2), (-1,3,-3), (-1,3,-4),
         (-3,4,-2)]
     ]
-    var currentTrack = 0
-    var currentBuildingStep = 0
+    private var currentTrack = 0
+    private var currentBuildingStep = 0
+    private var map = TrackMap<BasicCube>()
 
     override public init() {
         super.init()
@@ -36,6 +37,7 @@ class MarbleTrack: SCNNode {
         let pos = SCNVector3(CGFloat(x) * cube.sidelength, CGFloat(y) * cube.sidelength, CGFloat(z) * cube.sidelength)
         cube.set(position: pos)
         addChildNode(cube)
+        map.add(element: cube, atLocation: Triple(x, y, z))
         return cube
     }
     
@@ -60,12 +62,17 @@ class MarbleTrack: SCNNode {
     
     // remove all BasicCube nodes from the track
     func clearTrack() {
-        enumerateChildNodes { (node, stop) in
-            if node.name != "basecube" {
-                if let cube = node as? BasicCube {
-                    cube.remove()
-                }
+        map.forEach { (position, cube) in
+            if cube.name != "basecube" {
+                cube.remove()
+                map.removeElement(at: position)
             }
+        }
+    }
+    
+    func hideTrack() {
+        map.forEach { (_, cube) in
+            cube.hide()
         }
     }
     
@@ -82,20 +89,15 @@ class MarbleTrack: SCNNode {
     }
     
     func loadTrackCurrentBuildingLayer() {
-        if tracks.indices.contains(currentTrack) {
-            for block in tracks[currentTrack] {
-                if block.1 == currentBuildingStep - 1 {
-                    addCube(x: block.0, y: block.1, z: block.2).set(color: UIColor.red)
-                }
-            }
+        map.getElements(atLevel: currentBuildingStep-1).forEach { (_, cube) in
+            cube.show()
+            cube.set(color: UIColor.red)
         }
     }
     
     func increaseBuildingStep() {
         if currentBuildingStep == 0 {
-            // remove all nodes for the very first step in the building process
-            // because we'll rebuild the track step-by-step now
-            clearTrack()
+            hideTrack()
         }
         currentBuildingStep += 1
         clearHighlights()
@@ -103,12 +105,8 @@ class MarbleTrack: SCNNode {
     }
     
     func clearHighlights() {
-        enumerateChildNodes { (node, stop) in
-            if let cube = node as? BasicCube {
-                if node.name != "basecube" {
-                    cube.set(color: UIColor.white)
-                }
-            }
+        map.forEach { (_, cube) in
+            cube.set(color: UIColor.white)
         }
     }
 
