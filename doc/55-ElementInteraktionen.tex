@@ -104,7 +104,7 @@
 
     \textbf{Drehen von Würfeln anhand der akutellen Kameraposition}\\
 
-    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{didSwipe(_ gesture: UISwipeGestureRecognizer)} die beim Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} ausgeführt wird}
+    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{didSwipe(\_ gesture: UISwipeGestureRecognizer)} die beim Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} ausgeführt wird}
     @objc
     func didSwipe(_ gesture: UISwipeGestureRecognizer) {
         let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
