@@ -148,7 +148,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let result : ARHitTestResult = hitResults.first!
             let coords = result.worldTransform.columns.3
             track!.set(position: SCNVector3(coords.x, coords.y, coords.z))
-            track!.contstraintToCamera()
+            track!.constraintToCamera()
         }
     }
     
@@ -164,7 +164,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func unlockMarbleTrack() {
         isTrackLocked = false
         startButton.isEnabled = false
-        track!.contstraintToCamera()
+        track!.constraintToCamera()
         for a in anchors {
             sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0.1
         }
