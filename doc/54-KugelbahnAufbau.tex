@@ -58,6 +58,18 @@
 
 	Statt dass alle Würfel beim Beginn der Aufbauanleitung entfernt werden, werden sie nun bloss über Verändern der Transparenz ausgeblendet. Der Aufbau der Bahn geht weiterhin Ebene für Ebene.
 
+	\textbf{Genauigkeit und Stabilität der Augmentierung}\\
+	Während der Entwicklung fiel auf, dass sich das virtuelle Modell der Kugelbahn gegenüber der realen Welt oftmals verschob. Wenn sich die Szene durch den Aufbau physischer Würfel verändert, könnte das diesen Effekt erheblich verstärken. Zumal ARKit mit einer Kombination aus Beschleunigungssensoren und dem Kamerabild – das sich durch den Aufbau eben verändert – arbeitet.
+
+	In einem Test wurde auf einem Tisch mit vielen deutlichen Features die virtuelle Kugelbahn platziert. Ein einzelner physischer Würfel wurde als Messpunkt genau an eine Stelle der Bahn gesetzt. Die ganze Fläche des Tisches wurde anschliessend vollständig abgedeckt, ohne dass sich die Kugelbahn wesentlich verschob. Nachdem die Abdeckung wieder entfernt wurde, wurde die Verschiebung anhand des gesetzten Würfels sichtbar. In mehreren Durchläufen hat sich die AR Kugelbahn meistens um rund einen Zentimeter verschoben. Oftmals war die Verschiebung vertikal.
+
+	Die beobachteten Verschiebungen passieren teilweise auch ohne Veränderung der Szene. Weitere Tests sind notwendig, um festzustellen, ob mit diesen Ungenauigkeiten auch bei idealen Bedingungen gerechnet werden müssen.
+
+	% TODO: Versuch genauer beschreiben, mit Fotos am besten.
+	% Folgende Tests (as a reminder):
+	% - der ganze Tisch abgedeckt wird und keine Fläche mehr vorhanden ist.
+	% - nahe an das Modell heran gehen
+
 
 \end{description}
 
