@@ -1,7 +1,7 @@
 \subsubsection{Schrittweise augmentierte Bauanleitung einer Kugelbahn}\label{subsub:prot-kugelbahnaufbau}
 \begin{description}
-	\item[Fragestellung:] Wie kann eine schrittweise Bauanleitung für eine Kugelbahn umgesetzt/augmentiert werden? Es soll Würfel für Würfel den Aufbau einer einfache Kugelbahn auf einer Fläche angezeigt werden.
-	\item[Resultat:] 
+	\item[Fragestellung:] Wie kann eine schrittweise Bauanleitung für eine Kugelbahn umgesetzt/augmentiert werden? Es soll Würfel-für-Würfel den Aufbau einer einfache Kugelbahn auf einer Fläche angezeigt werden.
+	\item[Resultat:] Mit einem Dictionary, das als Schlüssel die Koordinaten und die Kugelbahn-Elemente als Werte verwendet, lassen sich die einzelnen Würfel problemlos verändern. Ein Algorithmus, der anhand der Koordinaten durch die Elemente geht, kann in diesem Setting eine Würfel-für-Würfel Anleitung erzeugen. In diesem Versuch wurde dies mit einem ebenenweisen Aufbau vereinfacht. ARKit hat die Angewohnheit, sich mit der Zeit aus bislang unklaren Gründen zu verschieben. Oftmals betragen die Verschiebungen bloss 1-2 Zentimeter, was bei Würfeln mit 5 cm Seitenlänge beträchtlich ist. Dies müsste mit weiteren Versuchen genauer beobachtet werden.
 	\item[Versuchsaufbau:] Dieser Versuch baut direkt auf \ref{subsub:prot-kugelbahn} auf und erweitert diesen. Der View wurde zusätzlich ein Button hinzugefügt, um die verschiedenen Schritte des Aufbaus zu bestätigen. Sobald die Kugelbahn platziert wird, ist der Button aktiviert und die Aufbauanleitung wird mit einem Tap darauf gestartet.
 
 	\textbf{Variante 1: Rekonstruktion der Bahn}\\
@@ -72,5 +72,3 @@
 
 
 \end{description}
-
-
