@@ -25,8 +25,8 @@ struct Triple<T:Hashable,U:Hashable,V:Hashable> : Hashable {
     init(_ a: T, _ b: U, _ c: V) {
         values = (a, b, c)
     }
-}
 
-func ==<T:Hashable,U:Hashable,V:Hashable>(lhs: Triple<T,U,V>, rhs: Triple<T,U,V>) -> Bool {
-    return lhs.values == rhs.values
+    static func ==<T:Hashable,U:Hashable,V:Hashable>(lhs: Triple<T,U,V>, rhs: Triple<T,U,V>) -> Bool {
+        return lhs.values == rhs.values
+    }
 }
