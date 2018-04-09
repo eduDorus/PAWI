@@ -14,15 +14,174 @@
 
     \textbf{\texttt{UITapGestureRecognizer} mit einmaligem Tippen}\\
 
+    \begin{code}{prot-gesture-addTapGestureToSceneView}{Methode \texttt{addTapGestureToSceneView()} um das einmalige antippen der \texttt{SceneView} hinzuzufügen}
+    func addTapGestureToSceneView() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(withGestureRecognizer:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        sceneView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    \end{code}
+
+    \begin{code}{prot-gesture-didTap}{Methode \texttt{didTap(withGestureRecognizer recognizer: UIGestureRecognizer)} die beim einmaligen antippen der \texttt{SceneView} ausgeführt wird}
+    @objc
+    func didTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
+        let tapLocation = recognizer.location(in: sceneView)
+        let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
+        let hitTestResults = sceneView.hitTest(tapLocation, options: hitTestOptions)
+
+        guard let node = hitTestResults.first?.node else {return}
+        
+        updateSelectedObject(node: node)
+    }
+    \end{code}
+
     \textbf{\texttt{UITapGestureRecognizer} mit zweimaligem Tippen}\\
+
+    \begin{code}{prot-gesture-addDoubleTapGestureToSceneView}{Methode \texttt{addDoubleTapGestureToSceneView()} um das zweimalige antippen der \texttt{SceneView} hinzuzufügen}
+    doubleTapGestureRecognizer.numberOfTapsRequired = 2
+    \end{code}
+
+    \begin{code}{prot-gesture-didTap}{Methode \texttt{didTap(withGestureRecognizer recognizer: UIGestureRecognizer)} die beim einmaligen antippen der \texttt{SceneView} ausgeführt wird}
+    @objc
+    func didDoubleTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
+        let tapLocation = recognizer.location(in: sceneView)
+        let hitTestResults = sceneView.hitTest(tapLocation)
+        
+        guard let node = hitTestResults.first?.node else {
+            let hitTestResultWithFeaturePoints = sceneView.hitTest(tapLocation, types: .estimatedHorizontalPlane)
+            if let hitTestResultWithFeaturePoints = hitTestResultWithFeaturePoints.first {
+                let translation = hitTestResultWithFeaturePoints.worldTransform.translation
+                addBox(x: translation.x, y: translation.y, z: translation.z)
+            }
+            return
+        }
+    }
+    \end{code}
 
     \textbf{\texttt{UILongPressGestureRecognizer} für langes antippen eines Objektes}\\
 
+    \begin{code}{prot-gesture-addLongTapGestureToSceneView}{Methode \texttt{addLongTapGestureToSceneView()} um das lange antippen der \texttt{SceneView} hinzuzufügen}
+    func addLongTapGestureToSceneView() {
+        let longTapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.didLongPress(withGestureRecognizer:)))
+        sceneView.addGestureRecognizer(longTapGestureRecognizer)
+    }
+    \end{code}
+
+    \begin{code}{prot-gesture-addLongTapGestureToSceneView}{Methode \texttt{addLongTapGestureToSceneView()} um das lange antippen der \texttt{SceneView} hinzuzufügen}
+    @objc
+    func didLongPress(withGestureRecognizer recognizer: UILongPressGestureRecognizer) {
+        let longPressLocation = recognizer.location(in: sceneView)
+        let hitTestResults = sceneView.hitTest(longPressLocation)
+        
+        guard let node = hitTestResults.first?.node else { return }
+        node.removeFromParentNode()
+    }
+    \end{code}
+    
     \textbf{\texttt{UISwipeGestureRecognizer} für die Rotationen}\\
+    
+    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{addSwipeGestureToSceneView()} um die Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} hinzuzufügen}
+    func addSwipeGestureToSceneView() {
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
+        swipeRightGesture.direction = .right
+        
+        let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
+        swipeLeftGesture.direction = .left
+        
+        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
+        swipeUpGesture.direction = .up
+        
+        let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
+        swipeDownGesture.direction = .down
+        
+        sceneView.addGestureRecognizer(swipeLeftGesture)
+        sceneView.addGestureRecognizer(swipeRightGesture)
+        sceneView.addGestureRecognizer(swipeUpGesture)
+        sceneView.addGestureRecognizer(swipeDownGesture)
+    }
+    \end{code}
 
-    \textbf{\texttt{UISwipeGestureRecognizer} für die Rotationen}\\
 
+    \textbf{Drehen von Würfeln anhand der akutellen Kameraposition}\\
 
+    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{didSwipe(_ gesture: UISwipeGestureRecognizer)} die beim Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} ausgeführt wird}
+    @objc
+    func didSwipe(_ gesture: UISwipeGestureRecognizer) {
+        let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
+        
+        if gesture.direction == .right {
+            let action = SCNAction.rotateBy(x: 0, y: CGFloat(Double.pi/2), z: 0, duration: 0.5)
+            selectedObject?.runAction(action, forKey: "rotate-right")
+        }
+        else if gesture.direction == .left {
+            let action = SCNAction.rotateBy(x: 0, y: CGFloat(-(Double.pi/2)), z: 0, duration: 0.5)
+            selectedObject?.runAction(action, forKey: "rotate-left")
+        }
+        else if gesture.direction == .up {
+            if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
+                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
+                selectedObject?.runAction(action, forKey: "rotate-up")
+            }
+            else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
+                let action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
+                selectedObject?.runAction(action, forKey: "rotate-up")
+                
+            }
+            else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
+                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
+                selectedObject?.runAction(action, forKey: "rotate-up")
+                
+            }
+            else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
+                let action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
+                selectedObject?.runAction(action, forKey: "rotate-up")
+            }
+        }
+        else if gesture.direction == .down {
+            if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
+                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
+                selectedObject?.runAction(action, forKey: "rotate-down")
+            }
+            else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
+                let action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
+                selectedObject?.runAction(action, forKey: "rotate-down")
+                
+            }
+            else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
+                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
+                selectedObject?.runAction(action, forKey: "rotate-down")
+                
+            }
+            else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
+                let action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
+                selectedObject?.runAction(action, forKey: "rotate-down")
+            }
+            
+        }
+        selectedObject?.orientation = SCNQuaternion(x: 0.0, y: 0.0, z: 0.0, w: 1.0)
+    }
+    \end{code}
+
+    \textbf{Zusätzliches}\\
+
+    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{updateSelectedObject(node: SCNNode)} um das ausgewählte Element zu animieren}
+    func updateSelectedObject(node: SCNNode) {
+        // Set selected color
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        selectedObject?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 182.0 / 255.0, green: 155.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
+        SCNTransaction.commit()
+        
+        // Set new selected node
+        selectedObject = node
+        
+        // Set selected color
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        selectedObject?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 130.0 / 255.0, green: 82.0 / 255.0, blue: 1.0 / 255.0, alpha: 1)
+        SCNTransaction.commit()
+    }
+    \end{code}
     
 
 \end{description}    
