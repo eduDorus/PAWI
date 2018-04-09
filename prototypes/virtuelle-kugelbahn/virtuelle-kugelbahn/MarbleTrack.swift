@@ -22,7 +22,7 @@ class MarbleTrack: SCNNode {
     private var currentBuildingStep = 0
     private var map = TrackMap<BasicCube>()
 
-    override public init() {
+    override init() {
         super.init()
         let cube = addCube(x: 0, y: 0, z: 0)
         cube.set(color: UIColor.yellow)
@@ -32,7 +32,7 @@ class MarbleTrack: SCNNode {
     
     // Positions a new BasicCube at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
     @discardableResult
-    public func addCube(x: Int, y: Int, z: Int) -> BasicCube {
+    private func addCube(x: Int, y: Int, z: Int) -> BasicCube {
         let cube = BasicCube()
         let pos = SCNVector3(CGFloat(x) * cube.sidelength, CGFloat(y) * cube.sidelength, CGFloat(z) * cube.sidelength)
         cube.set(position: pos)
@@ -41,27 +41,27 @@ class MarbleTrack: SCNNode {
         return cube
     }
     
-    public func set(position vector: SCNVector3) {
+    func set(position vector: SCNVector3) {
         position = vector
     }
     
-    public func set(rotation vector: SCNVector3) {
+    func set(rotation vector: SCNVector3) {
         eulerAngles = vector
     }
     
     // Makes the track always facing the camera by rotating around the Y axis
-    public func constraintToCamera() {
+    func constraintToCamera() {
         let constraint = SCNBillboardConstraint()
         constraint.freeAxes = SCNBillboardAxis.Y
         constraints = [constraint]
     }
     
-    public func removeConstraints() {
+    func removeConstraints() {
         constraints = []
     }
     
     // remove all BasicCube nodes from the track
-    func clearTrack() {
+    private func clearTrack() {
         map.forEach { (position, cube) in
             if cube.name != "basecube" {
                 cube.remove()
@@ -70,7 +70,7 @@ class MarbleTrack: SCNNode {
         }
     }
     
-    func hideTrack() {
+    private func hideTrack() {
         map.forEach { (_, cube) in
             cube.hide()
         }
@@ -88,7 +88,7 @@ class MarbleTrack: SCNNode {
         }
     }
     
-    func loadTrackCurrentBuildingLayer() {
+    private func loadTrackCurrentBuildingLayer() {
         map.getElements(atLevel: currentBuildingStep-1).forEach { (_, cube) in
             cube.show()
             cube.set(color: UIColor.red)
@@ -104,7 +104,7 @@ class MarbleTrack: SCNNode {
         loadTrackCurrentBuildingLayer()
     }
     
-    func clearHighlights() {
+    private func clearHighlights() {
         map.forEach { (_, cube) in
             cube.set(color: UIColor.white)
         }
