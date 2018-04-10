@@ -4,6 +4,7 @@
 	\item[Resultat:] Es konnte erfolgrich ein Prototyp entwickelt werden, bei dem es Möglich ist mittels verschiedenen Gesten mit einem virtuellen Objekt zu interagieren. Eine besondere Schwierigkeit bestand darin das Element zu kippen da je nach Kameraperspektive um die Z- oder X Achse gedreht werden muss. 
     \item[Versuchsaufbau:] Für diesen Versuch wurde ein neues XCode Projekt initialisiert. Anschliessend wurde die Logik implementiert um einen Würfel auf einer Fläche zu augmentieren. Es wurde die Funktionalität entwickelt mittels verschiedenen Gesten mit dem Würfel zu interagieren. Zu den funktionalitäten gehören:
     
+    
     \begin{itemize}
         \item \texttt{UITapGestureRecognizer} mit einmaligem Tippen
         \item \texttt{UITapGestureRecognizer} mit zweimaligem Tippen
@@ -105,61 +106,32 @@
     \textbf{Drehen von Würfeln anhand der akutellen Kameraposition}\\
 
     \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{didSwipe(\_ gesture: UISwipeGestureRecognizer)} die beim Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} ausgeführt wird}
-    @objc
-    func didSwipe(_ gesture: UISwipeGestureRecognizer) {
-        let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
-        
-        if gesture.direction == .right {
-            let action = SCNAction.rotateBy(x: 0, y: CGFloat(Double.pi/2), z: 0, duration: 0.5)
-            selectedObject?.runAction(action, forKey: "rotate-right")
-        }
-        else if gesture.direction == .left {
-            let action = SCNAction.rotateBy(x: 0, y: CGFloat(-(Double.pi/2)), z: 0, duration: 0.5)
-            selectedObject?.runAction(action, forKey: "rotate-left")
-        }
-        else if gesture.direction == .up {
-            if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
-                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-up")
-            }
-            else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
-                let action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-up")
-                
-            }
-            else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
-                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-up")
-                
-            }
-            else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
-                let action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-up")
-            }
-        }
-        else if gesture.direction == .down {
-            if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
-                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-down")
-            }
-            else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
-                let action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-down")
-                
-            }
-            else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
-                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-down")
-                
-            }
-            else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
-                let action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-down")
-            }
+        @objc
+        func didSwipe(_ gesture: UISwipeGestureRecognizer) {
+            let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
+            var action: SCNAction!
             
-        }
-        selectedObject?.orientation = SCNQuaternion(x: 0.0, y: 0.0, z: 0.0, w: 1.0)
-    }
+            if gesture.direction == .right {
+                action = SCNAction.rotateBy(x: 0, y: CGFloat(Double.pi/2), z: 0, duration: 0.5)
+            }
+            else if gesture.direction == .left {
+                action = SCNAction.rotateBy(x: 0, y: CGFloat(-(Double.pi/2)), z: 0, duration: 0.5)
+            }
+            else if gesture.direction == .up {
+                if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
+                    action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
+                }
+                else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
+                    action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
+                }
+                else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
+                    action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
+                }
+                else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
+                    action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
+                }
+            }
+            ...
     \end{code}
 
     \textbf{Zusätzliches}\\

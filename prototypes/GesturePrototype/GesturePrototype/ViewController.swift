@@ -163,59 +163,48 @@ class ViewController: UIViewController {
     @objc
     func didSwipe(_ gesture: UISwipeGestureRecognizer) {
         let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
+        var action: SCNAction!
         
         if gesture.direction == .right {
-            let action = SCNAction.rotateBy(x: 0, y: CGFloat(Double.pi/2), z: 0, duration: 0.5)
-            selectedObject?.runAction(action, forKey: "rotate-right")
+            action = SCNAction.rotateBy(x: 0, y: CGFloat(Double.pi/2), z: 0, duration: 0.5)
         }
         else if gesture.direction == .left {
-            let action = SCNAction.rotateBy(x: 0, y: CGFloat(-(Double.pi/2)), z: 0, duration: 0.5)
-            selectedObject?.runAction(action, forKey: "rotate-left")
+            action = SCNAction.rotateBy(x: 0, y: CGFloat(-(Double.pi/2)), z: 0, duration: 0.5)
         }
         else if gesture.direction == .up {
             if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
-                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-up")
+                action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
             }
             else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
-                let action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-up")
-                
+                action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
             }
             else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
-                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-up")
-                
+                action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
             }
             else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
-                let action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-up")
+                action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
             }
         }
         else if gesture.direction == .down {
             if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
-                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-down")
+                action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
             }
             else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
-                let action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-down")
-                
+                action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
             }
             else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
-                let action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-down")
-                
+                action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
             }
             else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
-                let action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
-                selectedObject?.runAction(action, forKey: "rotate-down")
+                action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
             }
             
         }
-        selectedObject?.orientation = SCNQuaternion(x: 0.0, y: 0.0, z: 0.0, w: 1.0)
+        if action != nil {
+            selectedObject?.runAction(action, forKey: "rotate")
+            selectedObject?.orientation = SCNQuaternion(x: 0.0, y: 0.0, z: 0.0, w: 1.0)
+        }
     }
-    
 }
 
 // Helper function to convert a matrix to float3 -> x,y,z
