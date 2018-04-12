@@ -118,6 +118,8 @@
     \end{code}
     
     \textbf{\texttt{UISwipeGestureRecognizer} für die Rotationen}\\
+
+    Damit die Rotation eines Würfels möglichst einfach wird wurde dies mit Wischgeste umgesetzt. Damit die Wischgeste für links, rechts, oben und untern funktioniert benötigt es vier \texttt{UISwipeGestureRecognizer}. Im Code \ref{code:prot-gesture-addSwipeGestureToSceneView} werden die vier \texttt{UISwipeGestureRecognizer} initialisiert. Wichtig hierbei ist es, dass jeweils die Richtig der Wischgeste mittels \texttt{swipeRightGesture.direction} gesetzt wird. Als auszuführende Aktion wird jeweils die Methode \texttt{didSwipe(\_:)} angegeben.
     
     \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{addSwipeGestureToSceneView()} um die Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} hinzuzufügen}
     func addSwipeGestureToSceneView() {
@@ -140,58 +142,46 @@
     }
     \end{code}
 
-
     \textbf{Drehen von Würfeln anhand der akutellen Kameraposition}\\
 
-    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{didSwipe(\_ gesture: UISwipeGestureRecognizer)} die beim Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} ausgeführt wird}
-        @objc
-        func didSwipe(_ gesture: UISwipeGestureRecognizer) {
-            let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
-            var action: SCNAction!
-            
-            if gesture.direction == .right {
-                action = SCNAction.rotateBy(x: 0, y: CGFloat(Double.pi/2), z: 0, duration: 0.5)
-            }
-            else if gesture.direction == .left {
-                action = SCNAction.rotateBy(x: 0, y: CGFloat(-(Double.pi/2)), z: 0, duration: 0.5)
-            }
-            else if gesture.direction == .up {
-                if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
-                    action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
-                }
-                else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
-                    action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
-                }
-                else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
-                    action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
-                }
-                else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
-                    action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
-                }
-            }
-            ...
-    \end{code}
+    Beim Drehen der Würfel bestehn zwei Schwierigkeiten. Einerseits muss der Würfel immer relativ zur Kamera nach ob oder unten gekippt werden. Es muss also entschieden werden ob die Rotation zur X-Achse oder Z-Achse erfolgt. Zusätzlich dreht beim rotieren eines Würfels das relative Koordinatensystem mit. Dies bedeutet dass bedeutet dem Kippen eine links Wischgeste den Würfel ebenfalls kippen würde.
 
-    \textbf{Zusätzliches}\\
+    Das erste Problem kann gelöst werden indem anhand der aktuellen Kameraposition die Y-Achse ausgewertet wird. Je nach Winkel kann somit entschieden werden um welche Achse der Würfel sich drehen sollte. %TODO: HIER NOCH EIN BILD EINFÜGEN
 
-    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{updateSelectedObject(node: SCNNode)} um das ausgewählte Element zu animieren}
-    func updateSelectedObject(node: SCNNode) {
-        // Set selected color
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.5
-        selectedObject?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 182.0 / 255.0, green: 155.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
-        SCNTransaction.commit()
+    Das zweite Problem kann mittels Überschreiben des relativen Würfelkoordinatensystems gelöst werden. Nach der Rotation muss das relative Koordinatensystem des Würfels mit dem der Ausrichtig des World Origin überschrieben werden (Code \ref{code:prot-gesture-didSwipe} Zeile 29).
+
+    \begin{code}{prot-gesture-didSwipe}{Methode \texttt{didSwipe(\_ gesture: UISwipeGestureRecognizer)} die beim Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} ausgeführt wird}
+    @objc
+    func didSwipe(_ gesture: UISwipeGestureRecognizer) {
+        let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
+        var action: SCNAction!
         
-        // Set new selected node
-        selectedObject = node
-        
-        // Set selected color
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.5
-        selectedObject?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 130.0 / 255.0, green: 82.0 / 255.0, blue: 1.0 / 255.0, alpha: 1)
-        SCNTransaction.commit()
+        if gesture.direction == .right {
+            action = SCNAction.rotateBy(x: 0, y: CGFloat(Double.pi/2), z: 0, duration: 0.5)
+        }
+        else if gesture.direction == .left {
+            action = SCNAction.rotateBy(x: 0, y: CGFloat(-(Double.pi/2)), z: 0, duration: 0.5)
+        }
+        else if gesture.direction == .up {
+            if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
+                action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
+            }
+            else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
+                action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
+            }
+            else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
+                action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
+            }
+            else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
+                action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
+            }
+        }
+        ...
+        if action != nil {
+            selectedObject?.runAction(action, forKey: "rotate")
+            selectedObject?.orientation = SCNQuaternion(x: 0.0, y: 0.0, z: 0.0, w: 1.0)
+        }
     }
-    \end{code}
-    
+    \end{code} 
 
 \end{description}    
