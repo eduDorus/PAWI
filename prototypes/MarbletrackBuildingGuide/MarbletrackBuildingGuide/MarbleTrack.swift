@@ -20,7 +20,7 @@ class MarbleTrack: SCNNode {
         [(-1,0,0), (-1,0,-1), (0,0,-1), (1,0,-1), (1,0,0),
          (-1,1,-1), (1,1,-1)]
     ]
-    private var currentTrack = 1
+    private var currentTrack = 0
     private var currentBuildingStep = 0
     private var map = TrackMap<BasicCube>()
 
@@ -104,6 +104,10 @@ class MarbleTrack: SCNNode {
         currentBuildingStep += 1
         clearHighlights()
         loadTrackCurrentBuildingLayer()
+    }
+    
+    func getMap() -> TrackMap<BasicCube> {
+        return map
     }
     
     private func clearHighlights() {
