@@ -26,6 +26,18 @@ class TrackMap<E:Hashable> {
     func getElements(atLevel level: Int) -> [Triple<Int,Int,Int> : E] {
         return map.filter { $0.key.values.1 == level }
     }
+    
+    func getHorizontalNeighbors(ofElement key: Triple<Int,Int,Int>) -> [Triple<Int,Int,Int> : E] {
+        var possibleNeighbors : [Triple<Int,Int,Int>] = []
+        possibleNeighbors.append(Triple(key.values.0+1, key.values.1, key.values.2))
+        possibleNeighbors.append(Triple(key.values.0-1, key.values.1, key.values.2))
+        possibleNeighbors.append(Triple(key.values.0, key.values.1, key.values.2+1))
+        possibleNeighbors.append(Triple(key.values.0, key.values.1, key.values.2-1))
+        
+        return map.filter { (element) -> Bool in
+            possibleNeighbors.contains(element.key)
+        }
+    }
 
     func getKeys(forElement element: E) -> [Triple<Int,Int,Int>] {
         return map.filter { $0.value == element }.map { $0.0 }
