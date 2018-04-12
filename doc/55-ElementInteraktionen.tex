@@ -14,18 +14,20 @@
 
 
     \textbf{\texttt{UITapGestureRecognizer} mit einmaligem Tippen}\\
-
+    Damit mit Touchgesten gearbeitet werden kann müssen diese der SceneView hinzugefügt werden Code \ref{code:prot-gesture-addTapGestureToSceneView}. Für einzelne Taps können wir den \texttt{UITapGestureRecognizer} initialisieren und als action parameter eine Methode angeben. Wir geben hierfür die Methode \texttt{ViewController.didTap(withGestureRecognizer:)}. Zusätzlich sollte die Anzahl benötigter Taps mit \texttt{tapGestureRecognizer.numberOfTapsRequired} auf Eins gesetzt werden, da wir auch einen DoubleTap erkennen wollen. 
     \begin{code}{prot-gesture-addTapGestureToSceneView}{Methode \texttt{addTapGestureToSceneView()} um das einmalige antippen der \texttt{SceneView} hinzuzufügen}
     func addTapGestureToSceneView() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(withGestureRecognizer:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(\_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
         sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
     \end{code}
 
-    \begin{code}{prot-gesture-didTap}{Methode \texttt{didTap(withGestureRecognizer recognizer: UIGestureRecognizer)} die beim einmaligen antippen der \texttt{SceneView} ausgeführt wird}
+    Sollte erfolgreich ein Tap auf der SceneView registriert werden, so wird die Methode \texttt{didTap(\_ recognizer: UIGestureRecognizer)} im Code \ref{code:prot-gesture-didTap} ausgeführt. Bei dieser Methode werden die 2D Koordinaten des Taps ausgelesen und anschliesend an einem \texttt{hitTest(\_:types:)} im 3D Raum weitergegeben. Dieser HitTest prüft ob es sich um ein SceneKit Node handelt. Falls dies der Fall ist wird dieses Element selektiert und als interagierbares Objekt gesetzt. Dies geschied mir der Methode \texttt{updateSelectedObject(node: node)} aus dem Code \ref{code:prot-gesture-updateSelectedObject}. In diesem Code abschnitt werden auch zwei \texttt{SCNTransaction} ausgeführt damit der Benutzer anhand einer Visuellen animation erkennt welches das aktuell selektierte Objekt ist. Mittels \texttt{SCNTransaction} können komplexe Animationen erstellt werden und innerhalb einer Transaktion ausgeführt werden.
+
+    \begin{code}{prot-gesture-didTap}{Methode \texttt{didTap(\_ recognizer: UIGestureRecognizer)} die beim einmaligen antippen der \texttt{SceneView} ausgeführt wird}
     @objc
-    func didTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
+    func didTap(_ recognizer: UIGestureRecognizer) {
         let tapLocation = recognizer.location(in: sceneView)
         let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
         let hitTestResults = sceneView.hitTest(tapLocation, options: hitTestOptions)
@@ -33,6 +35,25 @@
         guard let node = hitTestResults.first?.node else {return}
         
         updateSelectedObject(node: node)
+    }
+    \end{code}
+
+    \begin{code}{prot-gesture-updateSelectedObject}{Methode \texttt{updateSelectedObject(node: node)} zur aktualisierung des ausgewählten Objekts}
+    func updateSelectedObject(node: SCNNode) {
+        // reset color of old selected object
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        selectedObject?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 182.0 / 255.0, green: 155.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
+        SCNTransaction.commit()
+        
+        // Set new selected node
+        selectedObject = node
+        
+        // Set selected color
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        selectedObject?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 130.0 / 255.0, green: 82.0 / 255.0, blue: 1.0 / 255.0, alpha: 1)
+        SCNTransaction.commit()
     }
     \end{code}
 
