@@ -13,7 +13,7 @@
     \end{itemize}
 
 
-    \textbf{\texttt{UITapGestureRecognizer} mit einmaligem Tippen}\\
+    \textbf{\texttt{UITapGestureRecognizer} mit einmaligem Tippen}\label{textbf:tap-gesture-recognizer}\\
     Damit mit Touchgesten gearbeitet werden kann müssen diese der SceneView hinzugefügt werden Code \ref{code:prot-gesture-addTapGestureToSceneView}. Für einzelne Taps können wir den \texttt{UITapGestureRecognizer} initialisieren und als action parameter eine Methode angeben. Wir geben hierfür die Methode \texttt{ViewController.didTap(withGestureRecognizer:)}. Zusätzlich sollte die Anzahl benötigter Taps mit \texttt{tapGestureRecognizer.numberOfTapsRequired} auf Eins gesetzt werden, da wir auch einen DoubleTap erkennen wollen. 
     \begin{code}{prot-gesture-addTapGestureToSceneView}{Methode \texttt{addTapGestureToSceneView()} um das einmalige antippen der \texttt{SceneView} hinzuzufügen}
     func addTapGestureToSceneView() {
@@ -59,13 +59,17 @@
 
     \textbf{\texttt{UITapGestureRecognizer} mit zweimaligem Tippen}\\
 
+    Das zweimalige Antippen der SeceneView setzt einen neuen Würfel. Das Prinzip um das zweimalige Antippen zu registriern ist gleich wie im obigen Abschnitt "`\texttt{UITapGestureRecognizer} mit einmaligem Tippen"' ausser das wir die \texttt{doubleTapGestureRecognizer.numberOfTapsRequired} auf zwei erhöhen wie im Code \ref{code:prot-gesture-addDoubleTapGestureToSceneView} ersichtlich ist. Als auszuführende Methode wird \texttt{didDoubleTap(\_ recognizer: UIGestureRecognizer)} gesetzt.
+
     \begin{code}{prot-gesture-addDoubleTapGestureToSceneView}{Methode \texttt{addDoubleTapGestureToSceneView()} um das zweimalige antippen der \texttt{SceneView} hinzuzufügen}
     doubleTapGestureRecognizer.numberOfTapsRequired = 2
     \end{code}
 
-    \begin{code}{prot-gesture-didTap}{Methode \texttt{didTap(withGestureRecognizer recognizer: UIGestureRecognizer)} die beim einmaligen antippen der \texttt{SceneView} ausgeführt wird}
+    Bei der \texttt{didDoubleTap(\_ recognizer: UIGestureRecognizer)} Methode (Code \ref{code:prot-gesture-didDoubleTap}) wird wie beim einfachen Antippen geprüft on ein SeceneKit objekt beim HitTest getroffen wird. Ist dies nicht der Fall können wir den neuen Würfel platzieren. Dies wird mit der Methode \texttt{addBox(x: translation.x, y: translation.y, z: translation.z)} gemacht. Die Koordinaten des HitTest werden hierfür von einer Matrizen zu x, y, z konvertiert. Dies wurde anhand einer Extension gemacht Code \ref{code:prot-gesture-extension}
+
+    \begin{code}{prot-gesture-didDoubleTap}{Methode \texttt{didDoubleTap(\_ recognizer: UIGestureRecognizer)} die beim zweimaligen Antippen der \texttt{SceneView} ausgeführt wird}
     @objc
-    func didDoubleTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
+    func didDoubleTap(_ recognizer: UIGestureRecognizer) {
         let tapLocation = recognizer.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(tapLocation)
         
@@ -79,6 +83,15 @@
         }
     }
     \end{code}
+
+    \begin{code}{prot-gesture-extension}{Extension funktion einer float4x4 Matrize um die Koordinaten in x, y und z zurückzugeben}
+    // Helper function to convert a matrix to float3 -> x,y,z
+    extension float4x4 {
+        var translation: float3 {
+            let translation = self.columns.3
+            return float3(translation.x, translation.y, translation.z)
+        }
+    }
 
     \textbf{\texttt{UILongPressGestureRecognizer} für langes antippen eines Objektes}\\
 
