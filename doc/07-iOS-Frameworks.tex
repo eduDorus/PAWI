@@ -15,24 +15,22 @@ https://developer.apple.com/documentation/vision
 \subsubsection{Überblick}
 Zusammen mit iOS 11 präsentierte Apple im Juni 2017 ARKit als neues Framework für Augmented Reality Anwendungen, das alle iOS Geräten mit mindestens einem Apple A9 Prozessor unterstützt. Für das World Tracking nutzt ARKit die "`visual-inertial odometry"' Technik. Dabei werden Informationen aus den Bewegungssensoren mit denen aus den Kamerabildern kombiniert. Das Framework errechnet damit ein Modell der realen Welt und die Position und Ausrichtung des Geräts. Um in diesem Modell virtuelle Objekte zu platzieren bietet ARKit einerseits \texttt{ARHitTestResult} um Punkte auf dem Kamerabild einer Oberfläche/Stelle der realen Welt zuordnen, und andererseits \texttt{planeDetection}, das ebene Flächen sucht. Ab ARKit Version 1.5 werden neben horizontalen auch vertikale Flächen erkannt und die Geometrie der Flächen wird statt nur rechteckig neu auch polygonal angegeben. Die eigentliche Beschreibung und Konstruktion virtueller Objekte wird von den Frameworks SpriteKit, SceneKit oder Metal übernommen.
 
-\subsubsection{Session}
-Die Klasse \texttt{ARSession} koordiniert die wichtigsten Bestandteile der ARKit Funktionalität, darunter die Kamera und die Bewegungssensoren aber auch die Bildverarbeitung. Um das ARKit zu nutzen wird mindestens eine \texttt{ARSession} benötigt, die ViewController \texttt{ARSCNView} und \texttt{ARSKView} beinhalten gleich eine Session-Instanz.
+\subsubsection{Sessions}
+Die Klasse \texttt{ARSession} koordiniert die wichtigsten Bestandteile der ARKit Funktionalität, darunter die Kamera und die Bewegungssensoren aber auch die Bildverarbeitung. Um das ARKit zu nutzen wird mindestens eine \texttt{ARSession} benötigt, die beiden ViewController \texttt{ARSCNView} und \texttt{ARSKView} beinhalten gleich eine Session-Instanz.
 
-Die Session benötigt eine Konfiguration mit \texttt{ARConfiguration} oder einer ihrer Subklassen. Damit können verschiedene Eigenschaften festgelegt werden: wird nur das Drehen (die Ausrichtung) nicht aber die Position des Geräts berücksichtigt? Werden die Koordinaten nach der ursprünglichen oder aktuellen Lage des Gerät oder gar nach dem Kompass ausgerichtet? Wird die Frontkamera und Gesichtserkennung/-tracking verwendet?
+Die Session benötigt eine Konfiguration mit \texttt{ARConfiguration} oder einer ihrer Subklassen. Damit können verschiedene Eigenschaften festgelegt werden: wird nur das Drehen (die Ausrichtung) nicht aber die Position des Geräts berücksichtigt? Werden die Koordinaten nach der ursprünglichen oder aktuellen Lage des Gerät oder gar nach dem Kompass ausgerichtet? Wird die Frontkamera und somit Gesichtserkennung/-tracking verwendet?
 
 Bei der standardmässigen Verwendung von \texttt{ARWorldTrackingConfiguration} als Session Konfiguration wird die Position und Ausrichtung des Geräts beim Start der Session als Nullpunkt des dreidimensionalen Koordinatensystems definiert ("`World Coordinate Space"'). Abbildung \ref{fig:arkit-worldalignment-gravity} aus der Apple Dokumentation zeigt diese Einstellung. Es entspricht der manuellen Konfiguration der Session-Option \texttt{worldAlignment} auf \texttt{gravity}.
 
 \bild[https://developer.apple.com/documentation/arkit/arconfiguration.worldalignment/2873778-gravity]{0.4}{arkit-worldalignment-gravity}{AR-Koordinatensystem mit Gravity als World Alignment}
 
 \subsubsection{Anker}
-Dem Modell müssen Anker vom Typ \texttt{ARAnchor} hinzugefügt werden, damit Objekte platziert werden können. Wenn die automatische Flächendetektion mit \texttt{planeDetection} aktiviert ist, fügt ARKit der Session automatisch \texttt{ARPlaneAnchor}s hinzu. Bei der Gesichtserkennung werden \texttt{ARFaceAnchor} verwendet und bei Bilderkennung \texttt{ARImageAnchor}. Jeder Anker definiert sein eigenes lokales Koordinatensystem, das zur Platzierung von Objekten verwendet werden kann.
+Dem Modell können sogenannte Anker vom Typ \texttt{ARAnchor} hinzugefügt werden, die genutzt werden können, um Objekte zu platzieren. Wenn die Flächendetektion mit \texttt{planeDetection} aktiviert ist, fügt ARKit der Session automatisch \texttt{ARPlaneAnchor}s hinzu. Bei der Gesichtserkennung werden \texttt{ARFaceAnchor} verwendet und bei Bilderkennung \texttt{ARImageAnchor}. Jeder Anker definiert sein eigenes lokales Koordinatensystem, das zur Platzierung von Objekten verwendet werden kann.
 
 
 \subsection{SpriteKit}
-https://developer.apple.com/documentation/spritekit
-
 SpriteKit wurde mit iOS 7 eingeführt und bietet im Wesentlichen Werkzeuge für 2D Animationen. Es umfasst zudem eine Physik-Engine und Eventhandling, sodass es für Spiele genutzt werden kann.
 
 
 \subsection{SceneKit}
-https://developer.apple.com/documentation/scenekit
+Auf SpriteKit folgend, fügte Apple in iOS 8 mit SceneKit ein high-level Framework für 3D Grafiken hinzu. Das Framework war zuvor bereits in macOS im Einsatz. Wie SpriteKit beinhaltet es eine Physik-Engine, Eventhandling und ein Partikelsystem. Szenen können mit dreidimensionalen Geometrien, Materialien, Lichtern, Animationen und Kameras beschrieben werden. Die Elemente werden in \texttt{SCNScene} in einem Szenengraph hierarchisch verwaltet, mit der \texttt{rootNode} als Wurzelknoten.
