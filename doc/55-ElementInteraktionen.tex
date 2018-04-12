@@ -95,16 +95,20 @@
 
     \textbf{\texttt{UILongPressGestureRecognizer} für langes antippen eines Objektes}\\
 
+    Die neu erstellten Würfel sollten auch wieder gelöscht werden können. Um diese Verhalten möglichst Nutzerfreundlich zu gestalten kann lange auf ein Würfel getippt werden. Die Umsetzung erfolgt mit dem \texttt{UILongPressGestureRecognizer}. Der \texttt{UILongPressGestureRecognizer} muss wie bei den obigen Beispielen der SceneView hinzugefügt werden.
+
     \begin{code}{prot-gesture-addLongTapGestureToSceneView}{Methode \texttt{addLongTapGestureToSceneView()} um das lange antippen der \texttt{SceneView} hinzuzufügen}
     func addLongTapGestureToSceneView() {
-        let longTapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.didLongPress(withGestureRecognizer:)))
+        let longTapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.didLongPress(\_:)))
         sceneView.addGestureRecognizer(longTapGestureRecognizer)
     }
     \end{code}
 
+    Wird ein \texttt{UILongPressGestureRecognizer} Event registriert so wird die Funktion \texttt{didLongPress(\_ recognizer: UILongPressGestureRecognizer)} (Code \ref{code:prot-gesture-addLongTapGestureToSceneView}) aufgerufen. Hier findet wie bei den obigen Beispielen ein HitTest statt. Sollte sich an der lang angetippten Stelle ein Würfel befinden so wird dieser mit der Methode \texttt{node.removeFromParentNode()} der SceneView entfehrnt.
+
     \begin{code}{prot-gesture-addLongTapGestureToSceneView}{Methode \texttt{addLongTapGestureToSceneView()} um das lange antippen der \texttt{SceneView} hinzuzufügen}
     @objc
-    func didLongPress(withGestureRecognizer recognizer: UILongPressGestureRecognizer) {
+    func didLongPress(\_ recognizer: UILongPressGestureRecognizer) {
         let longPressLocation = recognizer.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(longPressLocation)
         
