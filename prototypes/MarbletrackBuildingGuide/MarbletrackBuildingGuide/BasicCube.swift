@@ -13,6 +13,7 @@ class BasicCube: SCNNode {
     open let sidelength : CGFloat = 0.05
     private let edgeWidth : CGFloat = 0.001
     private let transparency : CGFloat = 0.3
+    private var state = BasicCubeState.planned
     
     override public init() {
         super.init()
@@ -61,6 +62,24 @@ class BasicCube: SCNNode {
         eulerAngles = vector
     }
     
+    public func set(state: BasicCubeState) {
+        self.state = state
+        switch state {
+        case .planned:
+            set(color: UIColor.white)
+            hide()
+        case .active:
+            set(color: UIColor.red)
+            show()
+        case .built:
+            set(color: UIColor.white)
+        }
+    }
+    
+    public func getState() -> BasicCubeState {
+        return state
+    }
+    
     public func remove() {
         // apparently it's not enough for the node to be removed itself, all its child nodes have to be removed as well
         // maybe there is another way, a different way to build these node so to make it work simpler
@@ -87,4 +106,10 @@ class BasicCube: SCNNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+enum BasicCubeState {
+    case planned
+    case active
+    case built
 }
