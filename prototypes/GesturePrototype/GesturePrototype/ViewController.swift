@@ -73,19 +73,19 @@ class ViewController: UIViewController {
     
     // Tap gestures
     func addTapGestureToSceneView() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(withGestureRecognizer:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
         sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func addDoubleTapGestureToSceneView() {
-        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didDoubleTap(withGestureRecognizer:)))
+        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didDoubleTap(_:)))
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
         sceneView.addGestureRecognizer(doubleTapGestureRecognizer)
     }
     
     func addLongTapGestureToSceneView() {
-        let longTapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.didLongPress(withGestureRecognizer:)))
+        let longTapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.didLongPress(_:)))
         sceneView.addGestureRecognizer(longTapGestureRecognizer)
     }
     
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
     }
     
     @objc
-    func didTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
+    func didTap(_ recognizer: UIGestureRecognizer) {
         let tapLocation = recognizer.location(in: sceneView)
         let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
         let hitTestResults = sceneView.hitTest(tapLocation, options: hitTestOptions)
@@ -137,7 +137,7 @@ class ViewController: UIViewController {
     }
     
     @objc
-    func didDoubleTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
+    func didDoubleTap(_ recognizer: UIGestureRecognizer) {
         let tapLocation = recognizer.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(tapLocation)
         
@@ -152,7 +152,7 @@ class ViewController: UIViewController {
     }
     
     @objc
-    func didLongPress(withGestureRecognizer recognizer: UILongPressGestureRecognizer) {
+    func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
         let longPressLocation = recognizer.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(longPressLocation)
         
