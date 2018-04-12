@@ -14,6 +14,12 @@
 		A03F75DD207F4A360091BF2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A03F75DC207F4A360091BF2E /* Assets.xcassets */; };
 		A03F75E0207F4A360091BF2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A03F75DE207F4A360091BF2E /* LaunchScreen.storyboard */; };
 		A03F75EB207F4A360091BF2E /* MarbletrackBuildingGuideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F75EA207F4A360091BF2E /* MarbletrackBuildingGuideTests.swift */; };
+		A03F75F9207F4AF40091BF2E /* BasicCube.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F75F5207F4AF30091BF2E /* BasicCube.swift */; };
+		A03F75FA207F4AF40091BF2E /* MarbleTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F75F6207F4AF40091BF2E /* MarbleTrack.swift */; };
+		A03F75FB207F4AF40091BF2E /* TrackMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F75F7207F4AF40091BF2E /* TrackMap.swift */; };
+		A03F75FC207F4AF40091BF2E /* Triple.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F75F8207F4AF40091BF2E /* Triple.swift */; };
+		A03F7603207F4B3B0091BF2E /* TrackMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F7601207F4B3A0091BF2E /* TrackMapTests.swift */; };
+		A03F7604207F4B3B0091BF2E /* TripleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F7602207F4B3A0091BF2E /* TripleTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,12 @@
 		A03F75E6207F4A360091BF2E /* MarbletrackBuildingGuideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarbletrackBuildingGuideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A03F75EA207F4A360091BF2E /* MarbletrackBuildingGuideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbletrackBuildingGuideTests.swift; sourceTree = "<group>"; };
 		A03F75EC207F4A360091BF2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A03F75F5207F4AF30091BF2E /* BasicCube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCube.swift; sourceTree = "<group>"; };
+		A03F75F6207F4AF40091BF2E /* MarbleTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarbleTrack.swift; sourceTree = "<group>"; };
+		A03F75F7207F4AF40091BF2E /* TrackMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackMap.swift; sourceTree = "<group>"; };
+		A03F75F8207F4AF40091BF2E /* Triple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triple.swift; sourceTree = "<group>"; };
+		A03F7601207F4B3A0091BF2E /* TrackMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMapTests.swift; path = MarbletrackBuildingGuideTests/TrackMapTests.swift; sourceTree = SOURCE_ROOT; };
+		A03F7602207F4B3A0091BF2E /* TripleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripleTests.swift; path = MarbletrackBuildingGuideTests/TripleTests.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +91,10 @@
 		A03F75D2207F4A340091BF2E /* MarbletrackBuildingGuide */ = {
 			isa = PBXGroup;
 			children = (
+				A03F75F5207F4AF30091BF2E /* BasicCube.swift */,
+				A03F75F6207F4AF40091BF2E /* MarbleTrack.swift */,
+				A03F75F7207F4AF40091BF2E /* TrackMap.swift */,
+				A03F75F8207F4AF40091BF2E /* Triple.swift */,
 				A03F75D3207F4A340091BF2E /* AppDelegate.swift */,
 				A03F75D5207F4A340091BF2E /* art.scnassets */,
 				A03F75D7207F4A340091BF2E /* ViewController.swift */,
@@ -93,6 +109,8 @@
 		A03F75E9207F4A360091BF2E /* MarbletrackBuildingGuideTests */ = {
 			isa = PBXGroup;
 			children = (
+				A03F7601207F4B3A0091BF2E /* TrackMapTests.swift */,
+				A03F7602207F4B3A0091BF2E /* TripleTests.swift */,
 				A03F75EA207F4A360091BF2E /* MarbletrackBuildingGuideTests.swift */,
 				A03F75EC207F4A360091BF2E /* Info.plist */,
 			);
@@ -201,7 +219,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A03F75FA207F4AF40091BF2E /* MarbleTrack.swift in Sources */,
 				A03F75D8207F4A340091BF2E /* ViewController.swift in Sources */,
+				A03F75FB207F4AF40091BF2E /* TrackMap.swift in Sources */,
+				A03F75FC207F4AF40091BF2E /* Triple.swift in Sources */,
+				A03F75F9207F4AF40091BF2E /* BasicCube.swift in Sources */,
 				A03F75D4207F4A340091BF2E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,7 +232,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A03F7603207F4B3B0091BF2E /* TrackMapTests.swift in Sources */,
 				A03F75EB207F4A360091BF2E /* MarbletrackBuildingGuideTests.swift in Sources */,
+				A03F7604207F4B3B0091BF2E /* TripleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
