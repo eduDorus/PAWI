@@ -20,6 +20,7 @@
 		A03F75FC207F4AF40091BF2E /* Triple.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F75F8207F4AF40091BF2E /* Triple.swift */; };
 		A03F7603207F4B3B0091BF2E /* TrackMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F7601207F4B3A0091BF2E /* TrackMapTests.swift */; };
 		A03F7604207F4B3B0091BF2E /* TripleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F7602207F4B3A0091BF2E /* TripleTests.swift */; };
+		A03F7606207F525F0091BF2E /* TrackBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F7605207F525F0091BF2E /* TrackBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		A03F75F8207F4AF40091BF2E /* Triple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triple.swift; sourceTree = "<group>"; };
 		A03F7601207F4B3A0091BF2E /* TrackMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMapTests.swift; path = MarbletrackBuildingGuideTests/TrackMapTests.swift; sourceTree = SOURCE_ROOT; };
 		A03F7602207F4B3A0091BF2E /* TripleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripleTests.swift; path = MarbletrackBuildingGuideTests/TripleTests.swift; sourceTree = SOURCE_ROOT; };
+		A03F7605207F525F0091BF2E /* TrackBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				A03F75F5207F4AF30091BF2E /* BasicCube.swift */,
 				A03F75F6207F4AF40091BF2E /* MarbleTrack.swift */,
+				A03F7605207F525F0091BF2E /* TrackBuilder.swift */,
 				A03F75F7207F4AF40091BF2E /* TrackMap.swift */,
 				A03F75F8207F4AF40091BF2E /* Triple.swift */,
 				A03F75D3207F4A340091BF2E /* AppDelegate.swift */,
@@ -221,6 +224,7 @@
 			files = (
 				A03F75FA207F4AF40091BF2E /* MarbleTrack.swift in Sources */,
 				A03F75D8207F4A340091BF2E /* ViewController.swift in Sources */,
+				A03F7606207F525F0091BF2E /* TrackBuilder.swift in Sources */,
 				A03F75FB207F4AF40091BF2E /* TrackMap.swift in Sources */,
 				A03F75FC207F4AF40091BF2E /* Triple.swift in Sources */,
 				A03F75F9207F4AF40091BF2E /* BasicCube.swift in Sources */,

@@ -20,6 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var isBuildingPhase = false
     var anchors = [ARAnchor]()
     var track : MarbleTrack?
+    var builder : TrackBuilder?
     var screenCenter : CGPoint?
 
     override func viewDidLoad() {
@@ -183,7 +184,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             isBuildingPhase = true
             startButton.setTitle("Next Step …", for: .normal)
         }
-        track?.increaseBuildingStep()
+        if track != nil && builder == nil {
+            builder = TrackBuilder(track!.getMap())
+            builder!.start()
+        } else if builder != nil {
+            builder!.step()
+        }
+        //track?.increaseBuildingStep()
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
