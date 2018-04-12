@@ -59,8 +59,8 @@
 	\textbf{Beispielprojekt "`Using Vision in Real Time with ARKit"'}
 	Das zweite Beispiel bei diesem Versuch beschäftigt sich mit Vision, CoreML und ARKit. Die Bildaufnahmen von ARKit werden an Vision weitergegeben und anschliessend mittels einem trainierten neuralen Netzwerk(Inception v3) in CoreML ausgewertet. 
 
-	Der folgende Code ausschnitt startet die ARSession sowie den Klassifizierungsprozess. Da dieser Task performance intensive ist können nur eine gewisse Anzahl Bilder analisiert werden. Es wird stehts geprüft ob sich bereits ein Bild im Buffer befindet bevor ein neues Bild zur Auswertung freigegeben wird.
-	\begin{code}{arkit-recognition-configuration}{Startet die ARSession und den Klassifizierungsprozess}
+	Der Code \ref{code:arkit-recognition-session} ausschnitt startet die ARSession sowie den Klassifizierungsprozess. Da dieser Task performance intensive ist können nur eine gewisse Anzahl Bilder analisiert werden. Es wird stehts geprüft ob sich bereits ein Bild im Buffer befindet bevor ein neues Bild zur Auswertung freigegeben wird.
+	\begin{code}{arkit-recognition-session}{Startet die ARSession und den Klassifizierungsprozess}
 	func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guard currentBuffer == nil, case .normal = frame.camera.trackingState else {
             return
