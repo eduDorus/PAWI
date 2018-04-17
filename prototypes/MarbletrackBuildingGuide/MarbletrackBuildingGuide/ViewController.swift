@@ -187,10 +187,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if track != nil && builder == nil {
             builder = TrackBuilder(track!.getMap())
             builder!.start()
-        } else if builder != nil {
+        }
+        if builder != nil {
             builder!.step()
         }
-        //track?.increaseBuildingStep()
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {

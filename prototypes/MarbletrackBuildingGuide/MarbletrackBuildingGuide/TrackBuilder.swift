@@ -10,7 +10,6 @@ import Foundation
 import SceneKit
 
 class TrackBuilder {
-    var currentStep = 0
     var currentLevel = 0
     var currentElement : BasicCube?
     let map : TrackMap<BasicCube>
@@ -25,33 +24,58 @@ class TrackBuilder {
             element.hide()
         }
         if let startElement = map.getElement(at: Triple(0,0,0)) {
-            startElement.set(state: .planned)
             queue.append(startElement)
         }
-        step()
     }
     
     func step() {
+        deactivateCurrentElement()
+        setNewCurrentElement()
+        activateCurrentElement()
+        addNeighborsToQueue()
+        if queue.isEmpty {
+            startNextLevel()
+        }
+    }
+    
+    private func activateCurrentElement() {
+        if currentElement != nil {
+            currentElement!.set(state: .active)
+        }
+    }
+    
+    private func deactivateCurrentElement() {
         if currentElement != nil {
             currentElement!.set(state: .built)
         }
+    }
+    
+    private func setNewCurrentElement() {
         currentElement = queue.popLast()
+    }
+    
+    private func addNeighborsToQueue() {
         if currentElement != nil {
-            currentElement!.set(state: .active)
             let currentLocation = map.getKeys(forElement: currentElement!).first!
             let neighbors = map.getHorizontalNeighbors(ofElement: currentLocation)
             neighbors.forEach { (element) in
-                if element.value.getState() == BasicCubeState.planned {
-                    queue.append(element.value)
-                }
-            }
-            if queue.isEmpty {
-                currentLevel += 1
-                if let element = map.getElements(atLevel: currentLevel).first {
-                    queue.append(element.value)
+                if element.value.getState() == .normal {
+                    appendElement(element.value)
                 }
             }
         }
+    }
+    
+    private func startNextLevel() {
+        currentLevel += 1
+        if let element = map.getElements(atLevel: currentLevel).first {
+            appendElement(element.value)
+        }
+    }
+    
+    private func appendElement(_ element: BasicCube) {
+        element.set(state: .planned)
+        queue.append(element)
     }
     
 }
