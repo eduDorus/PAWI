@@ -40,8 +40,10 @@ class TrackBuilder {
     }
     
     func step() -> Bool {
-        if queue.isEmpty { stop() }
-        guard !finished else { return false }
+        if queue.isEmpty {
+            stop()
+            return false
+        }
         deactivateCurrentElement()
         setNewCurrentElement()
         activateCurrentElement()
@@ -51,15 +53,13 @@ class TrackBuilder {
     }
     
     private func activateCurrentElement() {
-        if currentElement != nil {
-            currentElement!.set(state: .active)
-        }
+        guard currentElement != nil else { return }
+        currentElement!.set(state: .active)
     }
     
     private func deactivateCurrentElement() {
-        if currentElement != nil {
-            currentElement!.set(state: .built)
-        }
+        guard currentElement != nil else { return }
+        currentElement!.set(state: .built)
     }
     
     private func setNewCurrentElement() {
@@ -67,13 +67,12 @@ class TrackBuilder {
     }
     
     private func addNeighborsToQueue() {
-        if currentElement != nil {
-            let currentLocation = map.getKeys(forElement: currentElement!).first!
-            let neighbors = map.getHorizontalNeighbors(ofElement: currentLocation)
-            neighbors.forEach { (element) in
-                if element.value.getState() == .normal {
-                    appendElement(element.value)
-                }
+        guard currentElement != nil else { return }
+        let currentLocation = map.getKeys(forElement: currentElement!).first!
+        let neighbors = map.getHorizontalNeighbors(ofElement: currentLocation)
+        neighbors.forEach { (element) in
+            if element.value.getState() == .normal {
+                appendElement(element.value)
             }
         }
     }
