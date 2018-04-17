@@ -90,7 +90,7 @@ class BasicCube: SCNNode {
     }
     
     func hide() {
-        self.geometry?.firstMaterial?.transparency = 0.1
+        self.geometry?.firstMaterial?.transparency = 0
         enumerateChildNodes { (node, _) in
             node.geometry?.firstMaterial?.transparency = 0.1
         }
