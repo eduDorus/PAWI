@@ -41,8 +41,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.automaticallyUpdatesLighting = true
         
         screenCenter = sceneView.center
-        
-        label.backgroundColor = UIColor.white.withAlphaComponent(0.5)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -140,6 +138,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func addMarbleTrack() {
         track = MarbleTrack()
         sceneView.scene.rootNode.addChildNode(track!)
+        track!.constraintToCamera()
         updateMarbleTrackLocation()
     }
     
@@ -149,7 +148,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let result : ARHitTestResult = hitResults.first!
             let coords = result.worldTransform.columns.3
             track!.set(position: SCNVector3(coords.x, coords.y, coords.z))
-            track!.constraintToCamera()
         }
     }
     
