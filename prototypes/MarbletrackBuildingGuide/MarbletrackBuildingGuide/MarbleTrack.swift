@@ -46,16 +46,16 @@ class MarbleTrack: SCNNode {
     }
     
     // Makes the track always facing the camera by rotating around the Y axis
-    func constraintToCamera() {
-        let constraint = SCNBillboardConstraint()
-        constraint.freeAxes = SCNBillboardAxis.Y
-        constraints = [constraint]
+    func constrainToCamera(_ constrain: Bool) {
+        if constrain {
+            let constraint = SCNBillboardConstraint()
+            constraint.freeAxes = SCNBillboardAxis.Y
+            constraints = [constraint]
+        } else {
+            constraints = []
+        }
     }
-    
-    func removeConstraints() {
-        constraints = []
-    }
-    
+
     // MARK: - Track Content
     
     func loadTrack(number index: Int) {

@@ -100,10 +100,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let touch = touches.first!
             let location = touch.location(in: sceneView)
             selectExistingPlane(location: location)
-        } else if !isTrackLocked {
-            lockMarbleTrack()
         } else if !isBuildingPhase {
-            unlockMarbleTrack()
+            lockMarbleTrack(!isTrackLocked)
         }
     }
 
@@ -138,7 +136,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func addMarbleTrack() {
         track = MarbleTrack()
         sceneView.scene.rootNode.addChildNode(track!)
-        track!.constraintToCamera()
+        track!.constrainToCamera(true)
         updateMarbleTrackLocation()
     }
     
@@ -151,23 +149,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func lockMarbleTrack() {
-        isTrackLocked = true
-        startButton.isEnabled = true
-        track!.removeConstraints()
-        for a in anchors {
-            sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0
-        }
-    }
-    
-    func unlockMarbleTrack() {
-        isTrackLocked = false
-        startButton.isEnabled = false
-        track!.constraintToCamera()
-        for a in anchors {
-            sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0.1
-        }
-        updateMarbleTrackLocation()
+    func lockMarbleTrack(_ lock: Bool = true) {
+        isTrackLocked = lock
+        startButton.isEnabled = lock
+        track!.constrainToCamera(!lock)
+        // deactivate for now, to see how the anchors and the object behave compared to each other
+//        for a in anchors {
+//            sceneView.node(for: a)?.childNodes.first?.geometry?.firstMaterial?.transparency = 0
+//        }
     }
     
     func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
