@@ -21,7 +21,6 @@ class MarbleTrack: SCNNode {
          (-1,1,-1), (1,1,-1)]
     ]
     private var currentTrack = 0
-    private var currentBuildingStep = 0
     private var map = TrackMap<BasicCube>()
 
     override init() {
@@ -32,16 +31,11 @@ class MarbleTrack: SCNNode {
         loadTrack(number: currentTrack)
     }
     
-    // Positions a new BasicCube at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
-    @discardableResult
-    private func addCube(x: Int, y: Int, z: Int) -> BasicCube {
-        let cube = BasicCube()
-        let pos = SCNVector3(CGFloat(x) * cube.sidelength, CGFloat(y) * cube.sidelength, CGFloat(z) * cube.sidelength)
-        cube.set(position: pos)
-        addChildNode(cube)
-        map.add(element: cube, atLocation: Triple(x, y, z))
-        return cube
+    func getMap() -> TrackMap<BasicCube> {
+        return map
     }
+
+    // MARK: - Positioning
     
     func set(position vector: SCNVector3) {
         position = vector
@@ -62,21 +56,7 @@ class MarbleTrack: SCNNode {
         constraints = []
     }
     
-    // remove all BasicCube nodes from the track
-    private func clearTrack() {
-        map.forEach { (position, cube) in
-            if cube.name != "basecube" {
-                cube.remove()
-                map.removeElement(at: position)
-            }
-        }
-    }
-    
-    private func hideTrack() {
-        map.forEach { (_, cube) in
-            cube.hide()
-        }
-    }
+    // MARK: - Track Content
     
     func loadTrack(number index: Int) {
         currentTrack = index
@@ -90,30 +70,25 @@ class MarbleTrack: SCNNode {
         }
     }
     
-    private func loadTrackCurrentBuildingLayer() {
-        map.getElements(atLevel: currentBuildingStep-1).forEach { (_, cube) in
-            cube.show()
-            cube.set(color: UIColor.red)
+    // remove all BasicCube nodes from the track
+    private func clearTrack() {
+        map.forEach { (position, cube) in
+            if cube.name != "basecube" {
+                cube.remove()
+                map.removeElement(at: position)
+            }
         }
     }
     
-    func increaseBuildingStep() {
-        if currentBuildingStep == 0 {
-            hideTrack()
-        }
-        currentBuildingStep += 1
-        clearHighlights()
-        loadTrackCurrentBuildingLayer()
-    }
-    
-    func getMap() -> TrackMap<BasicCube> {
-        return map
-    }
-    
-    private func clearHighlights() {
-        map.forEach { (_, cube) in
-            cube.set(color: UIColor.white)
-        }
+    // Positions a new BasicCube at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
+    @discardableResult
+    private func addCube(x: Int, y: Int, z: Int) -> BasicCube {
+        let cube = BasicCube()
+        let pos = SCNVector3(CGFloat(x) * cube.sidelength, CGFloat(y) * cube.sidelength, CGFloat(z) * cube.sidelength)
+        cube.set(position: pos)
+        addChildNode(cube)
+        map.add(element: cube, atLocation: Triple(x, y, z))
+        return cube
     }
 
     required init?(coder aDecoder: NSCoder) {
