@@ -13,7 +13,7 @@ class BasicCube: SCNNode {
     open let sidelength : CGFloat = 0.05
     private let edgeWidth : CGFloat = 0.001
     private let transparency : CGFloat = 0.3
-    private var state = BasicCubeState.planned
+    private var state = BasicCubeState.normal
     
     override public init() {
         super.init()
@@ -71,8 +71,9 @@ class BasicCube: SCNNode {
         case .active:
             set(color: UIColor.red)
             show()
-        case .built:
+        case .normal, .built:
             set(color: UIColor.white)
+            show()
         }
     }
     
@@ -109,6 +110,7 @@ class BasicCube: SCNNode {
 }
 
 enum BasicCubeState {
+    case normal
     case planned
     case active
     case built
