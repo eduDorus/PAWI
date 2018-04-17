@@ -189,7 +189,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             builder!.start()
         }
         if builder != nil {
-            builder!.step()
+            if !builder!.step() {
+                startButton.setTitle("Restart Building", for: .normal)
+                isBuildingPhase = false
+                builder = nil
+            }
         }
     }
     

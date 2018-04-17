@@ -14,6 +14,7 @@ class TrackBuilder {
     var currentElement : BasicCube?
     let map : TrackMap<BasicCube>
     var queue : [BasicCube] = []
+    var finished = false
     
     init(_ map: TrackMap<BasicCube>) {
         self.map = map
@@ -28,14 +29,25 @@ class TrackBuilder {
         }
     }
     
-    func step() {
+    func stop() {
+        currentLevel = 0
+        currentElement = nil
+        queue = []
+        finished = true
+        map.forEach { (key, element) in
+            element.set(state: .normal)
+        }
+    }
+    
+    func step() -> Bool {
+        if queue.isEmpty { stop() }
+        guard !finished else { return false }
         deactivateCurrentElement()
         setNewCurrentElement()
         activateCurrentElement()
         addNeighborsToQueue()
-        if queue.isEmpty {
-            startNextLevel()
-        }
+        if queue.isEmpty { startNextLevel() }
+        return true
     }
     
     private func activateCurrentElement() {
