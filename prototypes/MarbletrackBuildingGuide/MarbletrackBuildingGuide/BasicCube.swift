@@ -12,7 +12,7 @@ import SceneKit
 class BasicCube: SCNNode {
     open let sidelength : CGFloat = 0.05
     private let edgeWidth : CGFloat = 0.001
-    private let transparency : CGFloat = 0.3
+    private let transparency : CGFloat = 0.4
     private var state = BasicCubeState.normal
     
     override public init() {
@@ -93,7 +93,7 @@ class BasicCube: SCNNode {
     func hide() {
         self.geometry?.firstMaterial?.transparency = 0
         enumerateChildNodes { (node, _) in
-            node.geometry?.firstMaterial?.transparency = 0.1
+            node.geometry?.firstMaterial?.transparency = 0.2
         }
     }
     

@@ -21,6 +21,7 @@
 		A03F7603207F4B3B0091BF2E /* TrackMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F7601207F4B3A0091BF2E /* TrackMapTests.swift */; };
 		A03F7604207F4B3B0091BF2E /* TripleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F7602207F4B3A0091BF2E /* TripleTests.swift */; };
 		A03F7606207F525F0091BF2E /* TrackBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F7605207F525F0091BF2E /* TrackBuilder.swift */; };
+		A07B4F562086264E0062C2B2 /* PlaneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07B4F552086264E0062C2B2 /* PlaneNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		A03F7601207F4B3A0091BF2E /* TrackMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMapTests.swift; path = MarbletrackBuildingGuideTests/TrackMapTests.swift; sourceTree = SOURCE_ROOT; };
 		A03F7602207F4B3A0091BF2E /* TripleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripleTests.swift; path = MarbletrackBuildingGuideTests/TripleTests.swift; sourceTree = SOURCE_ROOT; };
 		A03F7605207F525F0091BF2E /* TrackBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBuilder.swift; sourceTree = "<group>"; };
+		A07B4F552086264E0062C2B2 /* PlaneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				A03F75DC207F4A360091BF2E /* Assets.xcassets */,
 				A03F75DE207F4A360091BF2E /* LaunchScreen.storyboard */,
 				A03F75E1207F4A360091BF2E /* Info.plist */,
+				A07B4F552086264E0062C2B2 /* PlaneNode.swift */,
 			);
 			path = MarbletrackBuildingGuide;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				A03F75FB207F4AF40091BF2E /* TrackMap.swift in Sources */,
 				A03F75FC207F4AF40091BF2E /* Triple.swift in Sources */,
 				A03F75F9207F4AF40091BF2E /* BasicCube.swift in Sources */,
+				A07B4F562086264E0062C2B2 /* PlaneNode.swift in Sources */,
 				A03F75D4207F4A340091BF2E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

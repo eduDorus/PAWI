@@ -79,14 +79,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         if let planeAnchor = anchor as? ARPlaneAnchor {
             node = SCNNode()
-            let planeHeight : CGFloat = 0.001
-            let planeGeometry = SCNBox(width: CGFloat(planeAnchor.extent.x), height: planeHeight, length: CGFloat(planeAnchor.extent.z), chamferRadius: 0.0)
-            planeGeometry.firstMaterial?.diffuse.contents = UIColor.green
-            planeGeometry.firstMaterial?.specular.contents = UIColor.white
-            planeGeometry.firstMaterial?.transparency = 0.3
-            let planeNode = SCNNode(geometry: planeGeometry)
-            planeNode.position = SCNVector3Make(planeAnchor.center.x, Float(planeHeight / 2), planeAnchor.center.z)
+            let planeNode = PlaneNode(planeAnchor: planeAnchor)
             node?.addChildNode(planeNode)
+            
             anchors.append(planeAnchor)
         } else {
             print("not plane anchor \(anchor)")
@@ -166,6 +161,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         updateMarbleTrackLocation()
     }
     
+
     func showNextBuildingStep() {
         if !isBuildingPhase {
             isBuildingPhase = true
