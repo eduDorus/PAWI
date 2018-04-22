@@ -13,7 +13,7 @@ class TrackBuilder {
     var currentLevel = 0
     var currentElement : BasicCube?
     let map : TrackMap<BasicCube>
-    var queue : [BasicCube] = []
+    var stack : [BasicCube] = []
     var finished = false
     
     init(_ map: TrackMap<BasicCube>) {
@@ -25,14 +25,14 @@ class TrackBuilder {
             element.hide()
         }
         if let startElement = map.getElement(at: Triple(0,0,0)) {
-            queue.append(startElement)
+            stack.append(startElement)
         }
     }
     
     func stop() {
         currentLevel = 0
         currentElement = nil
-        queue = []
+        stack = []
         finished = true
         map.forEach { (key, element) in
             element.set(state: .normal)
@@ -40,7 +40,7 @@ class TrackBuilder {
     }
     
     func step() -> Bool {
-        if queue.isEmpty {
+        if stack.isEmpty {
             stop()
             return false
         }
@@ -48,7 +48,7 @@ class TrackBuilder {
         setNewCurrentElement()
         activateCurrentElement()
         addNeighborsToQueue()
-        if queue.isEmpty { startNextLevel() }
+        if stack.isEmpty { startNextLevel() }
         return true
     }
     
@@ -63,7 +63,7 @@ class TrackBuilder {
     }
     
     private func setNewCurrentElement() {
-        currentElement = queue.popLast()
+        currentElement = stack.popLast()
     }
     
     private func addNeighborsToQueue() {
@@ -86,7 +86,7 @@ class TrackBuilder {
     
     private func appendElement(_ element: BasicCube) {
         element.set(state: .planned)
-        queue.append(element)
+        stack.append(element)
     }
     
 }
