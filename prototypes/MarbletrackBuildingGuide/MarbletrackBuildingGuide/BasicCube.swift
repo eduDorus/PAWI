@@ -12,7 +12,7 @@ import SceneKit
 class BasicCube: SCNNode {
     open let sidelength : CGFloat = 0.05
     private let edgeWidth : CGFloat = 0.001
-    private let transparency : CGFloat = 0.4
+    private let transparency : CGFloat = 0.8
     private var state = BasicCubeState.normal
     
     override public init() {
