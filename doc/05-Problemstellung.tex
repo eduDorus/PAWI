@@ -35,6 +35,12 @@ Im diesem Kapitel sind alle funktionalen und nichtfunktionalen Anforderungen des
 	\item Kann (K): Diese Zusatzanforderungen haben die niedrigste Priorität und können umgesetzt werden, sofern keine anderen (wichtigeren) Anforderungen beeinträchtigt werden und der erfolgreiche Projektablauf nicht gefährdet wird.
 \end{itemize}
 
+Die App soll folgende \textbf{Epics} erfüllen:
+\begin{enumerate}
+	\item \textbf{Bauanleitung:} Der Benutzer kann von einer gewählten Kugelbahn eine Augmented Reality Bauanleitung erhalten, um die Bahn physisch aufbauen zu können.
+	\item \textbf{Editor:} Der Benutzer kann in Augmented Reality eine virtuelle Kugelbahn neu erstellen oder eine bestehende verändern, damit diese als Bauanleitung zur Verfügung stehen.
+\end{enumerate}
+
 \subsubsection{Funktionale Anforderungen}
 In Tabelle \ref{tab:funktionale-anforderungen} sind die funktionalen Anforderungen an die zu entwickelnde App aufgelistet. Diese Anforderungen beschreiben die gewünschten Funktionen und Leistungen der fertigen Anwendung.
 
@@ -42,14 +48,14 @@ In Tabelle \ref{tab:funktionale-anforderungen} sind die funktionalen Anforderung
 	\hline
 	\textbf{Nr.} & \textbf{Prio.} & \textbf{Bezeichnung} & \textbf{Erläuterungen} \\
 	\hline
-	01 & M & Erkennen einer Kugelbahn & Die App muss eine physisch aufgebaute Kugelbahn als solche erkennen. \\
-	02 & S & Digitale Erfassung einer Kugelbahn & Mit der App können verschiedene physisch aufgebaute Kugelbahnen erfasst und so digitalisiert werden (CV). \\
-	03 & S & Virtuelle Darstellung einer Kugelbahn & Die App kann eine Kugelbahn virtuell darstellen (VR). \\
-	04 & S & Virtuelle Überlagerungen einer Kugelbahn & Ein physisches Modell einer Kugelbahn kann in Echtzeit mit virtuellen Überlagerungen auf der App angereichert werden (AR). \\
-	05 & S & Mehrere Kugelbahnen erfassen & Mehrere unterschiedliche Kugelbahnen können in der App erfasst, bzw. hinterlegt, werden. \\
-	06 & K & Import von cuboro-Webkit & Kugelbahnen auf dem cuboro-Webkit können in der App importiert werden. \\
-	07 & K & Virtuelle Kugeln simulieren & Es können virtuelle Kugeln auf einer physischen Kugelbahn simuliert werden. \\
-	08 & K & Kugelbahn virtuell platzieren & Erfasste virtuelle Kugelbahnen können mittels AR auf eine physische Fläche platziert und betrachtet werden. \\
+	01 & M & Virtuelle Darstellung einer Kugelbahn & Die App kann eine Kugelbahn virtuell darstellen (VR). \\
+	02 & M & AR Bahn erstellen & Der Benutzer kann eine virtuelle Kugelbahn in AR erstellen. \\
+	03 & M & AR Bahn verändern & Der Benutzer kann eine virtuelle Kugelbahn in AR verändern. \\
+	04 & M & AR Bauanleitung & Der Benutzer kann eine physische Kugelbahn mit Hilfe einer AR Bauanleitung Element für Element aufbauen. \\
+	05 & M & Mehrere Kugelbahnen erfassen & Die App kann mehrere unterschiedliche Kugelbahnen erfasst, bzw. hinterlegt, haben. \\
+	06 & M & Kugelbahn virtuell platzieren & Erfasste virtuelle Kugelbahnen können mittels AR auf eine physische Fläche platziert und betrachtet werden. \\
+	07 & S & Virtuelle Überlagerungen einer Kugelbahn & Ein physisches Modell einer Kugelbahn kann in Echtzeit mit virtuellen Überlagerungen auf der App angereichert werden (AR). \\
+	08 & K & Virtuelle Kugeln simulieren & Es können virtuelle Kugeln auf einer physischen Kugelbahn simuliert werden. \\
 	\hline
 	\caption{Funktionale Anforderungen}
 	\label{tab:funktionale-anforderungen}
@@ -65,6 +71,8 @@ In Tabelle \ref{tab:nichtfunktionale-anforderungen} sind die nichtfunktionalen A
 	01 & M & iOS und Swift & Die App ist in Swift für iOS programmiert. \\
 	02 & M & Lauffähige App & Die App läuft auf einem iOS Gerät. \\
 	03 & M & Recherche von iOS Frameworks & Die Dokumentation enthält Informationen zu den iOS Frameworks ARKit, Core ML und Vision. \\
+	04 & M & Technologie aufzeigen & Die App zeigt die Möglichkeiten von AR mittels ARKit auf. \\
+	05 & M & Nützlicher Code & Der Sourcecode soll für an der verwendeten Technik interessiert aufschlussreich und hilfreich sein. \\
 	\hline
 	\caption{Nichtfunktionale Anforderungen}
 	\label{tab:nichtfunktionale-anforderungen}
