@@ -36,6 +36,13 @@ class BasicCube: SCNNode {
         edgeBox.firstMaterial?.isDoubleSided = true
         addChildNode(SCNNode(geometry: edgeBox))
         set(color: UIColor.white)
+//        if let cubes = SCNScene(named: "art.scnassets/cuboro-set.scn")?.rootNode {
+//            if let cube = cubes.childNodes[0].childNodes.filter({ $0.name == "instance_6" }).first {
+//                cube.position = SCNVector3(-0.025,-0.025,0.025)
+//                cube.scale = SCNVector3(x: 0.00127, y: 0.00127, z: 0.00127)
+//                addChildNode(cube)
+//            }
+//        }
         castsShadow = true
     }
     
