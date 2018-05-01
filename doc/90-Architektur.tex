@@ -1,0 +1,98 @@
+\section{Architekturdokumentation}
+\subsection{Funktionale Anforderungen}
+\subsubsection{Epics}
+Die App soll folgende \textbf{Epics} erfüllen:
+\begin{enumerate}
+	\item \textbf{Bauanleitung:} Der Benutzer kann von einer gewählten Kugelbahn eine Augmented Reality Bauanleitung erhalten, um die Bahn physisch nachbauen/aufbauen zu können.
+	\item \textbf{Editor:} Der Benutzer kann in Augmented Reality eine virtuelle Kugelbahn neu erstellen oder eine bestehende verändern, damit diese als Bauanleitung zur Verfügung stehen.
+\end{enumerate}
+
+\subsubsection{User Stories}
+\begin{enumerate}
+	\setcounter{enumi}{-1}	% starte bei 0
+	\item Allgemein:
+	\begin{itemize}
+		\item Als Benutzer kann ich eine Fläche der realen Welt als Ebene für Augmented Reality auswählen, damit diese als Basis für die Anwendung verwendet wird.
+		\item Als Benutzer kann ich eine Kugelbahn auf der ausgewählten Ebene platzieren.
+		\item Als Benutzer kann ich die Kugelbahn auf einer Fläche ausrichten, damit sie wie gewünscht positioniert ist.
+		\item Als Benutzer kann ich die Position und Ausrichtung einer Kugelbahn korrigieren, damit sie mit der physischen Kugelbahn übereinstimmt.
+		\item Als Benutzer will ich erkennen in welchem Modus (Bauanleitung, Editor) ich mich befinde.
+		\item Als Benutzer kann ich zwischen den Modi wechseln, damit ich die aktuelle Bahn im anderen Modus direkt weiterverwenden kann.
+	\end{itemize}
+	\item Bauanleitung:
+	\begin{itemize}
+		\item Als Benutzer kann ich eine gespeicherte Kugelbahn auswählen, um ihre Bauanleitung zu verwenden.
+		\item Als Benutzer sehe ich, welches cuboro Element als nächstes physisch platziert werden soll.
+		\item Als Benutzer kann ich in der Bauanleitung einzelne Elemente vor und zurück gehen, damit ich eine Bahn schrittweise aufbauen kann.
+		\item Als Benutzer kann ich die Bauanleitung neu starten.
+	\end{itemize}
+	\item Editor:
+	\begin{itemize}
+		\item Als Benutzer kann ich 4 verschiedene cuboro Elemente in der App verwenden, um eine Bahn zu erstellen.
+		\item Als Benutzer kann ich eine neue Kugelbahn erstellen.
+		\item Als Benutzer kann ich eine Kugelbahn auf dem Gerät speichern, damit ich sie später wiederverwenden kann.
+		\item Als Benutzer kann ich eine gespeicherte Kugelbahn bearbeiten.
+		\item Als Benutzer sehe ich welche Positionen zur Wahl stehen, um ein cuboro Element hinzuzufügen.
+		\item Als Benutzer kann ich einer Kugelbahn ein neues cuboro Element hinzufügen.
+		\item Als Benutzer kann ich ein die Ausrichtung (Rotation) eines cuboro Elements verändern.
+		\item Als Benutzer kann ich ein cuboro Element von der Kugelbahn entfernen.
+		\item Als Benutzer werde ich darauf aufmerksam gemacht, wenn Elemente nicht aneinander passen, damit ich am Schluss eine funktionierende/zusammenhängende Kugelbahn habe.
+	\end{itemize}
+\end{enumerate}
+
+\subsubsection{Zielhierarchie}
+
+\subsection{Nichtfunktionale Anforderungen}
+\begin{itemize}
+	\item Die App ist in Swift für iOS programmiert. (Constraint, Tech)
+	\item Die App läuft auf aktuellen iPhones (ab iPhone 6s) mit iOS 11.3. (Constraint, Tech)
+	\item Die App verwendet ARKit 1.5. (Constraint, Tech)
+	\item Die App verwendet Farben, die auch für Personen mit Sehschwächen (z. B. Rot-Grün-Schwäche) erkenn- und unterscheidbar sind. (Usab)
+	\item Der Benutzer wird bei limitiertem Tracking Status über Massnahmen informiert. (Usab)
+	\item Beim Augmentieren von maximal 20 cuboro Elementen wird konstant mehr als 30 Frames pro Sekunde erreicht. (Perf)
+	\item Alle Daten der App werden nur lokal gespeichert (Offline). (Avail, Security)
+	\item Die App zeigt die technologischen Möglichkeiten auf und muss keinen Business Value erzielen. (Constraint, Business)
+	\item Klassen- und Variablennamen im Code sind aussagekräftig.
+	\item Schlüsselstellen im Code sind gut kommentiert und verständlich aufgebaut.
+\end{itemize}
+
+\subsubsection{Szenarien}
+
+\subsection{Fachdomäne (Domain Driven Design)}
+
+\subsubsection{Fachbegriffe}
+\begin{itemize}
+	\item \textbf{Element:} Ein einzelner cuboro Kugelbahnwürfel mit keinem (ganzer Würfel), einem oder mehreren Wegen für eine Kugel.
+	\item \textbf{Kugelbahn:} Ein zusammenhängendes Konstrukt aus einzelnen Elementen, sodass eine Kugel einen druchgehenden Weg durch die Bahn hat.
+	\item \textbf{Ebene:} Eine horizontale Fläche, die von ARKit als solche erkannt wird und als Untergrund für die Kugelbahn dient.
+	\item \textbf{Bauanleitung:} Eine interaktive Anleitung, die den Benutzer schrittweise (Element um Element) durch den Aufbau einer Kugelbahn führt.
+	\item \textbf{Tracking:} Der Vorgang, bei dem ARKit versucht Merkmale der realen Welt anhand Kamerabilder und Gerätesensoren zu verfolgen und anhand dessen die virtuellen Objekte ausrichtet.
+\end{itemize}
+
+\subsubsection{Entitäten und ihre Value Objects}
+\begin{itemize}
+	\item \textbf{Kugelbahn}
+	\begin{itemize}
+		\item Ausrichtung
+		\item Position
+		% \item Elemente?
+	\end{itemize}
+	\item \textbf{Element}
+	\begin{itemize}
+		\item Ausrichtung
+		\item Position
+		\item Geometrie
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Domain Events}
+
+\subsection{Systemkontext}
+\subsection{Systemvision und -idee}
+\subsection{Architekturprinzipien}
+\subsection{Taktiken}
+\subsection{Architekturstil}
+\subsection{EAI Pattern}
+\subsection{Systemsichten}
+\subsection{Architekturentscheidungen}
+\subsection{Architekturbewertung mit ATAM}
