@@ -288,13 +288,17 @@
 \appendix
 \setcounter{figure}{0}
 \setcounter{table}{0}
-\renewcommand{\thefigure}{A\arabic{figure}}
-\renewcommand{\thetable}{A\arabic{table}}
-\renewcommand{\thesubsection}{A\arabic{subsection}}
+\renewcommand{\thefigure}{\thesection\arabic{figure}}
+\renewcommand{\thetable}{\thesection\arabic{table}}
+\renewcommand{\thesubsection}{\thesection\arabic{subsection}}
 
 
 \IfFileExists{99-Appendix}{
   \input{99-Appendix}
+}
+
+\IfFileExists{90-Architektur}{
+  \input{90-Architektur}
 }
 
 \end{document}
