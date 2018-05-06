@@ -12,8 +12,8 @@ import UIKit
 class ListWireframe : ListWireframeProtocol {
     
     static func createListModule(in mode: ARInteractionMode) -> UIViewController {
-        let controller = mainStoryboard.instantiateViewController(withIdentifier: "ListNavigationController")
-        if let view = controller.childViewControllers.first as? ListViewProtocol {
+        let controller = mainStoryboard.instantiateViewController(withIdentifier: "ListViewController")
+        if let view = controller as? ListViewProtocol {
             let presenter: ListPresenterProtocol = ListPresenter()
             let wireframe: ListWireframeProtocol = ListWireframe()
             
@@ -23,7 +23,7 @@ class ListWireframe : ListWireframeProtocol {
             
             return controller
         }
-        return UINavigationController()
+        return UIViewController()
     }
     
     static var mainStoryboard: UIStoryboard {
@@ -31,8 +31,5 @@ class ListWireframe : ListWireframeProtocol {
     }
     
     func presentARView() {
-    }
-    
-    func presentMenuView() {
     }
 }

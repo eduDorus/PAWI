@@ -12,7 +12,6 @@ import UIKit
 protocol ListWireframeProtocol : class {
     static func createListModule(in mode: ARInteractionMode) -> UIViewController
     func presentARView()
-    func presentMenuView()
 }
 
 protocol ListViewProtocol : class {

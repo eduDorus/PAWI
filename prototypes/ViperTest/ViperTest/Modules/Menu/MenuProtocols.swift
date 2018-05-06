@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 protocol MenuWireframeProtocol : class {
+    var navigationController : UINavigationController? { get set }
     static func createMenuModule() -> UIViewController
     func presentListView(from view: MenuViewProtocol, with mode: ARInteractionMode)
 }
