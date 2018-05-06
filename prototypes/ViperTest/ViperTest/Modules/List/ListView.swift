@@ -10,21 +10,32 @@ import Foundation
 import UIKit
 
 class ListView: UIViewController, ListViewProtocol {
-    var presenter: ListPresenterProtocol?
     @IBOutlet var collectionView: UICollectionView!
+    var presenter: ListPresenterProtocol?
+    var marblerunList: [Marblerun] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
     }
+    
+    func reloadList(with marbleruns: [Marblerun]) {
+        marblerunList = marbleruns
+        collectionView.reloadData()
+    }
+    
 }
 
 extension ListView : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return marblerunList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MarblerunCell", for: indexPath)
+        if let label = cell.contentView.subviews.first as? UILabel {
+            label.text = marblerunList[indexPath.row].name
+        }
         return cell
     }
 }

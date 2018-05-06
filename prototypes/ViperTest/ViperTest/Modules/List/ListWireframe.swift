@@ -16,10 +16,12 @@ class ListWireframe : ListWireframeProtocol {
         if let view = controller as? ListViewProtocol {
             let presenter: ListPresenterProtocol = ListPresenter()
             let wireframe: ListWireframeProtocol = ListWireframe()
+            let interactor: ListInteractorProtocol = ListInteractor()
             
             view.presenter = presenter
             presenter.view = view
             presenter.wireframe = wireframe
+            presenter.interactor = interactor
             
             return controller
         }

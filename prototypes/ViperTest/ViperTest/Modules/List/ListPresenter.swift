@@ -13,6 +13,12 @@ class ListPresenter : ListPresenterProtocol {
     var view: ListViewProtocol?
     var interactor: ListInteractorProtocol?
 
+    func viewDidLoad() {
+        interactor?.retrieveMarbleruns { (marbleruns) -> Void in
+            view?.reloadList(with: marbleruns)
+        }
+    }
+    
     func didSelectMarblerun() {
     }
 }

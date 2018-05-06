@@ -16,6 +16,7 @@ protocol ListWireframeProtocol : class {
 
 protocol ListViewProtocol : class {
     var presenter : ListPresenterProtocol? { get set }
+    func reloadList(with marbleruns: [Marblerun])
 }
 
 protocol ListPresenterProtocol : class {
@@ -23,10 +24,11 @@ protocol ListPresenterProtocol : class {
     var wireframe : ListWireframeProtocol? { get set }
     var interactor : ListInteractorProtocol? { get set }
     
+    func viewDidLoad()
     func didSelectMarblerun()
 }
 
 protocol ListInteractorProtocol : class {
-    func retrieveMarbleruns(for closure: ())
+    func retrieveMarbleruns(_ callback: ([Marblerun]) -> Void)
 }
 

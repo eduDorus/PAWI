@@ -24,6 +24,7 @@
 		A0D82649209F5F0600C74FD7 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D82648209F5F0600C74FD7 /* ListView.swift */; };
 		A0D8264B209F5F0C00C74FD7 /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8264A209F5F0C00C74FD7 /* ListPresenter.swift */; };
 		A0D8264D209F5F1400C74FD7 /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8264C209F5F1400C74FD7 /* ListInteractor.swift */; };
+		A0D82650209F84FF00C74FD7 /* Marblerun.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8264F209F84FF00C74FD7 /* Marblerun.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		A0D82648209F5F0600C74FD7 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A0D8264A209F5F0C00C74FD7 /* ListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenter.swift; sourceTree = "<group>"; };
 		A0D8264C209F5F1400C74FD7 /* ListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
+		A0D8264F209F84FF00C74FD7 /* Marblerun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marblerun.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		A0D825FD209F3AA700C74FD7 /* ViperTest */ = {
 			isa = PBXGroup;
 			children = (
+				A0D8264E209F84E200C74FD7 /* Entities */,
 				A0D8263E209F54BE00C74FD7 /* Common */,
 				A0D82633209F43B400C74FD7 /* Modules */,
 				A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */,
@@ -159,6 +162,14 @@
 				A0D8264C209F5F1400C74FD7 /* ListInteractor.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		A0D8264E209F84E200C74FD7 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A0D8264F209F84FF00C74FD7 /* Marblerun.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 				A0D82639209F4D1200C74FD7 /* MenuView.swift in Sources */,
 				A0D82649209F5F0600C74FD7 /* ListView.swift in Sources */,
 				A0D82640209F54EE00C74FD7 /* ARInteractionMode.swift in Sources */,
+				A0D82650209F84FF00C74FD7 /* Marblerun.swift in Sources */,
 				A0D82635209F444700C74FD7 /* MenuProtocols.swift in Sources */,
 				A0D82637209F495900C74FD7 /* MenuWireframe.swift in Sources */,
 				A0D8264D209F5F1400C74FD7 /* ListInteractor.swift in Sources */,
