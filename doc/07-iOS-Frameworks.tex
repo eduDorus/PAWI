@@ -2,16 +2,16 @@
 In den folgenden Abschnitten wird ein Überblick über die wesentlichen iOS Frameworks gegeben, die für dieses Projekt relevant sind. Alle Informationen stammen, sofern nicht anders angegeben, aus den offizellen Dokumentationen von Apple. % TODO: Quellen hier einsetzen
 
 
-\subsection{Core ML} \label{core-ml}
+\subsection{Core ML} \label{subsub:core-ml}
 Mit dem Aufschwung von neuronalen Netzen insbesondere deep learning wollen Entwickler diese Technologie in ihren Apps nutzen. Mit dem CoreML Framework gibt Apple den Entwicklern diese Möglichkeit und erlaubt es selbst trainierte Netze in den Apps zu integrieren. CoreML \cite{core-ml} ist dabei für On-Device Performance optimiert und verspricht weniger Arbeitsspeicher zu belegen und dabei den Energie konsum zu minimieren. CoreML unterstützt die Frameworks Vision zur Bildverarbeitung, Foundation zum verarbeiten von Text und GameplayKit zum erstellen von Entscheidungsbäume.
 
 \bild[https://developer.apple.com/documentation/coreml]{0.4}{core-ml-architecture}{CoreML Architektur}
 
 \subsection{Vision}
-Apple bietet mit dem Vision \cite{vision} Framework eine gute Lösung für Computer Vision Probleme. Es enthält Gesichts-, Text-, Barcodeerkennung und Feature Tracking, wobei bereits ein grossteil der Probleme damit gelöst werden kann. Zusätzlich kann das in der Section \ref{core-ml} beschreibene CoreML verwendet werden, um spezifische Probleme mittels neuronalen Netzen zu lösen. Die integration mit dem CoreML Framework soll ohne Probleme funktionieren da es, wie im Bild \ref{core-ml-architecture}, eine API Schicht über dem CoreML Framework befindet.
+Apple bietet mit dem Vision \cite{vision} Framework eine gute Lösung für Computer Vision Probleme. Es enthält Gesichts-, Text-, Barcodeerkennung und Feature Tracking, wobei bereits ein grossteil der Probleme damit gelöst werden kann. Zusätzlich kann das in der Section \ref{subsub:core-ml} beschreibene CoreML verwendet werden, um spezifische Probleme mittels neuronalen Netzen zu lösen. Die integration mit dem CoreML Framework soll ohne Probleme funktionieren da es, wie im Bild \ref{core-ml-architecture}, eine API Schicht über dem CoreML Framework befindet.
 
 \subsection{ARKit}
-
+Das Herzstück der Augmented Reality auf IOS Geräten stellt das ARKit dar. %TODO: Vielleicht mit Überblick vereinen
 
 \subsubsection{Überblick}
 Zusammen mit iOS 11 präsentierte Apple im Juni 2017 ARKit als neues Framework für Augmented Reality Anwendungen, das alle iOS Geräten mit mindestens einem Apple A9 Prozessor unterstützt. Für das World Tracking nutzt ARKit die "`visual-inertial odometry"' Technik. Dabei werden Informationen aus den Bewegungssensoren mit denen aus den Kamerabildern kombiniert. Das Framework errechnet damit ein Modell der realen Welt und die Position und Ausrichtung des Geräts. Um in diesem Modell virtuelle Objekte zu platzieren bietet ARKit einerseits \texttt{ARHitTestResult} um Punkte auf dem Kamerabild einer Oberfläche/Stelle der realen Welt zuordnen, und andererseits \texttt{planeDetection}, das ebene Flächen sucht. Ab ARKit Version 1.5 werden neben horizontalen auch vertikale Flächen erkannt und die Geometrie der Flächen wird statt nur rechteckig neu auch polygonal angegeben. Die eigentliche Beschreibung und Konstruktion virtueller Objekte wird von den Frameworks SpriteKit, SceneKit oder Metal übernommen.
