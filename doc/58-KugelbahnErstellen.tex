@@ -19,5 +19,7 @@
 		\item Mit dem Antippen von einem Element wird ein Hittest durchgeführt und prüft ob es sich um ein Element mit dem Status \texttt{planned} handelt. Falls dies der Fall ist wird der Status des Elements auf \texttt{build} gesetzt
 		\item Anschlissend wird berechnet wo die nächsten neuen Elemente erstellt werden könnten und diese Werden über die Klasse \texttt{MarbleTrack} mit dem Status \texttt{planned} hinzugefügt.
 	\end{enumerate}
-	
+
+	Bei der Besprechung des Prototyps wurde festgestellt, dass das Löschen von Elementen eine ähnliche Überprüfung benötigt. Grundsätzlich dürfen nur Elemente entfehrnt werden die keine Inseln in der Bahn verursachen bzw. es muss immer eine Verbindung zum Ursprung bestehen.
+
 \end{description}
