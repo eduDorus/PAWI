@@ -9,8 +9,12 @@
 import Foundation
 
 class ListInteractor : ListInteractorProtocol {
+    
     func retrieveMarbleruns(_ callback: ([Marblerun]) -> Void) {
-        let runs = [Marblerun(), Marblerun()]
+        var runs : [Marblerun] = []
+        for _ in 0...12 {
+            runs.append(Marblerun())
+        }
         callback(runs)
     }
 }

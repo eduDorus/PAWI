@@ -23,7 +23,6 @@ class ListView: UIViewController, ListViewProtocol {
         marblerunList = marbleruns
         collectionView.reloadData()
     }
-    
 }
 
 extension ListView : UICollectionViewDataSource {
@@ -37,5 +36,12 @@ extension ListView : UICollectionViewDataSource {
             label.text = marblerunList[indexPath.row].name
         }
         return cell
+    }
+}
+
+extension ListView : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let marblerun = marblerunList[indexPath.row]
+        presenter?.didSelect(marblerun: marblerun)
     }
 }

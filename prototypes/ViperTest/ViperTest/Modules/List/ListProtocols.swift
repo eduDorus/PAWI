@@ -11,7 +11,7 @@ import UIKit
 
 protocol ListWireframeProtocol : class {
     static func createListModule(in mode: ARInteractionMode) -> UIViewController
-    func presentARView()
+    func presentARView(with marblerun: Marblerun)
 }
 
 protocol ListViewProtocol : class {
@@ -25,7 +25,7 @@ protocol ListPresenterProtocol : class {
     var interactor : ListInteractorProtocol? { get set }
     
     func viewDidLoad()
-    func didSelectMarblerun()
+    func didSelect(marblerun: Marblerun)
 }
 
 protocol ListInteractorProtocol : class {

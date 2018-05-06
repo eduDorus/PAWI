@@ -19,6 +19,7 @@ class ListPresenter : ListPresenterProtocol {
         }
     }
     
-    func didSelectMarblerun() {
+    func didSelect(marblerun: Marblerun) {
+        wireframe?.presentARView(with: marblerun)
     }
 }
