@@ -30,7 +30,7 @@
         <!--Navigation Controller-->
         <scene sceneID="hKv-xc-Y2Y">
             <objects>
-                <navigationController storyboardIdentifier="MenuNavigationController" id="xzU-wN-zxO" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SelectModeNavigationController" id="xzU-wN-zxO" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cub-eD-Cd3">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -46,7 +46,7 @@
         <!--Home-->
         <scene sceneID="Uok-hZ-Hzb">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" id="bZF-Ci-Udm" customClass="MenuView" customModule="ViperTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectModeViewController" id="bZF-Ci-Udm" customClass="SelectModeView" customModule="ViperTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="33w-bC-9Dq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,7 +80,7 @@
         <!--Marbleruns-->
         <scene sceneID="cYj-FS-Mnb">
             <objects>
-                <viewController storyboardIdentifier="ListViewController" id="l2T-NU-yi3" customClass="ListView" customModule="ViperTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MarblerunListViewController" id="l2T-NU-yi3" customClass="MarblerunListView" customModule="ViperTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HFm-o6-lyb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
