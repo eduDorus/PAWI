@@ -1,5 +1,5 @@
 //
-//  MenuView.swift
+//  SelectModeView.swift
 //  ViperTest
 //
 //  Created by Lucas Schnüriger on 06.05.18.
@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-class MenuView : UIViewController, MenuViewProtocol {
-    var presenter: MenuPresenterProtocol?
+class SelectModeView : UIViewController, SelectModeViewProtocol {
+    var presenter: SelectModePresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()

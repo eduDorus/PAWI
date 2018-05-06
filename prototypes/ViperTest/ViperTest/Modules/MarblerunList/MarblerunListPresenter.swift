@@ -1,5 +1,5 @@
 //
-//  ListPresenter.swift
+//  MarblerunListPresenter.swift
 //  ViperTest
 //
 //  Created by Lucas Schnüriger on 06.05.18.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-class ListPresenter : ListPresenterProtocol {
-    var wireframe: ListWireframeProtocol?
-    var view: ListViewProtocol?
-    var interactor: ListInteractorProtocol?
+class MarblerunListPresenter : MarblerunListPresenterProtocol {
+    var wireframe: MarblerunListWireframeProtocol?
+    var view: MarblerunListViewProtocol?
+    var interactor: MarblerunListInteractorProtocol?
 
     func viewDidLoad() {
         interactor?.retrieveMarbleruns { (marbleruns) -> Void in
-            view?.reloadList(with: marbleruns)
+            view?.reloadMarblerunList(with: marbleruns)
         }
     }
     

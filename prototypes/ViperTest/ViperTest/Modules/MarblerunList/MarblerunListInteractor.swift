@@ -1,5 +1,5 @@
 //
-//  ListInteractor.swift
+//  MarblerunListInteractor.swift
 //  ViperTest
 //
 //  Created by Lucas Schnüriger on 06.05.18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ListInteractor : ListInteractorProtocol {
+class MarblerunListInteractor : MarblerunListInteractorProtocol {
     
     func retrieveMarbleruns(_ callback: ([Marblerun]) -> Void) {
         var runs : [Marblerun] = []

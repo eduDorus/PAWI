@@ -1,5 +1,5 @@
 //
-//  ListWireframe.swift
+//  MarblerunListWireframe.swift
 //  ViperTest
 //
 //  Created by Lucas Schnüriger on 06.05.18.
@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-class ListWireframe : ListWireframeProtocol {
+class MarblerunListWireframe : MarblerunListWireframeProtocol {
     
-    static func createListModule(in mode: ARInteractionMode) -> UIViewController {
-        let controller = mainStoryboard.instantiateViewController(withIdentifier: "ListViewController")
-        if let view = controller as? ListViewProtocol {
-            let presenter: ListPresenterProtocol = ListPresenter()
-            let wireframe: ListWireframeProtocol = ListWireframe()
-            let interactor: ListInteractorProtocol = ListInteractor()
+    static func createMarblerunListModule(in mode: ARInteractionMode) -> UIViewController {
+        let controller = mainStoryboard.instantiateViewController(withIdentifier: "MarblerunListViewController")
+        if let view = controller as? MarblerunListViewProtocol {
+            let presenter: MarblerunListPresenterProtocol = MarblerunListPresenter()
+            let wireframe: MarblerunListWireframeProtocol = MarblerunListWireframe()
+            let interactor: MarblerunListInteractorProtocol = MarblerunListInteractor()
             
             view.presenter = presenter
             presenter.view = view
