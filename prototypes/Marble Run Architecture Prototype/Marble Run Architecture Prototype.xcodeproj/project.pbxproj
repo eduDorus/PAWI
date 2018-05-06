@@ -14,8 +14,12 @@
 		7E325684209B0887005D7B09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E325683209B0887005D7B09 /* Assets.xcassets */; };
 		7E325687209B0887005D7B09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E325685209B0887005D7B09 /* LaunchScreen.storyboard */; };
 		7E32568F209B0920005D7B09 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E32568E209B0920005D7B09 /* Presenter.swift */; };
-		7E325691209B0937005D7B09 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E325690209B0937005D7B09 /* Run.swift */; };
 		7E325693209B0970005D7B09 /* ActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E325692209B0970005D7B09 /* ActionHandler.swift */; };
+		7E94AF0E209F11E600F583FF /* Triple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E94AF0A209F11E500F583FF /* Triple.swift */; };
+		7E94AF0F209F11E600F583FF /* TrackMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E94AF0B209F11E600F583FF /* TrackMap.swift */; };
+		7E94AF10209F11E600F583FF /* TrackEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E94AF0C209F11E600F583FF /* TrackEditor.swift */; };
+		7E94AF11209F11E600F583FF /* BasicCube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E94AF0D209F11E600F583FF /* BasicCube.swift */; };
+		7E94AF13209F121B00F583FF /* TrackBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E94AF12209F121B00F583FF /* TrackBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +32,12 @@
 		7E325686209B0887005D7B09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E325688209B0887005D7B09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E32568E209B0920005D7B09 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
-		7E325690209B0937005D7B09 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		7E325692209B0970005D7B09 /* ActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionHandler.swift; sourceTree = "<group>"; };
+		7E94AF0A209F11E500F583FF /* Triple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triple.swift; sourceTree = "<group>"; };
+		7E94AF0B209F11E600F583FF /* TrackMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackMap.swift; sourceTree = "<group>"; };
+		7E94AF0C209F11E600F583FF /* TrackEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackEditor.swift; sourceTree = "<group>"; };
+		7E94AF0D209F11E600F583FF /* BasicCube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCube.swift; sourceTree = "<group>"; };
+		7E94AF12209F121B00F583FF /* TrackBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,11 @@
 		7E325679209B0885005D7B09 /* Marble Run Architecture Prototype */ = {
 			isa = PBXGroup;
 			children = (
+				7E94AF12209F121B00F583FF /* TrackBuilder.swift */,
+				7E94AF0D209F11E600F583FF /* BasicCube.swift */,
+				7E94AF0C209F11E600F583FF /* TrackEditor.swift */,
+				7E94AF0B209F11E600F583FF /* TrackMap.swift */,
+				7E94AF0A209F11E500F583FF /* Triple.swift */,
 				7E32567A209B0885005D7B09 /* AppDelegate.swift */,
 				7E32567C209B0885005D7B09 /* art.scnassets */,
 				7E32567E209B0885005D7B09 /* ViewController.swift */,
@@ -70,7 +83,6 @@
 				7E325685209B0887005D7B09 /* LaunchScreen.storyboard */,
 				7E325688209B0887005D7B09 /* Info.plist */,
 				7E32568E209B0920005D7B09 /* Presenter.swift */,
-				7E325690209B0937005D7B09 /* Run.swift */,
 				7E325692209B0970005D7B09 /* ActionHandler.swift */,
 			);
 			path = "Marble Run Architecture Prototype";
@@ -148,11 +160,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E94AF10209F11E600F583FF /* TrackEditor.swift in Sources */,
 				7E32568F209B0920005D7B09 /* Presenter.swift in Sources */,
-				7E325691209B0937005D7B09 /* Run.swift in Sources */,
+				7E94AF0F209F11E600F583FF /* TrackMap.swift in Sources */,
 				7E32567F209B0885005D7B09 /* ViewController.swift in Sources */,
+				7E94AF0E209F11E600F583FF /* Triple.swift in Sources */,
 				7E325693209B0970005D7B09 /* ActionHandler.swift in Sources */,
+				7E94AF11209F11E600F583FF /* BasicCube.swift in Sources */,
 				7E32567B209B0885005D7B09 /* AppDelegate.swift in Sources */,
+				7E94AF13209F121B00F583FF /* TrackBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
