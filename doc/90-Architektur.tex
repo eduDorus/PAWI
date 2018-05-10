@@ -3,75 +3,246 @@
 \subsubsection{Epics}
 Die App soll folgende \textbf{Epics} erfüllen:
 \begin{enumerate}
-	\item \textbf{Bauanleitung:} Der Benutzer kann von einer gewählten Kugelbahn eine Augmented Reality Bauanleitung erhalten, um die Bahn physisch nachbauen/aufbauen zu können.
-	\item \textbf{Editor:} Der Benutzer kann in Augmented Reality eine virtuelle Kugelbahn neu erstellen oder eine bestehende verändern, damit diese als Bauanleitung zur Verfügung stehen.
+	\item \textbf{Bauanleitung (Guide):} Der Benutzer kann von einer gewählten Kugelbahn eine Augmented Reality Bauanleitung erhalten, um die Bahn physisch nachbauen/aufbauen zu können.
+	\item \textbf{Baumodus (Builder):} Der Benutzer kann in Augmented Reality eine virtuelle Kugelbahn neu erstellen oder eine bestehende verändern, damit diese als Bauanleitung zur Verfügung stehen.
 \end{enumerate}
 
 \subsubsection{User Stories}
-\begin{enumerate}
-	\setcounter{enumi}{-1}	% starte bei 0
-	\item Allgemein:
-	\begin{longtable}{l l p{12cm}}
-		\hline
-		\textbf{Nr.} & \textbf{Prio.} & \textbf{Beschreibung} \\
-		\hline
-		1 & & Allgemein \\
-		\hline
-		1.1 & M & Als Benutzer kann ich eine Fläche der realen Welt als Ebene für Augmented Reality auswählen, damit diese als Basis für die Anwendung verwendet wird. \\
-		1.2 & M & Als Benutzer kann ich eine Kugelbahn auf der ausgewählten Ebene platzieren. \\
-		1.3 & M & Als Benutzer kann ich die Kugelbahn auf einer Fläche ausrichten, damit sie wie gewünscht positioniert ist. \\
-		1.4 & M & Als Benutzer will ich erkennen in welchem Modus (Bauanleitung, Editor) ich mich befinde. \\
-		1.5 & S & Als Benutzer kann ich die Position und Ausrichtung einer Kugelbahn korrigieren, damit sie mit der physischen Kugelbahn übereinstimmt. \\
-		1.6 & K & Als Benutzer kann ich zwischen den Modi wechseln, damit ich die aktuelle Bahn im anderen Modus direkt weiterverwenden kann. \\
-		\hline
-		2 & & Bauanleitung \\
-		\hline
-		2.1 & M & Als Benutzer kann ich eine gespeicherte Kugelbahn auswählen, um ihre Bauanleitung zu verwenden. \\
-		2.2 & M & Als Benutzer sehe ich, welches cuboro Element als nächstes physisch platziert werden soll. \\
-		2.3 & M & Als Benutzer kann ich in der Bauanleitung einzelne Elemente durchgehen, damit ich eine Bahn schrittweise aufbauen kann. \\
-		2.4 & S & Als Benutzer kann ich in der Bauanleitung einzelne Elemente zurück gehen. \\
-		2.5 & K & Als Benutzer kann ich die Bauanleitung neu starten. \\
-		\hline
-		3 & & Editor \\
-		\hline
-		3.1 & M & Als Benutzer kann ich 4 verschiedene cuboro Elemente in der App verwenden, um eine Bahn zu erstellen. \\
-		3.2 & M & Als Benutzer kann ich eine neue Kugelbahn erstellen. \\
-		3.3 & M & Als Benutzer kann ich eine Kugelbahn auf dem Gerät speichern, damit ich sie später wiederverwenden kann. \\
-		3.4 & M & Als Benutzer kann ich eine gespeicherte Kugelbahn bearbeiten. \\
-		3.5 & M & Als Benutzer sehe ich welche Positionen zur Wahl stehen, um ein cuboro Element hinzuzufügen. \\
-		3.6 & M & Als Benutzer kann ich einer Kugelbahn ein neues cuboro Element hinzufügen. \\
-		3.7 & M & Als Benutzer kann ich ein die Ausrichtung (Rotation) eines cuboro Elements verändern. \\
-		3.8 & M & Als Benutzer kann ich ein cuboro Element von der Kugelbahn entfernen. \\
-		3.9 & S & Als Benutzer werde ich darauf aufmerksam gemacht, wenn Elemente nicht aneinander passen, damit ich am Schluss eine funktionierende/zusammenhängende Kugelbahn habe. \\
-		\hline
-	\end{longtable}
-\end{enumerate}
+
+\begin{longtable}{l l p{13cm}}
+	\hline
+	\textbf{Nr.} & \textbf{Prio.} & \textbf{Beschreibung} \\
+	\hline
+	\textbf{1} & & \textbf{Allgemein} \\
+	\hline
+	1.1 & M &
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich eine Fläche der realen Welt als Ebene für Augmented Reality auswählen, damit diese als Basis für die Anwendung verwendet wird. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Von ARKit erkannte Flächen werden als rechteckige Flächen dargestellt.
+				\item Durch antippen einer Fläche wird diese ausgewählt und alle anderen Flächen ausgeblendet und gelöscht.
+				\item Die vertikale Position einer neu zu setzenden Kugelbahn orientiert sich an der ausgewählten Fläche, bzw. kommt darauf zu stehen.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	1.2 & M &
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich eine Kugelbahn auf der ausgewählten Ebene platzieren. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Wenn eine Fläche ausgewählt ist, wird darauf eine Kugelbahn angezeigt.
+				\item Die Kugelbahn befindet sich stets zentral im Kamerabild auf der Fläche.
+				\item Durch Benutzereingabe, kann die Bahn an der aktuellen platziert werden.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	1.3 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich die Kugelbahn auf einer Fläche ausrichten, damit sie wie gewünscht positioniert ist. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Die Kugelbahn ist während des Platzierens stets zur Kamera ausgerichtet, sodass eine Drehung des Geräts auch die Rotation der Kugelbahn gegenüber der realen Welt verändert.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	1.4 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer will ich erkennen in welchem Modus (Bauanleitung, Editor) ich mich befinde. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Auf dem AR Bildschirm wird unmissverständlich angezeigt, welcher Modus aktiv ist.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	1.5 & S & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich die Position und Ausrichtung einer Kugelbahn korrigieren, damit sie mit der physischen Kugelbahn übereinstimmt. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Die Position der Kugelbahn lässt sich über Bedienelemente in Richtung aller drei Achsen verschieben.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	1.6 & K & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich zwischen den Modi wechseln, damit ich die aktuelle Bahn im anderen Modus direkt weiterverwenden kann. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Es besteht die Möglichkeit den aktiven Modus zu wechseln.
+				\item Beim Wechsel bleibt die aktuelle Szene (Kugelbahn und Position) bestehen, die Fläche muss nicht neu erkannt und die Kugelbahn nicht neu gesetzt werden.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	\textbf{2} & & \textbf{Guide} \\
+	\hline
+	2.1 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich eine gespeicherte Kugelbahn auswählen, um ihre Bauanleitung zu verwenden. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Alle gespeicherten Kugelbahnen werden angezeigt und lassen sich auswählen.
+				\item Die Kugelbahn, die für die Bauanleitung gesetzt wird entspricht der ausgewählten, gespeicherten Kugelbahn.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	2.2 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer sehe ich, welches cuboro Element als nächstes physisch platziert werden soll. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Das als nächstes zu bauende Element ist deutlich von den anderen Elementen hervorgehoben.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	2.3 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich in der Bauanleitung einzelne Schritte vorwärts gehen, damit ich eine Bahn schrittweise aufbauen kann. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Es gibt ein Bedienelement um den nächsten Schritt der Anleitung auszulösen.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	2.4 & S & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich in der Bauanleitung einzelne Elemente zurück gehen. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Es gibt ein Bedienelement um zum vorhergehenden Schritt der Anleitung zurück zu gehen.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	2.5 & K & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich die Bauanleitung neu starten. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Die Anleitung lässt sich direkt vom aktuellen Stand zurück auf den ersten Schritt zurücksetzen.
+				\item Beim zurücksetzen bleibt die Position und Ausrichtung der Kugelbahn bestehen, es ist kein neu setzen notwendig.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	\textbf{3} & & \textbf{Builder} \\
+	\hline
+	3.1 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich mindestens 4 verschiedene cuboro Elemente in der App verwenden, um eine Bahn zu erstellen. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Bei der Auswahl des Elements stehen mindestens 4 unterschiedliche Typen zur Verfügung.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	3.2 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich eine neue Kugelbahn erstellen und benennen. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Bei der Wahl der Kugelbahn gibt es eine Option, eine neue Bahn zu erstellen.
+				\item Beim Erstellen einer neuen Kugelbahn erhält der Benutzer die Möglichkeit einen Namen einzugeben.
+				\item Die neu erstellte Kugelbahn erscheint in der Liste der Kugelbahnen mit ihrem Namen.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	3.3 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich eine Kugelbahn auf dem Gerät speichern, damit ich sie später wiederverwenden kann. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Die aktuelle Bahn kann durch den Benutzer gespeichert werden.
+				\item Beim nächsten Abruf der Bahn erscheint diese im Zustand, in dem sie gespeichert wurde.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	3.4 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich eine gespeicherte Kugelbahn bearbeiten. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Der Benutzer kann eine gespeicherte Bahn auswählen.
+				\item An der gewählten Bahn können Änderungen vorgenommen werden (Hinzufügen, Verändern oder Entfernen von Elementen).
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	3.5 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer sehe ich welche Positionen zur Wahl stehen, um ein Element hinzuzufügen. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Valide Positionen für neue Elemente sind nach der Wahl des zu hinzufügenden Elements dargestellt.
+				\item Valide Positionen sind nur solche, die physikalisch möglich sind (keine schwebende Elemente) und direkt an ein bestehendes Element anschliessen.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	3.6 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich einer Kugelbahn ein neues Element an einer validen Position hinzufügen. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Eine zur Wahl stehende Position kann ausgewählt werden, um an dieser Stelle das Element zu setzen.
+				\item Das Platzieren abseits hervorgehobener Positionen ist nicht möglich.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	3.7 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich ein die Ausrichtung (Rotation) eines Elements verändern. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Ein Element kann ausgewählt werden und wird hervorgehoben.
+				\item Durch Streichgesten kann das selektierte Element entlang einer der drei Achsen in Richtung der Geste um 90° gedreht werden.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	3.8 & M & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer kann ich ein Element von der Kugelbahn entfernen. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Ein einzelnes Element kann von der Kugelbahn entfernt werden, solange die Kugelbahn zusammenhängend bleibt und physikalisch möglich ist (keine schwebende Elemente).
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+	3.9 & S & 
+		\begin{tabular}[t]{@{}p{13cm}@{}}
+			Als Benutzer werde ich darauf aufmerksam gemacht, wenn Elemente nicht aneinander passen, damit ich am Schluss eine funktionierende/zusammenhängende Kugelbahn habe. \\
+			Akzeptanzkriterien:
+			\begin{itemize}
+				\item Die App überprüft nach jeder Änderung der Kugelbahn, ob Rillen und Löcher der Elemente zusammenpassen und es einen durchgängigen Weg für die Kugel gibt.
+				\item Elemente, die nicht zusammenpassen werden hervorgehoben oder markiert.
+				\item Unpassende Elemente müssen nicht für das Funktionieren der App korrigiert werden, da es eine bewusste Entscheidung des Benutzers sein kann.
+			\end{itemize} \vspace*{-\baselineskip}
+		\end{tabular} \\
+	\hline
+\end{longtable}
 
 \subsubsection{Zielhierarchie}
+\bild{1}{zielhierarchie-cockburn}{Zielhierarchie nach Cockburn}
 
 \subsection{Nichtfunktionale Anforderungen}
 
-	\begin{longtable}{l l l p{9cm}}
-		\hline
-		\textbf{Nr.} & \textbf{Prio.} & \textbf{Typ} & \textbf{Beschreibung} \\
-		\hline
-		1 & & Constraint & \\
-		\hline
-		1.1 & M & Technologie & Die App ist in Swift für iOS programmiert. \\
-		1.2 & M & Technologie & Die App läuft auf aktuellen iPhones (ab iPhone 6s) mit iOS 11.3. \\
-		1.3 & M & Technologie & Die App verwendet ARKit 1.5. \\
-		1.8 & M & Geschäftlich & Die App zeigt die technologischen Möglichkeiten auf und muss keinen Business Value erzielen. \\
-		\hline
-		1 & & Quality & \\
-		\hline
-		1.4 & M & Laufzeit & Die App verwendet Farben, die auch für Personen mit Sehschwächen (z. B. Rot-Grün-Schwäche) erkenn- und unterscheidbar sind. \\ 
-		1.5 & M & Laufzeit & Der Benutzer wird bei limitiertem Tracking Status über Massnahmen informiert. \\
-		1.9 & M & Nicht Laufzeit & Klassen- und Variablennamen im Code sind aussagekräftig. \\
-		1.10 & M & Nicht Laufzeit & Schlüsselstellen im Code sind gut kommentiert und verständlich aufgebaut. \\
-		1.6 & M & Leistung & Beim Augmentieren von maximal 20 cuboro Elementen wird konstant mehr als 30 Frames pro Sekunde erreicht. \\
-		1.7 & M & Verfügbarkeit, Sicherheit & Alle Daten der App werden nur lokal gespeichert (Offline). \\
-		\hline
-	\end{longtable}
+\begin{longtable}{l l l p{10cm}}
+	\hline
+	\textbf{Nr.} & \textbf{Prio.} & \textbf{Typ} & \textbf{Beschreibung} \\
+	\hline
+	 & & Constraints & \\
+	\hline
+	01 & M & Technologie & Die App ist in Swift für iOS programmiert. \\
+	02 & M & Technologie & Die App läuft auf aktuellen iPhones (ab iPhone 6s) mit iOS 11.3. \\
+	03 & M & Technologie & Die App verwendet ARKit 1.5. \\
+	04 & M & Geschäftlich & Die App zeigt die technologischen Möglichkeiten auf und muss keinen Business Value erzielen. \\
+	\hline
+	 & & Qualitäten & \\
+	\hline
+	05 & M & Laufzeit & Die App verwendet Farben, die auch für Personen mit Sehschwächen (z. B. Rot-Grün-Schwäche) erkenn- und unterscheidbar sind. \\ 
+	06 & M & Laufzeit & Der Benutzer wird bei limitiertem Tracking Status über Massnahmen informiert. \\
+	07 & M & Laufzeit & Beim Augmentieren von maximal 20 cuboro Elementen wird konstant mehr als 30 Frames pro Sekunde erreicht. \\
+	08 & M & Laufzeit & Alle Daten der App werden nur lokal gespeichert (Offline). \\
+	09 & M & Compilier-Zeit & Klassen- und Variablennamen im Code sind aussagekräftig. \\
+	10 & M & Compilier-Zeit & Schlüsselstellen im Code sind gut kommentiert und verständlich aufgebaut. \\
+	\hline
+\end{longtable}
 
 \subsubsection{Szenarien}
 
