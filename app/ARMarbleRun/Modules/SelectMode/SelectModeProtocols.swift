@@ -7,6 +7,7 @@ import UIKit
 
 protocol SelectModeWireframeProtocol : class {
     var navigationController : UINavigationController? { get set }
+    
     static func createSelectModeModule() -> UIViewController
     func presentMarbleRunListView(from view: SelectModeViewProtocol, with mode: ARInteractionMode)
 }

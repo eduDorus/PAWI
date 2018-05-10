@@ -8,9 +8,10 @@ import UIKit
 import ARKit
 
 class ARBuilderView : UIViewController, ARBuilderViewProtocol {
+    
     var presenter: ARBuilderPresenterProtocol?
     
-    // MARK: IBActions
+    // MARK: - IBActions
     
     @IBAction func didPressPrevious(_ sender: Any) {
         presenter?.didPressPrevious()
@@ -20,7 +21,7 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol {
         presenter?.didPressNext()
     }
     
-    // MARK: ARBuilderViewProtocol
+    // MARK: - ARBuilderViewProtocol
 
     func add(element: MarbleRunElement) {
     }

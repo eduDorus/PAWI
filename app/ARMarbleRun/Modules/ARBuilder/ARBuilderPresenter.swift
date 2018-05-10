@@ -6,6 +6,7 @@
 import Foundation
 
 class ARBuilderPresenter : ARBuilderPresenterProtocol {
+    
     var wireframe: ARBuilderWireframeProtocol?
     weak var view: ARBuilderViewProtocol?
     var interactor: ARBuilderInteractorProtocol?

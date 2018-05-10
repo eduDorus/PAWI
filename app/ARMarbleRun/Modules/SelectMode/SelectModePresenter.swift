@@ -6,6 +6,7 @@
 import Foundation
 
 class SelectModePresenter : SelectModePresenterProtocol {
+    
     var wireframe: SelectModeWireframeProtocol?
     weak var view: SelectModeViewProtocol?
 

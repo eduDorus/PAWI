@@ -6,6 +6,7 @@ import Foundation
 import UIKit
 
 class SelectModeWireframe : SelectModeWireframeProtocol {
+    
     var navigationController : UINavigationController?
     
     static func createSelectModeModule() -> UIViewController {

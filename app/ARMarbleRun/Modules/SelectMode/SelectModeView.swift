@@ -7,11 +7,10 @@ import Foundation
 import UIKit
 
 class SelectModeView : UIViewController, SelectModeViewProtocol {
+    
     var presenter: SelectModePresenterProtocol?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    // MARK: - IBActions
     
     @IBAction func editorButtonPressed(_ sender: UIButton) {
         presenter?.didPressEditorButton(on: self)

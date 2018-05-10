@@ -6,6 +6,7 @@
 import Foundation
 
 class MarbleRunListPresenter : MarbleRunListPresenterProtocol {
+    
     var wireframe: MarbleRunListWireframeProtocol?
     weak var view: MarbleRunListViewProtocol?
     var interactor: MarbleRunListInteractorProtocol?

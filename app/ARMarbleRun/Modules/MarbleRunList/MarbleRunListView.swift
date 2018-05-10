@@ -7,14 +7,22 @@ import Foundation
 import UIKit
 
 class MarbleRunListView: UIViewController, MarbleRunListViewProtocol {
-    @IBOutlet var collectionView: UICollectionView!
+    
     var presenter: MarbleRunListPresenterProtocol?
     var marblerunMarbleRunList: [MarbleRun] = []
     
+    // MARK: - IBOutlets
+    
+    @IBOutlet var collectionView: UICollectionView!
+    
+    // MARK: - UIViewController
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
     }
+    
+    // MARK: - MarbleRunListViewProtocol
     
     func reloadMarbleRunList(with marbleruns: [MarbleRun]) {
         marblerunMarbleRunList = marbleruns

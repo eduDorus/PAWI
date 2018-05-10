@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 
 class MarbleRunListWireframe : MarbleRunListWireframeProtocol {
+    
     let mode : ARInteractionMode
     
     static func createMarbleRunListModule(in mode: ARInteractionMode) -> UIViewController {

@@ -13,6 +13,7 @@ protocol MarbleRunListWireframeProtocol : class {
 
 protocol MarbleRunListViewProtocol : class {
     var presenter : MarbleRunListPresenterProtocol? { get set }
+    
     func reloadMarbleRunList(with marbleruns: [MarbleRun])
 }
 

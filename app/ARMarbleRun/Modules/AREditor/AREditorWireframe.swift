@@ -8,6 +8,7 @@ import UIKit
 import ARKit
 
 class AREditorWireframe : AREditorWireframeProtocol, ARWireframeProtocol {
+    
     static func createAREditorModule(of marblerun: MarbleRun) -> UIViewController {
         return UIViewController()
     }
@@ -24,6 +25,4 @@ class AREditorWireframe : AREditorWireframeProtocol, ARWireframeProtocol {
     
     func changeMode(with view: ARSCNView) {
     }
-    
-
 }
