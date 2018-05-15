@@ -183,10 +183,10 @@
             </objects>
             <point key="canvasLocation" x="3013.5999999999999" y="751.57421289355329"/>
         </scene>
-        <!--View Controller-->
+        <!--Editor View-->
         <scene sceneID="kCk-sT-Oau">
             <objects>
-                <viewController id="dXx-W0-vKx" sceneMemberID="viewController">
+                <viewController id="dXx-W0-vKx" customClass="AREditorView" customModule="ARMarbleRun" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jIb-BS-Lwr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -198,6 +198,22 @@
                                     <segue destination="BV1-FR-VrT" kind="embed" id="rf1-Jy-Gqf"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OT8-9F-TZt">
+                                <rect key="frame" x="172" y="617" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="pressedAdd:" destination="dXx-W0-vKx" eventType="touchUpInside" id="GmC-K4-RdJ"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Git-1e-iid">
+                                <rect key="frame" x="163" y="617" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancle"/>
+                                <connections>
+                                    <action selector="pressedCancel:" destination="dXx-W0-vKx" eventType="touchUpInside" id="Dkf-Ov-8Cc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="cOd-00-vFy"/>

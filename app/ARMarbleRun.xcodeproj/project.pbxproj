@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		A0CB293B20AAD71B0012A3C4 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CB293A20AAD71B0012A3C4 /* LocalDataManager.swift */; };
+		7ED4F91820AAB09E00A4CAEC /* AREditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F91520AAB09E00A4CAEC /* AREditorView.swift */; };
+		7ED4F91920AAB09E00A4CAEC /* AREditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F91620AAB09E00A4CAEC /* AREditorPresenter.swift */; };
+		7ED4F91A20AAB09E00A4CAEC /* AREditorInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F91720AAB09E00A4CAEC /* AREditorInteractor.swift */; };
+		7ED4F92320AACA6300A4CAEC /* ElementSelectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F91E20AACA6200A4CAEC /* ElementSelectInteractor.swift */; };
+		7ED4F92420AACA6300A4CAEC /* ElementSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F91F20AACA6200A4CAEC /* ElementSelectView.swift */; };
+		7ED4F92520AACA6300A4CAEC /* ElementSelectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92020AACA6200A4CAEC /* ElementSelectPresenter.swift */; };
+		7ED4F92620AACA6300A4CAEC /* ElementSelectProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92120AACA6200A4CAEC /* ElementSelectProtocols.swift */; };
+		7ED4F92720AACA6300A4CAEC /* ElementSelectWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92220AACA6300A4CAEC /* ElementSelectWireframe.swift */; };
+		7ED4F92920AAE58D00A4CAEC /* Triple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92820AAE58D00A4CAEC /* Triple.swift */; };
+		7ED4F92B20AAE6AF00A4CAEC /* MarbleRunMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */; };
+		7ED4F92D20AAEB2800A4CAEC /* ElementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92C20AAEB2800A4CAEC /* ElementProtocol.swift */; };
+		7ED4F92F20AAEC9D00A4CAEC /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */; };
 		A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */; };
 		A0D82601209F3AA700C74FD7 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A0D82600209F3AA700C74FD7 /* art.scnassets */; };
 		A0D82603209F3AA700C74FD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D82602209F3AA700C74FD7 /* ViewController.swift */; };
@@ -47,7 +59,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A0CB293A20AAD71B0012A3C4 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		7ED4F91520AAB09E00A4CAEC /* AREditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AREditorView.swift; sourceTree = "<group>"; };
+		7ED4F91620AAB09E00A4CAEC /* AREditorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AREditorPresenter.swift; sourceTree = "<group>"; };
+		7ED4F91720AAB09E00A4CAEC /* AREditorInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AREditorInteractor.swift; sourceTree = "<group>"; };
+		7ED4F91E20AACA6200A4CAEC /* ElementSelectInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementSelectInteractor.swift; sourceTree = "<group>"; };
+		7ED4F91F20AACA6200A4CAEC /* ElementSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementSelectView.swift; sourceTree = "<group>"; };
+		7ED4F92020AACA6200A4CAEC /* ElementSelectPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementSelectPresenter.swift; sourceTree = "<group>"; };
+		7ED4F92120AACA6200A4CAEC /* ElementSelectProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementSelectProtocols.swift; sourceTree = "<group>"; };
+		7ED4F92220AACA6300A4CAEC /* ElementSelectWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementSelectWireframe.swift; sourceTree = "<group>"; };
+		7ED4F92820AAE58D00A4CAEC /* Triple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triple.swift; sourceTree = "<group>"; };
+		7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunMap.swift; sourceTree = "<group>"; };
+		7ED4F92C20AAEB2800A4CAEC /* ElementProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementProtocol.swift; sourceTree = "<group>"; };
+		7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		A0D825FB209F3AA700C74FD7 /* ARMarbleRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMarbleRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0D82600209F3AA700C74FD7 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -98,6 +121,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7ED4F91D20AACA4D00A4CAEC /* ElementSelect */ = {
+			isa = PBXGroup;
+			children = (
+				7ED4F91E20AACA6200A4CAEC /* ElementSelectInteractor.swift */,
+				7ED4F92020AACA6200A4CAEC /* ElementSelectPresenter.swift */,
+				7ED4F92120AACA6200A4CAEC /* ElementSelectProtocols.swift */,
+				7ED4F91F20AACA6200A4CAEC /* ElementSelectView.swift */,
+				7ED4F92220AACA6300A4CAEC /* ElementSelectWireframe.swift */,
+			);
+			name = ElementSelect;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		A0D825F2209F3AA700C74FD7 = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +181,7 @@
 		A0D82633209F43B400C74FD7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7ED4F91D20AACA4D00A4CAEC /* ElementSelect */,
 				A0D82654209FA65100C74FD7 /* AREditor */,
 				A0D82651209F9BC100C74FD7 /* ARBuilder */,
 				A0D82643209F598100C74FD7 /* MarbleRunList */,
@@ -156,8 +193,9 @@
 		A0D8263E209F54BE00C74FD7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7ED4F92820AAE58D00A4CAEC /* Triple.swift */,
 				A0D8263F209F54EE00C74FD7 /* ARInteractionMode.swift */,
-				A0CB293A20AAD71B0012A3C4 /* LocalDataManager.swift */,
+				7ED4F92C20AAEB2800A4CAEC /* ElementProtocol.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -190,6 +228,8 @@
 			children = (
 				A0D8264F209F84FF00C74FD7 /* MarbleRun.swift */,
 				A0D8266120A0ACB200C74FD7 /* MarbleRunElement.swift */,
+				7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */,
+				7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -209,6 +249,9 @@
 		A0D82654209FA65100C74FD7 /* AREditor */ = {
 			isa = PBXGroup;
 			children = (
+				7ED4F91720AAB09E00A4CAEC /* AREditorInteractor.swift */,
+				7ED4F91620AAB09E00A4CAEC /* AREditorPresenter.swift */,
+				7ED4F91520AAB09E00A4CAEC /* AREditorView.swift */,
 				A0D82655209FA65D00C74FD7 /* AREditorProtocols.swift */,
 				A0D8265920A097AA00C74FD7 /* AREditorWireframe.swift */,
 			);
@@ -318,13 +361,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0D82647209F5EFB00C74FD7 /* MarbleRunListWireframe.swift in Sources */,
+				7ED4F92520AACA6300A4CAEC /* ElementSelectPresenter.swift in Sources */,
 				A0D8266020A09C1000C74FD7 /* ARBuilderInteractor.swift in Sources */,
+				7ED4F92F20AAEC9D00A4CAEC /* BoundingBox.swift in Sources */,
 				A0D82639209F4D1200C74FD7 /* SelectModeView.swift in Sources */,
 				A0D82649209F5F0600C74FD7 /* MarbleRunListView.swift in Sources */,
+				7ED4F92720AACA6300A4CAEC /* ElementSelectWireframe.swift in Sources */,
 				A0D8265E20A09BE600C74FD7 /* ARBuilderPresenter.swift in Sources */,
 				A0D82640209F54EE00C74FD7 /* ARInteractionMode.swift in Sources */,
 				A0D82653209FA0D200C74FD7 /* ARBuilderProtocols.swift in Sources */,
+				7ED4F91920AAB09E00A4CAEC /* AREditorPresenter.swift in Sources */,
+				7ED4F91A20AAB09E00A4CAEC /* AREditorInteractor.swift in Sources */,
 				A0D82650209F84FF00C74FD7 /* MarbleRun.swift in Sources */,
+				7ED4F92420AACA6300A4CAEC /* ElementSelectView.swift in Sources */,
 				A0D82635209F444700C74FD7 /* SelectModeProtocols.swift in Sources */,
 				A0D82637209F495900C74FD7 /* SelectModeWireframe.swift in Sources */,
 				A0D82656209FA65D00C74FD7 /* AREditorProtocols.swift in Sources */,
@@ -334,11 +383,17 @@
 				A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */,
 				A0CB293B20AAD71B0012A3C4 /* LocalDataManager.swift in Sources */,
 				A0D8264B209F5F0C00C74FD7 /* MarbleRunListPresenter.swift in Sources */,
+				7ED4F92B20AAE6AF00A4CAEC /* MarbleRunMap.swift in Sources */,
+				7ED4F91820AAB09E00A4CAEC /* AREditorView.swift in Sources */,
 				A0D8265C20A09BB800C74FD7 /* ARBuilderView.swift in Sources */,
+				7ED4F92D20AAEB2800A4CAEC /* ElementProtocol.swift in Sources */,
 				A0D8265A20A097AA00C74FD7 /* AREditorWireframe.swift in Sources */,
+				7ED4F92320AACA6300A4CAEC /* ElementSelectInteractor.swift in Sources */,
 				A0D8263B209F4D2500C74FD7 /* SelectModePresenter.swift in Sources */,
 				A0D82645209F599100C74FD7 /* MarbleRunListProtocols.swift in Sources */,
+				7ED4F92920AAE58D00A4CAEC /* Triple.swift in Sources */,
 				A0D8265820A0971F00C74FD7 /* ARBuilderWireframe.swift in Sources */,
+				7ED4F92620AACA6300A4CAEC /* ElementSelectProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

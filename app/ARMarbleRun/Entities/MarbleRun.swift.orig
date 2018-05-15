@@ -5,6 +5,9 @@
 import Foundation
 import SceneKit
 
+<<<<<<< HEAD
+import Foundation
+
 class MarbleRun : NSObject, NSCoding {
     
     let name : String
@@ -24,10 +27,9 @@ class MarbleRun : NSObject, NSCoding {
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: "name")
-    }
-}
-
-class MarbleRunNode: SCNNode {
+=======
+class MarbleRun: SCNNode {
+    
     
     override init() {
         super.init()
@@ -113,5 +115,6 @@ class MarbleRunNode: SCNNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+>>>>>>> e075c6a85a78be3d05849225545c552fd0c7d685
     }
 }
