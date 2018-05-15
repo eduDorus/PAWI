@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0CB293B20AAD71B0012A3C4 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CB293A20AAD71B0012A3C4 /* LocalDataManager.swift */; };
 		A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */; };
 		A0D82601209F3AA700C74FD7 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A0D82600209F3AA700C74FD7 /* art.scnassets */; };
 		A0D82603209F3AA700C74FD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D82602209F3AA700C74FD7 /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0CB293A20AAD71B0012A3C4 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		A0D825FB209F3AA700C74FD7 /* ARMarbleRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMarbleRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0D82600209F3AA700C74FD7 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				A0D8263F209F54EE00C74FD7 /* ARInteractionMode.swift */,
+				A0CB293A20AAD71B0012A3C4 /* LocalDataManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				A0D8266220A0ACB200C74FD7 /* MarbleRunElement.swift in Sources */,
 				A0D82603209F3AA700C74FD7 /* ViewController.swift in Sources */,
 				A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */,
+				A0CB293B20AAD71B0012A3C4 /* LocalDataManager.swift in Sources */,
 				A0D8264B209F5F0C00C74FD7 /* MarbleRunListPresenter.swift in Sources */,
 				A0D8265C20A09BB800C74FD7 /* ARBuilderView.swift in Sources */,
 				A0D8265A20A097AA00C74FD7 /* AREditorWireframe.swift in Sources */,
