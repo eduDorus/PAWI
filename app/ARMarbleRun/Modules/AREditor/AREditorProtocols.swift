@@ -21,6 +21,7 @@ protocol AREditorViewProtocol : class {
     func add(elements: [MarbleRunElement])
     func remove(elementAt position: Int)
     func removeAllElements()
+    func removeAllElemetns(with status: ElementStatus)
     func set(elementAt position: Int, to status: ElementStatus)
     func set(elementAt position: Int, to orientation: Int)
 }
@@ -34,10 +35,21 @@ protocol AREditorPresenterProtocol : class {
     func didPressMenuButton()
     func didPressAddButton()
     func didPressCancelButton()
-    func didPressSaveAction(with marblerun: MarbleRun)
+    func didPressGoToLaunchscreen()
+    func didPressSaveAction()
+    
+    func didSwipe(in direction: UISwipeGestureRecognizerDirection)
+    func didTap(on element: MarbleRunElement)
+    func didLongTap(on element: MarbleRunElement)
 }
 
 protocol AREditorInteractorProtocol : class {
-    func persist(marblerun: MarbleRun)
+    func getPossiblePositions()
+    func buildElement()
+    func removeElement()
+    func selectElement()
+    func clearSelectedElement()
+    func turnElement()
+    func persist()
 }
 
