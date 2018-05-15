@@ -218,7 +218,8 @@ Die App soll folgende \textbf{Epics} erfüllen:
 \end{longtable}
 
 \subsubsection{Zielhierarchie}
-\bild{1}{zielhierarchie-cockburn}{Zielhierarchie nach Cockburn}
+Abbildung \ref{fig:zielhierarchie-cockburn} zeigt einen Überblick über die Zielhierarchie der Anforderungen, zugeordnet nach den drei Farbstufen nach Cockburn.
+\bild{0.9}{zielhierarchie-cockburn}{Zielhierarchie nach Cockburn}
 
 \subsection{Nichtfunktionale Anforderungen}
 
@@ -246,9 +247,47 @@ Die App soll folgende \textbf{Epics} erfüllen:
 
 \subsubsection{Szenarien}
 
+Die Tabelle \ref{tab:szenario-nfa-06} zeigt ein Szenario der Benutzbarkeit anhand der nichtfunktionalen Anforderung 06.
+\begin{table}
+	\begin{tabular}{r p{12cm}}
+		\hline
+		Teil des Szenarios & Wert \\
+		\hline
+		Quelle des Auslösers & System (ARKit) \\
+		Auslöser/Ereignis & Die Kamera ändert ihren Tracking Status \\
+		Umgebung & ARMarbleRun App \\
+		Systembestandteil & Gesamtsystem \\
+		Antwort/Reaktion & Tracking Status wird dem Benutzer angezeigt und eine mögliche Massnahme zur Behebung des Problems vorgeschlagen \\
+		Antwortmetrik & Der Benutzer weiss, warum das Tracking nicht wie gewünscht funktioniert und kann darauf reagieren \\
+		\hline
+	\end{tabular}
+	\caption{Szenario für die nichtfunktionale Anforderung 06}
+	\label{tab:szenario-nfa-06}
+\end{table}
+
+Tabelle \ref{tab:szenario-nfa-07} zeigt das Szenario für die nichtfunktionale Anforderung 07.
+
+\begin{table}
+	\begin{tabular}{r p{12cm}}
+		\hline
+		Teil des Szenarios & Wert \\
+		\hline
+		Quelle des Auslösers & Benutzer \\
+		Auslöser/Ereignis & Der Benutzer setzt das 20. Element \\
+		Umgebung & ARMarbleRun App \\
+		Systembestandteil & Gesamtsystem \\
+		Antwort/Reaktion & Die Applikation wird optimiert, damit 20 Elemente zu keinen Einbussen unter 30 Bilder pro Sekunde führen. \\
+		Antwortmetrik & Die App läuft mit mindestens 30 Bilder pro Sekunde, wenn 20 Elemente einer Kugelbahn angezeigt werden. \\
+		\hline
+	\end{tabular}
+	\caption{Szenario für die nichtfunktionale Anforderung 07}
+	\label{tab:szenario-nfa-07}
+\end{table}
+
 \subsection{Fachdomäne (Domain Driven Design)}
 
 \subsubsection{Fachbegriffe}
+
 \begin{itemize}
 	\item \textbf{Element:} Ein einzelner cuboro Kugelbahnwürfel mit keinem (ganzer Würfel), einem oder mehreren Wegen für eine Kugel.
 	\item \textbf{Kugelbahn:} Ein zusammenhängendes Konstrukt aus einzelnen Elementen, sodass eine Kugel einen durchgehenden Weg durch die Bahn hat.
@@ -258,17 +297,19 @@ Die App soll folgende \textbf{Epics} erfüllen:
 \end{itemize}
 
 \subsubsection{Entitäten und ihre Value Objects}
+
 \begin{itemize}
 	\item \textbf{Kugelbahn}
 	\begin{itemize}
-		\item Ausrichtung
-		\item Position
-		% \item Elemente?
+		\item Name
+		\item Ausrichtungswinkel
+		\item Positionskoordinaten
 	\end{itemize}
 	\item \textbf{Element}
 	\begin{itemize}
-		\item Ausrichtung
-		\item Position
+		\item ID
+		\item Ausrichtungswinkel
+		\item Positionskoordinaten
 		\item Geometrie
 	\end{itemize}
 \end{itemize}
