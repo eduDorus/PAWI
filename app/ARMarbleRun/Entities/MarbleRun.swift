@@ -8,6 +8,11 @@ import Foundation
 class MarbleRun : NSObject, NSCoding {
     
     let name : String
+    var fileName : String {
+        get {
+            return self.name.lowercased() + ".dat"
+        }
+    }
     
     init(name: String) {
         self.name = name
