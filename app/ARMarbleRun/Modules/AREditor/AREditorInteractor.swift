@@ -7,14 +7,13 @@ import Foundation
 
 
 class AREditorInteractor : AREditorInteractorProtocol {
-    let marblerun: MarbleRun
+    let marblerun: MarbleRunEntity
     
-    init(with marblerun: MarbleRun) {
+    init(with marblerun: MarbleRunEntity) {
         self.marblerun = marblerun
     }
     
     func getPossiblePositions() {
-        marblerun.
     }
     
     func buildElement() {

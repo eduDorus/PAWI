@@ -1,33 +1,13 @@
 //
-//  MarbleRun.swift
+//  MarbleRunNode.swift
 //  ARMarbleRun
 //
+
 import Foundation
 import SceneKit
 
-class MarbleRun : NSObject, NSCoding {
-    
-    let name : String
-    var fileName : String {
-        get {
-            return self.name.lowercased() + ".dat"
-        }
-    }
-    
-    init(name: String) {
-        self.name = name
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "name")
-    }
-}
-
-class MarbleRunNode: SCNNode {
+class MarbleRunNode : SCNNode {
+    let map = MarbleRunMap<BoundingBox>()
     
     override init() {
         super.init()
@@ -37,10 +17,10 @@ class MarbleRunNode: SCNNode {
         //loadTrack(number: currentTrack)
     }
     
-    // Positions a new BasicCube at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
+    // Positions a new BoundingBox at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
     @discardableResult
-    func addCube(x: Int, y: Int, z: Int) -> BasicCube {
-        let cube = BasicCube()
+    func addCube(x: Int, y: Int, z: Int) -> BoundingBox {
+        let cube = BoundingBox()
         let pos = SCNVector3(CGFloat(x) * cube.sidelength, CGFloat(y) * cube.sidelength, CGFloat(z) * cube.sidelength)
         cube.set(position: pos)
         addChildNode(cube)
@@ -48,7 +28,7 @@ class MarbleRunNode: SCNNode {
         return cube
     }
     
-    func removeCube(cube: BasicCube) {
+    func removeCube(cube: BoundingBox) {
         map.removeElement(element: cube)
         cube.remove()
     }
@@ -72,7 +52,7 @@ class MarbleRunNode: SCNNode {
         constraints = []
     }
     
-    // remove all BasicCube nodes from the track
+    // remove all BoundingBox nodes from the track
     private func clearTrack() {
         map.forEach { (position, cube) in
             if cube.name != "basecube" {
@@ -88,19 +68,8 @@ class MarbleRunNode: SCNNode {
         }
     }
     
-    func loadTrack(number index: Int) {
-        currentTrack = index
-        clearTrack()
-        if tracks.indices.contains(index) {
-            for block in tracks[index] {
-                addCube(x: block.0, y: block.1, z: block.2)
-            }
-        } else {
-            print("track \(index) does not exist")
-        }
-    }
     
-    func getMap() -> TrackMap<BasicCube> {
+    func getMap() -> MarbleRunMap<BoundingBox> {
         return map
     }
     

@@ -9,7 +9,7 @@ import ARKit
 
 class ARBuilderWireframe : ARBuilderWireframeProtocol, ARWireframeProtocol {
     
-    static func createARBuilderModule(of marblerun: MarbleRun) -> UIViewController {
+    static func createARBuilderModule(of marblerun: MarbleRunEntity) -> UIViewController {
         let controller = mainStoryboard.instantiateViewController(withIdentifier: "ARBuilderViewController")
         if let view = controller as? ARBuilderViewProtocol {
             let presenter: ARBuilderPresenterProtocol = ARBuilderPresenter()
@@ -30,7 +30,7 @@ class ARBuilderWireframe : ARBuilderWireframeProtocol, ARWireframeProtocol {
         return UIStoryboard(name: "Main", bundle: Bundle.main)
     }
     
-    static func createModule(of marblerun: MarbleRun) -> UIViewController {
+    static func createModule(of marblerun: MarbleRunEntity) -> UIViewController {
         return createARBuilderModule(of: marblerun)
     }
     

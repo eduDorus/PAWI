@@ -7,7 +7,7 @@ import UIKit
 import ARKit
 
 protocol ElementSelectWireframeProtocol : class, ARWireframeProtocol {
-    static func createElementSelectModule(of marblerun: MarbleRun) -> UICollectionViewController
+    static func createElementSelectModule(of marblerun: MarbleRunEntity) -> UICollectionViewController
     
     func presentSelectElement()
     func presentSelectMode()

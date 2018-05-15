@@ -8,7 +8,7 @@ import UIKit
 import ARKit
 
 protocol ARBuilderWireframeProtocol : class, ARWireframeProtocol {
-    static func createARBuilderModule(of marblerun: MarbleRun) -> UIViewController
+    static func createARBuilderModule(of marblerun: MarbleRunEntity) -> UIViewController
     
     func presentSelectMode()
     func changeMode(with view: ARSCNView)

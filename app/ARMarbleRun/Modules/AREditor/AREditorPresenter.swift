@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 class AREditorPresenter : AREditorPresenterProtocol {
     var wireframe: AREditorWireframeProtocol?
@@ -26,8 +27,8 @@ class AREditorPresenter : AREditorPresenterProtocol {
         interactor?.clearSelectedElement()
     }
     
-    func didPressSaveAction(with marblerun: MarbleRun) {
-        interactor?.persist(marblerun: marblerun)
+    func didPressSaveAction(with marblerun: MarbleRunEntity) {
+        interactor?.persist()
     }
     
     func didPressGoToLaunchscreen() {

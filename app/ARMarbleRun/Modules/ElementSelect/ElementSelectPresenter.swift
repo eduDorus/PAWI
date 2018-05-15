@@ -13,4 +13,13 @@ class ElementSelectPresenter : ElementSelectPresenterProtocol {
     func viewDidLoad() {
     }
 
+    func didPressElement() {
+    }
+    
+    func didPressCancelButton() {
+    }
+    
+    func didPressGoToLaunchscreen() {
+    }
+    
 }

@@ -8,13 +8,13 @@ import UIKit
 
 protocol MarbleRunListWireframeProtocol : class {
     static func createMarbleRunListModule(in mode: ARInteractionMode) -> UIViewController
-    func presentARView(from view: MarbleRunListViewProtocol, with marblerun: MarbleRun)
+    func presentARView(from view: MarbleRunListViewProtocol, with marblerun: MarbleRunEntity)
 }
 
 protocol MarbleRunListViewProtocol : class {
     var presenter : MarbleRunListPresenterProtocol? { get set }
     
-    func reloadMarbleRunList(with marbleruns: [MarbleRun])
+    func reloadMarbleRunList(with marbleruns: [MarbleRunEntity])
 }
 
 protocol MarbleRunListPresenterProtocol : class {
@@ -23,10 +23,10 @@ protocol MarbleRunListPresenterProtocol : class {
     var interactor : MarbleRunListInteractorProtocol? { get set }
     
     func viewDidLoad()
-    func didSelect(marblerun: MarbleRun, on view: MarbleRunListViewProtocol)
+    func didSelect(marblerun: MarbleRunEntity, on view: MarbleRunListViewProtocol)
 }
 
 protocol MarbleRunListInteractorProtocol : class {
-    func retrieveMarbleRuns(_ callback: ([MarbleRun]) -> Void)
+    func retrieveMarbleRuns(_ callback: ([MarbleRunEntity]) -> Void)
 }
 

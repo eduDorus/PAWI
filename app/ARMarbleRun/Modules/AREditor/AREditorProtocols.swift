@@ -7,7 +7,7 @@ import UIKit
 import ARKit
 
 protocol AREditorWireframeProtocol : class, ARWireframeProtocol {
-    static func createAREditorModule(of marblerun: MarbleRun) -> UIViewController
+    static func createAREditorModule(of marblerun: MarbleRunEntity) -> UIViewController
     
     func presentSelectElement()
     func presentSelectMode()

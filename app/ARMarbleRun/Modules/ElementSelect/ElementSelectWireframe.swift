@@ -11,7 +11,7 @@ import ARKit
     
 class ElementSelectWireframe : ElementSelectWireframeProtocol, ARWireframeProtocol {
     
-    static func createElementSelectModule(of marblerun: MarbleRun) -> UICollectionViewController {
+    static func createElementSelectModule(of marblerun: MarbleRunEntity) -> UICollectionViewController {
         let controller = mainStoryboard.instantiateViewController(withIdentifier: "ElementSelectViewController")
         if let view = controller as? ElementSelectViewProtocol {
             let presenter: ElementSelectPresenterProtocol = ElementSelectPresenter()
@@ -32,7 +32,7 @@ class ElementSelectWireframe : ElementSelectWireframeProtocol, ARWireframeProtoc
         return UIStoryboard(name: "Main", bundle: Bundle.main)
     }
     
-    static func createModule(of marblerun: MarbleRun) -> UIViewController {
+    static func createModule(of marblerun: MarbleRunEntity) -> UIViewController {
         return createElementSelectModule(of: marblerun)
     }
     

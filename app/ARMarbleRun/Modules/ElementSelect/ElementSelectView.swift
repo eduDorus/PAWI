@@ -7,7 +7,8 @@ import Foundation
 import UIKit
 import ARKit
 
-class ElementSelectView : UIViewController, ElementSelectViewProtocol {
+class ElementSelectView : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ElementSelectViewProtocol {
+    
     var presenter: ElementSelectPresenterProtocol?
     
     // MARK: - IBActions
@@ -19,7 +20,7 @@ class ElementSelectView : UIViewController, ElementSelectViewProtocol {
     }
     
     // MARK: - ElementSelectViewProtocol
-
+    
     func add(element: MarbleRunElement) {
     }
     
@@ -36,6 +37,13 @@ class ElementSelectView : UIViewController, ElementSelectViewProtocol {
     }
     
     func set(elementAt position: Int, to orientation: Int) {
-        
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
     }
 }

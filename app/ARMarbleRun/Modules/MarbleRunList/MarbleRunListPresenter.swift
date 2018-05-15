@@ -17,7 +17,7 @@ class MarbleRunListPresenter : MarbleRunListPresenterProtocol {
         }
     }
     
-    func didSelect(marblerun: MarbleRun, on view: MarbleRunListViewProtocol) {
+    func didSelect(marblerun: MarbleRunEntity, on view: MarbleRunListViewProtocol) {
         wireframe?.presentARView(from: view, with: marblerun)
     }
 }

@@ -21,5 +21,5 @@ enum ARInteractionMode {
 }
 
 protocol ARWireframeProtocol {
-    static func createModule(of marblerun: MarbleRun) -> UIViewController
+    static func createModule(of marblerun: MarbleRunEntity) -> UIViewController
 }

@@ -1,9 +1,6 @@
 //
-//  BasicCube.swift
-//  SceneKit Kugelbahn Prototype
-//
-//  Created by Lucas Schnüriger on 12.04.2018
-//  Copyright © 2018 hslu. All rights reserved.
+//  BoundingBox.swift
+//  ARMarbleRun
 //
 
 import Foundation

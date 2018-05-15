@@ -7,10 +7,10 @@ import Foundation
 
 class MarbleRunListInteractor : MarbleRunListInteractorProtocol {
     
-    func retrieveMarbleRuns(_ callback: ([MarbleRun]) -> Void) {
-        var runs : [MarbleRun] = []
+    func retrieveMarbleRuns(_ callback: ([MarbleRunEntity]) -> Void) {
+        var runs : [MarbleRunEntity] = []
         for i in 0...12 {
-            runs.append(MarbleRun(name: "Test\(i)"))
+            runs.append(MarbleRunEntity(name: "Test\(i)"))
         }
         MarbleRunDataManager().persist(runs)
 

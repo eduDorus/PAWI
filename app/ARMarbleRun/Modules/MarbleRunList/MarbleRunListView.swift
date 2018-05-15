@@ -9,7 +9,7 @@ import UIKit
 class MarbleRunListView: UIViewController, MarbleRunListViewProtocol {
     
     var presenter: MarbleRunListPresenterProtocol?
-    var marblerunMarbleRunList: [MarbleRun] = []
+    var marblerunMarbleRunList: [MarbleRunEntity] = []
     
     // MARK: - IBOutlets
     
@@ -24,7 +24,7 @@ class MarbleRunListView: UIViewController, MarbleRunListViewProtocol {
     
     // MARK: - MarbleRunListViewProtocol
     
-    func reloadMarbleRunList(with marbleruns: [MarbleRun]) {
+    func reloadMarbleRunList(with marbleruns: [MarbleRunEntity]) {
         marblerunMarbleRunList = marbleruns
         collectionView.reloadData()
     }
