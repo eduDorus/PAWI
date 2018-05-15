@@ -17,11 +17,11 @@ protocol ARBuilderWireframeProtocol : class, ARWireframeProtocol {
 protocol ARBuilderViewProtocol : class {
     var presenter : ARBuilderPresenterProtocol? { get set }
     
-    func add(element: MarbleRunElement)
-    func add(elements: [MarbleRunElement])
+    func add(element: ElementEntity)
+    func add(elements: [ElementEntity])
     func remove(elementAt position: Int)
     func removeAllElements()
-    func set(elementAt position: Int, to status: ElementStatus)
+    func set(elementAt position: Int, to status: ElementState)
 }
 
 protocol ARBuilderPresenterProtocol : class {

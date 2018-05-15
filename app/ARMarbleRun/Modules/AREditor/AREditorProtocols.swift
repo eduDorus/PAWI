@@ -17,12 +17,12 @@ protocol AREditorWireframeProtocol : class, ARWireframeProtocol {
 protocol AREditorViewProtocol : class {
     var presenter : AREditorPresenterProtocol? { get set }
     
-    func add(element: MarbleRunElement)
-    func add(elements: [MarbleRunElement])
+    func add(element: ElementEntity)
+    func add(elements: [ElementEntity])
     func remove(elementAt position: Int)
     func removeAllElements()
-    func removeAllElemetns(with status: ElementStatus)
-    func set(elementAt position: Int, to status: ElementStatus)
+    func removeAllElemetns(with status: ElementState)
+    func set(elementAt position: Int, to status: ElementState)
     func set(elementAt position: Int, to orientation: Int)
 }
 
@@ -39,8 +39,8 @@ protocol AREditorPresenterProtocol : class {
     func didPressSaveAction()
     
     func didSwipe(in direction: UISwipeGestureRecognizerDirection)
-    func didTap(on element: MarbleRunElement)
-    func didLongTap(on element: MarbleRunElement)
+    func didTap(on element: ElementEntity)
+    func didLongTap(on element: ElementEntity)
 }
 
 protocol AREditorInteractorProtocol : class {

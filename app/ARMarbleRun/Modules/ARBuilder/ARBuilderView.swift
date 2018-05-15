@@ -23,10 +23,10 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol {
     
     // MARK: - ARBuilderViewProtocol
 
-    func add(element: MarbleRunElement) {
+    func add(element: ElementEntity) {
     }
     
-    func add(elements: [MarbleRunElement]) {
+    func add(elements: [ElementEntity]) {
     }
     
     func remove(elementAt position: Int) {
@@ -35,6 +35,6 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol {
     func removeAllElements() {
     }
     
-    func set(elementAt position: Int, to status: ElementStatus) {
+    func set(elementAt position: Int, to status: ElementState) {
     }
 }

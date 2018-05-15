@@ -22,11 +22,11 @@ class AREditorView : UIViewController, AREditorViewProtocol {
     
     // MARK: - AREditorViewProtocol
 
-    func add(element: MarbleRunElement) {
+    func add(element: ElementEntity) {
         
     }
     
-    func add(elements: [MarbleRunElement]) {
+    func add(elements: [ElementEntity]) {
         
     }
     
@@ -38,11 +38,11 @@ class AREditorView : UIViewController, AREditorViewProtocol {
         
     }
     
-    func removeAllElemetns(with status: ElementStatus) {
+    func removeAllElemetns(with status: ElementState) {
         
     }
     
-    func set(elementAt position: Int, to status: ElementStatus) {
+    func set(elementAt position: Int, to status: ElementState) {
         
     }
     

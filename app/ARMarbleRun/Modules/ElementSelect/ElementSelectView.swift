@@ -21,10 +21,10 @@ class ElementSelectView : UIViewController, UICollectionViewDelegate, UICollecti
     
     // MARK: - ElementSelectViewProtocol
     
-    func add(element: MarbleRunElement) {
+    func add(element: ElementEntity) {
     }
     
-    func add(elements: [MarbleRunElement]) {
+    func add(elements: [ElementEntity]) {
     }
     
     func remove(elementAt position: Int) {
@@ -33,7 +33,7 @@ class ElementSelectView : UIViewController, UICollectionViewDelegate, UICollecti
     func removeAllElements() {
     }
     
-    func set(elementAt position: Int, to status: ElementStatus) {
+    func set(elementAt position: Int, to status: ElementState) {
     }
     
     func set(elementAt position: Int, to orientation: Int) {

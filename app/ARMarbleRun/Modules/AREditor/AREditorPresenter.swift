@@ -43,11 +43,11 @@ class AREditorPresenter : AREditorPresenterProtocol {
         
     }
     
-    func didTap(on element: MarbleRunElement) {
+    func didTap(on element: ElementEntity) {
         
     }
     
-    func didLongTap(on element: MarbleRunElement) {
+    func didLongTap(on element: ElementEntity) {
         
     }
 }

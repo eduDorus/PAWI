@@ -21,6 +21,7 @@
 		7ED4F92F20AAEC9D00A4CAEC /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */; };
 		A0C0321720AB121D00C091A0 /* MarbleRunNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0321620AB121D00C091A0 /* MarbleRunNode.swift */; };
 		A0C0321920AB15AC00C091A0 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0321820AB15AC00C091A0 /* LocalDataManager.swift */; };
+		A0C0321E20AB1A3F00C091A0 /* ElementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0321D20AB1A3F00C091A0 /* ElementNode.swift */; };
 		A0CB293B20AAD71B0012A3C4 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */; };
 		A0D82601209F3AA700C74FD7 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A0D82600209F3AA700C74FD7 /* art.scnassets */; };
@@ -47,7 +48,7 @@
 		A0D8265C20A09BB800C74FD7 /* ARBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265B20A09BB800C74FD7 /* ARBuilderView.swift */; };
 		A0D8265E20A09BE600C74FD7 /* ARBuilderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265D20A09BE600C74FD7 /* ARBuilderPresenter.swift */; };
 		A0D8266020A09C1000C74FD7 /* ARBuilderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265F20A09C1000C74FD7 /* ARBuilderInteractor.swift */; };
-		A0D8266220A0ACB200C74FD7 /* MarbleRunElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8266120A0ACB200C74FD7 /* MarbleRunElement.swift */; };
+		A0D8266220A0ACB200C74FD7 /* ElementEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8266120A0ACB200C74FD7 /* ElementEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		A0C0321620AB121D00C091A0 /* MarbleRunNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunNode.swift; sourceTree = "<group>"; };
 		A0C0321820AB15AC00C091A0 /* LocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		A0C0321D20AB1A3F00C091A0 /* ElementNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementNode.swift; sourceTree = "<group>"; };
 		A0D825FB209F3AA700C74FD7 /* ARMarbleRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMarbleRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0D82600209F3AA700C74FD7 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -104,7 +106,7 @@
 		A0D8265B20A09BB800C74FD7 /* ARBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderView.swift; sourceTree = "<group>"; };
 		A0D8265D20A09BE600C74FD7 /* ARBuilderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderPresenter.swift; sourceTree = "<group>"; };
 		A0D8265F20A09C1000C74FD7 /* ARBuilderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderInteractor.swift; sourceTree = "<group>"; };
-		A0D8266120A0ACB200C74FD7 /* MarbleRunElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunElement.swift; sourceTree = "<group>"; };
+		A0D8266120A0ACB200C74FD7 /* ElementEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,15 @@
 			path = ElementSelect;
 			sourceTree = "<group>";
 		};
+		A0C0321C20AB1A2900C091A0 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				A0C0321620AB121D00C091A0 /* MarbleRunNode.swift */,
+				A0C0321D20AB1A3F00C091A0 /* ElementNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
 		A0D825F2209F3AA700C74FD7 = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				A0D8264E209F84E200C74FD7 /* Entities */,
+				A0C0321C20AB1A2900C091A0 /* Nodes */,
 				A0D8263E209F54BE00C74FD7 /* Common */,
 				A0D82633209F43B400C74FD7 /* Modules */,
 				A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */,
@@ -231,10 +243,9 @@
 			isa = PBXGroup;
 			children = (
 				A0D8264F209F84FF00C74FD7 /* MarbleRunEntity.swift */,
-				A0D8266120A0ACB200C74FD7 /* MarbleRunElement.swift */,
+				A0D8266120A0ACB200C74FD7 /* ElementEntity.swift */,
 				7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */,
 				7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */,
-				A0C0321620AB121D00C091A0 /* MarbleRunNode.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -384,7 +395,7 @@
 				A0D82637209F495900C74FD7 /* SelectModeWireframe.swift in Sources */,
 				A0D82656209FA65D00C74FD7 /* AREditorProtocols.swift in Sources */,
 				A0D8264D209F5F1400C74FD7 /* MarbleRunListInteractor.swift in Sources */,
-				A0D8266220A0ACB200C74FD7 /* MarbleRunElement.swift in Sources */,
+				A0D8266220A0ACB200C74FD7 /* ElementEntity.swift in Sources */,
 				A0D82603209F3AA700C74FD7 /* ViewController.swift in Sources */,
 				A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */,
 				A0CB293B20AAD71B0012A3C4 /* (null) in Sources */,
@@ -400,6 +411,7 @@
 				A0D82645209F599100C74FD7 /* MarbleRunListProtocols.swift in Sources */,
 				7ED4F92920AAE58D00A4CAEC /* Triple.swift in Sources */,
 				A0D8265820A0971F00C74FD7 /* ARBuilderWireframe.swift in Sources */,
+				A0C0321E20AB1A3F00C091A0 /* ElementNode.swift in Sources */,
 				7ED4F92620AACA6300A4CAEC /* ElementSelectProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

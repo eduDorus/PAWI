@@ -17,7 +17,7 @@ protocol ElementSelectWireframeProtocol : class, ARWireframeProtocol {
 protocol ElementSelectViewProtocol : class {
     var presenter : ElementSelectPresenterProtocol? { get set }
     
-    func add(elements: [MarbleRunElement])
+    func add(elements: [ElementEntity])
 }
 
 protocol ElementSelectPresenterProtocol : class {

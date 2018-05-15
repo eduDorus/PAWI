@@ -6,5 +6,6 @@
 import Foundation
 
 protocol ElementProtocol {
-    func setState()
+    func set(state: ElementState)
+    func getState() -> ElementState
 }
