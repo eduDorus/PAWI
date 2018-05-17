@@ -8,6 +8,8 @@ import SceneKit
 
 class MarbleRunNode : SCNNode {
     
+    var isLocked = false
+    
     override init() {
         super.init()
         addElement(type: 12, location: Triple(0, 0, 0))
@@ -73,10 +75,20 @@ class MarbleRunNode : SCNNode {
         let constraint = SCNBillboardConstraint()
         constraint.freeAxes = SCNBillboardAxis.Y
         constraints = [constraint]
+        isLocked = true
     }
     
     func removeConstraints() {
         constraints = []
+        isLocked = false
+    }
+    
+    func toggleConstraints() {
+        if isLocked {
+            removeConstraints()
+        } else {
+            constraintToCamera()
+        }
     }
     
     

@@ -10,8 +10,9 @@ import ARKit
 class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate {
     
     var presenter: ARBuilderPresenterProtocol?
-    var sceneView: ARSCNView?
+    var subview: ARViewController?
     var marbleRun: MarbleRunNode?
+    var state = ARBuilderState.planeSelection
     
     // MARK: - IBActions
     
@@ -29,8 +30,8 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ARViewController, segue.identifier == "ARSCNViewSegue" {
-            self.sceneView = vc.sceneView
-            self.sceneView?.delegate = self
+            self.subview = vc
+            //self.sceneView?.delegate = self
         }
     }
     
@@ -38,7 +39,7 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     
     func initializeMarbleRun() {
         marbleRun = MarbleRunNode()
-        sceneView?.scene.rootNode.addChildNode(marbleRun!)
+        subview?.sceneView.scene.rootNode.addChildNode(marbleRun!)
     }
 
     func add(element: ElementEntity) {
@@ -59,4 +60,26 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     
     func set(elementAt position: Int, to status: ElementState) {
     }
+    
+    // MARK: - Events
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if state == .planeSelection {
+            let touch = touches.first!
+            let location = touch.location(in: subview?.sceneView)
+            if subview!.selectExistingPlane(location: location) {
+                state = .runPlacement
+                print("here we go")
+            }
+        } else if state == .runPlacement {
+            marbleRun?.toggleConstraints()
+        }
+    }
+
+}
+
+enum ARBuilderState {
+    case planeSelection
+    case runPlacement
+    case buildProcess
 }
