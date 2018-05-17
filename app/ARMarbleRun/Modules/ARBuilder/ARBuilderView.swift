@@ -13,6 +13,9 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
     var state = ARBuilderState.planeSelection
+    override var prefersStatusBarHidden: Bool { // TODO: that's not all yet …
+        return true
+    }
     @IBOutlet var buttonContainer: UIStackView!
     @IBOutlet var previousButton: UIButton!
     @IBOutlet var nextButton: UIButton!
