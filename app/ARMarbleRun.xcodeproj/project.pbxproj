@@ -18,7 +18,7 @@
 		7ED4F92920AAE58D00A4CAEC /* Triple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92820AAE58D00A4CAEC /* Triple.swift */; };
 		7ED4F92B20AAE6AF00A4CAEC /* MarbleRunMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */; };
 		7ED4F92D20AAEB2800A4CAEC /* ElementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92C20AAEB2800A4CAEC /* ElementProtocol.swift */; };
-		7ED4F92F20AAEC9D00A4CAEC /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */; };
+		7ED4F92F20AAEC9D00A4CAEC /* BoundingBoxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92E20AAEC9D00A4CAEC /* BoundingBoxNode.swift */; };
 		A0C0321720AB121D00C091A0 /* MarbleRunNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0321620AB121D00C091A0 /* MarbleRunNode.swift */; };
 		A0C0321920AB15AC00C091A0 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0321820AB15AC00C091A0 /* LocalDataManager.swift */; };
 		A0C0321E20AB1A3F00C091A0 /* ElementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0321D20AB1A3F00C091A0 /* ElementNode.swift */; };
@@ -73,7 +73,7 @@
 		7ED4F92820AAE58D00A4CAEC /* Triple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triple.swift; sourceTree = "<group>"; };
 		7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunMap.swift; sourceTree = "<group>"; };
 		7ED4F92C20AAEB2800A4CAEC /* ElementProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementProtocol.swift; sourceTree = "<group>"; };
-		7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		7ED4F92E20AAEC9D00A4CAEC /* BoundingBoxNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxNode.swift; sourceTree = "<group>"; };
 		A0C0321620AB121D00C091A0 /* MarbleRunNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunNode.swift; sourceTree = "<group>"; };
 		A0C0321820AB15AC00C091A0 /* LocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		A0C0321D20AB1A3F00C091A0 /* ElementNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementNode.swift; sourceTree = "<group>"; };
@@ -142,6 +142,7 @@
 		A0C0321C20AB1A2900C091A0 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				7ED4F92E20AAEC9D00A4CAEC /* BoundingBoxNode.swift */,
 				A0C0321620AB121D00C091A0 /* MarbleRunNode.swift */,
 				A0C0321D20AB1A3F00C091A0 /* ElementNode.swift */,
 			);
@@ -245,7 +246,6 @@
 				A0D8264F209F84FF00C74FD7 /* MarbleRunEntity.swift */,
 				A0D8266120A0ACB200C74FD7 /* ElementEntity.swift */,
 				7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */,
-				7ED4F92E20AAEC9D00A4CAEC /* BoundingBox.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -379,7 +379,7 @@
 				A0D82647209F5EFB00C74FD7 /* MarbleRunListWireframe.swift in Sources */,
 				7ED4F92520AACA6300A4CAEC /* ElementSelectPresenter.swift in Sources */,
 				A0D8266020A09C1000C74FD7 /* ARBuilderInteractor.swift in Sources */,
-				7ED4F92F20AAEC9D00A4CAEC /* BoundingBox.swift in Sources */,
+				7ED4F92F20AAEC9D00A4CAEC /* BoundingBoxNode.swift in Sources */,
 				A0D82639209F4D1200C74FD7 /* SelectModeView.swift in Sources */,
 				A0D82649209F5F0600C74FD7 /* MarbleRunListView.swift in Sources */,
 				7ED4F92720AACA6300A4CAEC /* ElementSelectWireframe.swift in Sources */,
