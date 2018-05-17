@@ -6,12 +6,12 @@
 import Foundation
 import SceneKit
 
-class BoundingBoxNode: SCNNode {
+class BoundingBoxNode: SCNNode, ElementProtocol {
     open let sidelength : CGFloat = 0.05
     private let edgeWidth : CGFloat = 0.001
     private let transparency : CGFloat = 0.3
     private var location = Triple(0, 0, 0)
-    private var state = BoundingBoxState.planned
+    private var state = ElementState.faded
     
     
     init(location: Triple<Int, Int, Int>) {
@@ -43,21 +43,22 @@ class BoundingBoxNode: SCNNode {
         castsShadow = true
     }
     
-    func set(state: BoundingBoxState) {
+    func set(state: ElementState) {
         self.state = state
         switch state {
-        case .planned:
+        case .faded:
             set(color: UIColor.white)
-        case .active:
+        case .highlighted:
             set(color: UIColor.red)
-        case .built:
+        default:
             set(color: UIColor.white)
         }
     }
     
-    func getState() -> BoundingBoxState {
+    func getState() -> ElementState {
         return state
     }
+
     
     func set(location: Triple<Int, Int, Int>) {
         self.location = location
@@ -89,10 +90,4 @@ class BoundingBoxNode: SCNNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-enum BoundingBoxState {
-    case planned
-    case active
-    case built
 }

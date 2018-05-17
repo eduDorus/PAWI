@@ -31,16 +31,39 @@ class MarbleRunNode : SCNNode {
         addChildNode(element)
     }
     
-    // Positions a new BoudingBox at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
-    func addBoundingBox(location: Triple<Int, Int, Int>) {
-        let boundingBox = BoundingBoxNode(location: location)
-        addChildNode(boundingBox)
+    // MARK: - Elements
+    
+    func getElement(at location: Triple<Int, Int, Int>) -> ElementNode? {
+        var elementNode: ElementNode?
+        enumerateChildNodes { (node, _) in
+            if let element = node as? ElementNode, element.location == location {
+                elementNode = element
+            }
+        }
+        return elementNode
     }
     
     func removeElement(at location: Triple<Int, Int, Int>) {
         enumerateChildNodes { (node, _) in
             if let element = node as? ElementNode, element.location == location {
                 element.remove()
+            }
+        }
+    }
+    
+    // MARK: - Bounding Box
+    
+    // Positions a new BoudingBox at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
+    func addBoundingBox(location: Triple<Int, Int, Int>) {
+        let boundingBox = BoundingBoxNode(location: location)
+        addChildNode(boundingBox)
+    }
+    
+    // remove all BoundingBox nodes from the track
+    func removeBoundingBoxes() {
+        enumerateChildNodes { (node, _) in
+            if let box = node as? BoundingBoxNode {
+                box.remove()
             }
         }
     }
@@ -56,18 +79,11 @@ class MarbleRunNode : SCNNode {
         constraints = []
     }
     
-    // remove all BoundingBox nodes from the track
-    func removeBoundingBoxes() {
-        enumerateChildNodes { (node, _) in
-            if let box = node as? BoundingBoxNode {
-                box.remove()
-            }
-        }
-    }
+    
     
     func setRun(to state: ElementState) {
         enumerateChildNodes{ (node, _) in
-            if let element = node as? ElementNode {
+            if let element = node as? ElementProtocol {
                 element.set(state: state)
             }
         }
