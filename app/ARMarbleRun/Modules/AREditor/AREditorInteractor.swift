@@ -36,11 +36,13 @@ class AREditorInteractor : AREditorInteractorProtocol {
         return result
     }
     
-    func buildElement(at location: Triple<Int, Int, Int>) {
-        
+    func buildElement(type: Int, at location: Triple<Int, Int, Int>) {
+        let element = ElementEntity.init(id: type, location: location)
+        marbleRun.elements.append(element)
     }
     
     func removeElement(at location: Triple<Int, Int, Int>) {
+        marbleRun.removeElement(at: location)
     }
     
     func selectElement(at location: Triple<Int, Int, Int>) {
@@ -51,6 +53,7 @@ class AREditorInteractor : AREditorInteractorProtocol {
     }
     
     func persist() {
-        
+        let dataManager = MarbleRunDataManager.init()
+        dataManager.persist(marbleRun)
     }
 }

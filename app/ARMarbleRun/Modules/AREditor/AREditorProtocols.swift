@@ -17,13 +17,12 @@ protocol AREditorWireframeProtocol : class, ARWireframeProtocol {
 protocol AREditorViewProtocol : class {
     var presenter : AREditorPresenterProtocol? { get set }
     
-    func add(element: ElementEntity)
-    func add(elements: [ElementEntity])
-    func remove(elementAt position: Int)
-    func removeAllElements()
-    func removeAllElemetns(with status: ElementState)
-    func set(elementAt position: Int, to status: ElementState)
-    func set(elementAt position: Int, to orientation: Int)
+    func addElement(type: Int, at position: Triple<Int, Int, Int>)
+    func selectElement(at position: Triple<Int, Int, Int>)
+    func removeElement(at position: Triple<Int, Int, Int>)
+    
+    func addBoundingBoxes(at positions: Set<Triple<Int, Int, Int>>)
+    func removeBoundingBoxes()
 }
 
 protocol AREditorPresenterProtocol : class {
@@ -46,7 +45,7 @@ protocol AREditorPresenterProtocol : class {
 
 protocol AREditorInteractorProtocol : class {
     func getPossiblePositions() -> Set<Triple<Int, Int, Int>>
-    func buildElement(at location: Triple<Int, Int, Int>)
+    func buildElement(type: Int, at location: Triple<Int, Int, Int>)
     func removeElement(at location: Triple<Int, Int, Int>)
     func selectElement(at location: Triple<Int, Int, Int>)
     func rotateElement(to direction: RotationDirection)

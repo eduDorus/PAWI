@@ -30,6 +30,14 @@ class MarbleRunEntity : NSObject, NSCoding {
         return foundElement
     }
     
+    func removeElement(at location: Triple<Int, Int, Int>) {
+        for (index, element) in elements.enumerated() {
+            if element.location == location {
+                elements.remove(at: index)
+            }
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
         self.elements = aDecoder.decodeObject(forKey: "elements") as? [ElementEntity] ?? []

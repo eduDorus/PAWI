@@ -8,8 +8,10 @@ import UIKit
 import ARKit
 
 class AREditorView : UIViewController, AREditorViewProtocol {
+    
     @IBOutlet weak var sceneView: ARSCNView!
     var status: EditorStatus = .show
+    var marbleRun: MarbleRunNode = MarbleRunNode.init()
 
     
     var presenter: AREditorPresenterProtocol?
@@ -109,7 +111,6 @@ class AREditorView : UIViewController, AREditorViewProtocol {
         
         guard let node = hitTestResults.first?.node else {return}
         
-        // TODO: Check type of node -> if BoudingBox create cube else select box
         if let element = node as? ElementNode {
             presenter?.selectElement(at: element.getLocation())
         }
@@ -152,33 +153,31 @@ class AREditorView : UIViewController, AREditorViewProtocol {
     
     // MARK: - AREditorViewProtocol
 
-    func add(element: ElementEntity) {
-        
+    func addElement(type: Int, at position: Triple<Int, Int, Int>) {
+        marbleRun.addElement(type: type, location: position)
     }
     
-    func add(elements: [ElementEntity]) {
-        
+    func selectElement(at position: Triple<Int, Int, Int>) {
+        // TODO: Unhighlight the previouse selected
+        let element = marbleRun.getElement(at: position)
+        element?.set(state: .highlighted)
     }
     
-    func remove(elementAt position: Int) {
-        
+    func removeElement(at position: Triple<Int, Int, Int>) {
+        marbleRun.removeElement(at: position)
     }
     
-    func removeAllElements() {
-        
+    func addBoundingBoxes(at positions: Set<Triple<Int, Int, Int>>) {
+        for position in positions {
+            marbleRun.addBoundingBox(location: position)
+        }
     }
     
-    func removeAllElemetns(with status: ElementState) {
-        
+    func removeBoundingBoxes() {
+        marbleRun.removeBoundingBoxes()
     }
     
-    func set(elementAt position: Int, to status: ElementState) {
-        
-    }
     
-    func set(elementAt position: Int, to orientation: Int) {
-        
-    }
 }
 
 enum EditorStatus {
