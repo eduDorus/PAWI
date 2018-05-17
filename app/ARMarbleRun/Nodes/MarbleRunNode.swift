@@ -7,42 +7,13 @@ import Foundation
 import SceneKit
 
 class MarbleRunNode : SCNNode {
-    let map = MarbleRunMap<ElementProtocol>()
     
     override init() {
         super.init()
-        let element = addElement(x: 0, y: 0, z: 0, type: 0)
-        element.set(state: .highlighted)
-        element.name = "element"
-        //loadTrack(number: currentTrack)
+        addElement(type: 12, location: Triple(0, 0, 0))
     }
     
-    // Positions a new BoundingBox at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
-    @discardableResult
-    func addElement(x: Int, y: Int, z: Int, type: Int) -> ElementNode {
-        let element = ElementNode(id: type, location: Triple(x, y, z))
-        let pos = SCNVector3(CGFloat(x) * element.sidelength, CGFloat(y) * element.sidelength, CGFloat(z) * element.sidelength)
-        element.set(position: pos)
-        addChildNode(element)
-        map.add(element: element, atLocation: Triple(x, y, z))
-        return element
-    }
-    
-    // Positions a new BoundingBox at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
-    @discardableResult
-    func addBoundingBox(x: Int, y: Int, z: Int) -> BoundingBoxNode {
-        let boundingBox = BoundingBoxNode()
-        let pos = SCNVector3(CGFloat(x) * element.sidelength, CGFloat(y) * element.sidelength, CGFloat(z) * element.sidelength)
-        boundingBox.set(position: pos)
-        addChildNode(boundingBox)
-        map.add(element: boundingBox, atLocation: Triple(x, y, z))
-        return boundingBox
-    }
-    
-    func removeElement(element: ElementNode) {
-        map.removeElement(element: element)
-        element.remove()
-    }
+    // MARK: - Setters
     
     func set(position vector: SCNVector3) {
         position = vector
@@ -50,6 +21,28 @@ class MarbleRunNode : SCNNode {
     
     func set(rotation vector: SCNVector3) {
         eulerAngles = vector
+    }
+    
+    // MARK: - Logic
+    
+    // Positions a new Element at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
+    func addElement(type: Int, location: Triple<Int, Int, Int>) {
+        let element = ElementNode(id: type, location: location)
+        addChildNode(element)
+    }
+    
+    // Positions a new BoudingBox at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
+    func addBoundingBox(location: Triple<Int, Int, Int>) {
+        let boundingBox = BoundingBoxNode(location: location)
+        addChildNode(boundingBox)
+    }
+    
+    func removeElement(at location: Triple<Int, Int, Int>) {
+        enumerateChildNodes { (node, _) in
+            if let element = node as? ElementNode, element.location == location {
+                element.remove()
+            }
+        }
     }
     
     // Makes the track always facing the camera by rotating around the Y axis
@@ -64,43 +57,22 @@ class MarbleRunNode : SCNNode {
     }
     
     // remove all BoundingBox nodes from the track
-    private func removeBoundingBoxes() {
-        map.forEach { (position, element) in
-            if element.name != "boundingBox" {
-                element.remove()
-                map.removeElement(at: position)
+    func removeBoundingBoxes() {
+        enumerateChildNodes { (node, _) in
+            if let box = node as? BoundingBoxNode {
+                box.remove()
             }
         }
     }
     
-    // remove all BoundingBox nodes from the track
-    private func clearTrack() {
-        map.forEach { (position, cube) in
-            if cube.name != "boundingBox" {
-                cube.remove()
-                map.removeElement(at: position)
+    func setRun(to state: ElementState) {
+        enumerateChildNodes{ (node, _) in
+            if let element = node as? ElementNode {
+                element.set(state: state)
             }
         }
     }
-    
-    private func hideTrack() {
-        map.forEach { (_, element) in
-            element.hide()
-        }
-    }
-    
-    
-    func getMap() -> MarbleRunMap<ElementNode> {
-        return map
-    }
-    
-    
-    private func clearHighlights() {
-        map.forEach { (_, element) in
-            element.set(state: .normal)
-        }
-    }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

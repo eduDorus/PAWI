@@ -5,7 +5,7 @@
 
 import Foundation
 
-protocol ElementProtocol : Hashable {
+protocol ElementProtocol {
     func set(state: ElementState)
     func getState() -> ElementState
 }

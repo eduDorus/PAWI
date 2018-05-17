@@ -4,7 +4,6 @@
 //
 
 class ElementEntity : ElementProtocol {
-    
     public var location : Triple<Int, Int, Int>
     var state = ElementState.normal
     public var id = 12

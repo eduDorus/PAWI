@@ -10,7 +10,14 @@ class BoundingBoxNode: SCNNode {
     open let sidelength : CGFloat = 0.05
     private let edgeWidth : CGFloat = 0.001
     private let transparency : CGFloat = 0.3
+    private var location = Triple(0, 0, 0)
     private var state = BoundingBoxState.planned
+    
+    
+    init(location: Triple<Int, Int, Int>) {
+        super.init()
+        self.set(location: location)
+    }
     
     override public init() {
         super.init()
@@ -36,30 +43,7 @@ class BoundingBoxNode: SCNNode {
         castsShadow = true
     }
     
-    convenience init(with color: UIColor) {
-        self.init()
-        set(color: color)
-    }
-    
-    public func set(color: UIColor) {
-        self.geometry?.firstMaterial?.diffuse.contents = color
-        self.geometry?.firstMaterial?.specular.contents = color
-        for child in self.childNodes {
-            child.geometry?.firstMaterial?.diffuse.contents = color
-            child.geometry?.firstMaterial?.emission.contents = color
-        }
-    }
-    
-    public func set(position vector: SCNVector3) {
-        position = vector
-        position.y = vector.y + Float(sidelength / 2)
-    }
-    
-    public func set(rotation vector: SCNVector3) {
-        eulerAngles = vector
-    }
-    
-    public func set(state: BoundingBoxState) {
+    func set(state: BoundingBoxState) {
         self.state = state
         switch state {
         case .planned:
@@ -73,20 +57,20 @@ class BoundingBoxNode: SCNNode {
         }
     }
     
-    public func getState() -> BoundingBoxState {
+    func getState() -> BoundingBoxState {
         return state
     }
     
-    func set(position vector: SCNVector3) {
-        let pos = SCNVector3(CGFloat(vector.x) * self.sidelength, CGFloat(vector.y) * self.sidelength, CGFloat(vector.z) * self.sidelength)
-        self.position = pos
+    func set(location: Triple<Int, Int, Int>) {
+        self.location = location
+        self.position = SCNVector3(CGFloat(self.location.values.0) * self.sidelength, CGFloat(self.location.values.1) * self.sidelength, CGFloat(self.location.values.2) * self.sidelength)
     }
     
-    func getPosition() -> SCNVector3 {
-        return self.position
+    func getLocation() -> Triple<Int, Int, Int> {
+        return self.location
     }
     
-    public func remove() {
+    func remove() {
         // apparently it's not enough for the node to be removed itself, all its child nodes have to be removed as well
         // maybe there is another way, a different way to build these node so to make it work simpler
         enumerateChildNodes { (node, stop) in
@@ -95,17 +79,12 @@ class BoundingBoxNode: SCNNode {
         removeFromParentNode()
     }
     
-    func hide() {
-        self.geometry?.firstMaterial?.transparency = 0.1
-        enumerateChildNodes { (node, _) in
-            node.geometry?.firstMaterial?.transparency = 0.1
-        }
-    }
-    
-    func show() {
-        self.geometry?.firstMaterial?.transparency = 0.8
-        enumerateChildNodes { (node, _) in
-            node.geometry?.firstMaterial?.transparency = 1
+    private func set(color: UIColor) {
+        self.geometry?.firstMaterial?.diffuse.contents = color
+        self.geometry?.firstMaterial?.specular.contents = color
+        for child in self.childNodes {
+            child.geometry?.firstMaterial?.diffuse.contents = color
+            child.geometry?.firstMaterial?.emission.contents = color
         }
     }
     
