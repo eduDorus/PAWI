@@ -20,6 +20,16 @@ class MarbleRunEntity : NSObject, NSCoding {
         self.elements = []
     }
     
+    func getElement(at location: Triple<Int, Int, Int>) -> ElementEntity? {
+        var foundElement: ElementEntity?
+        for element in elements {
+            if element.location == location {
+                foundElement = element
+            }
+        }
+        return foundElement
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
         self.elements = aDecoder.decodeObject(forKey: "elements") as? [ElementEntity] ?? []
