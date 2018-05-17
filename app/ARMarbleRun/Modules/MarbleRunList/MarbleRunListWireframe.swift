@@ -37,9 +37,6 @@ class MarbleRunListWireframe : MarbleRunListWireframeProtocol {
     
     func presentARView(from view: MarbleRunListViewProtocol, with marblerun: MarbleRunEntity) {
         let arview = mode.wireframe().createModule(of: marblerun)
-        // TODO: push the view controller
-        if let sourceview = view as? UIViewController {
-            sourceview.present(arview, animated: true, completion: nil)
-        }
+        UIApplication.shared.keyWindow?.rootViewController = arview
     }
 }

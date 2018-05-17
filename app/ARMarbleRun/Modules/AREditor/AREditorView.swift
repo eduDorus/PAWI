@@ -7,15 +7,16 @@ import Foundation
 import UIKit
 import ARKit
 
-class AREditorView : UIViewController, AREditorViewProtocol {
-    
-    @IBOutlet weak var sceneView: ARSCNView!
-    var status: EditorStatus = .show
-    var marbleRun: MarbleRunNode = MarbleRunNode.init()
-
+class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     
     var presenter: AREditorPresenterProtocol?
-    
+    var subview: ARViewController?
+    var marbleRun: MarbleRunNode?
+    var status = EditorStatus.show
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
     // MARK: - IBActions
     
     @IBAction func didPressCancel(_ sender: Any) {
@@ -28,20 +29,6 @@ class AREditorView : UIViewController, AREditorViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
-        //sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        sceneView.debugOptions  = [.showConstraints, .showLightExtents, ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-        
-        // Set a new scene to the view
-        sceneView.scene = SCNScene()
-        
-        // Set lighting
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.automaticallyUpdatesLighting = true
-        
         // Add functionality
         addTapGestureToSceneView()
         addLongTapGestureToSceneView()
@@ -50,39 +37,22 @@ class AREditorView : UIViewController, AREditorViewProtocol {
         presenter?.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = ARWorldTrackingConfiguration.PlaneDetection.horizontal
-        
-        // Run the view's session
-        sceneView.session.run(configuration)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ARViewController, segue.identifier == "ARSCNViewSegue" {
+            self.subview = vc
+        }
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Pause the view's session
-        sceneView.session.pause()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
-    
+
     // Tap gestures
     func addTapGestureToSceneView() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
-        sceneView.addGestureRecognizer(tapGestureRecognizer)
+        subview?.sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func addLongTapGestureToSceneView() {
         let longTapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
-        sceneView.addGestureRecognizer(longTapGestureRecognizer)
+        subview?.sceneView.addGestureRecognizer(longTapGestureRecognizer)
     }
     
     func addSwipeGestureToSceneView() {
@@ -98,18 +68,18 @@ class AREditorView : UIViewController, AREditorViewProtocol {
         let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
         swipeDownGesture.direction = .down
         
-        sceneView.addGestureRecognizer(swipeLeftGesture)
-        sceneView.addGestureRecognizer(swipeRightGesture)
-        sceneView.addGestureRecognizer(swipeUpGesture)
-        sceneView.addGestureRecognizer(swipeDownGesture)
+        subview?.sceneView.addGestureRecognizer(swipeLeftGesture)
+        subview?.sceneView.addGestureRecognizer(swipeRightGesture)
+        subview?.sceneView.addGestureRecognizer(swipeUpGesture)
+        subview?.sceneView.addGestureRecognizer(swipeDownGesture)
     }
     
     @objc
     func didTap(_ recognizer: UIGestureRecognizer) {
-        let tapLocation = recognizer.location(in: sceneView)
-        let hitTestResults = sceneView.hitTest(tapLocation)
+        let tapLocation = recognizer.location(in: subview?.sceneView)
+        let hitTestResults = subview?.sceneView.hitTest(tapLocation)
         
-        guard let node = hitTestResults.first?.node else {return}
+        guard let node = hitTestResults?.first?.node else {return}
         
         if let element = node as? ElementNode {
             presenter?.selectElement(at: element.getLocation())
@@ -122,10 +92,10 @@ class AREditorView : UIViewController, AREditorViewProtocol {
     
     @objc
     func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
-        let longPressLocation = recognizer.location(in: sceneView)
-        let hitTestResults = sceneView.hitTest(longPressLocation)
+        let longPressLocation = recognizer.location(in: subview?.sceneView)
+        let hitTestResults = subview?.sceneView.hitTest(longPressLocation)
         
-        guard let node = hitTestResults.first?.node else { return }
+        guard let node = hitTestResults?.first?.node else { return }
         
         // TODO: Test if not in add mode
         if let element = node as? ElementNode {
@@ -135,7 +105,7 @@ class AREditorView : UIViewController, AREditorViewProtocol {
     
     @objc
     func didSwipe(_ gesture: UISwipeGestureRecognizer) {
-        let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
+        let currentAngle = subview?.sceneView.session.currentFrame?.camera.eulerAngles.y
         
         if gesture.direction == .right {
             presenter?.rotateElement(to: .right)
@@ -154,27 +124,27 @@ class AREditorView : UIViewController, AREditorViewProtocol {
     // MARK: - AREditorViewProtocol
 
     func addElement(type: Int, at position: Triple<Int, Int, Int>) {
-        marbleRun.addElement(type: type, location: position)
+        marbleRun?.addElement(type: type, location: position)
     }
     
     func selectElement(at position: Triple<Int, Int, Int>) {
         // TODO: Unhighlight the previouse selected
-        let element = marbleRun.getElement(at: position)
+        let element = marbleRun?.getElement(at: position)
         element?.set(state: .highlighted)
     }
     
     func removeElement(at position: Triple<Int, Int, Int>) {
-        marbleRun.removeElement(at: position)
+        marbleRun?.removeElement(at: position)
     }
     
     func addBoundingBoxes(at positions: Set<Triple<Int, Int, Int>>) {
         for position in positions {
-            marbleRun.addBoundingBox(location: position)
+            marbleRun?.addBoundingBox(location: position)
         }
     }
     
     func removeBoundingBoxes() {
-        marbleRun.removeBoundingBoxes()
+        marbleRun?.removeBoundingBoxes()
     }
     
     

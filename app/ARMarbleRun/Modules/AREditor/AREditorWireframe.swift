@@ -42,6 +42,6 @@ class AREditorWireframe : AREditorWireframeProtocol, ARWireframeProtocol {
     func presentSelectMode() {
     }
     
-    func changeMode(with view: ARSCNView) {
+    func changeMode(with run: MarbleRunEntity?) {
     }
 }

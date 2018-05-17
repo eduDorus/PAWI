@@ -30,10 +30,13 @@ class ARBuilderPresenter : ARBuilderPresenterProtocol {
     }
     
     func didPressChangeModeAction(from sceneView: ARSCNView) {
-        wireframe?.changeMode(with: sceneView)
+        if let run = interactor?.marbleRun {
+            wireframe?.changeMode(with: run)
+        }
     }
     
     func didPressLeaveAction() {
+        wireframe?.presentSelectMode()
     }
     
 }

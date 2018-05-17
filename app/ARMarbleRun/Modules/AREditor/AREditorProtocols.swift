@@ -11,11 +11,12 @@ protocol AREditorWireframeProtocol : class, ARWireframeProtocol {
     
     func presentSelectElement()
     func presentSelectMode()
-    func changeMode(with view: ARSCNView)
+    func changeMode(with run: MarbleRunEntity?)
 }
 
 protocol AREditorViewProtocol : class {
     var presenter : AREditorPresenterProtocol? { get set }
+    var subview : ARViewController? { get set }
     
     func addElement(type: Int, at position: Triple<Int, Int, Int>)
     func selectElement(at position: Triple<Int, Int, Int>)

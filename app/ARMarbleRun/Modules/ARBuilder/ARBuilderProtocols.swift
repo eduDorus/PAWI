@@ -11,11 +11,12 @@ protocol ARBuilderWireframeProtocol : class, ARWireframeProtocol {
     static func createARBuilderModule(of marblerun: MarbleRunEntity) -> UIViewController
     
     func presentSelectMode()
-    func changeMode(with view: ARSCNView)
+    func changeMode(with run: MarbleRunEntity)
 }
 
 protocol ARBuilderViewProtocol : class {
     var presenter : ARBuilderPresenterProtocol? { get set }
+    var subview : ARViewController? { get set }
     
     func initializeMarbleRun()
     func add(element: ElementEntity)
@@ -34,7 +35,7 @@ protocol ARBuilderPresenterProtocol : class {
     func didPressNext()
     func didPressPrevious()
     func didPressRestartAction()
-    func didPressChangeModeAction(from sceneView: ARSCNView)
+    func didPressChangeModeAction(from sceneview: ARSCNView)
     func didPressLeaveAction()
 }
 

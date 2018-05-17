@@ -36,11 +36,13 @@ class ARBuilderWireframe : ARBuilderWireframeProtocol, ARWireframeProtocol {
     }
     
     func presentSelectMode() {
-        //code
+        let selectMode = SelectModeWireframe.createSelectModeModule()
+        UIApplication.shared.keyWindow?.rootViewController = selectMode
     }
     
-    func changeMode(with view: ARSCNView) {
-        //code
+    func changeMode(with marblerun: MarbleRunEntity) {
+        let arview = AREditorWireframe.createAREditorModule(of: marblerun)
+        UIApplication.shared.keyWindow?.rootViewController = arview
     }
 
 }
