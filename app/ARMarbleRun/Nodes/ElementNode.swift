@@ -26,4 +26,13 @@ class ElementNode : SCNNode, ElementProtocol {
     func getPosition() -> SCNVector3 {
         return self.position
     }
+    
+    public func remove() {
+        // apparently it's not enough for the node to be removed itself, all its child nodes have to be removed as well
+        // maybe there is another way, a different way to build these node so to make it work simpler
+        enumerateChildNodes { (node, stop) in
+            node.removeFromParentNode()
+        }
+        removeFromParentNode()
+    }
 }
