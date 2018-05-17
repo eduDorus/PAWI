@@ -20,7 +20,7 @@ class MarbleRunNode : SCNNode {
     // Positions a new BoundingBox at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
     @discardableResult
     func addElement(x: Int, y: Int, z: Int, type: Int) -> ElementNode {
-        let element = ElementNode()
+        let element = ElementNode(id: type, location: Triple(x, y, z))
         let pos = SCNVector3(CGFloat(x) * element.sidelength, CGFloat(y) * element.sidelength, CGFloat(z) * element.sidelength)
         element.set(position: pos)
         addChildNode(element)

@@ -5,12 +5,15 @@
 
 class ElementEntity : ElementProtocol {
     
-    var x = 1
-    var y = 2
-    var z = 0
+    public var location : Triple<Int, Int, Int>
     var state = ElementState.normal
-    var name = "Typ_01"
+    public var id = 12
     var orientation = 5
+    
+    init(id: Int, location: Triple<Int, Int, Int>) {
+        self.id = id
+        self.location = location
+    }
 
     func set(state: ElementState) {
         self.state = state

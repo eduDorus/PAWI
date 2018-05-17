@@ -8,7 +8,16 @@ import SceneKit
 
 class ElementNode : SCNNode, ElementProtocol {
     var state = ElementState.normal
+    var id = 12
+    var location = Triple(0, 0, 0)
     let sidelength: CGFloat = 0.05
+    
+    init(id: Int, location: Triple<Int, Int, Int>) {
+        super.init()
+        self.id = id
+        self.location = location
+        setGeometry()
+    }
     
     func set(state: ElementState) {
         self.state = state
@@ -34,5 +43,21 @@ class ElementNode : SCNNode, ElementProtocol {
             node.removeFromParentNode()
         }
         removeFromParentNode()
+    }
+    
+    private func setGeometry() {
+        if let cubes = SCNScene(named: "art.scnassets/cuboro-set.scn")?.rootNode {
+            if let cube = cubes.childNodes[0].childNodes.filter({ $0.name == "instance_\(id)" }).first {
+                cube.position = SCNVector3(-0.025,-0.025,0.025)
+                cube.scale = SCNVector3(x: 0.00127, y: 0.00127, z: 0.00127)
+                addChildNode(cube)
+            }
+        } else {
+            fatalError("cube \(id) has not been found")
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

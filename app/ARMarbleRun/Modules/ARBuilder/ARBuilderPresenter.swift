@@ -12,6 +12,8 @@ class ARBuilderPresenter : ARBuilderPresenterProtocol {
     var interactor: ARBuilderInteractorProtocol?
     
     func viewDidLoad() {
+        let mr = interactor?.retrieveMarbleRun()
+        view?.add(elements: mr!)  // WTF? why optional
     }
     
     func didPressMenuButton() {

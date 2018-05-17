@@ -20,6 +20,7 @@ class ARBuilderWireframe : ARBuilderWireframeProtocol, ARWireframeProtocol {
             presenter.view = view
             presenter.wireframe = wireframe
             presenter.interactor = interactor
+            interactor.marbleRun = marblerun
             
             return controller
         }

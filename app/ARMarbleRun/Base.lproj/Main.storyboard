@@ -14,7 +14,7 @@
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARMarbleRun" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="ARViewController" customModule="ARMarbleRun" customModuleProvider="target" sceneMemberID="viewController">
                     <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BrB-h1-WRS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="embed" id="z08-RH-b7B"/>
+                                    <segue destination="BV1-FR-VrT" kind="embed" identifier="ARSCNViewSegue" id="z08-RH-b7B"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yh4-Uo-ocP">
@@ -186,7 +186,7 @@
         <!--Editor View-->
         <scene sceneID="kCk-sT-Oau">
             <objects>
-                <viewController id="dXx-W0-vKx" customClass="AREditorView" customModule="ARMarbleRun" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AREditorViewController" id="dXx-W0-vKx" customClass="AREditorView" customModule="ARMarbleRun" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jIb-BS-Lwr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,7 +195,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="embed" id="rf1-Jy-Gqf"/>
+                                    <segue destination="BV1-FR-VrT" kind="embed" identifier="ARSCNViewSegue" id="rf1-Jy-Gqf"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OT8-9F-TZt">

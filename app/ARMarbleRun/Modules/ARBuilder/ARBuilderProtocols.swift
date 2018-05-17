@@ -17,6 +17,7 @@ protocol ARBuilderWireframeProtocol : class, ARWireframeProtocol {
 protocol ARBuilderViewProtocol : class {
     var presenter : ARBuilderPresenterProtocol? { get set }
     
+    func initializeMarbleRun()
     func add(element: ElementEntity)
     func add(elements: [ElementEntity])
     func remove(elementAt position: Int)
@@ -37,6 +38,8 @@ protocol ARBuilderPresenterProtocol : class {
 }
 
 protocol ARBuilderInteractorProtocol : class {
+    var marbleRun : MarbleRunEntity? { get set }
     func nextBuildingStep()
     func previousBuildingStep()
+    func retrieveMarbleRun() -> [ElementEntity]
 }
