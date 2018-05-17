@@ -13,6 +13,9 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
     var state = ARBuilderState.planeSelection
+    @IBOutlet var buttonContainer: UIStackView!
+    @IBOutlet var previousButton: UIButton!
+    @IBOutlet var nextButton: UIButton!
     
     // MARK: - IBActions
     
@@ -69,6 +72,7 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
             let location = touch.location(in: subview?.sceneView)
             if subview!.selectExistingPlane(location: location) {
                 state = .runPlacement
+                buttonContainer.isHidden = false
                 print("here we go")
             }
         } else if state == .runPlacement {

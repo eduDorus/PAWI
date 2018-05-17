@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -42,32 +43,44 @@
                                     <segue destination="BV1-FR-VrT" kind="embed" identifier="ARSCNViewSegue" id="z08-RH-b7B"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yh4-Uo-ocP">
-                                <rect key="frame" x="0.0" y="602" width="375" height="65"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHL-F4-mlW">
+                                <rect key="frame" x="0.0" y="587" width="375" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRb-Ae-qfU">
-                                        <rect key="frame" x="78" y="17" width="59" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRb-Ae-qfU">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="40"/>
                                         <state key="normal" title="Previous"/>
                                         <connections>
                                             <action selector="didPressPrevious:" destination="lO3-wu-scR" eventType="touchUpInside" id="xnG-1a-QG2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U21-03-YBp">
-                                        <rect key="frame" x="264" y="17" width="32" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U21-03-YBp">
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
                                         <state key="normal" title="Next"/>
                                         <connections>
                                             <action selector="didPressNext:" destination="lO3-wu-scR" eventType="touchUpInside" id="O4z-hb-HdR"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                            </view>
+                                <constraints>
+                                    <constraint firstItem="U21-03-YBp" firstAttribute="leading" secondItem="AHL-F4-mlW" secondAttribute="centerX" id="DIr-6S-CzQ"/>
+                                    <constraint firstAttribute="height" constant="40" id="E6l-qk-amY"/>
+                                    <constraint firstItem="cRb-Ae-qfU" firstAttribute="trailing" secondItem="AHL-F4-mlW" secondAttribute="centerX" id="reT-rd-rgu"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eR1-Gq-JKJ" firstAttribute="bottom" secondItem="AHL-F4-mlW" secondAttribute="bottom" constant="40" id="C2C-8O-fKz"/>
+                            <constraint firstItem="eR1-Gq-JKJ" firstAttribute="trailing" secondItem="AHL-F4-mlW" secondAttribute="trailing" id="rgZ-bh-oJv"/>
+                            <constraint firstItem="AHL-F4-mlW" firstAttribute="leading" secondItem="eR1-Gq-JKJ" secondAttribute="leading" id="vxD-f2-GSP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="eR1-Gq-JKJ"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonContainer" destination="AHL-F4-mlW" id="ZVu-5a-oUz"/>
+                        <outlet property="nextButton" destination="U21-03-YBp" id="RWs-sN-tQU"/>
+                        <outlet property="previousButton" destination="cRb-Ae-qfU" id="MMm-q7-upM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2X-Xg-auQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -225,6 +238,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rf1-Jy-Gqf"/>
+        <segue reference="z08-RH-b7B"/>
     </inferredMetricsTieBreakers>
 </document>
