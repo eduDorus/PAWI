@@ -48,10 +48,8 @@ class BoundingBoxNode: SCNNode {
         switch state {
         case .planned:
             set(color: UIColor.white)
-            hide()
         case .active:
             set(color: UIColor.red)
-            show()
         case .built:
             set(color: UIColor.white)
         }
