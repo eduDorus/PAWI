@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import ARKit
 
 class ARBuilderPresenter : ARBuilderPresenterProtocol {
     
@@ -16,19 +17,23 @@ class ARBuilderPresenter : ARBuilderPresenterProtocol {
         view?.add(elements: mr!)  // WTF? why optional
     }
     
-    func didPressMenuButton() {
-    }
-    
     func didPressNext() {
-        interactor?.nextBuildingStep()
+        interactor?.nextStep()
     }
     
     func didPressPrevious() {
-        interactor?.previousBuildingStep()
+        interactor?.previousStep()
     }
     
     func didPressRestartAction() {
+        interactor?.resetGuide()
     }
     
+    func didPressChangeModeAction(from sceneView: ARSCNView) {
+        wireframe?.changeMode(with: sceneView)
+    }
+    
+    func didPressLeaveAction() {
+    }
     
 }

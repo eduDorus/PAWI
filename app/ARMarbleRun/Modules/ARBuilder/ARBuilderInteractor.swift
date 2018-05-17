@@ -17,11 +17,15 @@ class ARBuilderInteractor : ARBuilderInteractorProtocol {
         }
     }
     
-    func nextBuildingStep() {
+    func resetGuide() {
+        print("restart")
+    }
+    
+    func nextStep() {
         print("next")
     }
     
-    func previousBuildingStep() {
+    func previousStep() {
         print("previous")
     }
 }

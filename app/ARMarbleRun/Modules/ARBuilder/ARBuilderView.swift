@@ -31,7 +31,6 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     }
     
     @IBAction func didPressMenu(_ sender: Any) {
-        presenter?.didPressMenuButton()
         menuAction()
     }
     
@@ -88,24 +87,24 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
         }
     }
     
-    @IBAction func menuAction() {
+    func menuAction() {
         // Create the action buttons for the alert.
-        let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
-                                            // Respond to user selection of the action.
+        let restartAction = UIAlertAction(title: "Restart Guide", style: .default) { (action) in
+            self.presenter?.didPressRestartAction()
         }
         let changeModeAction = UIAlertAction(title: "Change to Build Mode", style: .default) { (action) in
-                                            // Respond to user selection of the action.
+            if let sceneView = self.subview?.sceneView {
+                self.presenter?.didPressChangeModeAction(from: sceneView)
+            }
         }
-        let leaveAction = UIAlertAction(title: "Back to Menu", style: .destructive) { (action) in
-                                            // Respond to user selection of the action.
+        let leaveAction = UIAlertAction(title: "Back to Homescreen", style: .destructive) { (action) in
+            self.presenter?.didPressLeaveAction()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-                                            // Respond to user selection of the action.
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         // Create and configure the alert controller.
         let alert = UIAlertController(title: "Menu", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(saveAction)
+        alert.addAction(restartAction)
         alert.addAction(changeModeAction)
         alert.addAction(leaveAction)
         alert.addAction(cancelAction)

@@ -31,15 +31,17 @@ protocol ARBuilderPresenterProtocol : class {
     var interactor : ARBuilderInteractorProtocol? { get set }
     
     func viewDidLoad()
-    func didPressMenuButton()
     func didPressNext()
     func didPressPrevious()
     func didPressRestartAction()
+    func didPressChangeModeAction(from sceneView: ARSCNView)
+    func didPressLeaveAction()
 }
 
 protocol ARBuilderInteractorProtocol : class {
     var marbleRun : MarbleRunEntity? { get set }
-    func nextBuildingStep()
-    func previousBuildingStep()
+    func resetGuide()
+    func nextStep()
+    func previousStep()
     func retrieveMarbleRun() -> [ElementEntity]
 }
