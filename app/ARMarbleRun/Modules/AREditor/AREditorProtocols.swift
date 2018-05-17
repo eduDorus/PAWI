@@ -38,18 +38,25 @@ protocol AREditorPresenterProtocol : class {
     func didPressGoToLaunchscreen()
     func didPressSaveAction()
     
-    func didSwipe(in direction: UISwipeGestureRecognizerDirection)
-    func didTap(on element: ElementEntity)
-    func didLongTap(on element: ElementEntity)
+    func buildElement(at location: Triple<Int, Int, Int>)
+    func removeElement(at location: Triple<Int, Int, Int>)
+    func selectElement(at location: Triple<Int, Int, Int>)
+    func rotateElement(to direction: RotationDirection)
 }
 
 protocol AREditorInteractorProtocol : class {
-    func getPossiblePositions()
-    func buildElement()
-    func removeElement()
-    func selectElement()
-    func clearSelectedElement()
-    func turnElement()
+    func getPossiblePositions() -> Set<Triple<Int, Int, Int>>
+    func buildElement(at location: Triple<Int, Int, Int>)
+    func removeElement(at location: Triple<Int, Int, Int>)
+    func selectElement(at location: Triple<Int, Int, Int>)
+    func rotateElement(to direction: RotationDirection)
     func persist()
+}
+
+enum RotationDirection {
+    case left
+    case right
+    case up
+    case down
 }
 

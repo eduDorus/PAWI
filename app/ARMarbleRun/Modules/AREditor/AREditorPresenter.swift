@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-class AREditorPresenter : AREditorPresenterProtocol {
+class AREditorPresenter : AREditorPresenterProtocol {    
     var wireframe: AREditorWireframeProtocol?
     weak var view: AREditorViewProtocol?
     var interactor: AREditorInteractorProtocol?
@@ -16,19 +16,15 @@ class AREditorPresenter : AREditorPresenterProtocol {
     }
     
     func didPressMenuButton() {
-        // TODO: This should open the menu
+        
     }
     
     func didPressAddButton() {
-        // TODO: Open ElementSelect View
+        
     }
     
     func didPressCancelButton() {
-        interactor?.clearSelectedElement()
-    }
-    
-    func didPressSaveAction(with marblerun: MarbleRunEntity) {
-        interactor?.persist()
+        
     }
     
     func didPressGoToLaunchscreen() {
@@ -39,15 +35,24 @@ class AREditorPresenter : AREditorPresenterProtocol {
         
     }
     
-    func didSwipe(in direction: UISwipeGestureRecognizerDirection) {
+    func getPossiblePositions() {
         
     }
     
-    func didTap(on element: ElementEntity) {
-        
+    func buildElement(at location: Triple<Int, Int, Int>) {
+        interactor?.buildElement(at: location)
     }
     
-    func didLongTap(on element: ElementEntity) {
-        
+    func removeElement(at location: Triple<Int, Int, Int>) {
+        interactor?.removeElement(at: location)
     }
+    
+    func selectElement(at location: Triple<Int, Int, Int>) {
+        interactor?.selectElement(at: location)
+    }
+    
+    func rotateElement(to direction: RotationDirection) {
+        interactor?.rotateElement(to: direction)
+    }
+    
 }

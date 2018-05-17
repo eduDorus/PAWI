@@ -7,32 +7,46 @@ import Foundation
 
 
 class AREditorInteractor : AREditorInteractorProtocol {
-    let marblerun: MarbleRunEntity
+    let marbleRun: MarbleRunEntity
     
-    init(with marblerun: MarbleRunEntity) {
-        self.marblerun = marblerun
+    init(with marbleRun: MarbleRunEntity) {
+        self.marbleRun = marbleRun
     }
     
-    func getPossiblePositions() {
+    func getPossiblePositions() -> Set<Triple<Int, Int, Int>> {
+        var result = Set<Triple<Int, Int, Int>>()
+        for element in marbleRun.elements {
+            let (x, y, z) = element.location.values
+            if marbleRun.getElement(at: Triple(x, y, z + 1)) == nil {
+                result.insert(Triple(x,y,z + 1))
+            }
+            if marbleRun.getElement(at: Triple(x, y, z - 1)) == nil {
+                result.insert(Triple(x,y,z - 1))
+            }
+            if marbleRun.getElement(at: Triple(x + 1, y, z )) == nil {
+                result.insert(Triple(x + 1,y,z))
+            }
+            if marbleRun.getElement(at: Triple(x - 1, y, z)) == nil {
+                result.insert(Triple(x - 1,y,z))
+            }
+            if marbleRun.getElement(at: Triple(x, y + 1, z)) == nil {
+                result.insert(Triple(x,y + 1,z))
+            }
+        }
+        return result
     }
     
-    func buildElement() {
+    func buildElement(at location: Triple<Int, Int, Int>) {
         
     }
     
-    func removeElement() {
-        
+    func removeElement(at location: Triple<Int, Int, Int>) {
     }
     
-    func selectElement() {
-        
+    func selectElement(at location: Triple<Int, Int, Int>) {
     }
     
-    func clearSelectedElement() {
-        
-    }
-    
-    func turnElement() {
+    func rotateElement(to direction: RotationDirection) {
         
     }
     
