@@ -16,12 +16,13 @@ class AREditorWireframe : AREditorWireframeProtocol, ARWireframeProtocol {
         if let view = controller as? AREditorViewProtocol {
             let presenter: AREditorPresenterProtocol = AREditorPresenter()
             let wireframe: AREditorWireframeProtocol = AREditorWireframe()
-            let interactor: AREditorInteractorProtocol = AREditorInteractor(with: marblerun)
+            let interactor: AREditorInteractorProtocol = AREditorInteractor()
             
             view.presenter = presenter
             presenter.view = view
             presenter.wireframe = wireframe
             presenter.interactor = interactor
+            interactor.marbleRun = marblerun
             
             return controller
         }
@@ -37,11 +38,16 @@ class AREditorWireframe : AREditorWireframeProtocol, ARWireframeProtocol {
     }
 
     func presentSelectElement() {
+        // TODO: Open Element Select view
     }
     
     func presentSelectMode() {
+        let selectMode = SelectModeWireframe.createSelectModeModule()
+        UIApplication.shared.keyWindow?.rootViewController = selectMode
     }
     
-    func changeMode(with run: MarbleRunEntity?) {
+    func changeMode(with marblerun: MarbleRunEntity) {
+        let arview = ARBuilderWireframe.createARBuilderModule(of: marblerun)
+        UIApplication.shared.keyWindow?.rootViewController = arview
     }
 }

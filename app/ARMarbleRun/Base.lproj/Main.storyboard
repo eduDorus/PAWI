@@ -223,19 +223,27 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OT8-9F-TZt">
-                                <rect key="frame" x="172" y="617" width="30" height="30"/>
+                                <rect key="frame" x="172" y="568" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="pressedAdd:" destination="dXx-W0-vKx" eventType="touchUpInside" id="GmC-K4-RdJ"/>
+                                    <action selector="didPressAdd:" destination="dXx-W0-vKx" eventType="touchUpInside" id="ndd-4x-IE8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuN-is-M0T">
+                                <rect key="frame" x="316" y="20" width="39" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Menu"/>
+                                <connections>
+                                    <action selector="didPressMenu:" destination="dXx-W0-vKx" eventType="touchUpInside" id="eB6-89-oMs"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Git-1e-iid">
-                                <rect key="frame" x="163" y="617" width="48" height="30"/>
+                                <rect key="frame" x="163" y="568" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancle"/>
                                 <connections>
-                                    <action selector="pressedCancel:" destination="dXx-W0-vKx" eventType="touchUpInside" id="Dkf-Ov-8Cc"/>
+                                    <action selector="didPressCancle:" destination="dXx-W0-vKx" eventType="touchUpInside" id="8gU-LN-M2A"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -255,6 +263,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="z08-RH-b7B"/>
+        <segue reference="rf1-Jy-Gqf"/>
     </inferredMetricsTieBreakers>
 </document>

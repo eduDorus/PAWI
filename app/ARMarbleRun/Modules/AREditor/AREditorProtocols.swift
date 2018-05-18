@@ -11,16 +11,18 @@ protocol AREditorWireframeProtocol : class, ARWireframeProtocol {
     
     func presentSelectElement()
     func presentSelectMode()
-    func changeMode(with run: MarbleRunEntity?)
+    func changeMode(with run: MarbleRunEntity)
 }
 
 protocol AREditorViewProtocol : class {
     var presenter : AREditorPresenterProtocol? { get set }
     var subview : ARViewController? { get set }
     
-    func addElement(type: Int, at position: Triple<Int, Int, Int>)
-    func selectElement(at position: Triple<Int, Int, Int>)
-    func removeElement(at position: Triple<Int, Int, Int>)
+    func initializeMarbleRun()
+    func add(element: ElementEntity)
+    func add(elements: [ElementEntity])
+    func select(at position: Triple<Int, Int, Int>)
+    func remove(at position: Triple<Int, Int, Int>)
     
     func addBoundingBoxes(at positions: Set<Triple<Int, Int, Int>>)
     func removeBoundingBoxes()
@@ -32,11 +34,13 @@ protocol AREditorPresenterProtocol : class {
     var interactor : AREditorInteractorProtocol? { get set }
     
     func viewDidLoad()
-    func didPressMenuButton()
+    func readyForMarbleRun()
     func didPressAddButton()
     func didPressCancelButton()
-    func didPressGoToLaunchscreen()
+    
     func didPressSaveAction()
+    func didPressChangeModeAction(from sceneview: ARSCNView)
+    func didPressLeaveAction()
     
     func buildElement(at location: Triple<Int, Int, Int>)
     func removeElement(at location: Triple<Int, Int, Int>)
@@ -45,12 +49,16 @@ protocol AREditorPresenterProtocol : class {
 }
 
 protocol AREditorInteractorProtocol : class {
+    var marbleRun : MarbleRunEntity? { get set }
+    
     func getPossiblePositions() -> Set<Triple<Int, Int, Int>>
     func buildElement(type: Int, at location: Triple<Int, Int, Int>)
-    func removeElement(at location: Triple<Int, Int, Int>)
+    func removeElement(at location: Triple<Int, Int, Int>) -> Bool
     func selectElement(at location: Triple<Int, Int, Int>)
     func rotateElement(to direction: RotationDirection)
     func persist()
+    
+   func retrieveMarbleRun() -> [ElementEntity]
 }
 
 enum RotationDirection {

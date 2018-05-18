@@ -8,24 +8,30 @@ import UIKit
 import ARKit
 
 class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
-    
     var presenter: AREditorPresenterProtocol?
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
-    var status = EditorStatus.show
+    var state : ARBuilderState = .planeSelection
     override var prefersStatusBarHidden: Bool {
         return true
     }
 
+    @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var addButton: UIButton!
+
     // MARK: - IBActions
     
-    @IBAction func didPressCancel(_ sender: Any) {
+    @IBAction func didPressCancle(_ sender: Any) {
+        presenter?.didPressCancelButton()
     }
     
     @IBAction func didPressAdd(_ sender: Any) {
-        
+        presenter?.didPressAddButton()
     }
     
+    @IBAction func didPressMenu(_ sender: Any) {
+        menuAction()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +49,8 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         }
     }
 
-    // Tap gestures
+    // MARK: - Tap Gestures
+
     func addTapGestureToSceneView() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
@@ -120,20 +127,53 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
             presenter?.rotateElement(to: .down)
         }
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        switch state {
+        case .planeSelection:
+            let touch = touches.first!
+            let location = touch.location(in: subview?.sceneView)
+            if subview!.selectExistingPlane(location: location) {
+                state = .runPlacement(.unlocked)
+                presenter?.readyForMarbleRun()
+            }
+        case .runPlacement(.unlocked):
+            marbleRun?.removeConstraints()
+            state = .runPlacement(.locked)
+        case .runPlacement(.locked):
+            marbleRun?.constraintToCamera()
+            state = .runPlacement(.unlocked)
+        default: break
+        }
+    }
     
     // MARK: - AREditorViewProtocol
 
-    func addElement(type: Int, at position: Triple<Int, Int, Int>) {
-        marbleRun?.addElement(type: type, location: position)
+    func initializeMarbleRun() {
+        marbleRun = MarbleRunNode()
+        subview?.sceneView.scene.rootNode.addChildNode(marbleRun!)
+        marbleRun!.constraintToCamera()
+        updateMarbleRunPosition()
+        subview?.sceneView.delegate = self
+    }
+
+    func add(element: ElementEntity) {
+        marbleRun?.addChildNode(ElementNode(id: element.id, location: element.location))
+    }
+
+    func add(elements: [ElementEntity]) {
+        for e in elements {
+            add(element: e)
+        }
     }
     
-    func selectElement(at position: Triple<Int, Int, Int>) {
+    func select(at position: Triple<Int, Int, Int>) {
         // TODO: Unhighlight the previouse selected
         let element = marbleRun?.getElement(at: position)
         element?.set(state: .highlighted)
     }
     
-    func removeElement(at position: Triple<Int, Int, Int>) {
+    func remove(at position: Triple<Int, Int, Int>) {
         marbleRun?.removeElement(at: position)
     }
     
@@ -148,10 +188,56 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
     
     
+    func menuAction() {
+        // Create the action buttons for the alert.
+        let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
+            self.presenter?.didPressSaveAction()
+        }
+        let changeModeAction = UIAlertAction(title: "Change to Build Mode", style: .default) { (action) in
+            if let sceneView = self.subview?.sceneView {
+                self.presenter?.didPressChangeModeAction(from: sceneView)
+            }
+        }
+        let leaveAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
+            self.presenter?.didPressLeaveAction()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        // Create and configure the alert controller.
+        let alert = UIAlertController(title: "Menu", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(saveAction)
+        alert.addAction(changeModeAction)
+        alert.addAction(leaveAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true)
+    }
+
+    func updateMarbleRunPosition() {
+        if let hitResult = subview?.hitTestCenter() {
+            let coords = hitResult.worldTransform.columns.3
+            marbleRun?.set(position: SCNVector3(coords.x, coords.y, coords.z))
+        }
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        switch state {
+        case .runPlacement(.unlocked):
+            updateMarbleRunPosition()
+        default: return
+        }
+    }
+    
 }
 
 enum EditorStatus {
-    case show
-    case build
+    case planeSelection
+    case runPlacement(ARBuilderState.Locking)
+    case editorMode
+
+    enum Locking {
+        case locked
+        case unlocked
+    }
 }
 

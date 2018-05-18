@@ -6,12 +6,9 @@ import Foundation
 import UIKit
 import ARKit
 
-protocol ElementSelectWireframeProtocol : class, ARWireframeProtocol {
-    static func createElementSelectModule(of marblerun: MarbleRunEntity) -> UICollectionViewController
-    
-    func presentSelectElement()
-    func presentSelectMode()
-    func changeMode(with view: ARSCNView)
+protocol ElementSelectWireframeProtocol : class {
+    static func createElementSelectModule() -> UICollectionViewController
+    func dismissModule(form view: ElementSelectViewProtocol, with type: Int)
 }
 
 protocol ElementSelectViewProtocol : class {
@@ -26,12 +23,10 @@ protocol ElementSelectPresenterProtocol : class {
     var interactor : ElementSelectInteractorProtocol? { get set }
     
     func viewDidLoad()
-    func didPressElement()
-    func didPressCancelButton()
-    func didPressGoToLaunchscreen()
+    func didSelectElement(id type: Int) -> Int
 }
 
 protocol ElementSelectInteractorProtocol : class {
-    func getElements()
+    func getElements() -> [Int]
 }
 
