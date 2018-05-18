@@ -76,6 +76,14 @@ class ARViewController : UIViewController, ARSCNViewDelegate {
         return false
     }
     
+    func hitTestCenter() -> ARHitTestResult? {
+        let hitResults = sceneView.hitTest(screenCenter!, types: .existingPlane)
+        if hitResults.count > 0 {
+            return hitResults.first!
+        }
+        return nil
+    }
+    
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
