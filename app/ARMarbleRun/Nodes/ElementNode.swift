@@ -29,7 +29,7 @@ class ElementNode : SCNNode, ElementProtocol {
     
     func set(location: Triple<Int, Int, Int>) {
         self.location = location
-        self.position = SCNVector3(CGFloat(self.location.values.0) * self.sidelength, CGFloat(self.location.values.1) * self.sidelength, CGFloat(self.location.values.2) * self.sidelength)
+        updatePosition()
     }
     
     func getLocation() -> Triple<Int, Int, Int> {
@@ -43,6 +43,10 @@ class ElementNode : SCNNode, ElementProtocol {
             node.removeFromParentNode()
         }
         removeFromParentNode()
+    }
+    
+    private func updatePosition() {
+        self.position = SCNVector3(CGFloat(self.location.values.0) * self.sidelength, CGFloat(self.location.values.1) * self.sidelength + (self.sidelength/2), CGFloat(self.location.values.2) * self.sidelength)
     }
     
     private func setGeometry() {
