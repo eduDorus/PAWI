@@ -32,6 +32,7 @@ protocol ARBuilderPresenterProtocol : class {
     var interactor : ARBuilderInteractorProtocol? { get set }
     
     func viewDidLoad()
+    func readyForMarbleRun()
     func didPressNext()
     func didPressPrevious()
     func didPressRestartAction()
