@@ -12,7 +12,7 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     var presenter: ARBuilderPresenterProtocol?
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
-    var state = ARBuilderState.planeSelection
+    var state : ARBuilderState = .planeSelection
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -50,6 +50,9 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     func initializeMarbleRun() {
         marbleRun = MarbleRunNode()
         subview?.sceneView.scene.rootNode.addChildNode(marbleRun!)
+        marbleRun!.constraintToCamera()
+        updateMarbleRunPosition()
+        subview?.sceneView.delegate = self
     }
 
     func add(element: ElementEntity) {
@@ -74,16 +77,22 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
     // MARK: - Events
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if state == .planeSelection {
+        switch state {
+        case .planeSelection:
             let touch = touches.first!
             let location = touch.location(in: subview?.sceneView)
             if subview!.selectExistingPlane(location: location) {
-                state = .runPlacement
                 buttonContainer.isHidden = false
-                print("here we go")
+                state = .runPlacement(.unlocked)
+                presenter?.readyForMarbleRun()
             }
-        } else if state == .runPlacement {
-            marbleRun?.toggleConstraints()
+        case .runPlacement(.unlocked):
+            marbleRun?.removeConstraints()
+            state = .runPlacement(.locked)
+        case .runPlacement(.locked):
+            marbleRun?.constraintToCamera()
+            state = .runPlacement(.unlocked)
+        default: break
         }
     }
     
@@ -111,11 +120,33 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
         
         self.present(alert, animated: true)
     }
-
+    
+    func updateMarbleRunPosition() {
+        if let hitResult = subview?.hitTestCenter() {
+            let coords = hitResult.worldTransform.columns.3
+            marbleRun?.set(position: SCNVector3(coords.x, coords.y, coords.z))
+        }
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        switch state {
+        case .runPlacement(.unlocked):
+            updateMarbleRunPosition()
+        default: return
+        }
+    }
 }
+
 
 enum ARBuilderState {
     case planeSelection
-    case runPlacement
+    case runPlacement(ARBuilderState.Locking)
     case buildProcess
+
+    enum Locking {
+        case locked
+        case unlocked
+    }
 }
+
+
