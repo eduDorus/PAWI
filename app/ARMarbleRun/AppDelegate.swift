@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = menuView
         window?.makeKeyAndVisible()
         
+        Initializer.makeDefaultRuns()
+        
         return true
     }
 
