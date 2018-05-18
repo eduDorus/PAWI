@@ -7,31 +7,31 @@ import Foundation
 import os
 
 class MarbleRunDataManager {
-    let directory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    let marbleRunsFile = "MarbleRuns.dat"
+    let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-    func retrieveMarbleRunList() -> [MarbleRunEntity]? {
-        let filePath = directory.appendingPathComponent(marbleRunsFile)
-        return NSKeyedUnarchiver.unarchiveObject(withFile: filePath.path) as? [MarbleRunEntity]
-    }
-    
-    func persist(_ runs: [MarbleRunEntity]) {
-        let filePath = directory.appendingPathComponent(marbleRunsFile)
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(runs, toFile: filePath.path)
-        if isSuccessfulSave {
-            os_log("MarbleRuns successfully saved.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Failed to save MarbleRuns...", log: OSLog.default, type: .error)
+    func retrieveMarbleRunList() -> [MarbleRunEntity] {
+        var runs : [MarbleRunEntity] = []
+
+        do {
+            let fileURLs = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+            for url in fileURLs {
+                if let run = NSKeyedUnarchiver.unarchiveObject(withFile: url.path) as? MarbleRunEntity {
+                    runs.append(run)
+                }
+            }
+        } catch {
+            print("Error while enumerating files \(directory.path): \(error.localizedDescription)")
         }
+
+        return runs
     }
     
     func persist(_ run: MarbleRunEntity) {
         let filePath = directory.appendingPathComponent(run.fileName)
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(run, toFile: filePath.path)
-        if isSuccessfulSave {
-            os_log("MarbleRun successfully saved.", log: OSLog.default, type: .debug)
+        if NSKeyedArchiver.archiveRootObject(run, toFile: filePath.path) {
+            print("MarbleRun '\(run.name)' successfully saved.")
         } else {
-            os_log("Failed to save MarbleRun...", log: OSLog.default, type: .error)
+            print("Failed to save MarbleRun '\(run.name)'...")
         }
     }
 }
