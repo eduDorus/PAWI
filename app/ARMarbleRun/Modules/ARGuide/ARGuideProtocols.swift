@@ -34,6 +34,7 @@ protocol ARGuidePresenterProtocol : class {
     
     func viewDidLoad()
     func readyForMarbleRun()
+    func didPressStart()
     func didPressNext()
     func didPressPrevious()
     func didPressRestartAction()

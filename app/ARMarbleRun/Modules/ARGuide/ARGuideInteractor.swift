@@ -7,7 +7,7 @@ import Foundation
 
 class ARGuideInteractor : ARGuideInteractorInputProtocol {
     var marbleRun: MarbleRunEntity?
-    var builder : MarbleRunBuilder?
+    var builder : MarbleRunGuide?
     weak var output: ARGuideInteractorOutputProtocol?
     
     func retrieveMarbleRun() -> [ElementEntity] {
@@ -21,8 +21,12 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
     
     func resetGuide() {
         if let run = marbleRun {
-            builder = MarbleRunBuilder(run.elements)
-            builder?.start()
+            builder = MarbleRunGuide(run.elements)
+            builder?.generate()
+            output?.setAllElements(to: .faded)
+            if let current = builder?.current() {
+                output?.set(elementAt: current, to: .highlighted)
+            }
         }
         print("restart")
     }
@@ -31,12 +35,27 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
         if builder == nil {
             resetGuide()
         } else {
-            builder!.step()
+            if let current = builder?.current() {
+                output?.set(elementAt: current, to: .faded)
+            }
+            if let next = builder?.next() {
+                output?.set(elementAt: next, to: .highlighted)
+            }
         }
         print("next")
     }
     
     func previousStep() {
+        if builder == nil {
+            resetGuide()
+        } else {
+            if let current = builder?.current() {
+                output?.set(elementAt: current, to: .faded)
+            }
+            if let next = builder?.previous() {
+                output?.set(elementAt: next, to: .highlighted)
+            }
+        }
         print("previous")
     }
 }

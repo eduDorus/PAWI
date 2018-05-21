@@ -42,6 +42,16 @@
                                     <segue destination="BV1-FR-VrT" kind="embed" identifier="ARSCNViewSegue" id="z08-RH-b7B"/>
                                 </connections>
                             </containerView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U21-03-YBp">
+                                <rect key="frame" x="170" y="587" width="34" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="gJZ-Ej-vxJ"/>
+                                </constraints>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="didPressStart:" destination="lO3-wu-scR" eventType="touchUpInside" id="3Od-Bj-E5r"/>
+                                </connections>
+                            </button>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHL-F4-mlW">
                                 <rect key="frame" x="0.0" y="587" width="375" height="40"/>
                                 <subviews>
@@ -52,16 +62,15 @@
                                             <action selector="didPressPrevious:" destination="lO3-wu-scR" eventType="touchUpInside" id="xnG-1a-QG2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U21-03-YBp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bah-Sv-BWv">
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
                                         <state key="normal" title="Next"/>
                                         <connections>
-                                            <action selector="didPressNext:" destination="lO3-wu-scR" eventType="touchUpInside" id="O4z-hb-HdR"/>
+                                            <action selector="didPressNext:" destination="lO3-wu-scR" eventType="touchUpInside" id="jlx-4F-8ER"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="U21-03-YBp" firstAttribute="leading" secondItem="AHL-F4-mlW" secondAttribute="centerX" id="DIr-6S-CzQ"/>
                                     <constraint firstAttribute="height" constant="40" id="E6l-qk-amY"/>
                                     <constraint firstItem="cRb-Ae-qfU" firstAttribute="trailing" secondItem="AHL-F4-mlW" secondAttribute="centerX" id="reT-rd-rgu"/>
                                 </constraints>
@@ -76,6 +85,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="U21-03-YBp" firstAttribute="centerX" secondItem="qQc-Y2-Dhg" secondAttribute="centerX" id="49H-0z-K43"/>
                             <constraint firstItem="eR1-Gq-JKJ" firstAttribute="bottom" secondItem="AHL-F4-mlW" secondAttribute="bottom" constant="40" id="C2C-8O-fKz"/>
                             <constraint firstItem="dXP-Oq-OXd" firstAttribute="leading" secondItem="eR1-Gq-JKJ" secondAttribute="leading" id="S2F-k8-tvr"/>
                             <constraint firstItem="dXP-Oq-OXd" firstAttribute="top" secondItem="qQc-Y2-Dhg" secondAttribute="top" id="SsI-J3-nLJ"/>
@@ -83,6 +93,7 @@
                             <constraint firstItem="dXP-Oq-OXd" firstAttribute="trailing" secondItem="eR1-Gq-JKJ" secondAttribute="trailing" id="WYO-XZ-Xlr"/>
                             <constraint firstItem="eR1-Gq-JKJ" firstAttribute="trailing" secondItem="eAu-uF-6Sf" secondAttribute="trailing" constant="20" id="d3p-AS-F53"/>
                             <constraint firstItem="eR1-Gq-JKJ" firstAttribute="trailing" secondItem="AHL-F4-mlW" secondAttribute="trailing" id="rgZ-bh-oJv"/>
+                            <constraint firstAttribute="bottom" secondItem="U21-03-YBp" secondAttribute="bottom" constant="40" id="sgj-l8-eru"/>
                             <constraint firstItem="eAu-uF-6Sf" firstAttribute="top" secondItem="dXP-Oq-OXd" secondAttribute="top" constant="20" id="u5t-1K-Gf3"/>
                             <constraint firstItem="AHL-F4-mlW" firstAttribute="leading" secondItem="eR1-Gq-JKJ" secondAttribute="leading" id="vxD-f2-GSP"/>
                         </constraints>
@@ -90,8 +101,9 @@
                     </view>
                     <connections>
                         <outlet property="buttonContainer" destination="AHL-F4-mlW" id="ZVu-5a-oUz"/>
-                        <outlet property="nextButton" destination="U21-03-YBp" id="RWs-sN-tQU"/>
+                        <outlet property="nextButton" destination="bah-Sv-BWv" id="nOz-j6-Sf7"/>
                         <outlet property="previousButton" destination="cRb-Ae-qfU" id="MMm-q7-upM"/>
+                        <outlet property="startButton" destination="U21-03-YBp" id="1h8-Ua-1Ra"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2X-Xg-auQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

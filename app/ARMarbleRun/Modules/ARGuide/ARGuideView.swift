@@ -20,6 +20,7 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
     @IBOutlet var buttonContainer: UIStackView!
     @IBOutlet var previousButton: UIButton!
     @IBOutlet var nextButton: UIButton!
+    @IBOutlet var startButton: UIButton!
     
     // MARK: - IBActions
     
@@ -35,6 +36,14 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
         menuAction()
     }
     
+    @IBAction func didPressStart(_ sender: Any) {
+        presenter?.didPressStart()
+        state = .buildProcess
+        startButton.isHidden = true
+        buttonContainer.isHidden = false
+    }
+    
+
     override func viewDidLoad() {
         presenter?.viewDidLoad()
     }
@@ -73,6 +82,9 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
     }
     
     func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState) {
+        if let element = marbleRun?.getElement(at: position) {
+            element.set(state: state)
+        }
     }
     
     func setRun(to state: ElementState) {
@@ -87,15 +99,18 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
             let touch = touches.first!
             let location = touch.location(in: subview?.sceneView)
             if subview!.selectExistingPlane(location: location) {
-                buttonContainer.isHidden = false
                 state = .runPlacement(.unlocked)
+                startButton.isHidden = false
+                startButton.isEnabled = false
                 presenter?.readyForMarbleRun()
             }
         case .runPlacement(.unlocked):
             marbleRun?.removeConstraints()
+            startButton.isEnabled = true
             state = .runPlacement(.locked)
         case .runPlacement(.locked):
             marbleRun?.constraintToCamera()
+            startButton.isEnabled = false
             state = .runPlacement(.unlocked)
         default: break
         }
@@ -111,7 +126,7 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
                 self.presenter?.didPressChangeModeAction(from: sceneView)
             }
         }
-        let leaveAction = UIAlertAction(title: "Back to Homescreen", style: .destructive) { (action) in
+        let leaveAction = UIAlertAction(title: "Leave", style: .destructive) { (action) in
             self.presenter?.didPressLeaveAction()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

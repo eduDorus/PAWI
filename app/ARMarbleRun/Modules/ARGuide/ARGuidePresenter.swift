@@ -24,6 +24,10 @@ class ARGuidePresenter : ARGuidePresenterProtocol, ARGuideInteractorOutputProtoc
         }
     }
     
+    func didPressStart() {
+        interactor?.resetGuide()
+    }
+    
     func didPressNext() {
         interactor?.nextStep()
     }
