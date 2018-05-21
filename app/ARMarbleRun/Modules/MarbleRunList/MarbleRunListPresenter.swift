@@ -20,4 +20,11 @@ class MarbleRunListPresenter : MarbleRunListPresenterProtocol {
     func didSelect(marblerun: MarbleRunEntity, on view: MarbleRunListViewProtocol) {
         wireframe?.presentARView(from: view, with: marblerun)
     }
+    
+    func didSelectNew(with name: String, on view: MarbleRunListViewProtocol) {
+        if interactor != nil {
+            let marblerun = interactor!.createNewMarbleRun(with: name)
+            wireframe?.presentARView(from: view, with: marblerun)
+        }
+    }
 }

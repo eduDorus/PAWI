@@ -18,6 +18,7 @@ class MarbleRunListWireframe : MarbleRunListWireframeProtocol {
             let interactor: MarbleRunListInteractorProtocol = MarbleRunListInteractor()
             
             view.presenter = presenter
+            view.canAddNew = (mode == .editor)
             presenter.view = view
             presenter.wireframe = wireframe
             presenter.interactor = interactor

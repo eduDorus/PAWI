@@ -13,6 +13,7 @@ protocol MarbleRunListWireframeProtocol : class {
 
 protocol MarbleRunListViewProtocol : class {
     var presenter : MarbleRunListPresenterProtocol? { get set }
+    var canAddNew : Bool { get set }
     
     func reloadMarbleRunList(with marbleruns: [MarbleRunEntity])
 }
@@ -24,9 +25,11 @@ protocol MarbleRunListPresenterProtocol : class {
     
     func viewDidLoad()
     func didSelect(marblerun: MarbleRunEntity, on view: MarbleRunListViewProtocol)
+    func didSelectNew(with name: String, on view: MarbleRunListViewProtocol)
 }
 
 protocol MarbleRunListInteractorProtocol : class {
     func retrieveMarbleRuns(_ callback: ([MarbleRunEntity]) -> Void)
+    func createNewMarbleRun(with name: String) -> MarbleRunEntity
 }
 

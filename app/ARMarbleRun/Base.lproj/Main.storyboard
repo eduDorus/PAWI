@@ -180,14 +180,14 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MarbleRunCell" id="umF-1u-lfI">
-                                        <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MarbleRunName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kre-W4-d04">
-                                                    <rect key="frame" x="26.5" y="146" width="128" height="21"/>
+                                                    <rect key="frame" x="24" y="142" width="128" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -199,7 +199,35 @@
                                             <constraint firstAttribute="bottomMargin" secondItem="kre-W4-d04" secondAttribute="bottom" constant="5" id="FF0-bp-Zzi"/>
                                             <constraint firstItem="kre-W4-d04" firstAttribute="centerX" secondItem="umF-1u-lfI" secondAttribute="centerX" id="s5E-sX-Tiq"/>
                                         </constraints>
-                                        <size key="customSize" width="180" height="180"/>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewRunCell" id="0oz-NT-geE">
+                                        <rect key="frame" x="199" y="0.0" width="176" height="176"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MarbleRunName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uN9-ml-vHH">
+                                                    <rect key="frame" x="24" y="142" width="128" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BX-Go-TgM">
+                                                    <rect key="frame" x="53" y="-4" width="70" height="144"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="120"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="3BX-Go-TgM" firstAttribute="centerY" secondItem="0oz-NT-geE" secondAttribute="centerY" constant="-20" id="ZVv-3A-Zsx"/>
+                                            <constraint firstItem="3BX-Go-TgM" firstAttribute="centerX" secondItem="0oz-NT-geE" secondAttribute="centerX" id="n4C-Im-xcT"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="uN9-ml-vHH" secondAttribute="bottom" constant="5" id="oAh-x0-mGh"/>
+                                            <constraint firstItem="uN9-ml-vHH" firstAttribute="centerX" secondItem="0oz-NT-geE" secondAttribute="centerX" id="viN-25-p96"/>
+                                        </constraints>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
