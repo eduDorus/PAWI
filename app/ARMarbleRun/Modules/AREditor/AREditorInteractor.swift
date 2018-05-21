@@ -49,7 +49,7 @@ class AREditorInteractor : AREditorInteractorProtocol {
         marbleRun!.elements.append(element)
     }
     
-    func removeElement(at location: Triple<Int, Int, Int>) -> Bool{
+    func removeElement(at location: Triple<Int, Int, Int>) -> Bool {
         // TODO: Check if remove is valid
         marbleRun!.removeElement(at: location)
         return true
