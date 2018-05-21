@@ -21,7 +21,9 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
 
     // MARK: - IBActions
     
-    @IBAction func didPressCancle(_ sender: Any) {
+    @IBAction func didPressCancel(_ sender: Any) {
+        cancelButton.isHidden = true
+        addButton.isHidden = false
         presenter?.didPressCancelButton()
     }
     
@@ -32,6 +34,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     @IBAction func didPressMenu(_ sender: Any) {
         menuAction()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -148,6 +151,12 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
     
     // MARK: - AREditorViewProtocol
+    
+    func elementSelected(element: ElementEntity) {
+        addButton.isHidden = true
+        cancelButton.isHidden = false
+        presenter?.setSelectedElement(element: element)
+    }
 
     func initializeMarbleRun() {
         marbleRun = MarbleRunNode()

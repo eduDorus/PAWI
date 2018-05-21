@@ -28,8 +28,7 @@ class AREditorPresenter : AREditorPresenterProtocol {
     }
     
     func didPressCancelButton() {
-        // TODO: Update view
-        // TODO: Clear selected element
+        view?.removeBoundingBoxes()
     }
     
     // MARK: - Menu actions
@@ -46,6 +45,11 @@ class AREditorPresenter : AREditorPresenterProtocol {
     
     func didPressSaveAction() {
         interactor?.persist()
+    }
+    
+    func setSelectedElement(element: ElementEntity) {
+        print(element.type)
+        getPossiblePositions()
     }
     
     func getPossiblePositions() {

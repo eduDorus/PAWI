@@ -33,9 +33,12 @@ class ElementSelectWireframe : ElementSelectWireframeProtocol {
     }
     
     func dismissModule(from view: ElementSelectViewProtocol , with element: ElementEntity) {
+        
         if let vc = view as? UIViewController {
-            vc.dismiss(animated: true) {
-                
+            if let parent = vc.presentingViewController as? AREditorViewProtocol {
+                vc.dismiss(animated: true) {
+                    parent.elementSelected(element: element)
+                }
             }
         }
     }

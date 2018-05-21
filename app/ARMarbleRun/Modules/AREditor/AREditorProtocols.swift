@@ -18,6 +18,7 @@ protocol AREditorViewProtocol : class {
     var presenter : AREditorPresenterProtocol? { get set }
     var subview : ARViewController? { get set }
     
+    func elementSelected(element: ElementEntity)
     func initializeMarbleRun()
     func add(element: ElementEntity)
     func add(elements: [ElementEntity])
@@ -42,6 +43,7 @@ protocol AREditorPresenterProtocol : class {
     func didPressChangeModeAction(from sceneview: ARSCNView)
     func didPressLeaveAction()
     
+    func setSelectedElement(element: ElementEntity)
     func buildElement(at location: Triple<Int, Int, Int>)
     func removeElement(at location: Triple<Int, Int, Int>)
     func selectElement(at location: Triple<Int, Int, Int>)
