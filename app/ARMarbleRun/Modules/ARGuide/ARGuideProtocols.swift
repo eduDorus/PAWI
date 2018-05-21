@@ -1,5 +1,5 @@
 //
-//  ARBuilderProtocols.swift
+//  ARGuideProtocols.swift
 //  ARMarbleRun
 //
 
@@ -7,15 +7,15 @@ import Foundation
 import UIKit
 import ARKit
 
-protocol ARBuilderWireframeProtocol : class, ARWireframeProtocol {
-    static func createARBuilderModule(of marblerun: MarbleRunEntity) -> UIViewController
+protocol ARGuideWireframeProtocol : class, ARWireframeProtocol {
+    static func createARGuideModule(of marblerun: MarbleRunEntity) -> UIViewController
     
     func presentSelectMode()
     func changeMode(with run: MarbleRunEntity)
 }
 
-protocol ARBuilderViewProtocol : class {
-    var presenter : ARBuilderPresenterProtocol? { get set }
+protocol ARGuideViewProtocol : class {
+    var presenter : ARGuidePresenterProtocol? { get set }
     var subview : ARViewController? { get set }
     
     func initializeMarbleRun()
@@ -26,10 +26,10 @@ protocol ARBuilderViewProtocol : class {
     func set(elementAt position: Int, to status: ElementState)
 }
 
-protocol ARBuilderPresenterProtocol : class {
-    var view : ARBuilderViewProtocol? { get set }
-    var wireframe : ARBuilderWireframeProtocol? { get set }
-    var interactor : ARBuilderInteractorProtocol? { get set }
+protocol ARGuidePresenterProtocol : class {
+    var view : ARGuideViewProtocol? { get set }
+    var wireframe : ARGuideWireframeProtocol? { get set }
+    var interactor : ARGuideInteractorProtocol? { get set }
     
     func viewDidLoad()
     func readyForMarbleRun()
@@ -40,7 +40,7 @@ protocol ARBuilderPresenterProtocol : class {
     func didPressLeaveAction()
 }
 
-protocol ARBuilderInteractorProtocol : class {
+protocol ARGuideInteractorProtocol : class {
     var marbleRun : MarbleRunEntity? { get set }
     func resetGuide()
     func nextStep()

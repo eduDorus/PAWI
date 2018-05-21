@@ -1,5 +1,5 @@
 //
-//  ARBuilderView.swift
+//  ARGuideView.swift
 //  ARMarbleRun
 //
 
@@ -7,12 +7,12 @@ import Foundation
 import UIKit
 import ARKit
 
-class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate {
+class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
     
-    var presenter: ARBuilderPresenterProtocol?
+    var presenter: ARGuidePresenterProtocol?
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
-    var state : ARBuilderState = .planeSelection
+    var state : ARGuideState = .planeSelection
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -45,7 +45,7 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
         }
     }
     
-    // MARK: - ARBuilderViewProtocol
+    // MARK: - ARGuideViewProtocol
     
     func initializeMarbleRun() {
         marbleRun = MarbleRunNode()
@@ -138,9 +138,9 @@ class ARBuilderView : UIViewController, ARBuilderViewProtocol, ARSCNViewDelegate
 }
 
 
-enum ARBuilderState {
+enum ARGuideState {
     case planeSelection
-    case runPlacement(ARBuilderState.Locking)
+    case runPlacement(ARGuideState.Locking)
     case buildProcess
 
     enum Locking {

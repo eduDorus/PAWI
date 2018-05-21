@@ -47,7 +47,7 @@ class AREditorWireframe : AREditorWireframeProtocol, ARWireframeProtocol {
     }
     
     func changeMode(with marblerun: MarbleRunEntity) {
-        let arview = ARBuilderWireframe.createARBuilderModule(of: marblerun)
+        let arview = ARGuideWireframe.createARGuideModule(of: marblerun)
         UIApplication.shared.keyWindow?.rootViewController = arview
     }
 }

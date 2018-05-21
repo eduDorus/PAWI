@@ -1,5 +1,5 @@
 //
-//  ARBuilderWireframe.swift
+//  ARGuideWireframe.swift
 //  ARMarbleRun
 //
 
@@ -7,14 +7,14 @@ import Foundation
 import UIKit
 import ARKit
 
-class ARBuilderWireframe : ARBuilderWireframeProtocol, ARWireframeProtocol {
+class ARGuideWireframe : ARGuideWireframeProtocol, ARWireframeProtocol {
     
-    static func createARBuilderModule(of marblerun: MarbleRunEntity) -> UIViewController {
-        let controller = mainStoryboard.instantiateViewController(withIdentifier: "ARBuilderViewController")
-        if let view = controller as? ARBuilderViewProtocol {
-            let presenter: ARBuilderPresenterProtocol = ARBuilderPresenter()
-            let wireframe: ARBuilderWireframeProtocol = ARBuilderWireframe()
-            let interactor: ARBuilderInteractorProtocol = ARBuilderInteractor()
+    static func createARGuideModule(of marblerun: MarbleRunEntity) -> UIViewController {
+        let controller = mainStoryboard.instantiateViewController(withIdentifier: "ARGuideViewController")
+        if let view = controller as? ARGuideViewProtocol {
+            let presenter: ARGuidePresenterProtocol = ARGuidePresenter()
+            let wireframe: ARGuideWireframeProtocol = ARGuideWireframe()
+            let interactor: ARGuideInteractorProtocol = ARGuideInteractor()
             
             view.presenter = presenter
             presenter.view = view
@@ -32,7 +32,7 @@ class ARBuilderWireframe : ARBuilderWireframeProtocol, ARWireframeProtocol {
     }
     
     static func createModule(of marblerun: MarbleRunEntity) -> UIViewController {
-        return createARBuilderModule(of: marblerun)
+        return createARGuideModule(of: marblerun)
     }
     
     func presentSelectMode() {

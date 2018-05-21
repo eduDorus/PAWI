@@ -1,11 +1,11 @@
 //
-//  ARBuilderInteractor.swift
+//  ARGuideInteractor.swift
 //  ARMarbleRun
 //
 
 import Foundation
 
-class ARBuilderInteractor : ARBuilderInteractorProtocol {
+class ARGuideInteractor : ARGuideInteractorProtocol {
     var marbleRun: MarbleRunEntity?
     
     func retrieveMarbleRun() -> [ElementEntity] {

@@ -44,13 +44,13 @@
 		A0D8264B209F5F0C00C74FD7 /* MarbleRunListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8264A209F5F0C00C74FD7 /* MarbleRunListPresenter.swift */; };
 		A0D8264D209F5F1400C74FD7 /* MarbleRunListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8264C209F5F1400C74FD7 /* MarbleRunListInteractor.swift */; };
 		A0D82650209F84FF00C74FD7 /* MarbleRunEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8264F209F84FF00C74FD7 /* MarbleRunEntity.swift */; };
-		A0D82653209FA0D200C74FD7 /* ARBuilderProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D82652209FA0D200C74FD7 /* ARBuilderProtocols.swift */; };
+		A0D82653209FA0D200C74FD7 /* ARGuideProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D82652209FA0D200C74FD7 /* ARGuideProtocols.swift */; };
 		A0D82656209FA65D00C74FD7 /* AREditorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D82655209FA65D00C74FD7 /* AREditorProtocols.swift */; };
-		A0D8265820A0971F00C74FD7 /* ARBuilderWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265720A0971F00C74FD7 /* ARBuilderWireframe.swift */; };
+		A0D8265820A0971F00C74FD7 /* ARGuideWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265720A0971F00C74FD7 /* ARGuideWireframe.swift */; };
 		A0D8265A20A097AA00C74FD7 /* AREditorWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265920A097AA00C74FD7 /* AREditorWireframe.swift */; };
-		A0D8265C20A09BB800C74FD7 /* ARBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265B20A09BB800C74FD7 /* ARBuilderView.swift */; };
-		A0D8265E20A09BE600C74FD7 /* ARBuilderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265D20A09BE600C74FD7 /* ARBuilderPresenter.swift */; };
-		A0D8266020A09C1000C74FD7 /* ARBuilderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265F20A09C1000C74FD7 /* ARBuilderInteractor.swift */; };
+		A0D8265C20A09BB800C74FD7 /* ARGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265B20A09BB800C74FD7 /* ARGuideView.swift */; };
+		A0D8265E20A09BE600C74FD7 /* ARGuidePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265D20A09BE600C74FD7 /* ARGuidePresenter.swift */; };
+		A0D8266020A09C1000C74FD7 /* ARGuideInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8265F20A09C1000C74FD7 /* ARGuideInteractor.swift */; };
 		A0D8266220A0ACB200C74FD7 /* ElementEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8266120A0ACB200C74FD7 /* ElementEntity.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,13 +105,13 @@
 		A0D8264A209F5F0C00C74FD7 /* MarbleRunListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunListPresenter.swift; sourceTree = "<group>"; };
 		A0D8264C209F5F1400C74FD7 /* MarbleRunListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunListInteractor.swift; sourceTree = "<group>"; };
 		A0D8264F209F84FF00C74FD7 /* MarbleRunEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunEntity.swift; sourceTree = "<group>"; };
-		A0D82652209FA0D200C74FD7 /* ARBuilderProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderProtocols.swift; sourceTree = "<group>"; };
+		A0D82652209FA0D200C74FD7 /* ARGuideProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGuideProtocols.swift; sourceTree = "<group>"; };
 		A0D82655209FA65D00C74FD7 /* AREditorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AREditorProtocols.swift; sourceTree = "<group>"; };
-		A0D8265720A0971F00C74FD7 /* ARBuilderWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderWireframe.swift; sourceTree = "<group>"; };
+		A0D8265720A0971F00C74FD7 /* ARGuideWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGuideWireframe.swift; sourceTree = "<group>"; };
 		A0D8265920A097AA00C74FD7 /* AREditorWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AREditorWireframe.swift; sourceTree = "<group>"; };
-		A0D8265B20A09BB800C74FD7 /* ARBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderView.swift; sourceTree = "<group>"; };
-		A0D8265D20A09BE600C74FD7 /* ARBuilderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderPresenter.swift; sourceTree = "<group>"; };
-		A0D8265F20A09C1000C74FD7 /* ARBuilderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderInteractor.swift; sourceTree = "<group>"; };
+		A0D8265B20A09BB800C74FD7 /* ARGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGuideView.swift; sourceTree = "<group>"; };
+		A0D8265D20A09BE600C74FD7 /* ARGuidePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGuidePresenter.swift; sourceTree = "<group>"; };
+		A0D8265F20A09C1000C74FD7 /* ARGuideInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGuideInteractor.swift; sourceTree = "<group>"; };
 		A0D8266120A0ACB200C74FD7 /* ElementEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,7 +206,7 @@
 			children = (
 				7ED4F91D20AACA4D00A4CAEC /* ElementSelect */,
 				A0D82654209FA65100C74FD7 /* AREditor */,
-				A0D82651209F9BC100C74FD7 /* ARBuilder */,
+				A0D82651209F9BC100C74FD7 /* ARGuide */,
 				A0D82643209F598100C74FD7 /* MarbleRunList */,
 				A0D82642209F591800C74FD7 /* SelectMode */,
 			);
@@ -259,16 +259,16 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		A0D82651209F9BC100C74FD7 /* ARBuilder */ = {
+		A0D82651209F9BC100C74FD7 /* ARGuide */ = {
 			isa = PBXGroup;
 			children = (
-				A0D82652209FA0D200C74FD7 /* ARBuilderProtocols.swift */,
-				A0D8265720A0971F00C74FD7 /* ARBuilderWireframe.swift */,
-				A0D8265B20A09BB800C74FD7 /* ARBuilderView.swift */,
-				A0D8265D20A09BE600C74FD7 /* ARBuilderPresenter.swift */,
-				A0D8265F20A09C1000C74FD7 /* ARBuilderInteractor.swift */,
+				A0D82652209FA0D200C74FD7 /* ARGuideProtocols.swift */,
+				A0D8265720A0971F00C74FD7 /* ARGuideWireframe.swift */,
+				A0D8265B20A09BB800C74FD7 /* ARGuideView.swift */,
+				A0D8265D20A09BE600C74FD7 /* ARGuidePresenter.swift */,
+				A0D8265F20A09C1000C74FD7 /* ARGuideInteractor.swift */,
 			);
-			path = ARBuilder;
+			path = ARGuide;
 			sourceTree = "<group>";
 		};
 		A0D82654209FA65100C74FD7 /* AREditor */ = {
@@ -387,14 +387,14 @@
 			files = (
 				A0D82647209F5EFB00C74FD7 /* MarbleRunListWireframe.swift in Sources */,
 				7ED4F92520AACA6300A4CAEC /* ElementSelectPresenter.swift in Sources */,
-				A0D8266020A09C1000C74FD7 /* ARBuilderInteractor.swift in Sources */,
+				A0D8266020A09C1000C74FD7 /* ARGuideInteractor.swift in Sources */,
 				7ED4F92F20AAEC9D00A4CAEC /* BoundingBoxNode.swift in Sources */,
 				A0D82639209F4D1200C74FD7 /* SelectModeView.swift in Sources */,
 				A0D82649209F5F0600C74FD7 /* MarbleRunListView.swift in Sources */,
 				7ED4F92720AACA6300A4CAEC /* ElementSelectWireframe.swift in Sources */,
-				A0D8265E20A09BE600C74FD7 /* ARBuilderPresenter.swift in Sources */,
+				A0D8265E20A09BE600C74FD7 /* ARGuidePresenter.swift in Sources */,
 				A0D82640209F54EE00C74FD7 /* ARInteractionMode.swift in Sources */,
-				A0D82653209FA0D200C74FD7 /* ARBuilderProtocols.swift in Sources */,
+				A0D82653209FA0D200C74FD7 /* ARGuideProtocols.swift in Sources */,
 				7ED4F91920AAB09E00A4CAEC /* AREditorPresenter.swift in Sources */,
 				7ED4F91A20AAB09E00A4CAEC /* AREditorInteractor.swift in Sources */,
 				A0D82650209F84FF00C74FD7 /* MarbleRunEntity.swift in Sources */,
@@ -412,7 +412,7 @@
 				A040BE2C20AEAD89002DD292 /* Initializer.swift in Sources */,
 				7ED4F92B20AAE6AF00A4CAEC /* MarbleRunMap.swift in Sources */,
 				7ED4F91820AAB09E00A4CAEC /* AREditorView.swift in Sources */,
-				A0D8265C20A09BB800C74FD7 /* ARBuilderView.swift in Sources */,
+				A0D8265C20A09BB800C74FD7 /* ARGuideView.swift in Sources */,
 				7ED4F92D20AAEB2800A4CAEC /* ElementProtocol.swift in Sources */,
 				A0D8265A20A097AA00C74FD7 /* AREditorWireframe.swift in Sources */,
 				A0C0321920AB15AC00C091A0 /* LocalDataManager.swift in Sources */,
@@ -422,7 +422,7 @@
 				A02D8C2C20AD638D001E1D2E /* ARViewController.swift in Sources */,
 				A02D8C2E20AD80E0001E1D2E /* PlaneNode.swift in Sources */,
 				7ED4F92920AAE58D00A4CAEC /* Triple.swift in Sources */,
-				A0D8265820A0971F00C74FD7 /* ARBuilderWireframe.swift in Sources */,
+				A0D8265820A0971F00C74FD7 /* ARGuideWireframe.swift in Sources */,
 				A0C0321E20AB1A3F00C091A0 /* ElementNode.swift in Sources */,
 				7ED4F92620AACA6300A4CAEC /* ElementSelectProtocols.swift in Sources */,
 			);
@@ -591,7 +591,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.hslu.pawi.ViperTest;
+				PRODUCT_BUNDLE_IDENTIFIER = ch.hslu.pawi.ARMarbleRun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -609,7 +609,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.hslu.pawi.ViperTest;
+				PRODUCT_BUNDLE_IDENTIFIER = ch.hslu.pawi.ARMarbleRun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

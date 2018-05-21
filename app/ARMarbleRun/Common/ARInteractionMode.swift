@@ -13,7 +13,7 @@ enum ARInteractionMode {
     func wireframe() -> ARWireframeProtocol.Type {
         switch self {
         case .builder:
-            return ARBuilderWireframe.self
+            return ARGuideWireframe.self
         case .editor:
             return AREditorWireframe.self
         }

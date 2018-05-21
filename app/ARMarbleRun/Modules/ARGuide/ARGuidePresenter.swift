@@ -1,16 +1,16 @@
 //
-//  ARBuilderPresenter.swift
+//  ARGuidePresenter.swift
 //  ARMarbleRun
 //
 
 import Foundation
 import ARKit
 
-class ARBuilderPresenter : ARBuilderPresenterProtocol {
+class ARGuidePresenter : ARGuidePresenterProtocol {
     
-    var wireframe: ARBuilderWireframeProtocol?
-    weak var view: ARBuilderViewProtocol?
-    var interactor: ARBuilderInteractorProtocol?
+    var wireframe: ARGuideWireframeProtocol?
+    weak var view: ARGuideViewProtocol?
+    var interactor: ARGuideInteractorProtocol?
     
     func viewDidLoad() {
         let mr = interactor?.retrieveMarbleRun()
