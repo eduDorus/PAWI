@@ -7,11 +7,11 @@ import Foundation
 class ElementEntity : NSObject, ElementProtocol, NSCoding {
     public var location : Triple<Int, Int, Int>
     var state = ElementState.normal
-    public var id = 12
+    public var type = 12
     var orientation = 5
     
-    init(id: Int, location: Triple<Int, Int, Int>) {
-        self.id = id
+    init(type: Int, location: Triple<Int, Int, Int>) {
+        self.type = type
         self.location = location
     }
 
@@ -24,7 +24,7 @@ class ElementEntity : NSObject, ElementProtocol, NSCoding {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.id = aDecoder.decodeInteger(forKey: "id")
+        self.type = aDecoder.decodeInteger(forKey: "type")
         self.orientation = aDecoder.decodeInteger(forKey: "orientation")
         let x = aDecoder.decodeInteger(forKey: "location0")
         let y = aDecoder.decodeInteger(forKey: "location1")
@@ -33,7 +33,7 @@ class ElementEntity : NSObject, ElementProtocol, NSCoding {
     }
 
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(id, forKey: "id")
+        aCoder.encode(type, forKey: "type")
         aCoder.encode(orientation, forKey: "orientation")
         aCoder.encode(location.values.0, forKey: "location0")
         aCoder.encode(location.values.1, forKey: "location1")

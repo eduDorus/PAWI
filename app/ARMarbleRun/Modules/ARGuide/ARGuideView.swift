@@ -56,7 +56,7 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
     }
 
     func add(element: ElementEntity) {
-        marbleRun?.addChildNode(ElementNode(id: element.id, location: element.location))
+        marbleRun?.addChildNode(ElementNode(type: element.type, location: element.location))
     }
     
     func add(elements: [ElementEntity]) {
@@ -101,7 +101,7 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
         let restartAction = UIAlertAction(title: "Restart Guide", style: .default) { (action) in
             self.presenter?.didPressRestartAction()
         }
-        let changeModeAction = UIAlertAction(title: "Change to Build Mode", style: .default) { (action) in
+        let changeModeAction = UIAlertAction(title: "Change to Editor", style: .default) { (action) in
             if let sceneView = self.subview?.sceneView {
                 self.presenter?.didPressChangeModeAction(from: sceneView)
             }

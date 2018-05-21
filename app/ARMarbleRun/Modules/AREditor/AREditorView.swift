@@ -158,7 +158,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
 
     func add(element: ElementEntity) {
-        marbleRun?.addChildNode(ElementNode(id: element.id, location: element.location))
+        marbleRun?.addChildNode(ElementNode(type: element.type, location: element.location))
     }
 
     func add(elements: [ElementEntity]) {
@@ -193,7 +193,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
             self.presenter?.didPressSaveAction()
         }
-        let changeModeAction = UIAlertAction(title: "Change to Build Mode", style: .default) { (action) in
+        let changeModeAction = UIAlertAction(title: "Change to Guide", style: .default) { (action) in
             if let sceneView = self.subview?.sceneView {
                 self.presenter?.didPressChangeModeAction(from: sceneView)
             }

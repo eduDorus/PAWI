@@ -55,7 +55,7 @@ class AREditorPresenter : AREditorPresenterProtocol {
     
     func buildElement(at location: Triple<Int, Int, Int>) {
         interactor?.buildElement(type: 12, at: location)
-        view?.add(element: ElementEntity.init(id: 12, location: location))
+        view?.add(element: ElementEntity(type: 12, location: location))
         view?.removeBoundingBoxes()
     }
     

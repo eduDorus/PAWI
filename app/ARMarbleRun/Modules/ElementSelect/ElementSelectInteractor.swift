@@ -13,13 +13,13 @@ class ElementSelectInteractor : ElementSelectInteractorProtocol {
         if let cubes = SCNScene(named: "art.scnassets/cuboro-set.scn")?.rootNode {
             for cube in cubes.childNodes[0].childNodes {
                 if let name = cube.name {
-                    let r = name.index(name.startIndex, offsetBy: 9)..<name.endIndex
-                    let result = name[r]
-                    let type = Int(result)
-                    // TODO: Init elements
+                    let r = name.split(separator: "_")
+                    if let type = Int(r[1]) {
+                        elements.append(ElementEntity.init(type: type, location: Triple(0,0,0)))
+                    }
                 }
             }
         }
-        return cubeIDs
+        return elements
     }
 }

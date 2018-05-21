@@ -7,8 +7,8 @@ import UIKit
 import ARKit
 
 protocol ElementSelectWireframeProtocol : class {
-    static func createElementSelectModule() -> UICollectionViewController
-    func dismissModule(form view: ElementSelectViewProtocol, with type: Int)
+    static func createElementSelectModule() -> UIViewController
+    func dismissModule(from view: ElementSelectViewProtocol, with element: ElementEntity)
 }
 
 protocol ElementSelectViewProtocol : class {
@@ -23,10 +23,10 @@ protocol ElementSelectPresenterProtocol : class {
     var interactor : ElementSelectInteractorProtocol? { get set }
     
     func viewDidLoad()
-    func didSelectElement(id type: Int) -> Int
+    func didSelect(element: ElementEntity, on view: ElementSelectViewProtocol)
 }
 
 protocol ElementSelectInteractorProtocol : class {
-    func getElements() -> [Int]
+    func getElements() -> [ElementEntity]
 }
 

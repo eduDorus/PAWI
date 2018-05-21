@@ -11,10 +11,11 @@ class ElementSelectPresenter : ElementSelectPresenterProtocol {
     var interactor: ElementSelectInteractorProtocol?
     
     func viewDidLoad() {
+        let elements = interactor?.getElements()
+        view?.reloadElementList(with: elements!)
     }
 
-    func didSelectElement(id type: Int) -> Int {
-        // TODO: Return with elementtype
-        return 0
+    func didSelect(element: ElementEntity, on view: ElementSelectViewProtocol) {
+        wireframe?.dismissModule(from: view, with: element)
     }
 }

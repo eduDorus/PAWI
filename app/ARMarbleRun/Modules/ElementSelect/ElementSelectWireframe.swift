@@ -10,7 +10,8 @@ import ARKit
     
     
 class ElementSelectWireframe : ElementSelectWireframeProtocol {
-    static func createElementSelectModule() -> UICollectionViewController {
+    
+    static func createElementSelectModule() -> UIViewController {
         let controller = mainStoryboard.instantiateViewController(withIdentifier: "ElementSelectViewController")
         if let view = controller as? ElementSelectViewProtocol {
             let presenter: ElementSelectPresenterProtocol = ElementSelectPresenter()
@@ -22,7 +23,7 @@ class ElementSelectWireframe : ElementSelectWireframeProtocol {
             presenter.wireframe = wireframe
             presenter.interactor = interactor
             
-            return controller as! UICollectionViewController
+            return controller
         }
         return UICollectionViewController()
     }
@@ -31,7 +32,7 @@ class ElementSelectWireframe : ElementSelectWireframeProtocol {
         return UIStoryboard(name: "Main", bundle: Bundle.main)
     }
     
-    func dismissModule(form view: ElementSelectViewProtocol , with type: Int) {
+    func dismissModule(from view: ElementSelectViewProtocol , with element: ElementEntity) {
         if let vc = view as? UIViewController {
             vc.dismiss(animated: true) {
                 
