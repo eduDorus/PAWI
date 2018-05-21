@@ -7,18 +7,29 @@ import Foundation
 import UIKit
 import ARKit
 
-class ElementSelectView : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ElementSelectViewProtocol {
+class ElementSelectView : UIViewController, ElementSelectViewProtocol {
     var presenter: ElementSelectPresenterProtocol?
+    var elementList: [ElementEntity] = []
     
-    // MARK: - IBActions
+    // MARK: - IBOutlets
     
+    @IBOutlet var collectionView: UICollectionView!
     
+    // MARK: - UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter?.viewDidLoad()
+    }
     
     // MARK: - ElementSelectViewProtocol
     
-    func add(elements: [ElementEntity]) {
-        
+    func reloadElementList(with elements: [ElementEntity]) {
+        elementList = elements
+        collectionView.reloadData()
     }
+    
+    // MARK: - ElementSelectViewProtocol
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0

@@ -26,7 +26,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
     
     @IBAction func didPressAdd(_ sender: Any) {
-        presenter?.didPressAddButton()
+        presenter?.didPressAddButton(on: self)
     }
     
     @IBAction func didPressMenu(_ sender: Any) {

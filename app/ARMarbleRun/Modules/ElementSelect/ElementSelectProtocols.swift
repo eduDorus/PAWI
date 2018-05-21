@@ -14,7 +14,7 @@ protocol ElementSelectWireframeProtocol : class {
 protocol ElementSelectViewProtocol : class {
     var presenter : ElementSelectPresenterProtocol? { get set }
     
-    func add(elements: [ElementEntity])
+    func reloadElementList(with elements: [ElementEntity])
 }
 
 protocol ElementSelectPresenterProtocol : class {

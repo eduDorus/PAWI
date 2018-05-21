@@ -37,8 +37,11 @@ class AREditorWireframe : AREditorWireframeProtocol, ARWireframeProtocol {
         return createAREditorModule(of: marblerun)
     }
 
-    func presentSelectElement() {
-        // TODO: Open Element Select view
+    func presentSelectElement(from view: AREditorViewProtocol) {
+        let elementSelect = ElementSelectWireframe.createElementSelectModule()
+        if let vc = view as? UIViewController {
+            vc.present(elementSelect, animated: true, completion: nil)
+        }
     }
     
     func presentSelectMode() {

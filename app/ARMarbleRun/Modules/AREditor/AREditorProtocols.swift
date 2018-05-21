@@ -9,7 +9,7 @@ import ARKit
 protocol AREditorWireframeProtocol : class, ARWireframeProtocol {
     static func createAREditorModule(of marblerun: MarbleRunEntity) -> UIViewController
     
-    func presentSelectElement()
+    func presentSelectElement(from view: AREditorViewProtocol)
     func presentSelectMode()
     func changeMode(with run: MarbleRunEntity)
 }
@@ -35,7 +35,7 @@ protocol AREditorPresenterProtocol : class {
     
     func viewDidLoad()
     func readyForMarbleRun()
-    func didPressAddButton()
+    func didPressAddButton(on view: AREditorViewProtocol)
     func didPressCancelButton()
     
     func didPressSaveAction()

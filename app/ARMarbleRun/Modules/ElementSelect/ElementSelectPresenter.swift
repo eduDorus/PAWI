@@ -17,8 +17,4 @@ class ElementSelectPresenter : ElementSelectPresenterProtocol {
         // TODO: Return with elementtype
         return 0
     }
-    
-    func didPressBackButton() {
-        // TODO: Hide view
-    }
 }

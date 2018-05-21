@@ -23,8 +23,8 @@ class AREditorPresenter : AREditorPresenterProtocol {
         }
     }
     
-    func didPressAddButton() {
-        // TODO: Open element select view
+    func didPressAddButton(on view: AREditorViewProtocol) {
+        wireframe?.presentSelectElement(from: view)
     }
     
     func didPressCancelButton() {
