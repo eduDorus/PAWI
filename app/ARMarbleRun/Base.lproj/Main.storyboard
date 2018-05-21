@@ -82,6 +82,12 @@
                                     <action selector="didPressMenu:" destination="lO3-wu-scR" eventType="touchUpInside" id="HA6-bD-ps0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guide" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Up-qC-V8R">
+                                <rect key="frame" x="20" y="20" width="45.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -91,7 +97,9 @@
                             <constraint firstItem="dXP-Oq-OXd" firstAttribute="top" secondItem="qQc-Y2-Dhg" secondAttribute="top" id="SsI-J3-nLJ"/>
                             <constraint firstItem="dXP-Oq-OXd" firstAttribute="bottom" secondItem="eR1-Gq-JKJ" secondAttribute="bottom" id="WLY-ol-4Yr"/>
                             <constraint firstItem="dXP-Oq-OXd" firstAttribute="trailing" secondItem="eR1-Gq-JKJ" secondAttribute="trailing" id="WYO-XZ-Xlr"/>
+                            <constraint firstItem="2Up-qC-V8R" firstAttribute="top" secondItem="dXP-Oq-OXd" secondAttribute="top" constant="20" id="c9o-8d-kZH"/>
                             <constraint firstItem="eR1-Gq-JKJ" firstAttribute="trailing" secondItem="eAu-uF-6Sf" secondAttribute="trailing" constant="20" id="d3p-AS-F53"/>
+                            <constraint firstItem="2Up-qC-V8R" firstAttribute="leading" secondItem="eR1-Gq-JKJ" secondAttribute="leading" constant="20" id="k5n-hc-TEo"/>
                             <constraint firstItem="eR1-Gq-JKJ" firstAttribute="trailing" secondItem="AHL-F4-mlW" secondAttribute="trailing" id="rgZ-bh-oJv"/>
                             <constraint firstAttribute="bottom" secondItem="U21-03-YBp" secondAttribute="bottom" constant="40" id="sgj-l8-eru"/>
                             <constraint firstItem="eAu-uF-6Sf" firstAttribute="top" secondItem="dXP-Oq-OXd" secondAttribute="top" constant="20" id="u5t-1K-Gf3"/>
@@ -369,9 +377,17 @@
                                     <action selector="didPressStart:" destination="dXx-W0-vKx" eventType="touchUpInside" id="g3f-hr-NcU"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Editor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-LR-aYl">
+                                <rect key="frame" x="20" y="20" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ciZ-LR-aYl" firstAttribute="top" secondItem="WKo-jg-nXE" secondAttribute="top" constant="20" id="7HU-nA-JbU"/>
+                            <constraint firstItem="ciZ-LR-aYl" firstAttribute="leading" secondItem="cOd-00-vFy" secondAttribute="leading" constant="20" id="8Pe-d6-YY3"/>
                             <constraint firstItem="WKo-jg-nXE" firstAttribute="leading" secondItem="cOd-00-vFy" secondAttribute="leading" id="Fej-OV-ZF2"/>
                             <constraint firstItem="WKo-jg-nXE" firstAttribute="top" secondItem="jIb-BS-Lwr" secondAttribute="top" id="TB1-tk-h3k"/>
                             <constraint firstItem="WKo-jg-nXE" firstAttribute="bottom" secondItem="cOd-00-vFy" secondAttribute="bottom" id="b6z-MZ-ufz"/>
