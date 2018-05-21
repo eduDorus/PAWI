@@ -16,7 +16,7 @@ class ElementSelectInteractor : ElementSelectInteractorProtocol {
                     let r = name.index(name.startIndex, offsetBy: 9)..<name.endIndex
                     let result = name[r]
                     let type = Int(result)
-                    elements.append(ElementEntity.)
+                    // TODO: Init elements
                 }
             }
         }
