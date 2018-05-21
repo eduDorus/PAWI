@@ -11,12 +11,13 @@ class ElementNode : SCNNode, ElementProtocol {
     var type = 12
     var location = Triple(0, 0, 0)
     let sidelength: CGFloat = 0.05
-    let normalColor = UIColor(hue: 33, saturation: 0.24, brightness: 0.97, alpha: 1)
+    let normalColor = UIColor(red: 0.98, green: 0.82, blue: 0.65, alpha: 1)
     
     init(type: Int, location: Triple<Int, Int, Int>) {
         super.init()
         self.type = type
         self.set(location: location)
+        self.set(state: .normal)
         setGeometry()
     }
     
