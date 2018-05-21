@@ -125,7 +125,9 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
             guard let node = hitTestResults?.first?.node else {return}
             
             if let element = node as? ElementNode {
-                presenter?.selectElement(at: element.getLocation())
+                presenter?.selectElement(element: element)
+            } else if let element = node.parent as? ElementNode {
+                presenter?.selectElement(element: element)
             }
             
             if let boundingBox = node as? BoundingBoxNode {
@@ -141,8 +143,9 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         
         guard let node = hitTestResults?.first?.node else { return }
         
-        // TODO: Test if not in add mode
         if let element = node as? ElementNode {
+            presenter?.removeElement(at: element.getLocation())
+        } else if let element = node.parent as? ElementNode {
             presenter?.removeElement(at: element.getLocation())
         }
     }
@@ -169,7 +172,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     
     func elementSelected(element: ElementEntity) {
         toggleAddCancel()
-        presenter?.setSelectedElement(element: element)
+        presenter?.setNextElement(element: element)
     }
 
     func initializeMarbleRun() {
@@ -182,7 +185,6 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
 
     func add(element: ElementEntity) {
         marbleRun?.addChildNode(ElementNode(type: element.type, location: element.location))
-        toggleAddCancel()
     }
 
     func add(elements: [ElementEntity]) {

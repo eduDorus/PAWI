@@ -25,6 +25,8 @@ protocol AREditorViewProtocol : class {
     func select(at position: Triple<Int, Int, Int>)
     func remove(at position: Triple<Int, Int, Int>)
     
+    func toggleAddCancel()
+    
     func addBoundingBoxes(at positions: Set<Triple<Int, Int, Int>>)
     func removeBoundingBoxes()
 }
@@ -43,10 +45,10 @@ protocol AREditorPresenterProtocol : class {
     func didPressChangeModeAction(from sceneview: ARSCNView)
     func didPressLeaveAction()
     
-    func setSelectedElement(element: ElementEntity)
+    func setNextElement(element: ElementEntity)
     func buildElement(at location: Triple<Int, Int, Int>)
     func removeElement(at location: Triple<Int, Int, Int>)
-    func selectElement(at location: Triple<Int, Int, Int>)
+    func selectElement(element: ElementNode)
     func rotateElement(to direction: RotationDirection)
 }
 
