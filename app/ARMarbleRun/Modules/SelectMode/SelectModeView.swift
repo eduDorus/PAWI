@@ -16,7 +16,7 @@ class SelectModeView : UIViewController, SelectModeViewProtocol {
         presenter?.didPressEditorButton(on: self)
     }
     
-    @IBAction func builderButtonPressed(_ sender: UIButton) {
-        presenter?.didPressBuilderButton(on: self)
+    @IBAction func guideButtonPressed(_ sender: UIButton) {
+        presenter?.didPressGuideButton(on: self)
     }
 }

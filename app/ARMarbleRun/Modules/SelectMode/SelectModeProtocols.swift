@@ -21,7 +21,7 @@ protocol SelectModePresenterProtocol : class {
     var view : SelectModeViewProtocol? { get set }
     var wireframe : SelectModeWireframeProtocol? { get set }
     
-    func didPressBuilderButton(on view: SelectModeViewProtocol)
+    func didPressGuideButton(on view: SelectModeViewProtocol)
     func didPressEditorButton(on view: SelectModeViewProtocol)
 }
 

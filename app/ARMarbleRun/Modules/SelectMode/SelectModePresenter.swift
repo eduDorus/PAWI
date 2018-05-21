@@ -10,7 +10,7 @@ class SelectModePresenter : SelectModePresenterProtocol {
     var wireframe: SelectModeWireframeProtocol?
     weak var view: SelectModeViewProtocol?
 
-    func didPressBuilderButton(on view: SelectModeViewProtocol) {
+    func didPressGuideButton(on view: SelectModeViewProtocol) {
         wireframe?.presentMarbleRunListView(from: view, with: .builder)
     }
     

@@ -131,9 +131,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rke-21-vtW">
-                                <rect key="frame" x="164" y="363" width="48" height="30"/>
+                                <rect key="frame" x="168" y="363" width="41" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Builder"/>
+                                <state key="normal" title="Guide"/>
                                 <connections>
                                     <action selector="builderButtonPressed:" destination="bZF-Ci-Udm" eventType="touchUpInside" id="M7P-Ex-MSP"/>
                                 </connections>
