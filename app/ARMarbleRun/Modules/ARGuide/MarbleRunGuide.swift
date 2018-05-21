@@ -69,12 +69,12 @@ class MarbleRunGuide {
         elements.forEach { (e) in
             e.set(state: .hidden)
             if e.location == Triple(0,0,0) {
-                stack.append(e)
+                appendElement(e)
             }
         }
         if stack.isEmpty {
             if let e = elements(onLevel: 0).first {
-                stack.append(e)
+                appendElement(e)
             }
         }
     }
@@ -87,6 +87,7 @@ class MarbleRunGuide {
         deactivateCurrentElement()
         setNewCurrentElement()
         activateCurrentElement()
+        addCurrentToGuide()
         addNeighborsToQueue()
         if stack.isEmpty {
             startNextLevel()
@@ -106,7 +107,12 @@ class MarbleRunGuide {
     private func setNewCurrentElement() {
         if let next = stack.popLast() {
             currentElement = next
-            guide.append(currentElement!.location)
+        }
+    }
+    
+    private func addCurrentToGuide() {
+        if let loc = currentElement?.location {
+            guide.append(loc)
         }
     }
     
@@ -120,7 +126,7 @@ class MarbleRunGuide {
             possibleNeighbors.append(Triple(x, y, z-1))
 
             elements.forEach { (e) in
-                if possibleNeighbors.contains(e.location) && e.getState() == .normal {
+                if possibleNeighbors.contains(e.location) && e.getState() == .hidden {
                     appendElement(e)
                 }
             }

@@ -23,12 +23,11 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
         if let run = marbleRun {
             builder = MarbleRunGuide(run.elements)
             builder?.generate()
-            output?.setAllElements(to: .faded)
+            output?.setAllElements(to: .hidden)
             if let current = builder?.current() {
                 output?.set(elementAt: current, to: .highlighted)
             }
         }
-        print("restart")
     }
     
     func nextStep() {
@@ -42,7 +41,6 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
                 output?.set(elementAt: next, to: .highlighted)
             }
         }
-        print("next")
     }
     
     func previousStep() {
@@ -50,12 +48,11 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
             resetGuide()
         } else {
             if let current = builder?.current() {
-                output?.set(elementAt: current, to: .faded)
+                output?.set(elementAt: current, to: .hidden)
             }
             if let next = builder?.previous() {
                 output?.set(elementAt: next, to: .highlighted)
             }
         }
-        print("previous")
     }
 }
