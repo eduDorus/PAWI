@@ -91,6 +91,14 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
         marbleRun?.setRun(to: state)
     }
     
+    func previousButton(enabled: Bool) {
+        previousButton.isEnabled = enabled
+    }
+    
+    func nextButton(enabled: Bool) {
+        nextButton.isEnabled = enabled
+    }
+    
     // MARK: - Events
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

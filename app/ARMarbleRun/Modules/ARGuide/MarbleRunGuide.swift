@@ -65,6 +65,14 @@ class MarbleRunGuide {
         }
     }
     
+    func hasNext() -> Bool {
+        return guide.indices.contains(guidePointer+1)
+    }
+    
+    func hasPrevious() -> Bool {
+        return guide.indices.contains(guidePointer-1)
+    }
+    
     private func start() {
         elements.forEach { (e) in
             e.set(state: .hidden)

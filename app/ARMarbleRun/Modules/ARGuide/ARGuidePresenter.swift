@@ -60,4 +60,8 @@ class ARGuidePresenter : ARGuidePresenterProtocol, ARGuideInteractorOutputProtoc
         view?.setRun(to: state)
     }
     
+    func buttons(previousEnabled prev: Bool, nextEnabled next: Bool) {
+        view?.previousButton(enabled: prev)
+        view?.nextButton(enabled: next)
+    }
 }

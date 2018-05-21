@@ -28,18 +28,20 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
                 output?.set(elementAt: current, to: .highlighted)
             }
         }
+        checkGuideBoundaries()
     }
     
     func nextStep() {
         if builder == nil {
             resetGuide()
         } else {
-            if let current = builder?.current() {
+            if let current = builder!.current() {
                 output?.set(elementAt: current, to: .faded)
             }
-            if let next = builder?.next() {
+            if let next = builder!.next() {
                 output?.set(elementAt: next, to: .highlighted)
             }
+            checkGuideBoundaries()
         }
     }
     
@@ -47,12 +49,22 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
         if builder == nil {
             resetGuide()
         } else {
-            if let current = builder?.current() {
+            if let current = builder!.current() {
                 output?.set(elementAt: current, to: .hidden)
             }
-            if let next = builder?.previous() {
+            if let next = builder!.previous() {
                 output?.set(elementAt: next, to: .highlighted)
             }
+            checkGuideBoundaries()
+        }
+    }
+    
+    private func checkGuideBoundaries() {
+        if builder != nil {
+            output?.buttons(
+                previousEnabled: builder!.hasPrevious(),
+                nextEnabled: builder!.hasNext()
+            )
         }
     }
 }

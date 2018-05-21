@@ -25,6 +25,8 @@ protocol ARGuideViewProtocol : class {
     func removeAllElements()
     func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState)
     func setRun(to state: ElementState)
+    func previousButton(enabled: Bool)
+    func nextButton(enabled: Bool)
 }
 
 protocol ARGuidePresenterProtocol : class {
@@ -54,4 +56,5 @@ protocol ARGuideInteractorInputProtocol : class {
 protocol ARGuideInteractorOutputProtocol : class {
     func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState)
     func setAllElements(to state: ElementState)
+    func buttons(previousEnabled prev: Bool, nextEnabled next: Bool)
 }
