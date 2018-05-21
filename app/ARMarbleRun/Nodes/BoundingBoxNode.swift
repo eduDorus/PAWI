@@ -17,30 +17,7 @@ class BoundingBoxNode: SCNNode, ElementProtocol {
     init(location: Triple<Int, Int, Int>) {
         super.init()
         self.set(location: location)
-    }
-    
-    override public init() {
-        super.init()
-        // this shader makes the (edge-)cube only show the lines on the sides and no diagonals
-        let sm = "float u = _surface.diffuseTexcoord.x; \n" +
-            "float v = _surface.diffuseTexcoord.y; \n" +
-            "int u100 = int(u * 100); \n" +
-            "int v100 = int(v * 100); \n" +
-            "if (u100 % 99 == 0 || v100 % 99 == 0) { \n" +
-            "  // do nothing \n" +
-            "} else { \n" +
-            "    discard_fragment(); \n" +
-        "} \n"
-        
-        let boxGeometry = SCNBox(width: sidelength, height: sidelength, length: sidelength, chamferRadius: 0.001)
-        boxGeometry.firstMaterial?.transparency = transparency
-        geometry = boxGeometry
-        let edgeBox = SCNBox(width: sidelength, height: sidelength, length: sidelength, chamferRadius: 0.0)
-        edgeBox.firstMaterial?.shaderModifiers = [SCNShaderModifierEntryPoint.surface: sm]
-        edgeBox.firstMaterial?.isDoubleSided = true
-        addChildNode(SCNNode(geometry: edgeBox))
-        set(color: UIColor.white)
-        castsShadow = true
+        setGeometry()
     }
     
     func set(state: ElementState) {
@@ -59,10 +36,13 @@ class BoundingBoxNode: SCNNode, ElementProtocol {
         return state
     }
 
-    
     func set(location: Triple<Int, Int, Int>) {
         self.location = location
-        self.position = SCNVector3(CGFloat(self.location.values.0) * self.sidelength, CGFloat(self.location.values.1) * self.sidelength, CGFloat(self.location.values.2) * self.sidelength)
+        updatePosition()
+    }
+    
+    private func updatePosition() {
+        self.position = SCNVector3(CGFloat(self.location.values.0) * self.sidelength, CGFloat(self.location.values.1) * self.sidelength + (self.sidelength/2), CGFloat(self.location.values.2) * self.sidelength)
     }
     
     func getLocation() -> Triple<Int, Int, Int> {
@@ -85,6 +65,29 @@ class BoundingBoxNode: SCNNode, ElementProtocol {
             child.geometry?.firstMaterial?.diffuse.contents = color
             child.geometry?.firstMaterial?.emission.contents = color
         }
+    }
+    
+    private func setGeometry() {
+        // this shader makes the (edge-)cube only show the lines on the sides and no diagonals
+        let sm = "float u = _surface.diffuseTexcoord.x; \n" +
+            "float v = _surface.diffuseTexcoord.y; \n" +
+            "int u100 = int(u * 100); \n" +
+            "int v100 = int(v * 100); \n" +
+            "if (u100 % 99 == 0 || v100 % 99 == 0) { \n" +
+            "  // do nothing \n" +
+            "} else { \n" +
+            "    discard_fragment(); \n" +
+        "} \n"
+        
+        let boxGeometry = SCNBox(width: sidelength, height: sidelength, length: sidelength, chamferRadius: 0.001)
+        boxGeometry.firstMaterial?.transparency = transparency
+        geometry = boxGeometry
+        let edgeBox = SCNBox(width: sidelength, height: sidelength, length: sidelength, chamferRadius: 0.0)
+        edgeBox.firstMaterial?.shaderModifiers = [SCNShaderModifierEntryPoint.surface: sm]
+        edgeBox.firstMaterial?.isDoubleSided = true
+        addChildNode(SCNNode(geometry: edgeBox))
+        set(color: UIColor.white)
+        castsShadow = true
     }
     
     required init?(coder aDecoder: NSCoder) {

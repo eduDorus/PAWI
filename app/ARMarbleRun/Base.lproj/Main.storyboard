@@ -281,7 +281,7 @@
                                     <segue destination="BV1-FR-VrT" kind="embed" identifier="ARSCNViewSegue" id="rf1-Jy-Gqf"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OT8-9F-TZt">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OT8-9F-TZt">
                                 <rect key="frame" x="172" y="568" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
@@ -300,9 +300,17 @@
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Git-1e-iid">
                                 <rect key="frame" x="163" y="568" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancle"/>
+                                <state key="normal" title="Cancel"/>
                                 <connections>
-                                    <action selector="didPressCancle:" destination="dXx-W0-vKx" eventType="touchUpInside" id="8gU-LN-M2A"/>
+                                    <action selector="didPressCancel:" destination="dXx-W0-vKx" eventType="touchUpInside" id="g14-DI-UeJ"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHW-Rd-isO">
+                                <rect key="frame" x="172" y="568" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="didPressStart:" destination="dXx-W0-vKx" eventType="touchUpInside" id="g3f-hr-NcU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -315,6 +323,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cOd-00-vFy"/>
                     </view>
+                    <connections>
+                        <outlet property="addButton" destination="OT8-9F-TZt" id="VIY-BP-bU9"/>
+                        <outlet property="cancelButton" destination="Git-1e-iid" id="TPv-Dp-rfB"/>
+                        <outlet property="startButton" destination="bHW-Rd-isO" id="Yeh-UA-9JC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLH-WP-xSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -322,6 +335,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="z08-RH-b7B"/>
+        <segue reference="rf1-Jy-Gqf"/>
     </inferredMetricsTieBreakers>
 </document>
