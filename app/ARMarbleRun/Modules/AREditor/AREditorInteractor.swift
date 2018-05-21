@@ -22,17 +22,19 @@ class AREditorInteractor : AREditorInteractorProtocol {
         if marbleRun != nil {
             for element in marbleRun!.elements {
                 let (x, y, z) = element.location.values
-                if marbleRun!.getElement(at: Triple(x, y, z + 1)) == nil {
-                    result.insert(Triple(x,y,z + 1))
-                }
-                if marbleRun!.getElement(at: Triple(x, y, z - 1)) == nil {
-                    result.insert(Triple(x,y,z - 1))
-                }
-                if marbleRun!.getElement(at: Triple(x + 1, y, z )) == nil {
-                    result.insert(Triple(x + 1,y,z))
-                }
-                if marbleRun!.getElement(at: Triple(x - 1, y, z)) == nil {
-                    result.insert(Triple(x - 1,y,z))
+                if (y == 0) {
+                    if marbleRun!.getElement(at: Triple(x, y, z + 1)) == nil {
+                        result.insert(Triple(x,y,z + 1))
+                    }
+                    if marbleRun!.getElement(at: Triple(x, y, z - 1)) == nil {
+                        result.insert(Triple(x,y,z - 1))
+                    }
+                    if marbleRun!.getElement(at: Triple(x + 1, y, z )) == nil {
+                        result.insert(Triple(x + 1,y,z))
+                    }
+                    if marbleRun!.getElement(at: Triple(x - 1, y, z)) == nil {
+                        result.insert(Triple(x - 1,y,z))
+                    }
                 }
                 if marbleRun!.getElement(at: Triple(x, y + 1, z)) == nil {
                     result.insert(Triple(x,y + 1,z))
