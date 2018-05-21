@@ -19,6 +19,10 @@ class ElementEntity : NSObject, ElementProtocol, NSCoding {
         self.state = state
     }
     
+    func set(location: Triple<Int, Int, Int>) {
+        self.location = location
+    }
+    
     func getState() -> ElementState {
         return self.state
     }

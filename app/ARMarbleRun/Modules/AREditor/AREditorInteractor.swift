@@ -45,8 +45,7 @@ class AREditorInteractor : AREditorInteractorProtocol {
         return result
     }
     
-    func buildElement(type: Int, at location: Triple<Int, Int, Int>) {
-        let element = ElementEntity.init(type: type, location: location)
+    func buildElement(element: ElementEntity) {
         marbleRun!.elements.append(element)
     }
     

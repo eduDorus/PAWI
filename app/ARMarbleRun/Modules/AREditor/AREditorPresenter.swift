@@ -10,6 +10,7 @@ class AREditorPresenter : AREditorPresenterProtocol {
     var wireframe: AREditorWireframeProtocol?
     weak var view: AREditorViewProtocol?
     var interactor: AREditorInteractorProtocol?
+    var nextElement: ElementEntity = ElementEntity(type: 12, location: Triple(0,0,0))
     
     func viewDidLoad() {
         let mr = interactor?.retrieveMarbleRun()
@@ -48,7 +49,7 @@ class AREditorPresenter : AREditorPresenterProtocol {
     }
     
     func setSelectedElement(element: ElementEntity) {
-        print(element.type)
+        nextElement = element
         getPossiblePositions()
     }
     
@@ -58,8 +59,9 @@ class AREditorPresenter : AREditorPresenterProtocol {
     }
     
     func buildElement(at location: Triple<Int, Int, Int>) {
-        interactor?.buildElement(type: 12, at: location)
-        view?.add(element: ElementEntity(type: 12, location: location))
+        nextElement.set(location: location)
+        interactor?.buildElement(element: nextElement)
+        view?.add(element: nextElement)
         view?.removeBoundingBoxes()
     }
     

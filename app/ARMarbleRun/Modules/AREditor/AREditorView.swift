@@ -11,14 +11,15 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     var presenter: AREditorPresenterProtocol?
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
-    var state : ARGuideState = .planeSelection
+    var state : AREditorStatus = .planeSelection
     override var prefersStatusBarHidden: Bool {
         return true
     }
 
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var addButton: UIButton!
-
+    @IBOutlet weak var startButton: UIButton!
+    
     // MARK: - IBActions
     
     @IBAction func didPressCancel(_ sender: Any) {
@@ -33,6 +34,13 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     
     @IBAction func didPressMenu(_ sender: Any) {
         menuAction()
+    }
+    
+    @IBAction func didPressStart(_ sender: Any) {
+        state = .editorMode
+        startButton.isHidden = true
+        startButton.isEnabled = false
+        addButton.isHidden = false
     }
     
     override func viewDidLoad() {
@@ -50,6 +58,11 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         if let vc = segue.destination as? ARViewController, segue.identifier == "ARSCNViewSegue" {
             self.subview = vc
         }
+    }
+    
+    func toggleAddCancel() {
+        addButton.isHidden = !addButton.isHidden
+        cancelButton.isHidden = !cancelButton.isHidden
     }
 
     // MARK: - Tap Gestures
@@ -86,17 +99,38 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     
     @objc
     func didTap(_ recognizer: UIGestureRecognizer) {
-        let tapLocation = recognizer.location(in: subview?.sceneView)
-        let hitTestResults = subview?.sceneView.hitTest(tapLocation)
-        
-        guard let node = hitTestResults?.first?.node else {return}
-        
-        if let element = node as? ElementNode {
-            presenter?.selectElement(at: element.getLocation())
-        }
-        
-        if let boundingBox = node as? BoundingBoxNode {
-            presenter?.buildElement(at: boundingBox.getLocation())
+        switch state {
+        case .planeSelection:
+            let location = recognizer.location(in: subview?.sceneView)
+            if subview!.selectExistingPlane(location: location) {
+                state = .runPlacement(.unlocked)
+                presenter?.readyForMarbleRun()
+                startButton.isHidden = false
+            }
+            
+        case .runPlacement(.unlocked):
+            marbleRun?.removeConstraints()
+            state = .runPlacement(.locked)
+            startButton.isEnabled = true
+            
+        case .runPlacement(.locked):
+            marbleRun?.constraintToCamera()
+            state = .runPlacement(.unlocked)
+            startButton.isEnabled = false
+            
+        case .editorMode:
+            let tapLocation = recognizer.location(in: subview?.sceneView)
+            let hitTestResults = subview?.sceneView.hitTest(tapLocation)
+            
+            guard let node = hitTestResults?.first?.node else {return}
+            
+            if let element = node as? ElementNode {
+                presenter?.selectElement(at: element.getLocation())
+            }
+            
+            if let boundingBox = node as? BoundingBoxNode {
+                presenter?.buildElement(at: boundingBox.getLocation())
+            }
         }
     }
     
@@ -130,31 +164,11 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
             presenter?.rotateElement(to: .down)
         }
     }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        switch state {
-        case .planeSelection:
-            let touch = touches.first!
-            let location = touch.location(in: subview?.sceneView)
-            if subview!.selectExistingPlane(location: location) {
-                state = .runPlacement(.unlocked)
-                presenter?.readyForMarbleRun()
-            }
-        case .runPlacement(.unlocked):
-            marbleRun?.removeConstraints()
-            state = .runPlacement(.locked)
-        case .runPlacement(.locked):
-            marbleRun?.constraintToCamera()
-            state = .runPlacement(.unlocked)
-        default: break
-        }
-    }
     
     // MARK: - AREditorViewProtocol
     
     func elementSelected(element: ElementEntity) {
-        addButton.isHidden = true
-        cancelButton.isHidden = false
+        toggleAddCancel()
         presenter?.setSelectedElement(element: element)
     }
 
@@ -168,6 +182,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
 
     func add(element: ElementEntity) {
         marbleRun?.addChildNode(ElementNode(type: element.type, location: element.location))
+        toggleAddCancel()
     }
 
     func add(elements: [ElementEntity]) {
@@ -196,6 +211,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         marbleRun?.removeBoundingBoxes()
     }
     
+    // MARK: - Menu Action
     
     func menuAction() {
         // Create the action buttons for the alert.
@@ -239,9 +255,9 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     
 }
 
-enum EditorStatus {
+enum AREditorStatus {
     case planeSelection
-    case runPlacement(EditorStatus.Locking)
+    case runPlacement(AREditorStatus.Locking)
     case editorMode
 
     enum Locking {
