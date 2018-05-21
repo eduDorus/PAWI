@@ -12,15 +12,16 @@ class ARGuideWireframe : ARGuideWireframeProtocol, ARWireframeProtocol {
     static func createARGuideModule(of marblerun: MarbleRunEntity) -> UIViewController {
         let controller = mainStoryboard.instantiateViewController(withIdentifier: "ARGuideViewController")
         if let view = controller as? ARGuideViewProtocol {
-            let presenter: ARGuidePresenterProtocol = ARGuidePresenter()
+            let presenter = ARGuidePresenter()
             let wireframe: ARGuideWireframeProtocol = ARGuideWireframe()
-            let interactor: ARGuideInteractorProtocol = ARGuideInteractor()
+            let interactor: ARGuideInteractorInputProtocol = ARGuideInteractor()
             
             view.presenter = presenter
             presenter.view = view
             presenter.wireframe = wireframe
             presenter.interactor = interactor
             interactor.marbleRun = marblerun
+            interactor.output = presenter
             
             return controller
         }

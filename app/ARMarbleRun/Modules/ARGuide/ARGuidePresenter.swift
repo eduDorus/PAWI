@@ -6,11 +6,11 @@
 import Foundation
 import ARKit
 
-class ARGuidePresenter : ARGuidePresenterProtocol {
+class ARGuidePresenter : ARGuidePresenterProtocol, ARGuideInteractorOutputProtocol {
     
     var wireframe: ARGuideWireframeProtocol?
     weak var view: ARGuideViewProtocol?
-    var interactor: ARGuideInteractorProtocol?
+    var interactor: ARGuideInteractorInputProtocol?
     
     func viewDidLoad() {
         let mr = interactor?.retrieveMarbleRun()
@@ -44,6 +44,16 @@ class ARGuidePresenter : ARGuidePresenterProtocol {
     
     func didPressLeaveAction() {
         wireframe?.presentSelectMode()
+    }
+    
+    // MARK: - ARGuideInteractorOutputProtocol
+    
+    func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState) {
+        view?.set(elementAt: position, to: state)
+    }
+    
+    func setAllElements(to state: ElementState) {
+        view?.setRun(to: state)
     }
     
 }

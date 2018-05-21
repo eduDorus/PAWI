@@ -9,6 +9,7 @@ import ARKit
 
 class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
     
+    
     var presenter: ARGuidePresenterProtocol?
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
@@ -65,13 +66,17 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
         }
     }
     
-    func remove(elementAt position: Int) {
+    func remove(elementAt position: Triple<Int, Int, Int>) {
     }
     
     func removeAllElements() {
     }
     
-    func set(elementAt position: Int, to status: ElementState) {
+    func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState) {
+    }
+    
+    func setRun(to state: ElementState) {
+        marbleRun?.setRun(to: state)
     }
     
     // MARK: - Events

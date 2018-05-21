@@ -5,8 +5,10 @@
 
 import Foundation
 
-class ARGuideInteractor : ARGuideInteractorProtocol {
+class ARGuideInteractor : ARGuideInteractorInputProtocol {
     var marbleRun: MarbleRunEntity?
+    var builder : MarbleRunBuilder?
+    weak var output: ARGuideInteractorOutputProtocol?
     
     func retrieveMarbleRun() -> [ElementEntity] {
         //MarbleRunDataManager().retrieveMarbleRun(name: "TestingMe")
@@ -18,10 +20,19 @@ class ARGuideInteractor : ARGuideInteractorProtocol {
     }
     
     func resetGuide() {
+        if let run = marbleRun {
+            builder = MarbleRunBuilder(run.elements)
+            builder?.start()
+        }
         print("restart")
     }
     
     func nextStep() {
+        if builder == nil {
+            resetGuide()
+        } else {
+            builder!.step()
+        }
         print("next")
     }
     

@@ -21,15 +21,16 @@ protocol ARGuideViewProtocol : class {
     func initializeMarbleRun()
     func add(element: ElementEntity)
     func add(elements: [ElementEntity])
-    func remove(elementAt position: Int)
+    func remove(elementAt position: Triple<Int, Int, Int>)
     func removeAllElements()
-    func set(elementAt position: Int, to status: ElementState)
+    func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState)
+    func setRun(to state: ElementState)
 }
 
 protocol ARGuidePresenterProtocol : class {
     var view : ARGuideViewProtocol? { get set }
     var wireframe : ARGuideWireframeProtocol? { get set }
-    var interactor : ARGuideInteractorProtocol? { get set }
+    var interactor : ARGuideInteractorInputProtocol? { get set }
     
     func viewDidLoad()
     func readyForMarbleRun()
@@ -40,10 +41,16 @@ protocol ARGuidePresenterProtocol : class {
     func didPressLeaveAction()
 }
 
-protocol ARGuideInteractorProtocol : class {
+protocol ARGuideInteractorInputProtocol : class {
     var marbleRun : MarbleRunEntity? { get set }
+    var output : ARGuideInteractorOutputProtocol? { get set }
     func resetGuide()
     func nextStep()
     func previousStep()
     func retrieveMarbleRun() -> [ElementEntity]
+}
+
+protocol ARGuideInteractorOutputProtocol : class {
+    func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState)
+    func setAllElements(to state: ElementState)
 }
