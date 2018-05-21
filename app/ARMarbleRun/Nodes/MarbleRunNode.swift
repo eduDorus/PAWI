@@ -12,7 +12,6 @@ class MarbleRunNode : SCNNode {
     
     override init() {
         super.init()
-        addElement(type: 12, location: Triple(0, 0, 0))
     }
     
     // MARK: - Setters
