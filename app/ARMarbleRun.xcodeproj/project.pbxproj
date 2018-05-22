@@ -29,7 +29,7 @@
 		A0CB293B20AAD71B0012A3C4 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */; };
 		A0D82601209F3AA700C74FD7 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A0D82600209F3AA700C74FD7 /* art.scnassets */; };
-		A0D82603209F3AA700C74FD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D82602209F3AA700C74FD7 /* ViewController.swift */; };
+		A0D82603209F3AA700C74FD7 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D82602209F3AA700C74FD7 /* AboutView.swift */; };
 		A0D82606209F3AA700C74FD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0D82604209F3AA700C74FD7 /* Main.storyboard */; };
 		A0D82608209F3AA800C74FD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0D82607209F3AA800C74FD7 /* Assets.xcassets */; };
 		A0D8260B209F3AA800C74FD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0D82609209F3AA800C74FD7 /* LaunchScreen.storyboard */; };
@@ -88,7 +88,7 @@
 		A0D825FB209F3AA700C74FD7 /* ARMarbleRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMarbleRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0D82600209F3AA700C74FD7 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		A0D82602209F3AA700C74FD7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A0D82602209F3AA700C74FD7 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		A0D82605209F3AA700C74FD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A0D82607209F3AA800C74FD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0D8260A209F3AA800C74FD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				A0D82633209F43B400C74FD7 /* Modules */,
 				A0D825FE209F3AA700C74FD7 /* AppDelegate.swift */,
 				A0D82600209F3AA700C74FD7 /* art.scnassets */,
-				A0D82602209F3AA700C74FD7 /* ViewController.swift */,
+				A0D82602209F3AA700C74FD7 /* AboutView.swift */,
 				A0D82604209F3AA700C74FD7 /* Main.storyboard */,
 				A0D82607209F3AA800C74FD7 /* Assets.xcassets */,
 				A0D82609209F3AA800C74FD7 /* LaunchScreen.storyboard */,
@@ -408,7 +408,7 @@
 				A0D82656209FA65D00C74FD7 /* AREditorProtocols.swift in Sources */,
 				A0D8264D209F5F1400C74FD7 /* MarbleRunListInteractor.swift in Sources */,
 				A0D8266220A0ACB200C74FD7 /* ElementEntity.swift in Sources */,
-				A0D82603209F3AA700C74FD7 /* ViewController.swift in Sources */,
+				A0D82603209F3AA700C74FD7 /* AboutView.swift in Sources */,
 				A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */,
 				A0CB293B20AAD71B0012A3C4 /* (null) in Sources */,
 				A0D8264B209F5F0C00C74FD7 /* MarbleRunListPresenter.swift in Sources */,
