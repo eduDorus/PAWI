@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import os
 
 class MarbleRunDataManager {
     let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
