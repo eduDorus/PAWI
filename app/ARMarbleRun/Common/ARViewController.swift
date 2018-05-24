@@ -2,9 +2,6 @@
 //  ARViewController.swift
 //  ARMarbleRun
 //
-//  Created by Lucas Schnüriger on 17.05.18.
-//  Copyright © 2018 hslu. All rights reserved.
-//
 
 import Foundation
 import ARKit

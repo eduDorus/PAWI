@@ -2,6 +2,7 @@
 //  ElementEntity.swift
 //  ARMarbleRun
 //
+
 import Foundation
 
 class ElementEntity : NSObject, ElementProtocol, NSCoding {

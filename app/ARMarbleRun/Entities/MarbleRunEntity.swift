@@ -2,6 +2,7 @@
 //  MarbleRunEntity.swift
 //  ARMarbleRun
 //
+
 import Foundation
 
 class MarbleRunEntity : NSObject, NSCoding {
