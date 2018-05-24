@@ -14,8 +14,8 @@ class PlaneNode: SCNNode {
         super.init()
         let planeGeometry = SCNPlane(width:CGFloat(planeAnchor.extent.x), height:CGFloat(planeAnchor.extent.z))
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "art.scnassets/checkerboard.png")
-        material.transparent.contents = UIImage(named: "art.scnassets/checkerboard-alpha.png")
+        material.diffuse.contents = UIImage(named: "art.scnassets/grid-pattern.png")
+        material.transparent.contents = UIImage(named: "art.scnassets/grid-pattern.png")
         material.transparencyMode = .rgbZero
         // set repeat mode in both direction otherwise the patern is stretched!
         material.diffuse.wrapS = .repeat
@@ -44,8 +44,8 @@ class PlaneNode: SCNNode {
         // the scale gives the number of times the image is repeated
         // ARKit gives the width and height in meters, in this case we want to repeat
         // the pattern each 2cm = 0.02m so we divide the width/height to find the number of patterns
-        let scaleX = (Float(planeGeometry.width)  / 0.02)
-        let scaleY = (Float(planeGeometry.height) / 0.02)
+        let scaleX = (Float(planeGeometry.width)  / 0.01)
+        let scaleY = (Float(planeGeometry.height) / 0.01)
         // we then apply the scaling
         planeGeometry.firstMaterial?.diffuse.contentsTransform = SCNMatrix4MakeScale(scaleX, scaleY, 0)
         planeGeometry.firstMaterial?.transparent.contentsTransform = SCNMatrix4MakeScale(scaleX, scaleY, 0)
