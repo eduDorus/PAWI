@@ -83,7 +83,15 @@ class AREditorPresenter : AREditorPresenterProtocol {
         selectedElement?.set(state: .highlighted)
     }
     
-    func rotateElement(to direction: RotationDirection) {
-        interactor?.rotateElement(to: direction)
+    func rotateElement(to direction: UISwipeGestureRecognizerDirection) {
+        var rotation: CGFloat = 0.0
+        if direction == .left {
+            rotation = CGFloat(-(Double.pi/2))
+        }
+        if direction == .right {
+            rotation = CGFloat(Double.pi/2)
+        }
+        
+        view?.rotate(element: selectedElement!, rotation: rotation)
     }
 }

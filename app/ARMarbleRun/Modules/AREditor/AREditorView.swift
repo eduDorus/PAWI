@@ -93,8 +93,6 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         
         subview?.sceneView.addGestureRecognizer(swipeLeftGesture)
         subview?.sceneView.addGestureRecognizer(swipeRightGesture)
-        subview?.sceneView.addGestureRecognizer(swipeUpGesture)
-        subview?.sceneView.addGestureRecognizer(swipeDownGesture)
     }
     
     @objc
@@ -152,20 +150,12 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     
     @objc
     func didSwipe(_ gesture: UISwipeGestureRecognizer) {
-        let currentAngle = subview?.sceneView.session.currentFrame?.camera.eulerAngles.y
-        
-        if gesture.direction == .right {
-            presenter?.rotateElement(to: .right)
-        }
-        else if gesture.direction == .left {
-            presenter?.rotateElement(to: .left)
-        }
-        else if gesture.direction == .up {
-            presenter?.rotateElement(to: .up)
-        }
-        else if gesture.direction == .down {
-            presenter?.rotateElement(to: .down)
-        }
+        presenter?.rotateElement(to: gesture.direction)
+    }
+    
+    func rotate(element: ElementNode, rotation: CGFloat) {
+        let action: SCNAction = SCNAction.rotateBy(x: 0, y: rotation, z: 0, duration: 0.0)
+        element.runAction(action, forKey: "rotate")
     }
     
     // MARK: - AREditorViewProtocol

@@ -50,9 +50,61 @@ class AREditorInteractor : AREditorInteractorProtocol {
     }
     
     func removeElement(at location: Triple<Int, Int, Int>) -> Bool {
-        // TODO: Check if remove is valid
+        if hasElementOnTop(at: location) {
+            return false
+        }
+        if (location.values.1 == 0 && !checkRemoveElement(at: location)) {
+            return false
+        }
         marbleRun!.removeElement(at: location)
         return true
+    }
+    
+    func hasElementOnTop(at location: Triple<Int, Int, Int>) -> Bool {
+        var elements = marbleRun?.elements
+        for element in elements! {
+            if element.location.values.1 == location.values.1 + 1 {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func checkRemoveElement(at location: Triple<Int, Int, Int>) -> Bool {
+        let elementLocations = marbleRun?.elements
+        .filter({ (e) -> Bool in
+            e.location.values.1 == 0 && e.location != location
+        })
+        .map({ (e) -> Triple<Int, Int, Int> in
+            e.location
+        })
+        // make sure there is always at least one cube
+        if elementLocations?.count == 0 {
+            return false
+        }
+        
+        var visited : [Triple<Int, Int, Int>] = []
+        var next: [Triple<Int, Int, Int>] = []
+        next.append((elementLocations?.first)!)
+        
+        while next.count != 0 {
+            let nextElement = next.first
+            let (x,y,z) = (nextElement?.values)!
+            var p: [Triple<Int, Int, Int>] = []
+            p.append(Triple(x+1,y,z))
+            p.append(Triple(x-1,y,z))
+            p.append(Triple(x,y,z+1))
+            p.append(Triple(x,y,z-1))
+            
+            for e in p {
+                if ((elementLocations?.contains(e))! && !visited.contains(e)) && !next.contains(e) {
+                    next.append(e)
+                }
+            }
+            visited.append(nextElement!)
+            next.removeFirst()
+        }
+        return visited.count == elementLocations?.count
     }
     
     func selectElement(at location: Triple<Int, Int, Int>) {

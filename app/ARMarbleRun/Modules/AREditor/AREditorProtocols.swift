@@ -25,6 +25,7 @@ protocol AREditorViewProtocol : class {
     func add(elements: [ElementEntity])
     func select(at position: Triple<Int, Int, Int>)
     func remove(at position: Triple<Int, Int, Int>)
+    func rotate(element: ElementNode, rotation: CGFloat)
     
     func toggleAddCancel()
     
@@ -50,7 +51,7 @@ protocol AREditorPresenterProtocol : class {
     func buildElement(at location: Triple<Int, Int, Int>)
     func removeElement(at location: Triple<Int, Int, Int>)
     func selectElement(element: ElementNode)
-    func rotateElement(to direction: RotationDirection)
+    func rotateElement(to direction: UISwipeGestureRecognizerDirection)
 }
 
 protocol AREditorInteractorProtocol : class {
@@ -69,7 +70,5 @@ protocol AREditorInteractorProtocol : class {
 enum RotationDirection {
     case left
     case right
-    case up
-    case down
 }
 
