@@ -17,7 +17,6 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    @IBOutlet var buttonContainer: UIStackView!
     @IBOutlet var previousButton: UIButton!
     @IBOutlet var nextButton: UIButton!
     @IBOutlet var startButton: UIButton!
@@ -40,10 +39,10 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
         presenter?.didPressStart()
         state = .buildProcess
         startButton.isHidden = true
-        buttonContainer.isHidden = false
+        previousButton.isHidden = false
+        nextButton.isHidden = false
     }
     
-
     override func viewDidLoad() {
         presenter?.viewDidLoad()
     }
