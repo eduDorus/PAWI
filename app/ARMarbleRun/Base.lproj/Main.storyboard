@@ -168,16 +168,64 @@
                                     <action selector="guideButtonPressed:" destination="bZF-Ci-Udm" eventType="touchUpInside" id="x5a-ER-YBz"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Create a new Marble Run or edit an existing one." textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EtC-sI-WFD">
+                                <rect key="frame" x="60" y="265.5" width="255" height="80"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="XPT-hI-3jj"/>
+                                </constraints>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Use the interactive building guide to build Marble Runs in your home." textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyU-nG-yAa">
+                                <rect key="frame" x="60" y="567" width="255" height="80"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="lJL-40-rpC"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-editor" translatesAutoresizingMaskIntoConstraints="NO" id="sjG-nc-IzX">
+                                <rect key="frame" x="147.5" y="104" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Puc-pA-AjP"/>
+                                    <constraint firstAttribute="width" constant="80" id="rQ0-xm-xIS"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-guide" translatesAutoresizingMaskIntoConstraints="NO" id="Cmm-9e-cdk">
+                                <rect key="frame" x="147" y="405.5" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="52r-83-27h"/>
+                                    <constraint firstAttribute="width" constant="80" id="Vcq-ck-adY"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Cmm-9e-cdk" firstAttribute="top" secondItem="NJH-Ki-6xL" secondAttribute="bottom" constant="40" id="4g1-O4-QF0"/>
+                            <constraint firstItem="IAB-0X-xoV" firstAttribute="bottom" secondItem="kyU-nG-yAa" secondAttribute="bottom" constant="20" id="4gB-8d-jl8"/>
                             <constraint firstItem="NJH-Ki-6xL" firstAttribute="top" secondItem="IAB-0X-xoV" secondAttribute="top" id="BMA-BE-0gR"/>
                             <constraint firstItem="NJH-Ki-6xL" firstAttribute="leading" secondItem="IAB-0X-xoV" secondAttribute="leading" id="CtZ-Zb-frx"/>
                             <constraint firstItem="IAB-0X-xoV" firstAttribute="trailing" secondItem="NJH-Ki-6xL" secondAttribute="trailing" id="EV0-l7-HwD"/>
                             <constraint firstItem="Rke-21-vtW" firstAttribute="leading" secondItem="IAB-0X-xoV" secondAttribute="leading" id="KNQ-rA-zTn"/>
+                            <constraint firstItem="IAB-0X-xoV" firstAttribute="trailing" secondItem="EtC-sI-WFD" secondAttribute="trailing" constant="60" id="Mmm-JO-P96"/>
+                            <constraint firstItem="Cmm-9e-cdk" firstAttribute="centerX" secondItem="33w-bC-9Dq" secondAttribute="centerX" id="SEv-v4-JzQ"/>
+                            <constraint firstItem="EtC-sI-WFD" firstAttribute="leading" secondItem="IAB-0X-xoV" secondAttribute="leading" constant="60" id="YTr-pp-Dhh"/>
                             <constraint firstItem="Rke-21-vtW" firstAttribute="top" secondItem="NJH-Ki-6xL" secondAttribute="bottom" id="a6S-FK-iHZ"/>
+                            <constraint firstItem="kyU-nG-yAa" firstAttribute="leading" secondItem="IAB-0X-xoV" secondAttribute="leading" constant="60" id="b40-Va-fwX"/>
                             <constraint firstItem="IAB-0X-xoV" firstAttribute="bottom" secondItem="Rke-21-vtW" secondAttribute="bottom" id="eoq-Ez-YPM"/>
+                            <constraint firstItem="IAB-0X-xoV" firstAttribute="trailing" secondItem="kyU-nG-yAa" secondAttribute="trailing" constant="60" id="hTo-rS-kJe"/>
+                            <constraint firstItem="sjG-nc-IzX" firstAttribute="top" secondItem="IAB-0X-xoV" secondAttribute="top" constant="40" id="hWJ-c9-QPJ"/>
+                            <constraint firstItem="sjG-nc-IzX" firstAttribute="centerX" secondItem="33w-bC-9Dq" secondAttribute="centerX" id="htp-sB-Qz7"/>
                             <constraint firstItem="IAB-0X-xoV" firstAttribute="trailing" secondItem="Rke-21-vtW" secondAttribute="trailing" id="iT6-xU-dzX"/>
+                            <constraint firstItem="Rke-21-vtW" firstAttribute="top" secondItem="EtC-sI-WFD" secondAttribute="bottom" constant="20" id="lVe-aw-np4"/>
                             <constraint firstItem="Rke-21-vtW" firstAttribute="top" secondItem="IAB-0X-xoV" secondAttribute="centerY" id="lmy-LB-eyr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IAB-0X-xoV"/>
@@ -636,6 +684,8 @@ Find its source code and all documentation on:</string>
         <image name="button-forward" width="100" height="100"/>
         <image name="button-menu" width="100" height="100"/>
         <image name="button-start" width="100" height="100"/>
+        <image name="icon-editor" width="100" height="100"/>
+        <image name="icon-guide" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rf1-Jy-Gqf"/>
