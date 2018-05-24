@@ -55,14 +55,10 @@ class MarbleRunGuide {
     }
     
     func current() -> Triple<Int,Int,Int>? {
-        guard finished else {
+        guard finished && guide.indices.contains(guidePointer) else {
             return nil
         }
-        if guide.indices.contains(guidePointer) {
-            return guide[guidePointer]
-        } else {
-            return nil
-        }
+        return guide[guidePointer]
     }
     
     func hasNext() -> Bool {
@@ -97,6 +93,9 @@ class MarbleRunGuide {
         activateCurrentElement()
         addCurrentToGuide()
         addNeighborsToQueue()
+        if stack.isEmpty {
+            checkLevel()
+        }
         if stack.isEmpty {
             startNextLevel()
         }
@@ -137,6 +136,15 @@ class MarbleRunGuide {
                 if possibleNeighbors.contains(e.location) && e.getState() == .hidden {
                     appendElement(e)
                 }
+            }
+        }
+    }
+    
+    private func checkLevel() {
+        for e in elements(onLevel: currentLevel) {
+            if e.getState() == .hidden {
+                appendElement(e)
+                return
             }
         }
     }
