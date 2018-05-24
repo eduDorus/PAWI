@@ -22,8 +22,10 @@ class ARViewController : UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        sceneView.debugOptions  = [.showConstraints, .showLightExtents, ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        if UserDefaults.standard.bool(forKey: "debugMode") {
+            sceneView.showsStatistics = true
+            sceneView.debugOptions  = [.showConstraints, .showLightExtents, ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        }
         
         // Set a new scene to the view
         sceneView.scene = SCNScene()

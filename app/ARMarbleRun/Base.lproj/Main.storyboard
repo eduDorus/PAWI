@@ -379,17 +379,27 @@ Find its source code and all documentation on:</string>
                                     <action selector="didPressWarehouseLink:" destination="WEs-F4-860" eventType="touchUpInside" id="Hub-wF-Jf1"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JK2-99-sMx">
-                                <rect key="frame" x="20" y="460" width="335" height="140"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="y7f-Lq-ctv">
+                                <rect key="frame" x="301" y="470" width="51" height="31"/>
+                                <connections>
+                                    <action selector="didChangeDebugSwitch:" destination="WEs-F4-860" eventType="valueChanged" id="KoX-0V-sy4"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debug Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gX-kc-CIZ">
+                                <rect key="frame" x="25" y="475" width="99" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enabling debug mode shows world origin, feature points and statistics about performance." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZK-k7-yel">
+                                <rect key="frame" x="20" y="511" width="335" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="140" id="hpF-iC-HXY"/>
+                                    <constraint firstAttribute="height" constant="60" id="3nR-oJ-9bl"/>
                                 </constraints>
-                                <string key="text">We are not affiliated, associated, authorized, endorsed by, or in any way officially connected with cuboro AG, their clients, or any of their affiliated companies.
-The name "cuboro" as well as related names, marks, emblems and images are registered trademarks of cuboro AG.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -400,16 +410,18 @@ The name "cuboro" as well as related names, marks, emblems and images are regist
                             <constraint firstItem="RBq-vw-z66" firstAttribute="leading" secondItem="Lnc-Ag-KxU" secondAttribute="trailing" constant="25" id="0mm-Uq-MVm"/>
                             <constraint firstItem="Qfb-aO-SaC" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="20" id="1sy-Rj-daS"/>
                             <constraint firstItem="Lnc-Ag-KxU" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="25" id="2rZ-lF-Kn2"/>
-                            <constraint firstItem="JK2-99-sMx" firstAttribute="top" secondItem="9PR-tV-f2G" secondAttribute="bottom" constant="25" id="45T-mo-PEG"/>
+                            <constraint firstItem="qZK-k7-yel" firstAttribute="top" secondItem="y7f-Lq-ctv" secondAttribute="bottom" constant="10" id="9ex-76-icb"/>
                             <constraint firstItem="Qfb-aO-SaC" firstAttribute="top" secondItem="RBq-vw-z66" secondAttribute="bottom" constant="25" id="A57-yK-1fl"/>
                             <constraint firstItem="XIF-M4-K8t" firstAttribute="trailing" secondItem="6yF-l9-IQc" secondAttribute="trailing" constant="25" id="CAt-3W-XaR"/>
                             <constraint firstItem="XIF-M4-K8t" firstAttribute="trailing" secondItem="Jar-Qg-YZD" secondAttribute="trailing" constant="20" id="E4Z-AF-dUX"/>
                             <constraint firstItem="4Jw-gr-ZUX" firstAttribute="leading" secondItem="Lnc-Ag-KxU" secondAttribute="trailing" constant="25" id="Gaf-ok-npG"/>
                             <constraint firstItem="nF8-mv-9lr" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="25" id="J9k-pw-Yx5"/>
+                            <constraint firstItem="y7f-Lq-ctv" firstAttribute="top" secondItem="9PR-tV-f2G" secondAttribute="bottom" constant="35" id="Pdw-fn-hr7"/>
                             <constraint firstItem="nF8-mv-9lr" firstAttribute="top" secondItem="XIF-M4-K8t" secondAttribute="top" constant="25" id="Tqf-GD-vYw"/>
+                            <constraint firstItem="XIF-M4-K8t" firstAttribute="trailing" secondItem="qZK-k7-yel" secondAttribute="trailing" constant="20" id="Wbn-Cv-rmI"/>
                             <constraint firstAttribute="trailing" secondItem="9PR-tV-f2G" secondAttribute="trailing" constant="25" id="YBs-uk-s3F"/>
                             <constraint firstItem="Jar-Qg-YZD" firstAttribute="top" secondItem="6yF-l9-IQc" secondAttribute="bottom" constant="25" id="cQ2-d6-mq1"/>
-                            <constraint firstItem="XIF-M4-K8t" firstAttribute="trailing" secondItem="JK2-99-sMx" secondAttribute="trailing" constant="20" id="daJ-3j-xD2"/>
+                            <constraint firstItem="qZK-k7-yel" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="20" id="ddB-0o-NI4"/>
                             <constraint firstItem="6yF-l9-IQc" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="25" id="ewc-xF-3n2"/>
                             <constraint firstItem="6yF-l9-IQc" firstAttribute="top" secondItem="Qfb-aO-SaC" secondAttribute="bottom" id="hL7-U6-9Uc"/>
                             <constraint firstItem="Jar-Qg-YZD" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="20" id="iIe-ja-6NV"/>
@@ -417,10 +429,12 @@ The name "cuboro" as well as related names, marks, emblems and images are regist
                             <constraint firstItem="4Jw-gr-ZUX" firstAttribute="top" secondItem="Lnc-Ag-KxU" secondAttribute="top" id="mLr-p4-2d1"/>
                             <constraint firstItem="9PR-tV-f2G" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="25" id="pRa-t8-Y6T"/>
                             <constraint firstItem="XIF-M4-K8t" firstAttribute="trailing" secondItem="Qfb-aO-SaC" secondAttribute="trailing" constant="20" id="qmM-Mw-CmU"/>
+                            <constraint firstItem="7gX-kc-CIZ" firstAttribute="centerY" secondItem="y7f-Lq-ctv" secondAttribute="centerY" id="rgC-J5-dTj"/>
                             <constraint firstItem="Ye1-N3-llr" firstAttribute="top" secondItem="XIF-M4-K8t" secondAttribute="top" constant="25" id="tlS-1Z-05H"/>
+                            <constraint firstItem="XIF-M4-K8t" firstAttribute="trailing" secondItem="y7f-Lq-ctv" secondAttribute="trailing" constant="25" id="uju-z2-Z07"/>
                             <constraint firstItem="Lnc-Ag-KxU" firstAttribute="top" secondItem="nF8-mv-9lr" secondAttribute="bottom" constant="25" id="vXm-qw-eaB"/>
                             <constraint firstItem="RBq-vw-z66" firstAttribute="top" secondItem="4Jw-gr-ZUX" secondAttribute="bottom" constant="10" id="xQg-YJ-H3i"/>
-                            <constraint firstItem="JK2-99-sMx" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="20" id="xzV-Rj-mxG"/>
+                            <constraint firstItem="7gX-kc-CIZ" firstAttribute="leading" secondItem="XIF-M4-K8t" secondAttribute="leading" constant="25" id="yIk-j0-dRJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XIF-M4-K8t"/>
                     </view>
@@ -436,6 +450,9 @@ The name "cuboro" as well as related names, marks, emblems and images are regist
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="debugSwitch" destination="y7f-Lq-ctv" id="XHC-w7-NuK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oxg-mc-fEZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

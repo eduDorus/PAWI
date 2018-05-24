@@ -99,3 +99,4 @@ doc/*.pdf
 
 # VSCode
 .vscode
+.idea

@@ -9,6 +9,8 @@ import ARKit
 
 class AboutView: UIViewController {
 
+    @IBOutlet var debugSwitch: UISwitch!
+    
     @IBAction func didPressClose(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -21,8 +23,13 @@ class AboutView: UIViewController {
         UIApplication.shared.open(URL(string: "https://3dwarehouse.sketchup.com/model/186c758680cfa2a522da50b0bf761759")! as URL, options: [:], completionHandler: nil)
     }
     
+    @IBAction func didChangeDebugSwitch(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "debugMode")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        debugSwitch.isOn = UserDefaults.standard.bool(forKey: "debugMode")
    }
     
     override func viewWillAppear(_ animated: Bool) {
