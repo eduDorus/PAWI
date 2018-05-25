@@ -13,11 +13,11 @@ class MarbleRunGuide {
     var guide : [Triple<Int,Int,Int>] = []
     var guidePointer = 0
     var finished = false
-    
+
     init(_ elements: [ElementEntity]) {
         self.elements = elements
     }
-    
+
     func generate() {
         guard !finished else {
             return
@@ -27,48 +27,42 @@ class MarbleRunGuide {
             self.step()
         } while (!finished)
     }
-    
+
     func next() -> Triple<Int,Int,Int>? {
-        guard finished else {
+        guard hasNext() else {
             return nil
         }
         guidePointer += 1
-        if guide.indices.contains(guidePointer) {
-            return guide[guidePointer]
-        } else {
-            guidePointer -= 1
-            return nil
-        }
+        return getStep(number: guidePointer+1)
     }
-    
+
     func previous() -> Triple<Int,Int,Int>? {
-        guard finished else {
+        guard hasPrevious() else {
             return nil
         }
         guidePointer -= 1
-        if guide.indices.contains(guidePointer) {
-            return guide[guidePointer]
-        } else {
-            guidePointer += 1
+        return getStep(number: guidePointer)
+    }
+
+    private func getStep(number: Int) -> Triple<Int,Int,Int>? {
+        guard finished, guide.indices.contains(number) else {
             return nil
         }
+        return guide[number]
     }
-    
+
     func current() -> Triple<Int,Int,Int>? {
-        guard finished && guide.indices.contains(guidePointer) else {
-            return nil
-        }
-        return guide[guidePointer]
+        return getStep(number: guidePointer)
     }
-    
+
     func hasNext() -> Bool {
         return guide.indices.contains(guidePointer+1)
     }
-    
+
     func hasPrevious() -> Bool {
         return guide.indices.contains(guidePointer-1)
     }
-    
+
     private func start() {
         elements.forEach { (e) in
             e.set(state: .hidden)
@@ -82,7 +76,7 @@ class MarbleRunGuide {
             }
         }
     }
-    
+
     private func step() {
         if stack.isEmpty {
             finished = true
@@ -100,29 +94,29 @@ class MarbleRunGuide {
             startNextLevel()
         }
     }
-    
+
     private func activateCurrentElement() {
         guard currentElement != nil else { return }
         currentElement!.set(state: .highlighted)
     }
-    
+
     private func deactivateCurrentElement() {
         guard currentElement != nil else { return }
         currentElement!.set(state: .faded)
     }
-    
+
     private func setNewCurrentElement() {
         if let next = stack.popLast() {
             currentElement = next
         }
     }
-    
+
     private func addCurrentToGuide() {
         if let loc = currentElement?.location {
             guide.append(loc)
         }
     }
-    
+
     private func addNeighborsToQueue() {
         guard currentElement != nil else { return }
         if let (x,y,z) = currentElement?.location.values {
@@ -139,7 +133,7 @@ class MarbleRunGuide {
             }
         }
     }
-    
+
     private func checkLevel() {
         for e in elements(onLevel: currentLevel) {
             if e.getState() == .hidden {
@@ -148,14 +142,14 @@ class MarbleRunGuide {
             }
         }
     }
-    
+
     private func startNextLevel() {
         currentLevel += 1
         if let e = elements(onLevel: currentLevel).first {
             appendElement(e)
         }
     }
-    
+
     private func elements(onLevel level: Int) -> [ElementEntity] {
         var levelElements : [ElementEntity] = []
         elements.forEach { (e) in
@@ -165,10 +159,10 @@ class MarbleRunGuide {
         }
         return levelElements
     }
-    
+
     private func appendElement(_ element: ElementEntity) {
         element.set(state: .normal)
         stack.append(element)
     }
-    
+
 }

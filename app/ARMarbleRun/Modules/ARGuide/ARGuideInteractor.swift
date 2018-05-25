@@ -52,8 +52,8 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
             if let current = builder!.current() {
                 output?.set(elementAt: current, to: .hidden)
             }
-            if let next = builder!.previous() {
-                output?.set(elementAt: next, to: .highlighted)
+            if let previous = builder!.previous() {
+                output?.set(elementAt: previous, to: .highlighted)
             }
             checkGuideBoundaries()
         }
