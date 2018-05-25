@@ -71,17 +71,9 @@ class AREditorInteractor : AREditorInteractorProtocol {
     }
     
     func checkRemoveElement(at location: Triple<Int, Int, Int>) -> Bool {
-        let elementLocations = marbleRun?.elements
-        .filter({ (e) -> Bool in
-            e.location.values.1 == 0 && e.location != location
-        })
-        .map({ (e) -> Triple<Int, Int, Int> in
-            e.location
-        })
+        let elementLocations = getAllBaseElements(except: location)
         // make sure there is always at least one cube
-        if elementLocations?.count == 0 {
-            return false
-        }
+        if elementLocations?.count == 0 { return false }
         
         var visited : [Triple<Int, Int, Int>] = []
         var next: [Triple<Int, Int, Int>] = []
@@ -89,13 +81,8 @@ class AREditorInteractor : AREditorInteractorProtocol {
         
         while next.count != 0 {
             let nextElement = next.first
-            let (x,y,z) = (nextElement?.values)!
-            var p: [Triple<Int, Int, Int>] = []
-            p.append(Triple(x+1,y,z))
-            p.append(Triple(x-1,y,z))
-            p.append(Triple(x,y,z+1))
-            p.append(Triple(x,y,z-1))
-            
+            let p: [Triple<Int, Int, Int>] = neighborPositions(from: nextElement)
+
             for e in p {
                 if ((elementLocations?.contains(e))! && !visited.contains(e)) && !next.contains(e) {
                     next.append(e)
@@ -106,7 +93,27 @@ class AREditorInteractor : AREditorInteractorProtocol {
         }
         return visited.count == elementLocations?.count
     }
-    
+
+    private func neighborPositions(from position: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>] {
+        let (x, y, z) = (position?.values)!
+        var p: [Triple<Int, Int, Int>] = []
+        p.append(Triple(x+1,y,z))
+        p.append(Triple(x-1,y,z))
+        p.append(Triple(x,y,z+1))
+        p.append(Triple(x,y,z-1))
+        return p
+    }
+
+    private func getAllBaseElements(except location: Triple<Int, Int, Int>) -> [Triple<Int, Int, Int>]? {
+        let elementLocations = marbleRun?.elements.filter({ (e) -> Bool in
+            e.location.values.1 == 0 && e.location != location
+        })
+        .map({ (e) -> Triple<Int, Int, Int> in
+            e.location
+        })
+        return elementLocations
+    }
+
     func selectElement(at location: Triple<Int, Int, Int>) {
     }
     
