@@ -117,23 +117,27 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
             startButton.isEnabled = false
             
         case .editorMode:
-            let tapLocation = recognizer.location(in: subview?.sceneView)
-            let hitTestResults = subview?.sceneView.hitTest(tapLocation)
-            
-            guard let node = hitTestResults?.first?.node else {return}
-            
-            if let element = node as? ElementNode {
-                presenter?.selectElement(element: element)
-            } else if let element = node.parent as? ElementNode {
-                presenter?.selectElement(element: element)
-            }
-            
-            if let boundingBox = node as? BoundingBoxNode {
-                presenter?.buildElement(at: boundingBox.getLocation())
-            }
+            selectElement(recognizer)
         }
     }
-    
+
+    private func selectElement(_ recognizer: UIGestureRecognizer) {
+        let tapLocation = recognizer.location(in: subview?.sceneView)
+        let hitTestResults = subview?.sceneView.hitTest(tapLocation)
+
+        guard let node = hitTestResults?.first?.node else { return }
+
+        if let element = node as? ElementNode {
+            presenter?.selectElement(element: element)
+        } else if let element = node.parent as? ElementNode {
+            presenter?.selectElement(element: element)
+        }
+
+        if let boundingBox = node as? BoundingBoxNode {
+            presenter?.buildElement(at: boundingBox.getLocation())
+        }
+    }
+
     @objc
     func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
         let longPressLocation = recognizer.location(in: subview?.sceneView)
