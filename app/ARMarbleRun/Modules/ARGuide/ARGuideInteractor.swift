@@ -9,7 +9,7 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
     var marbleRun: MarbleRunEntity?
     var builder : MarbleRunGuide?
     weak var output: ARGuideInteractorOutputProtocol?
-    
+
     func retrieveMarbleRun() -> [ElementEntity] {
         //MarbleRunDataManager().retrieveMarbleRun(name: "TestingMe")
         if marbleRun != nil {
@@ -18,7 +18,7 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
             return []
         }
     }
-    
+
     func resetGuide() {
         if let run = marbleRun {
             builder = MarbleRunGuide(run.elements)
@@ -30,35 +30,39 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
         }
         checkGuideBoundaries()
     }
-    
+
     func nextStep() {
-        if builder == nil {
+        guard builder != nil else {
             resetGuide()
-        } else {
-            if let current = builder!.current() {
-                output?.set(elementAt: current, to: .faded)
-            }
-            if let next = builder!.next() {
-                output?.set(elementAt: next, to: .highlighted)
-            }
-            checkGuideBoundaries()
+            return
         }
+        setCurrent(to: .faded)
+        highlight(element: builder?.next())
+        checkGuideBoundaries()
     }
-    
+
     func previousStep() {
-        if builder == nil {
+        guard builder != nil else {
             resetGuide()
-        } else {
-            if let current = builder!.current() {
-                output?.set(elementAt: current, to: .hidden)
-            }
-            if let previous = builder!.previous() {
-                output?.set(elementAt: previous, to: .highlighted)
-            }
-            checkGuideBoundaries()
+            return
+        }
+        setCurrent(to: .hidden)
+        highlight(element: builder?.previous())
+        checkGuideBoundaries()
+    }
+
+    private func setCurrent(to state: ElementState) {
+        if let current = builder!.current() {
+            output?.set(elementAt: current, to: state)
         }
     }
-    
+
+    private func highlight(element: Triple<Int,Int,Int>?) {
+        if let pos = element {
+            output?.set(elementAt: pos, to: .highlighted)
+        }
+    }
+
     private func checkGuideBoundaries() {
         if builder != nil {
             output?.buttons(
