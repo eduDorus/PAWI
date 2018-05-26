@@ -103,12 +103,12 @@ class AREditorInteractor : AREditorInteractorProtocol {
 
     private func neighborPositions(from position: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>] {
         let (x, y, z) = (position?.values)!
-        var p: [Triple<Int, Int, Int>] = []
-        p.append(Triple(x+1,y,z))
-        p.append(Triple(x-1,y,z))
-        p.append(Triple(x,y,z+1))
-        p.append(Triple(x,y,z-1))
-        return p
+        return [
+            Triple(x+1,y,z),
+            Triple(x-1,y,z),
+            Triple(x,y,z+1),
+            Triple(x,y,z-1)
+        ]
     }
 
     private func getAllBaseElements(except location: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>]? {
