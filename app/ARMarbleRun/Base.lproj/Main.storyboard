@@ -382,7 +382,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfb-aO-SaC">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfb-aO-SaC">
                                 <rect key="frame" x="20" y="212" width="335" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -404,8 +404,8 @@ Find its source code and all documentation on:</string>
                                     <action selector="didPressGitHubLink:" destination="WEs-F4-860" eventType="touchUpInside" id="yAV-Sb-sjm"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.1 (22.05.2018)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ye1-N3-llr">
-                                <rect key="frame" x="141" y="89" width="124" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0 (01.06.2018)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ye1-N3-llr">
+                                <rect key="frame" x="141" y="89" width="123" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -491,7 +491,7 @@ Find its source code and all documentation on:</string>
                         <viewLayoutGuide key="safeArea" id="XIF-M4-K8t"/>
                     </view>
                     <navigationItem key="navigationItem" title="About this App" id="f28-Lr-kXv">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="DzJ-ed-Uun">
+                        <barButtonItem key="rightBarButtonItem" style="done" id="DzJ-ed-Uun">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZBa-Hq-itq">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -584,7 +584,7 @@ Find its source code and all documentation on:</string>
                                 </connections>
                             </containerView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OT8-9F-TZt">
-                                <rect key="frame" x="158" y="577" width="60" height="60"/>
+                                <rect key="frame" x="157" y="577" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="t3e-OP-AdC"/>
                                     <constraint firstAttribute="width" constant="60" id="wgu-E6-M67"/>
@@ -617,7 +617,7 @@ Find its source code and all documentation on:</string>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHW-Rd-isO">
-                                <rect key="frame" x="157.5" y="577" width="60" height="60"/>
+                                <rect key="frame" x="157" y="577" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="ArM-qa-luC"/>
                                     <constraint firstAttribute="height" constant="60" id="tp1-py-X9D"/>
@@ -663,20 +663,6 @@ Find its source code and all documentation on:</string>
             </objects>
             <point key="canvasLocation" x="4001" y="1518"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="6bV-60-qgc">
-            <objects>
-                <viewController id="9wa-DA-h1W" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MFK-Ja-xhC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Few-0n-lbT"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ofO-dC-hng" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
         <image name="button-add" width="100" height="100"/>
@@ -689,6 +675,6 @@ Find its source code and all documentation on:</string>
         <image name="icon-guide" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rf1-Jy-Gqf"/>
+        <segue reference="z08-RH-b7B"/>
     </inferredMetricsTieBreakers>
 </document>
