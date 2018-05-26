@@ -162,7 +162,7 @@
                                 <color key="backgroundColor" red="0.98431372549019602" green="0.75294117647058822" blue="0.1764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Guide">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="guideButtonPressed:" destination="bZF-Ci-Udm" eventType="touchUpInside" id="x5a-ER-YBz"/>
@@ -188,7 +188,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="lJL-40-rpC"/>
                                 </constraints>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -665,14 +665,14 @@ Find its source code and all documentation on:</string>
         </scene>
     </scenes>
     <resources>
-        <image name="button-add" width="100" height="100"/>
-        <image name="button-back" width="100" height="100"/>
-        <image name="button-cancel" width="100" height="100"/>
-        <image name="button-forward" width="100" height="100"/>
-        <image name="button-menu" width="100" height="100"/>
-        <image name="button-start" width="100" height="100"/>
-        <image name="icon-editor" width="100" height="100"/>
-        <image name="icon-guide" width="100" height="100"/>
+        <image name="button-add" width="150" height="150"/>
+        <image name="button-back" width="150" height="150"/>
+        <image name="button-cancel" width="150" height="150"/>
+        <image name="button-forward" width="150" height="150"/>
+        <image name="button-menu" width="150" height="150"/>
+        <image name="button-start" width="150" height="150"/>
+        <image name="icon-editor" width="150" height="150"/>
+        <image name="icon-guide" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="z08-RH-b7B"/>
