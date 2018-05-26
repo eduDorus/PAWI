@@ -259,21 +259,21 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rzK-fg-Zaf">
-                                    <size key="itemSize" width="176" height="176"/>
+                                    <size key="itemSize" width="180" height="180"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MarbleRunCell" id="umF-1u-lfI">
-                                        <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MarbleRunName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kre-W4-d04">
-                                                    <rect key="frame" x="24" y="142" width="128" height="21"/>
+                                                    <rect key="frame" x="26" y="146" width="128" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -287,30 +287,31 @@
                                         </constraints>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewRunCell" id="0oz-NT-geE">
-                                        <rect key="frame" x="199" y="0.0" width="176" height="176"/>
+                                        <rect key="frame" x="195" y="0.0" width="180" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MarbleRunName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uN9-ml-vHH">
-                                                    <rect key="frame" x="24" y="142" width="128" height="21"/>
+                                                    <rect key="frame" x="26" y="146" width="128" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BX-Go-TgM">
-                                                    <rect key="frame" x="53" y="-4" width="70" height="144"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="120"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button-add" translatesAutoresizingMaskIntoConstraints="NO" id="5bB-1W-R40">
+                                                    <rect key="frame" x="50" y="35" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="7VH-c5-Ecm"/>
+                                                        <constraint firstAttribute="height" constant="80" id="KRc-Y8-fPt"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="3BX-Go-TgM" firstAttribute="centerY" secondItem="0oz-NT-geE" secondAttribute="centerY" constant="-20" id="ZVv-3A-Zsx"/>
-                                            <constraint firstItem="3BX-Go-TgM" firstAttribute="centerX" secondItem="0oz-NT-geE" secondAttribute="centerX" id="n4C-Im-xcT"/>
+                                            <constraint firstItem="5bB-1W-R40" firstAttribute="centerY" secondItem="0oz-NT-geE" secondAttribute="centerY" constant="-15" id="46y-cT-s8Y"/>
+                                            <constraint firstItem="5bB-1W-R40" firstAttribute="centerX" secondItem="0oz-NT-geE" secondAttribute="centerX" id="Ofb-1E-H7q"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="uN9-ml-vHH" secondAttribute="bottom" constant="5" id="oAh-x0-mGh"/>
                                             <constraint firstItem="uN9-ml-vHH" firstAttribute="centerX" secondItem="0oz-NT-geE" secondAttribute="centerX" id="viN-25-p96"/>
                                         </constraints>
@@ -523,27 +524,27 @@ Find its source code and all documentation on:</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZAz-Ff-PqG">
-                                    <size key="itemSize" width="110" height="120"/>
+                                    <size key="itemSize" width="115" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ElementCell" id="rVl-Ra-KzT">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="110" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="115" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ElementName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt4-VF-MCj">
-                                                    <rect key="frame" x="1.5" y="91" width="107" height="21"/>
+                                                    <rect key="frame" x="3.5" y="91" width="107" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bx-6Q-uOU">
-                                                    <rect key="frame" x="15" y="5" width="80" height="80"/>
+                                                    <rect key="frame" x="17" y="5" width="80" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="80" id="c1F-SP-EAK"/>
                                                         <constraint firstAttribute="width" constant="80" id="nJn-78-wW3"/>
