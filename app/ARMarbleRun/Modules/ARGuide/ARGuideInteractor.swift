@@ -7,11 +7,13 @@ import Foundation
 
 class ARGuideInteractor : ARGuideInteractorInputProtocol {
     var marbleRun: MarbleRunEntity?
-    var builder : MarbleRunGuide?
+    var guide: [Triple<Int,Int,Int>] = []
+    var currentPointer = 0
+    let pastElementState = ElementState.faded
+    let futureElementState = ElementState.hidden
     weak var output: ARGuideInteractorOutputProtocol?
 
     func retrieveMarbleRun() -> [ElementEntity] {
-        //MarbleRunDataManager().retrieveMarbleRun(name: "TestingMe")
         if marbleRun != nil {
             return marbleRun!.elements
         } else {
@@ -21,54 +23,52 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
 
     func resetGuide() {
         if let run = marbleRun {
-            builder = MarbleRunGuide(run.elements)
-            builder?.generate()
-            output?.setAllElements(to: .hidden)
-            if let current = builder?.current() {
-                output?.set(elementAt: current, to: .highlighted)
+            var pos : [Triple<Int,Int,Int>] = []
+            for e in run.elements {
+                pos.append(e.location)
             }
+            let builder = DepthFirstSort(pos)
+            guide = builder.generate()
+            output?.setAllElements(to: futureElementState)
+            output?.set(elementAt: guide[0], to: .highlighted)
         }
         checkGuideBoundaries()
     }
 
     func nextStep() {
-        guard builder != nil else {
-            resetGuide()
-            return
+        if hasNext() {
+            setCurrent(to: pastElementState)
+            currentPointer += 1
+            setCurrent(to: .highlighted)
+            checkGuideBoundaries()
         }
-        setCurrent(to: .faded)
-        highlight(element: builder?.next())
-        checkGuideBoundaries()
     }
 
     func previousStep() {
-        guard builder != nil else {
-            resetGuide()
-            return
+        if hasPrevious() {
+            setCurrent(to: futureElementState)
+            currentPointer -= 1
+            setCurrent(to: .highlighted)
+            checkGuideBoundaries()
         }
-        setCurrent(to: .hidden)
-        highlight(element: builder?.previous())
-        checkGuideBoundaries()
+    }
+
+    private func hasNext() -> Bool {
+        return currentPointer+1 < guide.endIndex
+    }
+
+    private func hasPrevious() -> Bool {
+        return currentPointer-1 >= guide.startIndex
     }
 
     private func setCurrent(to state: ElementState) {
-        if let current = builder!.current() {
-            output?.set(elementAt: current, to: state)
-        }
-    }
-
-    private func highlight(element: Triple<Int,Int,Int>?) {
-        if let pos = element {
-            output?.set(elementAt: pos, to: .highlighted)
-        }
+        output?.set(elementAt: guide[currentPointer], to: state)
     }
 
     private func checkGuideBoundaries() {
-        if builder != nil {
-            output?.buttons(
-                previousEnabled: builder!.hasPrevious(),
-                nextEnabled: builder!.hasNext()
-            )
-        }
+        output?.buttons(
+            previousEnabled: hasPrevious(),
+            nextEnabled: hasNext()
+        )
     }
 }
