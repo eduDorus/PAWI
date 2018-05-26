@@ -4,12 +4,19 @@
 //
 
 import Foundation
+import UIKit
 
 class ElementEntity : NSObject, ElementProtocol, NSCoding {
     public var location : Triple<Int, Int, Int>
     var state = ElementState.normal
     public var type = 12
     var orientation = 5
+    
+    var image : UIImage? {
+        get {
+            return UIImage(named: "element-\(type)")
+        }
+    }
     
     init(type: Int, location: Triple<Int, Int, Int>) {
         self.type = type

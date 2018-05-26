@@ -523,33 +523,41 @@ Find its source code and all documentation on:</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZAz-Ff-PqG">
-                                    <size key="itemSize" width="130" height="130"/>
+                                    <size key="itemSize" width="110" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ElementCell" id="rVl-Ra-KzT">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="110" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ElementName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt4-VF-MCj">
-                                                    <rect key="frame" x="-3.5" y="66" width="107" height="21"/>
+                                                    <rect key="frame" x="1.5" y="91" width="107" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bx-6Q-uOU">
+                                                    <rect key="frame" x="15" y="5" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="c1F-SP-EAK"/>
+                                                        <constraint firstAttribute="width" constant="80" id="nJn-78-wW3"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="4bx-6Q-uOU" firstAttribute="top" secondItem="rVl-Ra-KzT" secondAttribute="top" constant="5" id="Owd-Mi-4lf"/>
+                                            <constraint firstItem="4bx-6Q-uOU" firstAttribute="centerX" secondItem="rVl-Ra-KzT" secondAttribute="centerX" id="ato-E1-K7w"/>
                                             <constraint firstItem="qt4-VF-MCj" firstAttribute="centerX" secondItem="rVl-Ra-KzT" secondAttribute="centerX" id="vdF-k5-ZBc"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="qt4-VF-MCj" secondAttribute="bottom" constant="5" id="zt1-VY-KuU"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="qt4-VF-MCj" secondAttribute="bottom" id="zt1-VY-KuU"/>
                                         </constraints>
-                                        <size key="customSize" width="100" height="100"/>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -567,7 +575,7 @@ Find its source code and all documentation on:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajN-16-PSj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3014" y="1518"/>
+            <point key="canvasLocation" x="3013.5999999999999" y="1517.9910044977512"/>
         </scene>
         <!--Editor View-->
         <scene sceneID="kCk-sT-Oau">

@@ -38,8 +38,11 @@ extension ElementSelectView : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ElementCell", for: indexPath)
-        if let label = cell.contentView.subviews.first as? UILabel {
+        if let label = cell.contentView.subviews[0] as? UILabel {
             label.text = String(elementList[indexPath.row].type)
+        }
+        if let image = cell.contentView.subviews[1] as? UIImageView {
+            image.image = elementList[indexPath.row].image
         }
         return cell
     }
