@@ -11,7 +11,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     var presenter: AREditorPresenterProtocol?
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
-    var state : AREditorStatus = .planeSelection
+    var state : ARModeState = .planeSelection
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -118,6 +118,8 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
             
         case .editorMode:
             selectElement(recognizer)
+            
+        default: return
         }
     }
 
@@ -250,15 +252,3 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
     
 }
-
-enum AREditorStatus {
-    case planeSelection
-    case runPlacement(AREditorStatus.Locking)
-    case editorMode
-
-    enum Locking {
-        case locked
-        case unlocked
-    }
-}
-

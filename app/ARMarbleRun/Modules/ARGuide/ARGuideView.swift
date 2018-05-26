@@ -8,12 +8,11 @@ import UIKit
 import ARKit
 
 class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
-    
-    
+
     var presenter: ARGuidePresenterProtocol?
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
-    var state : ARGuideState = .planeSelection
+    var state : ARModeState = .planeSelection
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -163,17 +162,3 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
         }
     }
 }
-
-
-enum ARGuideState {
-    case planeSelection
-    case runPlacement(ARGuideState.Locking)
-    case buildProcess
-
-    enum Locking {
-        case locked
-        case unlocked
-    }
-}
-
-

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		465A9853DE09C2576F9E2AE4 /* DepthFirstSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465A9E9C7A591DB9F683FF12 /* DepthFirstSort.swift */; };
+		465A9EFA0E7BC9419F24034A /* ARModeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465A9B290373727901468C6F /* ARModeState.swift */; };
 		7ED4F91820AAB09E00A4CAEC /* AREditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F91520AAB09E00A4CAEC /* AREditorView.swift */; };
 		7ED4F91920AAB09E00A4CAEC /* AREditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F91620AAB09E00A4CAEC /* AREditorPresenter.swift */; };
 		7ED4F91A20AAB09E00A4CAEC /* AREditorInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F91720AAB09E00A4CAEC /* AREditorInteractor.swift */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		465A9B290373727901468C6F /* ARModeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARModeState.swift; sourceTree = "<group>"; };
 		465A9E9C7A591DB9F683FF12 /* DepthFirstSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthFirstSort.swift; sourceTree = "<group>"; };
 		7ED4F91520AAB09E00A4CAEC /* AREditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AREditorView.swift; sourceTree = "<group>"; };
 		7ED4F91620AAB09E00A4CAEC /* AREditorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AREditorPresenter.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				A02D8C2B20AD638D001E1D2E /* ARViewController.swift */,
 				465A9E9C7A591DB9F683FF12 /* DepthFirstSort.swift */,
 				A040BE2B20AEAD89002DD292 /* Initializer.swift */,
+				465A9B290373727901468C6F /* ARModeState.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				A0C0321E20AB1A3F00C091A0 /* ElementNode.swift in Sources */,
 				7ED4F92620AACA6300A4CAEC /* ElementSelectProtocols.swift in Sources */,
 				465A9853DE09C2576F9E2AE4 /* DepthFirstSort.swift in Sources */,
+				465A9EFA0E7BC9419F24034A /* ARModeState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
