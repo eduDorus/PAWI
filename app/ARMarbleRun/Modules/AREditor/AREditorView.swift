@@ -128,13 +128,16 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         let tapLocation = recognizer.location(in: subview?.sceneView)
         let hitTestResults = subview?.sceneView.hitTest(tapLocation)
 
-        guard let node = hitTestResults?.first?.node else { return }
+        guard let node = hitTestResults?.first?.node else {
+            presenter?.unselectElement()
+            return
+        }
 
         if let element = node as? ElementNode {
             presenter?.selectElement(at: element.location)
         } else if let element = node.parent as? ElementNode {
             presenter?.selectElement(at: element.location)
-        } else  if let boundingBox = node as? BoundingBoxNode {
+        } else if let boundingBox = node as? BoundingBoxNode {
             presenter?.buildElement(at: boundingBox.getLocation())
         } else {
             presenter?.unselectElement()
