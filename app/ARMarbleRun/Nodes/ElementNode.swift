@@ -82,17 +82,21 @@ class ElementNode : SCNNode, ElementProtocol {
     private func updatePosition() {
         let (x,y,z) = self.location.values
         self.position = SCNVector3(
-            CGFloat(x) * self.sideLength - (self.sideLength/2),
-            CGFloat(y) * self.sideLength,
-            CGFloat(z) * self.sideLength + (self.sideLength/2)
+            CGFloat(x) * self.sideLength,
+            CGFloat(y) * self.sideLength + (self.sideLength/2),
+            CGFloat(z) * self.sideLength
         )
     }
 
     private func setGeometry() {
         if let cube = getNodeFromAssets() {
+            // scaling and translation necessary, b/c the 3d models are in inches(?) and have their origin at the bottom left front corner
+            let scalingFactor = Float(sideLength) / cube.boundingBox.max.x
+            let translation = Float(sideLength) / 2 / scalingFactor
+            self.pivot = SCNMatrix4MakeTranslation(translation, translation, translation)
             self.geometry = cube.geometry
             self.rotation = cube.rotation
-            self.scale = SCNVector3(x: 0.00127, y: 0.00127, z: 0.00127)
+            self.scale = SCNVector3(x: scalingFactor, y: scalingFactor, z: scalingFactor)
             for child in cube.childNodes {
                 addChildNode(child)
             }
