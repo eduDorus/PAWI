@@ -6,9 +6,9 @@
 import Foundation
 
 class MarbleRunDataManager {
-    let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-    func retrieveMarbleRunList() -> [MarbleRunEntity] {
+    static func retrieveMarbleRunList() -> [MarbleRunEntity] {
         var runs : [MarbleRunEntity] = []
 
         do {
@@ -25,7 +25,7 @@ class MarbleRunDataManager {
         return runs
     }
     
-    func persist(_ run: MarbleRunEntity) {
+    static func persist(_ run: MarbleRunEntity) {
         let filePath = directory.appendingPathComponent(run.fileName)
         if NSKeyedArchiver.archiveRootObject(run, toFile: filePath.path) {
             print("MarbleRun '\(run.name)' successfully saved.")

@@ -128,7 +128,6 @@ class AREditorInteractor : AREditorInteractorProtocol {
     }
 
     func persist() {
-        let dataManager = MarbleRunDataManager.init()
-        dataManager.persist(marbleRun!)
+        MarbleRunDataManager.persist(marbleRun!)
     }
 }

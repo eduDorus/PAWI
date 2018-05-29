@@ -19,6 +19,6 @@ class Initializer {
         
         run.elements.append(contentsOf: elements)
         
-        MarbleRunDataManager().persist(run)
+        MarbleRunDataManager.persist(run)
     }
 }
