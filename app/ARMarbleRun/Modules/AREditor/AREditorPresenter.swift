@@ -77,7 +77,7 @@ class AREditorPresenter : AREditorPresenterProtocol {
     
     func selectElement(at location: Triple<Int, Int, Int>) {
         if selectedElement != nil {
-            view?.unselect(at: location)
+            view?.unselect(at: selectedElement!)
         }
         selectedElement = location
         view?.select(at: location)
@@ -92,7 +92,8 @@ class AREditorPresenter : AREditorPresenterProtocol {
             if direction == .right {
                 rotation = CGFloat(Double.pi/2)
             }
-            view?.rotate(at: element, rotation: (0,rotation,0))
+            interactor?.rotateElement(at: element, rotate: (Float(0), Float(rotation), Float(0)))
+            view?.rotate(at: element, rotation: (0, rotation, 0))
         }
     }
     

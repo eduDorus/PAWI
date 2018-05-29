@@ -121,10 +121,10 @@ class AREditorInteractor : AREditorInteractorProtocol {
         return elementLocations
     }
 
-    func selectElement(at location: Triple<Int, Int, Int>) {
-    }
-
-    func rotateElement(to direction: RotationDirection) {
+    func rotateElement(at location: Triple<Int, Int, Int>, rotate: (Float, Float, Float)) {
+        if let element = marbleRun?.getElement(at: location) {
+            element.rotate(rotate)
+        }
     }
 
     func persist() {

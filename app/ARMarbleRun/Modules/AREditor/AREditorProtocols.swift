@@ -62,8 +62,7 @@ protocol AREditorInteractorProtocol : class {
     func getPossiblePositions() -> Set<Triple<Int, Int, Int>>
     func buildElement(element: ElementEntity)
     func removeElement(at location: Triple<Int, Int, Int>) -> Bool
-    func selectElement(at location: Triple<Int, Int, Int>)
-    func rotateElement(to direction: RotationDirection)
+    func rotateElement(at location: Triple<Int, Int, Int>, rotate: (Float, Float, Float))
     func persist()
     
    func retrieveMarbleRun() -> [ElementEntity]
