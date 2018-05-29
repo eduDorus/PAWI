@@ -16,9 +16,9 @@ class ElementNode : SCNNode, ElementProtocol {
     init(type: Int, location: Triple<Int, Int, Int>) {
         super.init()
         self.type = type
-        self.set(location: location)
-        self.set(state: .normal)
         setGeometry()
+        set(location: location)
+        set(state: .normal)
     }
 
     func set(state: ElementState) {
