@@ -84,14 +84,15 @@ class AREditorPresenter : AREditorPresenterProtocol {
     }
     
     func rotateElement(to direction: UISwipeGestureRecognizerDirection) {
-        var rotation: CGFloat = 0.0
-        if direction == .left {
-            rotation = CGFloat(-(Double.pi/2))
+       if let element = selectedElement {
+            var rotation: CGFloat = 0.0
+            if direction == .left {
+                rotation = CGFloat(-(Double.pi/2))
+            }
+            if direction == .right {
+                rotation = CGFloat(Double.pi/2)
+            }
+            view?.rotate(element: element, rotation: rotation)
         }
-        if direction == .right {
-            rotation = CGFloat(Double.pi/2)
-        }
-        
-        view?.rotate(element: selectedElement!, rotation: rotation)
     }
 }
