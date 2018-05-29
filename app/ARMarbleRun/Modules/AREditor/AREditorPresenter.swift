@@ -7,12 +7,12 @@ import Foundation
 import ARKit
 
 class AREditorPresenter : AREditorPresenterProtocol {
-    
+
     var wireframe: AREditorWireframeProtocol?
     weak var view: AREditorViewProtocol?
     var interactor: AREditorInteractorProtocol?
     var nextElement: ElementEntity = ElementEntity(type: 12, location: Triple(0,0,0))
-    var selectedElement: ElementNode?
+    var selectedElement: Triple<Int, Int, Int>?
     
     func viewDidLoad() {
         let mr = interactor?.retrieveMarbleRun()
@@ -75,12 +75,12 @@ class AREditorPresenter : AREditorPresenterProtocol {
         }
     }
     
-    func selectElement(element: ElementNode) {
+    func selectElement(at location: Triple<Int, Int, Int>) {
         if selectedElement != nil {
-            selectedElement?.set(state: .normal)
+            view?.unselect(at: location)
         }
-        selectedElement = element
-        selectedElement?.set(state: .highlighted)
+        selectedElement = location
+        view?.select(at: location)
     }
     
     func rotateElement(to direction: UISwipeGestureRecognizerDirection) {
@@ -92,7 +92,14 @@ class AREditorPresenter : AREditorPresenterProtocol {
             if direction == .right {
                 rotation = CGFloat(Double.pi/2)
             }
-            view?.rotate(element: element, rotation: rotation)
+            view?.rotate(at: element, rotation: (0,rotation,0))
+        }
+    }
+    
+    func unselectElement() {
+        if selectedElement != nil {
+            view?.unselect(at: selectedElement!)
+            selectedElement = nil
         }
     }
 }

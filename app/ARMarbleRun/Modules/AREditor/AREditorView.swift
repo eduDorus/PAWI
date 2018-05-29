@@ -8,6 +8,7 @@ import UIKit
 import ARKit
 
 class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
+
     var presenter: AREditorPresenterProtocol?
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
@@ -130,13 +131,13 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         guard let node = hitTestResults?.first?.node else { return }
 
         if let element = node as? ElementNode {
-            presenter?.selectElement(element: element)
+            presenter?.selectElement(at: element.location)
         } else if let element = node.parent as? ElementNode {
-            presenter?.selectElement(element: element)
-        }
-
-        if let boundingBox = node as? BoundingBoxNode {
+            presenter?.selectElement(at: element.location)
+        } else  if let boundingBox = node as? BoundingBoxNode {
             presenter?.buildElement(at: boundingBox.getLocation())
+        } else {
+            presenter?.unselectElement()
         }
     }
 
@@ -159,9 +160,12 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         presenter?.rotateElement(to: gesture.direction)
     }
     
-    func rotate(element: ElementNode, rotation: CGFloat) {
-        let action: SCNAction = SCNAction.rotateBy(x: 0, y: rotation, z: 0, duration: 0.0)
-        element.runAction(action, forKey: "rotate")
+    func rotate(at position: Triple<Int, Int, Int>, rotation: (CGFloat, CGFloat, CGFloat)) {
+        if let element = marbleRun?.getElement(at: position) {
+            let (x,y,z) = rotation
+            let action: SCNAction = SCNAction.rotateBy(x: x, y: y, z: z, duration: 0.2)
+            element.runAction(action, forKey: "rotate")
+        }
     }
     
     // MARK: - AREditorViewProtocol
@@ -190,9 +194,13 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
     
     func select(at position: Triple<Int, Int, Int>) {
-        // TODO: Unhighlight the previouse selected
         let element = marbleRun?.getElement(at: position)
         element?.set(state: .highlighted)
+    }
+    
+    func unselect(at position: Triple<Int, Int, Int>) {
+        let element = marbleRun?.getElement(at: position)
+        element?.set(state: .normal)
     }
     
     func remove(at position: Triple<Int, Int, Int>) {

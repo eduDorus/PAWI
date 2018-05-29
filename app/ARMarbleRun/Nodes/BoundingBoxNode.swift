@@ -18,6 +18,8 @@ class BoundingBoxNode: SCNNode, ElementProtocol {
         super.init()
         self.set(location: location)
         setGeometry()
+        let length = Float(self.edgeWidth/2)
+        self.pivot = SCNMatrix4MakeTranslation(length, length, length)
     }
     
     func set(state: ElementState) {

@@ -30,7 +30,7 @@ class ARViewController : UIViewController, ARSCNViewDelegate {
         // Set lighting
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
-
+        
         screenCenter = sceneView.center
     }
 
