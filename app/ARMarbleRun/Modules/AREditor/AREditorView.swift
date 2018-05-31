@@ -133,7 +133,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         let hitTestResults = subview?.sceneView.hitTest(tapLocation)
 
         guard let node = hitTestResults?.first?.node else {
-            presenter?.unselectElement()
+            presenter?.deselectElement()
             return
         }
 
@@ -144,7 +144,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         } else if let boundingBox = node as? BoundingBoxNode {
             presenter?.buildElement(at: boundingBox.getLocation())
         } else {
-            presenter?.unselectElement()
+            presenter?.deselectElement()
         }
     }
 
@@ -170,11 +170,13 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         }
     }
 
-    func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3) {
+    func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler block: @escaping ((_ rotation: SCNVector4) -> Void)) {
         if let element = marbleRun?.getElement(at: position) {
             if element.hasActions { return }
             let action = SCNAction.rotate(by: .pi/2, around: rotation, duration: 0.2)
-            element.runAction(action, forKey: "rotate")
+            element.runAction(action, forKey: "rotate") {
+                block(element.rotation)
+            }
         }
     }
 
@@ -208,7 +210,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         element?.set(state: .highlighted)
     }
     
-    func unselect(at position: Triple<Int, Int, Int>) {
+    func deselect(at position: Triple<Int, Int, Int>) {
         let element = marbleRun?.getElement(at: position)
         element?.set(state: .normal)
     }

@@ -77,7 +77,7 @@ class AREditorPresenter : AREditorPresenterProtocol {
     
     func selectElement(at location: Triple<Int, Int, Int>) {
         if selectedElement != nil {
-            view?.unselect(at: selectedElement!)
+            view?.deselect(at: selectedElement!)
         }
         selectedElement = location
         view?.select(at: location)
@@ -114,15 +114,15 @@ class AREditorPresenter : AREditorPresenterProtocol {
                 }
             }
 
-            let floatRotation = (Float(rotation.x), Float(rotation.y), Float(rotation.z))
-            interactor?.rotateElement(at: element, rotate: floatRotation)
-            view?.rotate(at: element, rotation: rotation)
+            view?.rotate(at: element, rotation: rotation) { (rotation) in
+                self.interactor?.rotateElement(at: element, rotate: (rotation.x, rotation.y, rotation.z, rotation.w))
+            }
         }
     }
     
-    func unselectElement() {
+    func deselectElement() {
         if selectedElement != nil {
-            view?.unselect(at: selectedElement!)
+            view?.deselect(at: selectedElement!)
             selectedElement = nil
         }
     }

@@ -10,7 +10,7 @@ class ElementEntity : NSObject, ElementProtocol, NSCoding {
     public var location : Triple<Int, Int, Int>
     var state = ElementState.normal
     public var type = 12
-    var rotation: (Float, Float, Float) = (0.0,0.0,0.0)
+    var rotation: (Float, Float, Float, Float) = (0.0, 0.0, 0.0, 0.0)
     
     var image : UIImage? {
         get {
@@ -31,11 +31,8 @@ class ElementEntity : NSObject, ElementProtocol, NSCoding {
         self.location = location
     }
     
-    func rotate(_ rotation: (Float, Float, Float)) {
-        let (x,y,z) = rotation
-        self.rotation.0 = (self.rotation.0 + x).remainder(dividingBy: (2 * .pi))
-        self.rotation.1 = (self.rotation.1 + y).remainder(dividingBy: (2 * .pi))
-        self.rotation.2 = (self.rotation.2 + z).remainder(dividingBy: (2 * .pi))
+    func set(rotation: (Float, Float, Float, Float)) {
+        self.rotation = rotation
     }
     
     func getState() -> ElementState {
@@ -44,19 +41,26 @@ class ElementEntity : NSObject, ElementProtocol, NSCoding {
     
     required init?(coder aDecoder: NSCoder) {
         self.type = aDecoder.decodeInteger(forKey: "type")
-        //self.rotation = aDecoder.decode(forKey: "rotation")
         let x = aDecoder.decodeInteger(forKey: "location0")
         let y = aDecoder.decodeInteger(forKey: "location1")
         let z = aDecoder.decodeInteger(forKey: "location2")
         self.location = Triple(x,y,z)
+        let rx = aDecoder.decodeFloat(forKey: "rotationX")
+        let ry = aDecoder.decodeFloat(forKey: "rotationY")
+        let rz = aDecoder.decodeFloat(forKey: "rotationZ")
+        let rw = aDecoder.decodeFloat(forKey: "rotationW")
+        self.rotation = (rx, ry, rz, rw)
     }
 
     func encode(with aCoder: NSCoder) {
         aCoder.encode(type, forKey: "type")
-        //.encode(orientation, forKey: "orientation")
         aCoder.encode(location.values.0, forKey: "location0")
         aCoder.encode(location.values.1, forKey: "location1")
         aCoder.encode(location.values.2, forKey: "location2")
+        aCoder.encode(rotation.0, forKey: "rotationX")
+        aCoder.encode(rotation.1, forKey: "rotationY")
+        aCoder.encode(rotation.2, forKey: "rotationZ")
+        aCoder.encode(rotation.3, forKey: "rotationW")
     }
 }
 

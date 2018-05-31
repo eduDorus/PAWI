@@ -24,9 +24,9 @@ protocol AREditorViewProtocol : class {
     func add(element: ElementEntity)
     func add(elements: [ElementEntity])
     func select(at position: Triple<Int, Int, Int>)
-    func unselect(at position: Triple<Int, Int, Int>)
+    func deselect(at position: Triple<Int, Int, Int>)
     func remove(at position: Triple<Int, Int, Int>)
-    func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3)
+    func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler block: @escaping ((_ rotation: SCNVector4) -> Void))
     
     func toggleAddCancel()
     
@@ -52,7 +52,7 @@ protocol AREditorPresenterProtocol : class {
     func buildElement(at location: Triple<Int, Int, Int>)
     func removeElement(at location: Triple<Int, Int, Int>)
     func selectElement(at location: Triple<Int, Int, Int>)
-    func unselectElement()
+    func deselectElement()
     func rotateElement(to direction: UISwipeGestureRecognizerDirection, with cameraAngle: Float)
 }
 
@@ -62,7 +62,7 @@ protocol AREditorInteractorProtocol : class {
     func getPossiblePositions() -> Set<Triple<Int, Int, Int>>
     func buildElement(element: ElementEntity)
     func removeElement(at location: Triple<Int, Int, Int>) -> Bool
-    func rotateElement(at location: Triple<Int, Int, Int>, rotate: (Float, Float, Float))
+    func rotateElement(at location: Triple<Int, Int, Int>, rotate: (Float, Float, Float, Float))
     func persist()
     
    func retrieveMarbleRun() -> [ElementEntity]
