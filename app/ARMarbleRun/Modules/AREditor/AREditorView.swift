@@ -61,26 +61,21 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
             self.subview = vc
         }
     }
-    
-    func toggleAddCancel() {
-        addButton.isHidden = !addButton.isHidden
-        cancelButton.isHidden = !cancelButton.isHidden
-    }
 
     // MARK: - Tap Gestures
 
-    func addTapGestureToSceneView() {
+    private func addTapGestureToSceneView() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
         subview?.sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func addLongTapGestureToSceneView() {
+    private func addLongTapGestureToSceneView() {
         let longTapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
         subview?.sceneView.addGestureRecognizer(longTapGestureRecognizer)
     }
     
-    func addSwipeGestureToSceneView() {
+    private func addSwipeGestureToSceneView() {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
         swipeRightGesture.direction = .right
         
@@ -100,7 +95,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
     
     @objc
-    func didTap(_ recognizer: UIGestureRecognizer) {
+    private func didTap(_ recognizer: UIGestureRecognizer) {
         switch state {
         case .planeSelection:
             let location = recognizer.location(in: subview?.sceneView)
@@ -149,7 +144,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
 
     @objc
-    func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
+    private func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
         switch state {
         case .editorMode:
             let longPressLocation = recognizer.location(in: subview?.sceneView)
@@ -167,12 +162,14 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
     
     @objc
-    func didSwipe(_ gesture: UISwipeGestureRecognizer) {
+    private func didSwipe(_ gesture: UISwipeGestureRecognizer) {
         if var cameraAngle = subview?.sceneView.session.currentFrame?.camera.eulerAngles.y {
             cameraAngle = (cameraAngle - marbleRunAngle).truncatingRemainder(dividingBy: Float.pi)
             presenter?.rotateElement(to: gesture.direction, with: cameraAngle)
         }
     }
+
+    // MARK: - AREditorViewProtocol
 
     func rotate(at location: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler block: @escaping ((_ rotation: SCNVector4) -> Void)) {
         if let element = marbleRun?.getElement(at: location) {
@@ -184,8 +181,11 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         }
     }
 
-    // MARK: - AREditorViewProtocol
-    
+    func toggleAddCancel() {
+        addButton.isHidden = !addButton.isHidden
+        cancelButton.isHidden = !cancelButton.isHidden
+    }
+
     func elementSelected(element: ElementEntity) {
         toggleAddCancel()
         presenter?.setNextElement(element: element)
@@ -209,34 +209,30 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
             add(element: e)
         }
     }
-    
-    func select(at location: Triple<Int, Int, Int>) {
-        let element = marbleRun?.getElement(at: location)
-        element?.set(state: .highlighted)
+
+    func set(elementAt location: Triple<Int, Int, Int>, to state: ElementState) {
+        if let element = marbleRun?.getElement(at: location) {
+            element.set(state: state)
+        }
     }
-    
-    func deselect(at location: Triple<Int, Int, Int>) {
-        let element = marbleRun?.getElement(at: location)
-        element?.set(state: .normal)
-    }
-    
+
     func remove(at location: Triple<Int, Int, Int>) {
         marbleRun?.removeElement(at: location)
     }
-    
+
     func addBoundingBoxes(at locations: Set<Triple<Int, Int, Int>>) {
         for location in locations {
             marbleRun?.addBoundingBox(location: location)
         }
     }
-    
+
     func removeBoundingBoxes() {
         marbleRun?.removeBoundingBoxes()
     }
-    
+
     // MARK: - Menu Action
     
-    func menuAction() {
+    private func menuAction() {
         // Create the action buttons for the alert.
         let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
             self.presenter?.didPressSaveAction()
@@ -261,13 +257,15 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         self.present(alert, animated: true)
     }
 
-    func updateMarbleRunPosition() {
+    private func updateMarbleRunPosition() {
         if let hitResult = subview?.hitTestCenter() {
             let coords = hitResult.worldTransform.columns.3
             marbleRun?.set(position: SCNVector3(coords.x, coords.y, coords.z))
         }
     }
-    
+
+    // MARK: - ARSCNViewDelegate
+
     func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
         switch state {
         case .runPlacement(.unlocked):

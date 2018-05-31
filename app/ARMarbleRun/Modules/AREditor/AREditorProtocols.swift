@@ -23,8 +23,7 @@ protocol AREditorViewProtocol : class {
     func initializeMarbleRun()
     func add(element: ElementEntity)
     func add(elements: [ElementEntity])
-    func select(at location: Triple<Int, Int, Int>)
-    func deselect(at location: Triple<Int, Int, Int>)
+    func set(elementAt location: Triple<Int, Int, Int>, to state: ElementState)
     func remove(at location: Triple<Int, Int, Int>)
     func rotate(at location: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler block: @escaping ((_ rotation: SCNVector4) -> Void))
     

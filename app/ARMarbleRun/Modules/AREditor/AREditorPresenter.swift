@@ -77,10 +77,10 @@ class AREditorPresenter : AREditorPresenterProtocol {
     
     func selectElement(at location: Triple<Int, Int, Int>) {
         if selectedElement != nil {
-            view?.deselect(at: selectedElement!)
+            view?.set(elementAt: selectedElement!, to: .normal)
         }
         selectedElement = location
-        view?.select(at: location)
+        view?.set(elementAt: selectedElement!, to: .highlighted)
     }
 
     func rotateElement(to direction: UISwipeGestureRecognizerDirection, with cameraAngle: Float) {
@@ -122,7 +122,7 @@ class AREditorPresenter : AREditorPresenterProtocol {
     
     func deselectElement() {
         if selectedElement != nil {
-            view?.deselect(at: selectedElement!)
+            view?.set(elementAt: selectedElement!, to: .normal)
             selectedElement = nil
         }
     }
