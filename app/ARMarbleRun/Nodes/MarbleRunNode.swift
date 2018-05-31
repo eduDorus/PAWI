@@ -27,8 +27,8 @@ class MarbleRunNode : SCNNode {
     // MARK: - Logic
     
     // Positions a new Element at the given location in blocks (origin block is at 0,0,0 while 0,1,0 would be a block on top of it)
-    func addElement(type: Int, location: Triple<Int, Int, Int>) {
-        let element = ElementNode(type: type, location: location)
+    func addElement(type: Int, at location: Triple<Int, Int, Int>, with rotation: SCNVector4) {
+        let element = ElementNode(type: type, at: location, with: rotation)
         addChildNode(element)
     }
     

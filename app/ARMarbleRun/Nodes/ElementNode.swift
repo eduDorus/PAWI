@@ -13,12 +13,15 @@ class ElementNode : SCNNode, ElementProtocol {
     let sideLength: CGFloat = 0.05
     let normalColor = UIColor(red: 0.98, green: 0.82, blue: 0.65, alpha: 1)
 
-    init(type: Int, location: Triple<Int, Int, Int>) {
+    init(type: Int, at location: Triple<Int, Int, Int>, with rotation: SCNVector4) {
         super.init()
         self.type = type
         setGeometry()
         set(location: location)
         set(state: .normal)
+        if rotation.x != 0, rotation.y != 0, rotation.z != 0, rotation.w != 0 {
+            self.rotation = rotation
+        }
     }
 
     func set(state: ElementState) {

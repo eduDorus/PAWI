@@ -196,7 +196,8 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     }
 
     func add(element: ElementEntity) {
-        marbleRun?.addChildNode(ElementNode(type: element.type, location: element.location))
+        let rotation = SCNVector4(element.rotation.0, element.rotation.1, element.rotation.2, element.rotation.3)
+        marbleRun?.addChildNode(ElementNode(type: element.type, at: element.location, with: rotation))
     }
 
     func add(elements: [ElementEntity]) {
