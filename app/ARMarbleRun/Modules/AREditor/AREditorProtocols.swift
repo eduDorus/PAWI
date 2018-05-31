@@ -26,7 +26,7 @@ protocol AREditorViewProtocol : class {
     func select(at position: Triple<Int, Int, Int>)
     func unselect(at position: Triple<Int, Int, Int>)
     func remove(at position: Triple<Int, Int, Int>)
-    func rotate(at position: Triple<Int, Int, Int>, rotation: (CGFloat, CGFloat, CGFloat))
+    func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3)
     
     func toggleAddCancel()
     
@@ -53,7 +53,7 @@ protocol AREditorPresenterProtocol : class {
     func removeElement(at location: Triple<Int, Int, Int>)
     func selectElement(at location: Triple<Int, Int, Int>)
     func unselectElement()
-    func rotateElement(to direction: UISwipeGestureRecognizerDirection)
+    func rotateElement(to direction: UISwipeGestureRecognizerDirection, with cameraAngle: Float)
 }
 
 protocol AREditorInteractorProtocol : class {

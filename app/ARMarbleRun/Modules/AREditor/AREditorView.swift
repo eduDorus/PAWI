@@ -13,6 +13,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     var subview: ARViewController?
     var marbleRun: MarbleRunNode?
     var state : ARModeState = .planeSelection
+    var marbleRunAngle : Float = 0.0
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -94,6 +95,8 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         
         subview?.sceneView.addGestureRecognizer(swipeLeftGesture)
         subview?.sceneView.addGestureRecognizer(swipeRightGesture)
+        subview?.sceneView.addGestureRecognizer(swipeUpGesture)
+        subview?.sceneView.addGestureRecognizer(swipeDownGesture)
     }
     
     @objc
@@ -109,6 +112,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
             
         case .runPlacement(.unlocked):
             marbleRun?.removeConstraints()
+            marbleRunAngle = subview?.sceneView.session.currentFrame?.camera.eulerAngles.y ?? 0.0
             state = .runPlacement(.locked)
             startButton.isEnabled = true
             
@@ -160,17 +164,19 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
     
     @objc
     func didSwipe(_ gesture: UISwipeGestureRecognizer) {
-        presenter?.rotateElement(to: gesture.direction)
+        if var cameraAngle = subview?.sceneView.session.currentFrame?.camera.eulerAngles.y {
+            cameraAngle = (cameraAngle - marbleRunAngle).truncatingRemainder(dividingBy: Float.pi)
+            presenter?.rotateElement(to: gesture.direction, with: cameraAngle)
+        }
     }
-    
-    func rotate(at position: Triple<Int, Int, Int>, rotation: (CGFloat, CGFloat, CGFloat)) {
+
+    func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3) {
         if let element = marbleRun?.getElement(at: position) {
-            let (x,y,z) = rotation
-            let action: SCNAction = SCNAction.rotateBy(x: x, y: y, z: z, duration: 0.2)
+            let action = SCNAction.rotate(by: .pi/2, around: rotation, duration: 0.2)
             element.runAction(action, forKey: "rotate")
         }
     }
-    
+
     // MARK: - AREditorViewProtocol
     
     func elementSelected(element: ElementEntity) {

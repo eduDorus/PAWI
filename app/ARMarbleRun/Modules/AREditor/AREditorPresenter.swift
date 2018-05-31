@@ -82,18 +82,41 @@ class AREditorPresenter : AREditorPresenterProtocol {
         selectedElement = location
         view?.select(at: location)
     }
-    
-    func rotateElement(to direction: UISwipeGestureRecognizerDirection) {
-       if let element = selectedElement {
-            var rotation: CGFloat = 0.0
-            if direction == .left {
-                rotation = CGFloat(-(Double.pi/2))
+
+    func rotateElement(to direction: UISwipeGestureRecognizerDirection, with cameraAngle: Float) {
+        if let element = selectedElement {
+            var rotation : SCNVector3
+            switch direction {
+            case .left:
+                rotation = SCNVector3(0, -1, 0)
+            case .right:
+                rotation = SCNVector3(0, 1, 0)
+            case .up:
+                rotation = SCNVector3(-1, 0, 0)
+            case .down:
+                rotation = SCNVector3(1, 0, 0)
+            default:
+                rotation = SCNVector3(0, 0, 0)
             }
-            if direction == .right {
-                rotation = CGFloat(Double.pi/2)
+
+            if (direction == .up || direction == .down) {
+                // looking at right face
+                if (cameraAngle > Float.pi/4 && cameraAngle < Float.pi/4*3) {
+                    (rotation.x, rotation.z) = (rotation.z, -rotation.x)
+                }
+                // looking at back face
+                else if (cameraAngle > Float.pi/4*3 || cameraAngle < -Float.pi/4*3) {
+                    rotation.x = -rotation.x
+                }
+                // looking at left face
+                else if (cameraAngle > -Float.pi/4*3 && cameraAngle < -Float.pi/4) {
+                    (rotation.x, rotation.z) = (rotation.z, rotation.x)
+                }
             }
-            interactor?.rotateElement(at: element, rotate: (Float(0), Float(rotation), Float(0)))
-            view?.rotate(at: element, rotation: (0, rotation, 0))
+
+            let floatRotation = (Float(rotation.x), Float(rotation.y), Float(rotation.z))
+            interactor?.rotateElement(at: element, rotate: floatRotation)
+            view?.rotate(at: element, rotation: rotation)
         }
     }
     
