@@ -172,6 +172,7 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
 
     func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3) {
         if let element = marbleRun?.getElement(at: position) {
+            if element.hasActions { return }
             let action = SCNAction.rotate(by: .pi/2, around: rotation, duration: 0.2)
             element.runAction(action, forKey: "rotate")
         }
