@@ -170,8 +170,8 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         }
     }
 
-    func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler block: @escaping ((_ rotation: SCNVector4) -> Void)) {
-        if let element = marbleRun?.getElement(at: position) {
+    func rotate(at location: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler block: @escaping ((_ rotation: SCNVector4) -> Void)) {
+        if let element = marbleRun?.getElement(at: location) {
             if element.hasActions { return }
             let action = SCNAction.rotate(by: .pi/2, around: rotation, duration: 0.2)
             element.runAction(action, forKey: "rotate") {
@@ -206,23 +206,23 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
         }
     }
     
-    func select(at position: Triple<Int, Int, Int>) {
-        let element = marbleRun?.getElement(at: position)
+    func select(at location: Triple<Int, Int, Int>) {
+        let element = marbleRun?.getElement(at: location)
         element?.set(state: .highlighted)
     }
     
-    func deselect(at position: Triple<Int, Int, Int>) {
-        let element = marbleRun?.getElement(at: position)
+    func deselect(at location: Triple<Int, Int, Int>) {
+        let element = marbleRun?.getElement(at: location)
         element?.set(state: .normal)
     }
     
-    func remove(at position: Triple<Int, Int, Int>) {
-        marbleRun?.removeElement(at: position)
+    func remove(at location: Triple<Int, Int, Int>) {
+        marbleRun?.removeElement(at: location)
     }
     
-    func addBoundingBoxes(at positions: Set<Triple<Int, Int, Int>>) {
-        for position in positions {
-            marbleRun?.addBoundingBox(location: position)
+    func addBoundingBoxes(at locations: Set<Triple<Int, Int, Int>>) {
+        for location in locations {
+            marbleRun?.addBoundingBox(location: location)
         }
     }
     

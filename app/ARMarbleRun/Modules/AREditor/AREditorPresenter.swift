@@ -52,12 +52,12 @@ class AREditorPresenter : AREditorPresenterProtocol {
     
     func setNextElement(element: ElementEntity) {
         nextElement = element
-        getPossiblePositions()
+        getPossibleLocations()
     }
     
-    func getPossiblePositions() {
-        let positions = interactor?.getPossiblePositions()
-        view?.addBoundingBoxes(at: positions!)
+    func getPossibleLocations() {
+        let locations = interactor?.getPossibleLocations()
+        view?.addBoundingBoxes(at: locations!)
     }
     
     func buildElement(at location: Triple<Int, Int, Int>) {

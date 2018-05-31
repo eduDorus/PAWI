@@ -17,20 +17,20 @@ class AREditorInteractor : AREditorInteractorProtocol {
         }
     }
 
-    func getPossiblePositions() -> Set<Triple<Int, Int, Int>> {
+    func getPossibleLocations() -> Set<Triple<Int, Int, Int>> {
         var result = Set<Triple<Int, Int, Int>>()
 
-        result.formUnion(possibleBaselevelPositions())
+        result.formUnion(possibleBaselevelLocations())
         result.formUnion(possibleTopLocations())
 
         return result
     }
 
-    private func possibleBaselevelPositions() -> Set<Triple<Int, Int, Int>> {
+    private func possibleBaselevelLocations() -> Set<Triple<Int, Int, Int>> {
         var result = Set<Triple<Int, Int, Int>>()
-        if let baseElementsPositions = getAllBaseElements(except: nil) {
-            for pos in baseElementsPositions {
-                let possibleNeighbors = neighborPositions(from: pos)
+        if let baseElementsLocations = getAllBaseElements(except: nil) {
+            for pos in baseElementsLocations {
+                let possibleNeighbors = neighborLocations(from: pos)
                 for pn in possibleNeighbors {
                     if marbleRun!.getElement(at: pn) == nil {
                         result.insert(pn)
@@ -88,7 +88,7 @@ class AREditorInteractor : AREditorInteractorProtocol {
 
         while next.count != 0 {
             let nextElement = next.first
-            let p: [Triple<Int, Int, Int>] = neighborPositions(from: nextElement)
+            let p: [Triple<Int, Int, Int>] = neighborLocations(from: nextElement)
 
             for e in p {
                 if ((elementLocations?.contains(e))! && !visited.contains(e)) && !next.contains(e) {
@@ -101,8 +101,8 @@ class AREditorInteractor : AREditorInteractorProtocol {
         return visited.count == elementLocations?.count
     }
 
-    private func neighborPositions(from position: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>] {
-        let (x, y, z) = (position?.values)!
+    private func neighborLocations(from location: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>] {
+        let (x, y, z) = (location?.values)!
         return [
             Triple(x+1,y,z),
             Triple(x-1,y,z),

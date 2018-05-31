@@ -21,9 +21,7 @@ protocol ARGuideViewProtocol : class {
     func initializeMarbleRun()
     func add(element: ElementEntity)
     func add(elements: [ElementEntity])
-    func remove(elementAt position: Triple<Int, Int, Int>)
-    func removeAllElements()
-    func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState)
+    func set(elementAt location: Triple<Int, Int, Int>, to state: ElementState)
     func setRun(to state: ElementState)
     func previousButton(enabled: Bool)
     func nextButton(enabled: Bool)
@@ -54,7 +52,7 @@ protocol ARGuideInteractorInputProtocol : class {
 }
 
 protocol ARGuideInteractorOutputProtocol : class {
-    func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState)
+    func set(elementAt location: Triple<Int, Int, Int>, to state: ElementState)
     func setAllElements(to state: ElementState)
     func buttons(previousEnabled prev: Bool, nextEnabled next: Bool)
 }

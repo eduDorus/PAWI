@@ -52,8 +52,8 @@ class ARGuidePresenter : ARGuidePresenterProtocol, ARGuideInteractorOutputProtoc
     
     // MARK: - ARGuideInteractorOutputProtocol
     
-    func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState) {
-        view?.set(elementAt: position, to: state)
+    func set(elementAt location: Triple<Int, Int, Int>, to state: ElementState) {
+        view?.set(elementAt: location, to: state)
     }
     
     func setAllElements(to state: ElementState) {

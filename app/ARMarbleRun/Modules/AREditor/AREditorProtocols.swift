@@ -23,14 +23,14 @@ protocol AREditorViewProtocol : class {
     func initializeMarbleRun()
     func add(element: ElementEntity)
     func add(elements: [ElementEntity])
-    func select(at position: Triple<Int, Int, Int>)
-    func deselect(at position: Triple<Int, Int, Int>)
-    func remove(at position: Triple<Int, Int, Int>)
-    func rotate(at position: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler block: @escaping ((_ rotation: SCNVector4) -> Void))
+    func select(at location: Triple<Int, Int, Int>)
+    func deselect(at location: Triple<Int, Int, Int>)
+    func remove(at location: Triple<Int, Int, Int>)
+    func rotate(at location: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler block: @escaping ((_ rotation: SCNVector4) -> Void))
     
     func toggleAddCancel()
     
-    func addBoundingBoxes(at positions: Set<Triple<Int, Int, Int>>)
+    func addBoundingBoxes(at locations: Set<Triple<Int, Int, Int>>)
     func removeBoundingBoxes()
 }
 
@@ -59,7 +59,7 @@ protocol AREditorPresenterProtocol : class {
 protocol AREditorInteractorProtocol : class {
     var marbleRun : MarbleRunEntity? { get set }
     
-    func getPossiblePositions() -> Set<Triple<Int, Int, Int>>
+    func getPossibleLocations() -> Set<Triple<Int, Int, Int>>
     func buildElement(element: ElementEntity)
     func removeElement(at location: Triple<Int, Int, Int>) -> Bool
     func rotateElement(at location: Triple<Int, Int, Int>, rotate: (Float, Float, Float, Float))

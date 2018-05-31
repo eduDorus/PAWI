@@ -23,7 +23,7 @@ class DepthFirstSort {
                 search(from: missing)
             } else {
                 level += 1
-                search(from: positions(onLevel: level).first!)
+                search(from: locations(onLevel: level).first!)
             }
         }
         return result
@@ -32,7 +32,7 @@ class DepthFirstSort {
     // recursive depth-first function
     private func search(from node: Triple<Int,Int,Int>) {
         result.append(node)
-        let neighbors = positions(nextTo: node)
+        let neighbors = locations(nextTo: node)
         for n in neighbors {
             if !result.contains(n) && nodes.contains(n) {
                 search(from: n)
@@ -46,21 +46,21 @@ class DepthFirstSort {
         if nodes.contains(zero) {
             return zero
         }
-        return positions(onLevel: 0).first!
+        return locations(onLevel: 0).first!
     }
 
-    private func positions(onLevel level: Int) -> [Triple<Int,Int,Int>] {
-        var positions : [Triple<Int,Int,Int>] = []
+    private func locations(onLevel level: Int) -> [Triple<Int,Int,Int>] {
+        var locations : [Triple<Int,Int,Int>] = []
         for n in nodes {
             if n.values.1 == level {
-                positions.append(n)
+                locations.append(n)
             }
         }
-        return positions
+        return locations
     }
 
-    private func positions(nextTo position: Triple<Int,Int,Int>) -> [Triple<Int,Int,Int>] {
-        let (x, y, z) = position.values
+    private func locations(nextTo location: Triple<Int,Int,Int>) -> [Triple<Int,Int,Int>] {
+        let (x, y, z) = location.values
         return [
             Triple(x+1,y,z),
             Triple(x-1,y,z),
@@ -70,7 +70,7 @@ class DepthFirstSort {
     }
 
     private func notFoundNode(onLevel level: Int) -> Triple<Int,Int,Int>? {
-        for n in positions(onLevel: level) {
+        for n in locations(onLevel: level) {
             if !result.contains(n) {
                 return n
             }

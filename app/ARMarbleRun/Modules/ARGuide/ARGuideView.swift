@@ -19,21 +19,21 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
     @IBOutlet var previousButton: UIButton!
     @IBOutlet var nextButton: UIButton!
     @IBOutlet var startButton: UIButton!
-    
+
     // MARK: - IBActions
-    
+
     @IBAction func didPressPrevious(_ sender: Any) {
         presenter?.didPressPrevious()
     }
-    
+
     @IBAction func didPressNext(_ sender: Any) {
         presenter?.didPressNext()
     }
-    
+
     @IBAction func didPressMenu(_ sender: Any) {
         menuAction()
     }
-    
+
     @IBAction func didPressStart(_ sender: Any) {
         presenter?.didPressStart()
         state = .buildProcess
@@ -41,20 +41,20 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
         previousButton.isHidden = false
         nextButton.isHidden = false
     }
-    
+
     override func viewDidLoad() {
         presenter?.viewDidLoad()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ARViewController, segue.identifier == "ARSCNViewSegue" {
             self.subview = vc
             //self.sceneView?.delegate = self
         }
     }
-    
+
     // MARK: - ARGuideViewProtocol
-    
+
     func initializeMarbleRun() {
         marbleRun = MarbleRunNode()
         subview?.sceneView.scene.rootNode.addChildNode(marbleRun!)
@@ -74,14 +74,8 @@ class ARGuideView : UIViewController, ARGuideViewProtocol, ARSCNViewDelegate {
         }
     }
     
-    func remove(elementAt position: Triple<Int, Int, Int>) {
-    }
-    
-    func removeAllElements() {
-    }
-    
-    func set(elementAt position: Triple<Int, Int, Int>, to state: ElementState) {
-        if let element = marbleRun?.getElement(at: position) {
+    func set(elementAt location: Triple<Int, Int, Int>, to state: ElementState) {
+        if let element = marbleRun?.getElement(at: location) {
             element.set(state: state)
         }
     }
