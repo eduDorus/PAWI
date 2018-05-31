@@ -69,7 +69,6 @@ class AREditorPresenter : AREditorPresenterProtocol {
     }
     
     func removeElement(at location: Triple<Int, Int, Int>) {
-        // TODO: Check if remove is possible. Should not create a island :)
         if interactor?.removeElement(at: location) == true {
             view?.remove(at: location)
         }
