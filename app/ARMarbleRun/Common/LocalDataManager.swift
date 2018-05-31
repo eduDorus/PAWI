@@ -33,4 +33,19 @@ class MarbleRunDataManager {
             print("Failed to save MarbleRun '\(run.name)'...")
         }
     }
+    
+    static func isDirectoryEmpty() -> Bool {
+        do {
+            let fileURLs = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+            if fileURLs.count == 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            print("Error while enumerating files \(directory.path): \(error.localizedDescription)")
+            return true
+        }
+    }
+
 }

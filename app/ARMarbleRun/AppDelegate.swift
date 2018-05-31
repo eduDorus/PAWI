@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = menuView
         window?.makeKeyAndVisible()
         
-        Initializer.makeDefaultRuns()
+        if MarbleRunDataManager.isDirectoryEmpty() {
+            Initializer.makeDefaultRuns()
+        }
         
         return true
     }
