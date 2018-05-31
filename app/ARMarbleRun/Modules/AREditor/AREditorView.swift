@@ -150,15 +150,19 @@ class AREditorView : UIViewController, AREditorViewProtocol, ARSCNViewDelegate {
 
     @objc
     func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
-        let longPressLocation = recognizer.location(in: subview?.sceneView)
-        let hitTestResults = subview?.sceneView.hitTest(longPressLocation)
-        
-        guard let node = hitTestResults?.first?.node else { return }
-        
-        if let element = node as? ElementNode {
-            presenter?.removeElement(at: element.getLocation())
-        } else if let element = node.parent as? ElementNode {
-            presenter?.removeElement(at: element.getLocation())
+        switch state {
+        case .editorMode:
+            let longPressLocation = recognizer.location(in: subview?.sceneView)
+            let hitTestResults = subview?.sceneView.hitTest(longPressLocation)
+
+            guard let node = hitTestResults?.first?.node else { return }
+
+            if let element = node as? ElementNode {
+                presenter?.removeElement(at: element.getLocation())
+            } else if let element = node.parent as? ElementNode {
+                presenter?.removeElement(at: element.getLocation())
+            }
+        default: return
         }
     }
     
