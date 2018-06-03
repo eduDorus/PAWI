@@ -4,19 +4,72 @@
 \subsection{Konzept}
 
 Zur Illustration der Möglichkeiten der AR Technologie soll eine lauffähige iOS Demo-App entstehen.
+Im Abschnitt zur Lösungswahl (\ref{sub:loesungswahl}) wurde anhand der erarbeiteten Prototypen entschieden, dass die App primär zwei Anwendungsfälle enthalten soll:
 
-Beschreibung der Funktionalitäten und des Aufbaus. Übersicht der wesentlichen Use Cases (mit Verweis auf User Stories im Anhang), Mockups usw.
+\begin{itemize}
+	\item Eine interaktive Bauanleitung, bei der eine virtuelle Kugelbahn in Augmented Reality als Anleitung für den Benutzer zum Bau der physischen Kugelbahn verwendet wird.
+	\item Der Bau und die Bearbeitung von virtuellen Kugelbahnen in Augmented Reality.
+\end{itemize}
+
+Eine ausführliche Architekturdokumentation findet sich im Anhang \ref{appendix:architekturdokumentation}.
+Darin enthalten sind die kompletten Funktionalen Anforderungen als User Stories mit Akzeptanzkriterien (\ref{appendix:funktionale-anforderungen}) und Nichtfunktionalen Anforderungen (\ref{appendix:nichtfunktionale-anforderungen}).
+
+\bild{1}{mockup-flow}{Mockups der Bildschirme und deren Zusammenhänge}
+
+\textit{Beschreibung der Funktionalitäten und des Aufbaus. Übersicht der wesentlichen Use Cases (mit Verweis auf User Stories im Anhang), Mockups usw.}
+% TODO:
 
 \subsection{Softwarearchitektur}
 
-Hier kurz VIPER beschreiben und dann auf die ausführliche Architekturdokumentation im Anhang verweisen?
+\subsubsection{VIPER Architektur}
+
+In einem Artikel auf der Webseite obj.io von \cite{viper-objcio} wird als Alternative zu der Architektur MVC (Model-View-Controller) das Modell VIPER vorgestellt.
+Die Architektur verfolgt einerseits das Ziel sogenannte "`Massive View Controllers"' zu vermeiden, bei denen zu viel Logik in die Controller von MVC gesteckt wird.
+Andererseits ist es ein Versuch die von Robert C. Martin vorgeschlagene Clean Architecture in iOS umzusetzen (\cite{clean-architecture}).
+Der Name VIPER ist ein Backronym, das für folgende Komponenten steht (Auflistung frei aus dem Artikel von \cite{viper-objcio} übersetzt):
+
+\begin{itemize}
+	\item \textbf{View:} zeigt an, was vom Presenter mitgeteilt wird und leitet Benutzerinteraktionen an diesen weiter
+	\item \textbf{Interactor:} enthält die eigentliche Businesslogik
+	\item \textbf{Presenter:} beinhaltet Logik für die View, um die Daten vom Interactor aufzubereiten und reagiert auf Benutzereingaben
+	\item \textbf{Entities:} sind grundlegende Datenmodelle, die primär durch den Interactor genutzt werden
+	\item \textbf{Router/Wireframe:} enthält die Navigationslogik und ist Verbindungsglied zwischen einzelnen Modulen/Bildschirmen
+\end{itemize}
+
+\bild[https://www.objc.io/issues/13-architecture/viper/]{0.8}{viper-diagram-objc}{VIPER Diagramm der Komponenten}
+
+Abbildung \ref{fig:viper-diagram-objc} zeigt den Zusammenhang der Komponenten in der Grundidee von VIPER.
+Pro Bildschirm wird grundsätzlich ein Modul erstellt, das aus den VIPER Komponenten besteht.
+Über die Wireframes werden die entsprechenden Module aufgerufen.
+Das erlaubt eine starke Trennung der verschiedenen Module und innerhalb der Module die Trennung von Verantwortlichkeiten.
+
+% TODO: Wahl für VIPER begründen
+% TODO: Verweis auf Architekturdokumentation Teil zum Stil und Sichten
+
+\subsubsection{Aufbau} % TODO: bessere Bezeichnung finden
+
+Es gibt Module (nach VIPER), Common, Entities, Nodes und die unabhängige About Screen.
 
 \subsection{Module}
 
-Übersicht der Module in einem Komponentendiagramm oder so.
-Der Ablauf und Zusammenhang der Module muss hier gezeigt werden, bevor sie im Detail erläutert werden.
+\textit{Übersicht der Module in einem Komponentendiagramm oder so. Der Ablauf und Zusammenhang der Module muss hier gezeigt werden, bevor sie im Detail erläutert werden. Pro Modul dann die Klassenübersicht zeichnen und jede Klasse beschreiben.}
+% TODO:
 
-Pro Modul dann die Klassenübersicht zeichnen und jede Klasse beschreiben.
+Im Folgenden werden die einzelnen Module der Demo-App einzeln beschrieben.
+Die App besteht aus folgenden VIPER-Modulen:
+
+\begin{itemize}
+	\item \textbf{SelectMode:} Startbildschirm mit der Auswahl zwischen Editor und Guide
+	\item \textbf{MarbleRunList:} Auflistung der gespeicherten Kugelbahnen zur Auswahl durch den Benutzer, für den Editor wird zusätzlich die Option zum Erstellen einer neuen Bahn angeboten
+	\item \textbf{AREditor:} AR Bildschirm für den Editor
+	\item \textbf{ARGuide:} AR Bildschirm für die Bauanleitung
+	\item \textbf{ElementList:} Auflistung der verfügbaren Elementtypen zur Auswahl durch den Benutzer (vom Editor verwendet)
+\end{itemize}
+
+Das Zusammenspiel der Module ist in Abbildung \ref{fig:viper-modules} ersichtlich.
+Sie zeigt, von wo man zu welchen Modulen gelangt.
+
+\bild{0.6}{viper-modules}{Module der Demo-App}
 
 \subsubsection{Select Mode}
 
@@ -26,7 +79,7 @@ Pro Modul dann die Klassenübersicht zeichnen und jede Klasse beschreiben.
 
 \subsubsection{AR Editor}
 
-\subsubsection{Element Select}
+\subsubsection{Element List}
 
 
 \subsection{Persistenz}
