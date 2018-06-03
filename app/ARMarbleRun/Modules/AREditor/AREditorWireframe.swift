@@ -38,9 +38,9 @@ class AREditorWireframe : AREditorWireframeProtocol, ARWireframeProtocol {
     }
 
     func presentSelectElement(from view: AREditorViewProtocol) {
-        let elementSelect = ElementSelectWireframe.createElementSelectModule()
+        let elementList = ElementListWireframe.createElementListModule()
         if let vc = view as? UIViewController {
-            vc.present(elementSelect, animated: true, completion: nil)
+            vc.present(elementList, animated: true, completion: nil)
         }
     }
     

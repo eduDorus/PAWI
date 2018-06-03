@@ -1,5 +1,5 @@
 //
-//  ElementSelectWireframe.swift
+//  ElementListWireframe.swift
 //  ARMarbleRun
 //
 
@@ -9,14 +9,14 @@ import ARKit
 
     
     
-class ElementSelectWireframe : ElementSelectWireframeProtocol {
+class ElementListWireframe : ElementListWireframeProtocol {
     
-    static func createElementSelectModule() -> UIViewController {
-        let controller = mainStoryboard.instantiateViewController(withIdentifier: "ElementSelectViewController")
-        if let view = controller as? ElementSelectViewProtocol {
-            let presenter: ElementSelectPresenterProtocol = ElementSelectPresenter()
-            let wireframe: ElementSelectWireframeProtocol = ElementSelectWireframe()
-            let interactor: ElementSelectInteractorProtocol = ElementSelectInteractor()
+    static func createElementListModule() -> UIViewController {
+        let controller = mainStoryboard.instantiateViewController(withIdentifier: "ElementListViewController")
+        if let view = controller as? ElementListViewProtocol {
+            let presenter: ElementListPresenterProtocol = ElementListPresenter()
+            let wireframe: ElementListWireframeProtocol = ElementListWireframe()
+            let interactor: ElementListInteractorProtocol = ElementListInteractor()
             
             view.presenter = presenter
             presenter.view = view
@@ -32,7 +32,7 @@ class ElementSelectWireframe : ElementSelectWireframeProtocol {
         return UIStoryboard(name: "Main", bundle: Bundle.main)
     }
     
-    func dismissModule(from view: ElementSelectViewProtocol , with element: ElementEntity) {
+    func dismissModule(from view: ElementListViewProtocol , with element: ElementEntity) {
         
         if let vc = view as? UIViewController {
             if let parent = vc.presentingViewController as? AREditorViewProtocol {

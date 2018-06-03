@@ -1,5 +1,5 @@
 //
-//  ElementSelectView.swift
+//  ElementListView.swift
 //  ARMarbleRun
 //
 
@@ -7,8 +7,8 @@ import Foundation
 import UIKit
 import ARKit
 
-class ElementSelectView : UIViewController, ElementSelectViewProtocol {
-    var presenter: ElementSelectPresenterProtocol?
+class ElementListView : UIViewController, ElementListViewProtocol {
+    var presenter: ElementListPresenterProtocol?
     var elementList: [ElementEntity] = []
     
     // MARK: - IBOutlets
@@ -22,7 +22,7 @@ class ElementSelectView : UIViewController, ElementSelectViewProtocol {
         presenter?.viewDidLoad()
     }
     
-    // MARK: - ElementSelectViewProtocol
+    // MARK: - ElementListViewProtocol
     
     func reloadElementList(with elements: [ElementEntity]) {
         elementList = elements
@@ -31,7 +31,7 @@ class ElementSelectView : UIViewController, ElementSelectViewProtocol {
 }
 
 
-extension ElementSelectView : UICollectionViewDataSource {
+extension ElementListView : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return elementList.count
     }
@@ -48,7 +48,7 @@ extension ElementSelectView : UICollectionViewDataSource {
     }
 }
 
-extension ElementSelectView : UICollectionViewDelegate {
+extension ElementListView : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let element = elementList[indexPath.row]
         presenter?.didSelect(element: element, on: self)

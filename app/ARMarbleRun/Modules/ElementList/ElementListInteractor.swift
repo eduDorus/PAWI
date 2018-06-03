@@ -1,12 +1,12 @@
 //
-//  ElementSelectInteractor.swift
+//  ElementListInteractor.swift
 //  ARMarbleRun
 //
 
 import Foundation
 import SceneKit
 
-class ElementSelectInteractor : ElementSelectInteractorProtocol {
+class ElementListInteractor : ElementListInteractorProtocol {
 
     func getElements() -> [ElementEntity] {
         var elements = [ElementEntity]()
