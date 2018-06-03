@@ -1,14 +1,14 @@
 \section{iOS Frameworks}
-In den folgenden Abschnitten wird ein Überblick über die wesentlichen iOS Frameworks gegeben, die für dieses Projekt relevant sind. Alle Informationen stammen, sofern nicht anders angegeben, aus den offizellen Dokumentationen von Apple. % TODO: Quellen hier einsetzen
+In den folgenden Abschnitten wird ein Überblick über die wesentlichen iOS Frameworks gegeben, die für dieses Projekt relevant sind. Alle Informationen stammen, sofern nicht anders angegeben, aus den offiziellen Dokumentationen von Apple. % TODO: Quellen hier einsetzen
 
 
 \subsection{Core ML} \label{subsub:core-ml}
-Mit dem Aufschwung von neuronalen Netzen insbesondere deep learning wollen Entwickler diese Technologie in ihren Apps nutzen. Mit dem CoreML Framework gibt Apple den Entwicklern diese Möglichkeit und erlaubt es selbst trainierte Netze in den Apps zu integrieren. CoreML \cite{core-ml} ist dabei für On-Device Performance optimiert und verspricht weniger Arbeitsspeicher zu belegen und dabei den Energie konsum zu minimieren. CoreML unterstützt die Frameworks Vision zur Bildverarbeitung, Foundation zum verarbeiten von Text und GameplayKit zum erstellen von Entscheidungsbäume.
+Mit dem Aufschwung von neuronalen Netzen insbesondere Deep Learning wollen Entwickler diese Technologie in ihren Apps nutzen. Mit dem CoreML Framework gibt Apple den Entwicklern diese Möglichkeit und erlaubt es selbst trainierte Netze in den Apps zu integrieren. CoreML \cite{core-ml} ist dabei für On-Device Performance optimiert und verspricht weniger Arbeitsspeicher zu belegen und dabei den Energie konsum zu minimieren. CoreML unterstützt die Frameworks Vision zur Bildverarbeitung, Foundation zum verarbeiten von Text und GameplayKit zum erstellen von Entscheidungsbäume.
 
 \bild[https://developer.apple.com/documentation/coreml]{0.4}{core-ml-architecture}{CoreML Architektur}
 
 \subsection{Vision}
-Apple bietet mit dem Vision \cite{vision} Framework eine gute Lösung für Computer Vision Probleme. Es enthält Gesichts-, Text-, Barcodeerkennung und Feature Tracking, wobei bereits ein grossteil der Probleme damit gelöst werden kann. Zusätzlich kann das in der Section \ref{subsub:core-ml} beschreibene CoreML verwendet werden, um spezifische Probleme mittels neuronalen Netzen zu lösen. Die integration mit dem CoreML Framework soll ohne Probleme funktionieren da es, wie im Bild \ref{core-ml-architecture}, eine API Schicht über dem CoreML Framework befindet.
+Apple bietet mit dem Vision \cite{vision} Framework eine gute Lösung für Computer Vision Probleme. Es enthält Gesichts-, Text-, Barcodeerkennung und Feature Tracking, wobei bereits ein grossteil der Probleme damit gelöst werden kann. Zusätzlich kann das in der Section \ref{subsub:core-ml} beschriebene CoreML verwendet werden, um spezifische Probleme mittels neuronalen Netzen zu lösen. Die integration mit dem CoreML Framework soll ohne Probleme funktionieren da es, wie im Bild \ref{fig:core-ml-architecture}, eine API Schicht über dem CoreML Framework befindet.
 
 \subsection{ARKit}
 

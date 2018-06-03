@@ -1,15 +1,15 @@
-\subsubsection{Physischen Würfel als virtuelles Objekt erfassen}
+\subsubsection{Physischen Würfel als virtuelles Objekt erfassen}\label{subsub:prot-physische-wuerfel}
 \begin{description}
 	\item[Fragestellung:] Wie kann ein physischer Würfel mittels den Frameworks ARKit, Vision oder CoreML als virtuelles Objekt erfassen werden?
-	\item[Resultat:] ARKit bietet die Erkennung zweidimensonaler Elemente. Es verwendet dabei praktiken wie beim bekannten Bilderkennungsframework OpenCV, wobei ein Referenzbild hinterlegt werden muss.
+	\item[Resultat:] ARKit bietet die Erkennung zweidimensionaler Elemente. Es verwendet dabei praktiken wie beim bekannten Bilderkennungsframework OpenCV, wobei ein Referenzbild hinterlegt werden muss.
 	Mit Vision und CoreML kann ein beliebig trainiertes Neural Network Model verwenden um die Klassifikation durchzuführen. Es konnte leider keine solide Möglichkeit gefunden werden 3D Objekte zu erfassen damit Sie für eine spätere Augmentierung verwendet werden können. 
 	\item[Versuchsaufbau:] Für den Versuchsaufbau wurden zwei Beispielprojekte von der Apple Developer Dokumentation verwendet. Das erste Projekt "`Recognizing Images in an AR Experience"' \cite{arkit-recognize-images} verspricht bekannte 2D Bilder mittels ARKit zu Erkennen. Anschliessend können die erkannten Koordinaten verwendet werden um AR Inhalte zu platzieren.
 	Beim zweiten Projekt handelt es sich um das Thema "`Using Vision in Real Time with ARKit"' \cite{vision-real-time-with-arkit} bei dem die Frameworks Vision und CoreML zum Einsatz kommen.
 
 	\textbf{Beispielprojekt "`Recognizing Images in an AR Experience"'}
-	Das Beispielprojekt kann von der Apple Developer Website heruntergeladen werden. Anschliessen lässt sich das Projekt in XCode öffnen und muss vor der Verwendung auf dem eigenen Gerät signiert werden. Das Verzeichnis "`Ressources"' befinden sich bereits einige Demobilder die als Testversuch verwendet werden können. Damit die Genauigkeit und Geschwindigkeit getestet werden konnte wurde ein Versuch gestartet die Demobilder am Laptop anzuzeigen und anschliessend mit dem IPhone zu Erkennen. Die Erkennungsrate war schnell und zuverlässig. Das augmentierte Fläche in der sich das Bild befindet wurde korrekt angezeigt. Es wurde festgestellt, dass beim bewegen des IPhones die Fläche die Koordinaten nicht halten kann und diese Ständig neu platzieren muss.
+	Das Beispielprojekt kann von der Apple Developer Website heruntergeladen werden. Anschliessend lässt sich das Projekt in XCode öffnen und muss vor der Verwendung auf dem eigenen Gerät signiert werden. Das Verzeichnis "`Ressources"' befinden sich bereits einige Demobilder die als Testversuch verwendet werden können. Damit die Genauigkeit und Geschwindigkeit getestet werden konnte wurde ein Versuch gestartet die Demobilder am Laptop anzuzeigen und anschliessend mit dem IPhone zu Erkennen. Die Erkennungsrate war schnell und zuverlässig. Das augmentierte Fläche in der sich das Bild befindet wurde korrekt angezeigt. Es wurde festgestellt, dass beim bewegen des IPhones die Fläche die Koordinaten nicht halten kann und diese Ständig neu platzieren muss.
 
-	Darauf Folgend wurde ein eigenes Bild für die Erkennung eines cuboro Elements hinterlegt. Der Prozess wie ein eigenes Bild beigefügt werden kann wird im README.md des Beispielprojektes detailiert Erklärt. Beim Versuch wurde wie folgt vorgegangen: 
+	Darauf Folgend wurde ein eigenes Bild für die Erkennung eines cuboro Elements hinterlegt. Der Prozess wie ein eigenes Bild beigefügt werden kann wird im README.md des Beispielprojektes detailliert Erklärt. Beim Versuch wurde wie folgt vorgegangen: 
 
 	\begin{enumerate}
 		\item Bei guter Belichtung ein frontal Bild des cuboro Elements mit dem IPhone aufnehmen. 
@@ -60,7 +60,7 @@
 	\textbf{Beispielprojekt "`Using Vision in Real Time with ARKit"'}
 	Das zweite Beispiel bei diesem Versuch beschäftigt sich mit Vision, CoreML und ARKit. Die Bildaufnahmen von ARKit werden an Vision weitergegeben und anschliessend mittels einem trainierten neuralen Netzwerk(Inception v3) in CoreML ausgewertet. 
 
-	Der Code \ref{code:arkit-recognition-session} ausschnitt startet die ARSession sowie den Klassifizierungsprozess. Da dieser Task performance intensive ist können nur eine gewisse Anzahl Bilder analisiert werden. Es wird stehts geprüft ob sich bereits ein Bild im Buffer befindet bevor ein neues Bild zur Auswertung freigegeben wird.
+	Der Code \ref{code:arkit-recognition-session} ausschnitt startet die ARSession sowie den Klassifizierungsprozess. Da dieser Task performance intensive ist können nur eine gewisse Anzahl Bilder analysiert werden. Es wird stets geprüft ob sich bereits ein Bild im Puffer befindet bevor ein neues Bild zur Auswertung freigegeben wird.
 
 	\begin{code}{arkit-recognition-session}{Startet die ARSession und den Klassifizierungsprozess}	
 	func session(_ session: ARSession, didUpdate frame: ARFrame) {

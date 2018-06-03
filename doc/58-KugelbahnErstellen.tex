@@ -8,7 +8,7 @@
 	Die Klasse \texttt{TrackEditor} wurde dem Demoprojekt hinzugefügt. Zusätzlich musste der \texttt{ViewController} und \texttt{MarbleTrack} angepasst werden. Die übrigen Klassen wie \texttt{BasicCube}, \texttt{Triple} und \texttt{TrackMap} sind die Klassen im Wesentlichen wie von Prototyp \ref{subsub:prot-kugelbahnaufbau}.
 	\begin{itemize}
 		\item \texttt{MarbleTrack}: erbt von \texttt{SCNNode}, hält Koordinaten verschiedener Kugelbahnen, kann eine solche Bahn mit \texttt{BasicCube} Elementen erstellen, verfügt über Methoden zur Positionierung und Ausrichtung der gesamten Bahn, besitzt Referenzen auf die Elemente der Bahn in einer \texttt{TrackMap}
-		\item \texttt{TrackEditor}: nutzt die Klasse \texttt{MarbleTrack} um den Status von Elementen der Kugelbahn zu verändern oder Elemente der Bahn hinzuzufügen/zu entfehrnen. Beim hinzufügen von neuen Elementen wird berechnet welche umliegende Elemente als Mögliche Elemente anzuzeigen sind.
+		\item \texttt{TrackEditor}: nutzt die Klasse \texttt{MarbleTrack} um den Status von Elementen der Kugelbahn zu verändern oder Elemente der Bahn hinzuzufügen/zu entfernen. Beim hinzufügen von neuen Elementen wird berechnet welche umliegende Elemente als Mögliche Elemente anzuzeigen sind.
 	\end{itemize}
 
 	\textbf{Hinzufügen neuer Elemente}\\
@@ -17,9 +17,9 @@
 	\begin{enumerate}
 		\item Beim erstellen des Root-Elements werden die Umliegenden Felder geprüft und Elemente mit dem Status \texttt{planned} hinzugefügt.
 		\item Mit dem Antippen von einem Element wird ein Hittest durchgeführt und prüft ob es sich um ein Element mit dem Status \texttt{planned} handelt. Falls dies der Fall ist wird der Status des Elements auf \texttt{build} gesetzt
-		\item Anschlissend wird berechnet wo die nächsten neuen Elemente erstellt werden könnten und diese Werden über die Klasse \texttt{MarbleTrack} mit dem Status \texttt{planned} hinzugefügt.
+		\item Anschliessend wird berechnet wo die nächsten neuen Elemente erstellt werden könnten und diese Werden über die Klasse \texttt{MarbleTrack} mit dem Status \texttt{planned} hinzugefügt.
 	\end{enumerate}
 
-	Bei der Besprechung des Prototyps wurde festgestellt, dass das Löschen von Elementen eine ähnliche Überprüfung benötigt. Grundsätzlich dürfen nur Elemente entfehrnt werden die keine Inseln in der Bahn verursachen bzw. es muss immer eine Verbindung zum Ursprung bestehen.
+	Bei der Besprechung des Prototyps wurde festgestellt, dass das Löschen von Elementen eine ähnliche Überprüfung benötigt. Grundsätzlich dürfen nur Elemente entfernt werden die keine Inseln in der Bahn verursachen bzw. es muss immer eine Verbindung zum Ursprung bestehen.
 
 \end{description}

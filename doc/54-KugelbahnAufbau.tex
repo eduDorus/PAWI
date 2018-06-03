@@ -32,7 +32,7 @@
 	Mit jedem Tap auf den Button wird \texttt{currentBuildingStep} inkrementiert und die beiden Methoden \texttt{clearHighlights()} und \texttt{loadTrackCurrentBuildingLayer()} ausgeführt (Code \ref{code:prot-kugelbahnaufbau-loadcurrentlevel1} und \ref{code:prot-kugelbahnaufbau-removehighlight1}). Ein Ende des Aufbaus gibt es nicht, da die Höhe der Bahn nicht geprüft wird.
 
 	\textbf{Variante 2: Informationen über die Position von Elementen erhalten}\\
-	Es wäre eine deutliche Vereinfachung des Vorgehens, wenn man direkt über die Koordinaten auf ein Elemen, einen Würfel, zugreifen könnte. Dazu müssen die Würfel in einer Datenstruktur refernziert werden. Ein dreidimensionales Array ist aufgrund der negativen Koordinatenwerte im momentanen Aufbau nicht geeignet. In diesem Versuch wird probiert dies mit einem Dictionary zu lösen. Hierbei soll ein Koordinaten-Tuple als Schlüssel und die \texttt{BasicCube} als Werte dienen.
+	Es wäre eine deutliche Vereinfachung des Vorgehens, wenn man direkt über die Koordinaten auf ein Element, einen Würfel, zugreifen könnte. Dazu müssen die Würfel in einer Datenstruktur referenziert werden. Ein dreidimensionales Array ist aufgrund der negativen Koordinatenwerte im momentanen Aufbau nicht geeignet. In diesem Versuch wird probiert dies mit einem Dictionary zu lösen. Hierbei soll ein Koordinaten-Tuple als Schlüssel und die \texttt{BasicCube} als Werte dienen.
 	
 	Der Schlüssel eines Dictionaries muss das Protokoll \texttt{Hashable} adoptieren, was Swift Tuple nicht machen. Deswegen übernimmt dies ein neues Struct \texttt{Triple<T,U,V>}, mit einem Tuple von drei Werten als Attribut. So kann das Dictionary für die dreidimensionale "`Karte"' der Kugelbahn wie folgt erstellt werden:
 
