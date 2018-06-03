@@ -245,102 +245,123 @@ Abbildung \ref{fig:zielhierarchie-cockburn} zeigt einen Überblick über die Zie
 	\hline
 \end{longtable}
 
-\subsubsection{Szenarien}
-
-Die Tabelle \ref{tab:szenario-nfa-06} zeigt ein Szenario der Benutzbarkeit anhand der nichtfunktionalen Anforderung 06.
-\begin{table}
-	\begin{tabular}{r p{12cm}}
-		\hline
-		Teil des Szenarios & Wert \\
-		\hline
-		Quelle des Auslösers & System (ARKit) \\
-		Auslöser/Ereignis & Die Kamera ändert ihren Tracking Status \\
-		Umgebung & ARMarbleRun App \\
-		Systembestandteil & Gesamtsystem \\
-		Antwort/Reaktion & Tracking Status wird dem Benutzer angezeigt und eine mögliche Massnahme zur Behebung des Problems vorgeschlagen \\
-		Antwortmetrik & Der Benutzer weiss, warum das Tracking nicht wie gewünscht funktioniert und kann darauf reagieren \\
-		\hline
-	\end{tabular}
-	\caption{Szenario für die nichtfunktionale Anforderung 06}
-	\label{tab:szenario-nfa-06}
-\end{table}
-
-Tabelle \ref{tab:szenario-nfa-07} zeigt das Szenario für die nichtfunktionale Anforderung 07.
-
-\begin{table}
-	\begin{tabular}{r p{12cm}}
-		\hline
-		Teil des Szenarios & Wert \\
-		\hline
-		Quelle des Auslösers & Benutzer \\
-		Auslöser/Ereignis & Der Benutzer setzt das 20. Element \\
-		Umgebung & ARMarbleRun App \\
-		Systembestandteil & Gesamtsystem \\
-		Antwort/Reaktion & Die Applikation wird optimiert, damit 20 Elemente zu keinen Einbussen unter 30 Bilder pro Sekunde führen. \\
-		Antwortmetrik & Die App läuft mit mindestens 30 Bilder pro Sekunde, wenn 20 Elemente einer Kugelbahn angezeigt werden. \\
-		\hline
-	\end{tabular}
-	\caption{Szenario für die nichtfunktionale Anforderung 07}
-	\label{tab:szenario-nfa-07}
-\end{table}
-
-\subsection{Fachdomäne (Domain Driven Design)}
-
-\subsubsection{Fachbegriffe}
+\subsection{Fachbegriffe}
 
 \begin{itemize}
 	\item \textbf{Element:} Ein einzelner cuboro Kugelbahnwürfel mit keinem (ganzer Würfel), einem oder mehreren Wegen für eine Kugel.
 	\item \textbf{Kugelbahn:} Ein zusammenhängendes Konstrukt aus einzelnen Elementen, sodass eine Kugel einen durchgehenden Weg durch die Bahn hat.
 	\item \textbf{Ebene:} Eine horizontale Fläche, die von ARKit als solche erkannt wird und als Untergrund für die Kugelbahn dient.
 	\item \textbf{Bauanleitung:} Eine interaktive Anleitung, die den Benutzer schrittweise (Element um Element) durch den Aufbau einer Kugelbahn führt.
-	\item \textbf{Tracking:} Der Vorgang, bei dem ARKit versucht Merkmale der realen Welt anhand Kamerabilder und Gerätesensoren zu verfolgen und anhand dessen die virtuellen Objekte ausrichtet.
+  \item \textbf{Tracking:} Der Vorgang, bei dem ARKit versucht Merkmale der realen Welt anhand Kamerabilder und Gerätesensoren zu verfolgen und anhand dessen die virtuellen Objekte ausrichtet.
+  \item \textbf{Szene:} Die Lage des virtuellen Koordinatensystems in Referenz zur realen, physischen Welt. Dies umfässt die im virtuellen Raum platzierten Objekte (Kugelbahn).
 \end{itemize}
-
-\subsubsection{Entitäten und ihre Value Objects}
-
-\begin{itemize}
-	\item \textbf{Kugelbahn}
-	\begin{itemize}
-		\item Name
-		\item Ausrichtungswinkel
-		\item Positionskoordinaten
-	\end{itemize}
-	\item \textbf{Element}
-	\begin{itemize}
-		\item ID
-		\item Ausrichtungswinkel
-		\item Positionskoordinaten
-		\item Geometrie
-	\end{itemize}
-\end{itemize}
-
-\subsubsection{Domain Events}
 
 \subsection{Systemkontext}
-\subsection{Systemvision und -idee}
-\subsubsection{Systemvision}
+
+Das zu entwickelnde System (eine iOS App) interagiert mit dem Benutzer und mit den beiden Frameworks ARKit und SceneKit. Der Benutzer hält und bewegt das Gerät und über den Touchscreen mit der Benutzeroberfläche der App interagieren. Die App hält alle Daten lokal und hat keine Verbindung nach aussen zu irgendeinem anderen System oder Akteur.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{kontextdiagramm}
+\end{figure}
+
+\subsection{Systemvision}
 
 Für Kugelbahnenthusiasten, cuboro Fans und solche die es noch werden wollen,
 die ihre Kugelbahn mitnehmen wollen, planen wollen und nach Anleitung nachbauen wollen,
 bietet unsere Kugelbahn App
 mit Augmented Reality
-eine komforable, moderne und effiziente Methode seine Bahn zu planen oder zu bauen.
+eine komfortable, moderne und effiziente Methode seine Bahn zu planen oder zu bauen.
 Anders als das offizielle cuboro Webkit,
 ist die Kugelbahn mit der App mobil und man kann sie virtuell in einen realen Raum stellen.
 
-For fans of marbleruns and cuboro and everyone who wants to become one,
-who want to take their marbleruns with them, plan them and rebuild them with a building guide,
-our marblerun mobile app
-with augmented reality
-offers comfortable, modern and efficient methods to plan and build a marblerun.
-Compared to the official cuboro webkit,
-with the app a marblerun is mobile and a user can place them virtually in a real scene.
-
-\subsubsection{Systemidee}
 \subsection{Architekturprinzipien}
+
+Die zu entwickelnde Demo-App wird zu einem grossen Teil zum Selbstzweck erstellt.
+Die App soll die ausgearbeiteten technologischen Möglichkeiten demonstrieren.
+Der Code selber muss für an der entsprechenden Technik Interessierte hilfreich sein.
+Dazu soll er informativ und verständlich sein.
+Dies wird unter anderem mit \textbf{Selbstdokumentation} und der \textbf{Trennung von Verantwortlichkeiten} erreicht.
+Die Trennung der Verantwortlichkeiten soll ausserdem dazu führen, dass einzelne Aufgaben/Teilprobleme gezielt studiert und wiederverwendet werden können.
+
 \subsection{Taktiken}
+
+Durch eine durchgehenden, starken Nutzung von Interfaces kann übersichtlich sichergestellt werden, welche Bestandteile der Software welche Aufgaben lösen. Die Interfaces sollen sprechene Methoden und Attributevariablen haben und wo notwendig mit Kommentaren ergänzt werden. Dieses Vorgehen hilft sowohl der Trennung von Verantwortlichkeiten und der Selbstdokumentation.
+
+Weiter sollen Klassen möglichst klein und kohäsiv gehalten werden und zu zusammengehörigen Modulen gruppiert werden. Somit sollen interessante Stellen im Code rascher gefunden und verstanden werden. Das Vereinfacht die Wiederverwendung einzelner Module.
+
 \subsection{Architekturstil}
-\subsection{EAI Pattern}
+
+Da die App monolithischen Charakter hat, also ohne Verbindungen nach Aussen und ohne Notwendigkeit zur Kommunikation mit verteilten Komponenten ist, fallen verteilte Stile (Client-Server, P2P usw.) weg.
+Praktisch alle Abläufe in der App werden durch den Benutzer ausgelöst und führen zur Ausführung verschiedener Use Cases. Im Kern stehen die Kugelbahnen und deren Elemente.
+Ein Stil nach dem Vorbild von Clean Architecture scheint daher passend zu sein: Events aus dem UI werden über Interfaces an verschiedene Interactor (Use Cases) weitergegeben, welche die Entities abrufen und bearbeiten.
+
+Bei Recherchen stiessen wir auf die VIPER Architektur, welche versucht Clean Architecture spezifisch für iOS umzusetzen. Jeder Use Case ist ein VIPER Modul, das aus View, Interactor, Presenter, Entities und Wireframe (Router) besteht. Die Wireframes initialisieren ihr Modul und sind für das Aufrufen anderer Module verantwortlich. Der Interactor nutzt die globalen DataManager um Daten aufzurufen und für den Presenter bereitzustellen.
+
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{viper-architecture}
+\end{figure}
+
+Die beiden wesentlichen Funktionen Bauanleitung (ARGuide) und Baumodus (AREditor) sind jeweils ein solches Modul. Sie teilen sich den DataManager, der Zugriff auf Kugelbahn- und Element-Entities hat. Daneben gibt es den Startbildschirm, bei dem der User den Modus wählen kann (SelectMode) und Listenansichten für Kugelbahnen (MarbleRunList) und Elemente (ElementList).
+
+\begin{figure}
+  \includegraphics[width=0.5\textwidth]{viper-modules}
+\end{figure}
+
 \subsection{Systemsichten}
+
+Alle Aktivitäten gehen von der View, bzw. vom Benutzer aus. Daher beginnt der folgende Fluss mit der View.
+
+\begin{figure}
+  \includegraphics[width=0.5\textwidth]{viper-architecture-numbered}
+\end{figure}
+
+\begin{enumerate}
+  \item Die View übergibt ein Event an den Presenter.
+  \item Je nach Event wird entweder ein anderes Modul aufgerufen (via Wireframe) oder eine Anfrage nach Daten an den Interactor, der die Business Logik hat gerichtet.
+  \item Der Interactor sendet einen Request nach Daten an den entsprechenden DataManager.
+  \item Der DataManager gibt die gewünschten Entity Daten zurück.
+  \item Der Interactor verarbeitet die Daten falls nötig und gibt sie an den Presenter weiter.
+  \item Vom Presenter erhält die View nun Informationen, wie sie sich zu verändern hat.
+\end{enumerate}
+
 \subsection{Architekturentscheidungen}
-\subsection{Architekturbewertung mit ATAM}
+
+Im folgenden zwei der wichtigsten Architekturentscheidungen:
+
+\begin{table}
+  \begin{tabular}{l p{13cm}}
+    Issue         & 
+      Der Benutzer soll zwischen den beiden Modi Baumodus und Bauanleitung wechseln können, ohne die virtuelle Kugelbahn neu im realen Raum zu platzieren. \\
+    Alternatives  & 
+      \begin{tabular}[t]{@{}p{13cm}@{}}
+        Zwei Varianten:
+        \begin{enumerate}
+          \item Nur die relevanten UI Elemente (Buttons) ein-/ausblenden und eine Eventhandler Klasse verwenden, die ausgetauscht werden kann.
+          \item Zwei getrenne Module machen, die sich die AR Szene mit den relevanten Informationen übergeben.
+        \end{enumerate}
+      \end{tabular} \vspace*{-\baselineskip}
+      \\
+    Outcome       & 2. Zwei getrennte Module. \\
+    Rationale     &
+      Eine saubere Trennung der unterschiedlichen Modi hilft der Nachvollziehbarkeit und Verständlichkeit des Codes und entkoppelt die Komponenten. Dies unterstützt ausserdem die Trennung der Verantwortlichkeiten und Erweiterbarkeit und bietet eine klarere Struktur. \\
+  \end{tabular}
+\end{table}
+
+\begin{table}
+  \begin{tabular}{l p{13cm}}
+    Issue         &
+      Die Elemente der aktuellen Kugelbahn müssen einerseits in der View als SceneKit Kindknoten der Kugelbahn zur Darstellung sein. Andererseits müssen sie in einem Konstrukt sein, das ihre logische Position und Nachbarn verwalten kann, um die Bauanleitung und Persistierung zu ermöglichen. \\
+    Alternatives  &
+      \begin{tabular}[t]{@{}p{13cm}@{}}
+        Zwei Varianten:
+        \begin{enumerate}
+          \item Die SceneKit Knoten werden mit den notwendigen Informationen erweitert und zusammen mit logischen Koordinaten zusätzlich in einer Hashmap referenziert für die Business Logik.
+          \item Die SceneKit Knoten werden rein auf ihre Funktion als UI Komponente reduziert und von zu persistierenden Entities getrennt.
+        \end{enumerate}
+      \end{tabular} \vspace*{-\baselineskip} \\
+    Outcome       & 2. View und Entity trennen. \\
+    Rationale     & 
+      In Prototypen wurde Variante 1 versucht, dies führt jedoch zu starker Vermischung von Darstellung/View und der Business Logik. Die gewählte Variante stellt die Trennung von Verantwortlichkeiten sicher und erlaubt es zwischen der Darstellung von Persistierung von Kugelbahnen zu abstrahieren. Dadurch könnte das Datenformat geändert werden, ohne auch die Handhabung der 3D Element/Knoten komplett ändern zu müssen. \\
+  \end{tabular}
+\end{table}
+

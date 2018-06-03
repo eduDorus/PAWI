@@ -1,0 +1,20 @@
+@startuml viper-architecture-numbered
+
+!include style.plantuml
+
+package "A Module in VIPER Architecture" <<Frame>> {
+	class Wireframe
+	class Presenter
+	class View
+	class Interactor
+
+	Wireframe <-- Presenter : 2
+	View -> Presenter : 1
+	View <- Presenter : 6
+	Presenter -> Interactor : 2
+	Interactor -> Presenter : 5
+	Interactor -u-> DataManager : 3
+	DataManager --> Interactor : 4
+}
+
+@enduml

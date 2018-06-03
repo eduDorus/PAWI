@@ -1,0 +1,15 @@
+@startuml viper-modules
+
+!include style.plantuml
+
+package "ARMarbleRun Modules" <<Frame>> {
+	SelectMode --> MarbleRunList
+	MarbleRunList -l-> ARGuide
+	MarbleRunList -r-> AREditor
+	ARGuide -u-> SelectMode
+	AREditor -u-> SelectMode
+	AREditor -u-> ElementList
+	ElementList --> AREditor
+}
+
+@enduml

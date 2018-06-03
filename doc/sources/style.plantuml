@@ -1,0 +1,25 @@
+skinparam Shadowing false
+'skinparam DefaultFontName "Source Sans Pro"
+skinparam DefaultFontName "SF Mono"
+skinparam dpi 150
+skinparam partitionBackgroundColor white
+
+skinparam Class {
+	BorderColor black
+'	BorderThickness 1
+	ArrowColor black
+	BackgroundColor white
+	FontStyle bold
+	StereotypeFontSize 10
+	ArrowFontSize 10
+	AttributeIconSize 0
+}
+
+skinparam Component {
+	BorderColor black
+	BackgroundColor white
+}
+
+hide empty fields
+hide empty methods
+hide circle

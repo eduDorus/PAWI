@@ -1,0 +1,23 @@
+@startuml viper-architecture
+
+!include style.plantuml
+
+package "A Module in VIPER Architecture" <<Frame>> {
+	class Wireframe
+	class Presenter
+	class View
+	class Interactor
+
+	Wireframe <-- Presenter : owns
+	View <- Presenter : weak reference
+	View -> Presenter : "owns"
+	Presenter -> Interactor : owns
+	Wireframe ..> Wireframe : creates
+	Wireframe ..> Presenter : creates
+	Wireframe ..> View : creates
+	Wireframe ..> Interactor : creates
+	Interactor -u-> DataManager : uses
+	DataManager -l> Entity : knows about
+}
+
+@enduml
