@@ -1,7 +1,7 @@
-\subsubsection{Mittels Touchgesten mit virtuellen Objekten interagieren}
+\subsubsection{Mittels Touchgesten mit virtuellen Objekten interagieren}\label{subsub:prot-interagieren}
 \begin{description}
 	\item[Fragestellung:] Wie kann mit Touch- und Swipe-Gesten mit virtuellen Objekten interagiert werden?
-	\item[Resultat:] Es konnte erfolgrich ein Prototyp entwickelt werden, bei dem es Möglich ist mittels verschiedenen Gesten mit einem virtuellen Objekt zu interagieren. Eine besondere Schwierigkeit bestand darin das Element zu kippen da je nach Kameraperspektive um die Z- oder X Achse gedreht werden muss. 
+	\item[Resultat:] Es konnte erfolgreich ein Prototyp entwickelt werden, bei dem es Möglich ist mittels verschiedenen Gesten mit einem virtuellen Objekt zu interagieren. Eine besondere Schwierigkeit bestand darin das Element zu kippen da je nach Kameraperspektive um die Z- oder X Achse gedreht werden muss. 
     \item[Versuchsaufbau:] Für diesen Versuch wurde ein neues XCode Projekt initialisiert. Anschliessend wurde die Logik implementiert um einen Würfel auf einer Fläche zu augmentieren. Es wurde die Funktionalität entwickelt mittels verschiedenen Gesten mit dem Würfel zu interagieren. Zu den funktionalitäten gehören:
     
     
@@ -13,7 +13,7 @@
     \end{itemize}
 
 
-    \textbf{\texttt{UITapGestureRecognizer} mit einmaligem Tippen}\label{textbf:tap-gesture-recognizer}\\
+    \textbf{\texttt{UITapGestureRecognizer} mit einmaligem Tippen}\\
     Damit mit Touchgesten gearbeitet werden kann müssen diese der SceneView hinzugefügt werden Code \ref{code:prot-gesture-addTapGestureToSceneView}. Für einzelne Taps können wir den \texttt{UITapGestureRecognizer} initialisieren und als action parameter eine Methode angeben. Wir geben hierfür die Methode \texttt{ViewController.didTap(withGestureRecognizer:)}. Zusätzlich sollte die Anzahl benötigter Taps mit \texttt{tapGestureRecognizer.numberOfTapsRequired} auf Eins gesetzt werden, da wir auch einen DoubleTap erkennen wollen. 
     \begin{code}{prot-gesture-addTapGestureToSceneView}{Methode \texttt{addTapGestureToSceneView()} um das einmalige antippen der \texttt{SceneView} hinzuzufügen}
     func addTapGestureToSceneView() {
