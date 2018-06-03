@@ -33,6 +33,7 @@
 	\end{code}
 
 	Wenn ein Bild aus dem Ressourcenverzeichnis erkennt wurde wird ein \texttt{ARImageAnchor} zurückgegeben. Ein \texttt{ARImageAnchor} enthält diverse informationen z.B über die Position im Koordinatensystem. Dies wird in diesem Beispiel verwendet um das Overlay zu erzeugen. 
+
 	\begin{code}{overlay-renderer}{Implementation der \texttt{renderer(\_:nodeFor:)} Methode zur Darstellung von Flächen}
 		func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 			guard let imageAnchor = anchor as? ARImageAnchor else { return }
@@ -60,13 +61,14 @@
 	Das zweite Beispiel bei diesem Versuch beschäftigt sich mit Vision, CoreML und ARKit. Die Bildaufnahmen von ARKit werden an Vision weitergegeben und anschliessend mittels einem trainierten neuralen Netzwerk(Inception v3) in CoreML ausgewertet. 
 
 	Der Code \ref{code:arkit-recognition-session} ausschnitt startet die ARSession sowie den Klassifizierungsprozess. Da dieser Task performance intensive ist können nur eine gewisse Anzahl Bilder analisiert werden. Es wird stehts geprüft ob sich bereits ein Bild im Buffer befindet bevor ein neues Bild zur Auswertung freigegeben wird.
-	\begin{code}{arkit-recognition-session}{Startet die ARSession und den Klassifizierungsprozess}
+
+	\begin{code}{arkit-recognition-session}{Startet die ARSession und den Klassifizierungsprozess}	
 	func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        guard currentBuffer == nil, case .normal = frame.camera.trackingState else {
-            return
-        }
-        self.currentBuffer = frame.capturedImage
-        classifyCurrentImage()
+		guard currentBuffer == nil, case .normal = frame.camera.trackingState else {
+			return
+		}
+		self.currentBuffer = frame.capturedImage
+		classifyCurrentImage()
 	}
 	\end{code}
 
