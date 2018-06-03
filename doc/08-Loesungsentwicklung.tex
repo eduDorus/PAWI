@@ -38,21 +38,61 @@ In diesem Abschnitt folgen die verschiedenen Prototypen, die während der explor
 }
 
 \subsection{Lösungsvarianten}
-\textit{Verschiedene Lösungen (2-3) zur Umsetzung der Demo App beschreiben …}
 
-\subsubsection{Bauanleitung}
+Mit den Ergebnissen der Recherche und dem Bau der Prototypen sind folgende Ideen zur praktischen Umsetzung einer App entstanden.
+Diese Varianten sollen als Grundlage für die finale Demo-App dienen.
 
-Basierend auf den Prototypen \ref{subsub:prot-kugelbahnaufbau} und \ref{subsub:prot-kugelbahnaufbau2} kann eine schrittweise Bauanleitung erstellt werden.
+\subsubsection{Interaktive Bauanleitung}\label{subsub:loesung-bauanleitung}
+
+Basierend auf den Prototypen zur Erstellung von Bauanleitungen \ref{subsub:prot-kugelbahnaufbau} und \ref{subsub:prot-kugelbahnaufbau2} kann eine schrittweise Bauanleitung erstellt werden.
 Damit kann der Benutzer eine gespeicherte, virtuelle Kugelbahn auf eine Fläche projizieren und erhält dann eine Schritt-für-Schritt Anleitung zum physischen Nachbau der Bahn.
 Dabei wird jeweils ein Element hervorgehoben, an dessen Stelle der Benutzer das echte Element hinstellen kann.
 Das App erkennt dann selber, ob ein Element an den Ort gestellt wurde und geht über zum nächsten Schritt der Anleitung.
 Da in Prototyp \ref{subsub:prot-physische-wuerfel} keine verlässliche Methode für die Erkennung und Nutzung von dreidimensionalen Objekten gefunden wurde, könnte alternativ der Benutzer manuell in der Anleitung vor- und zurückgehen.
 
-\subsubsection{AR Baumodus}
+\subsubsection{Virtuelle Bahn bauen}\label{subsub:loesung-virtuelle-bahn}
 
-\subsubsection{Simulation virtueller Kugel}
+Anhand der Prototypen zur Projektion von Kugelbahnen (\ref{subsub:prot-kugelbahn}), mit Elementen interagieren (\ref{subsub:prot-interagieren}) und zum Erstellen von Kugelbahnen durch den Benutzer (\ref{subsub:prot-kugelbahneditor}) ist ein Kugelbahneditor möglich.
+Darin kann der Benutzer eine neue Bahn erstellen, indem er Elemente hinzufügen und drehen kann.
+Bereits gesetzte Elemente können wieder gelöscht werden.
+Die Bahnen können lokal in der App gespeichert und wiederverwendet werden.
 
-\subsubsection{Kugelbahnerkennung}
+\subsubsection{Augmentiertes Aufbauen einer Kugelbahn}\label{subsub:loesung-augmentiertes-aufbauen}
+
+Der Benutzer kann eine Kugelbahn physisch aufbauen und diese parallel dazu virtuell in der App erfassen.
+Jedes Element wird zuerst vor die Kamera gehalten und von der App identifiziert und getrackt.
+Danach wird das Element an seinen Ort gestellt und die App ergänzt eine virtuelle Version davon an derselben Stelle.
+So kann der Benutzer mit möglichst geringer Störung des üblichen Aufbauprozesses die Bahn gleich virtuell erstellen, speichern und allenfalls mit anderen teilen.
+
+Um diese Variante umsetzen zu können, müsste das Konzept im Prototyp zur Erkennung von Elementen innerhalb einer Bounding Box (\ref{subsub:prot-boundingbox}) weiterverfolgt werden.
+Damit könnte erkannt werden, wann ein Element an einer bestimmten Stelle platziert wurde.
+Weiter müssten alle unterstützten Elementtypen in einem Machine Learning Verfahren gelernt werden, damit sie wie in Prototyp \ref{subsub:prot-physische-wuerfel} beschrieben zur Erkennung verwendet werden könnten.
+Allerdings hat dieser Prototyp auch gezeigt, dass Erkennung und Tracking von dreidimensionalen Objekten weitere Untersuchungen benötigen würden.
+Die Werkzeuge von Apple alleine reichen zum Zeitpunkt dieses Projekts nicht aus um diese Aufgabe verlässlich zu lösen.
+
+\subsubsection{Physische Kugelbahn augmentieren}
+
+Eine physisch aufgebaute Kugelbahn wird von der App als solche erkannt und erlaubt daraufhin die virtuelle Interaktion mit ihr.
+Der Benutzer kann einzelne Elemente der Kugelbahn auf der App auswählen.
+Damit wird das Element hervorgehoben und es könnten zusätzliche Informationen angezeigt werden.
+Beispielsweise die Bezeichnung, eine schematische Darstellung des Elements oder in welchen Sets das Element enthalten ist.
+
+Diese Möglichkeit ist in ähnlichen Aspekten wie die vorhergehende von \ref{subsub:loesung-augmentiertes-aufbauen} limitiert.
+Die Kugelbahn und ihre einzelnen Elemente müssen zuverlässig erkannt werden.
+
+\subsubsection{Kugel simulieren}
+
+Auf einer in Augmented Reality platzierten Kugelbahn kann der Lauf einer Kugel simuliert werden.
+Diese Variante kann als Ergänzung verwendet werden.
+Apples SceneKit enthält bereits eine Physik Engine, mit der eine virtuelle Kugel unter Einfluss von Gravitationskraft simuliert werden könnte. 
+% TODO: Referenz auf SceneKit Teil mit Physik Engine
 
 \subsection{Lösungswahl}
-\textit{Entscheiden und begründen …}
+
+Die Varianten, welche das Erkennung und Tracken von dreidimensionalen Objekten enthalten kommen im Rahmen dieses Projekts nicht für die Demo-App in Frage.
+Die verfügbaren Mittel und Fähigkeiten der iOS Frameworks reichen dazu zum Zeitpunkt dieses Projekts nicht aus.
+ARKit ist darauf spezialisiert horizontale und vertikale Flächen zu erkennen und als Koordinaten für die Nutzung mit SceneKit bereitzustellen.
+Daher sind die beiden Anwendungen, welche keine physische Kugelbahn als Basis benötigen geeigneter.
+
+Für die Demo-App wurde dem betreuenden Dozenten die Varianten der Bauanleitung (\ref{subsub:loesung-bauanleitung}) und dem Bau virtueller Bahnen (\ref{subsub:loesung-virtuelle-bahn}) vorgeschlagen und als Funktionen der App gewählt.
+Der Kern dieser Funktionen ist in den erarbeiteten Prototypen grösstenteils enthalten und eine funktionierende Umsetzung davon ist möglich.
