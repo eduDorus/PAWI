@@ -1,13 +1,18 @@
-@startuml viper-architecture
+@startuml project-viper-architecture
 
 !include style.plantuml
 
-frame "VIPER Architecture" {
+frame "other Modules" {
+	class otherWireframe <<Wireframe>>
+}
+
+frame Module {
 	class Wireframe <<Wireframe>>
 	class Presenter <<Presenter>>
 	class View <<View>>
 	class Interactor <<Interactor>>
 
+	otherWireframe <-r-> Wireframe : knows
 	Wireframe <-- Presenter : owns
 	View <- Presenter : weak reference
 	View -> Presenter : "owns"
@@ -16,8 +21,16 @@ frame "VIPER Architecture" {
 	Wireframe ..> Presenter : creates
 	Wireframe ..> View : creates
 	Wireframe ..> Interactor : creates
-	Interactor -u-> DataManager : uses
-	DataManager -l> Entity : knows about
+}
+
+frame Common {
+	class DataManager
+	Interactor -> DataManager : uses
+}
+
+frame Entities {
+	class Entity
+	DataManager -u-> Entity : knows about
 }
 
 @enduml

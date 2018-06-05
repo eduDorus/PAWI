@@ -4,13 +4,13 @@
 
 ' Interfaces
 
-interface ARGuideWireframeProtocol {
+interface ARGuideWireframeProtocol <<Wireframe>> {
     {static} createARGuideModule(of: MarbleRunEntity) -> UIViewController
     presentSelectMode()
     changeMode(with: MarbleRunEntity)
 }
 
-interface ARGuideViewProtocol {
+interface ARGuideViewProtocol <<View>> {
     presenter : ARGuidePresenterProtocol? { get set }
     subview : ARViewController? { get set }
     
@@ -23,7 +23,7 @@ interface ARGuideViewProtocol {
     nextButton(enabled: Bool)
 }
 
-interface ARGuidePresenterProtocol {
+interface ARGuidePresenterProtocol <<Presenter>> {
     view : ARGuideViewProtocol?
     wireframe : ARGuideWireframeProtocol?
     interactor : ARGuideInteractorInputProtocol?
@@ -38,7 +38,7 @@ interface ARGuidePresenterProtocol {
     didPressLeaveAction()
 }
 
-interface ARGuideInteractorInputProtocol {
+interface ARGuideInteractorInputProtocol <<Interactor>> {
     marbleRun : MarbleRunEntity?
     output : ARGuideInteractorOutputProtocol?
     resetGuide()
@@ -47,7 +47,7 @@ interface ARGuideInteractorInputProtocol {
     retrieveMarbleRun() -> [ElementEntity]
 }
 
-interface ARGuideInteractorOutputProtocol {
+interface ARGuideInteractorOutputProtocol <<Interactor>> {
     set(elementAt: Triple<Int, Int, Int>, to: ElementState)
     setAllElements(to: ElementState)
     buttons(previousEnabled: Bool, nextEnabled: Bool)
@@ -68,11 +68,11 @@ interface UIViewController {
 
 ' Classes
 
-class ARGuideWireframe {
+class ARGuideWireframe <<Wireframe>> {
     {static} mainStoryboard: UIStoryboard
 }
 
-class ARGuideView {
+class ARGuideView <<View>> {
     marbleRun: MarbleRunNode?
     state : ARModeState
     previousButton: UIButton!
@@ -86,9 +86,9 @@ class ARGuideView {
     updateMarbleRunPosition()
 }
 
-class ARGuidePresenter
+class ARGuidePresenter <<Presenter>>
 
-class ARGuideInteractor {
+class ARGuideInteractor <<Interactor>> {
     guide: [Triple<Int,Int,Int>]
     currentPointer : Int
     pastElementState : ElementState
@@ -113,11 +113,11 @@ ARGuideInteractor ..> DepthFirstSort
 
 ARGuideWireframe .u.|> ARGuideWireframeProtocol
 ARGuideWireframe .u.|> ARWireframeProtocol
-ARGuideView .u.|> ARGuideViewProtocol
+ARGuideView .u...|> ARGuideViewProtocol
 ARGuidePresenter .u.|> ARGuidePresenterProtocol
-ARGuidePresenter .u.|> ARGuideInteractorOutputProtocol
+ARGuidePresenter .d.|> ARGuideInteractorOutputProtocol
 ARGuideInteractor .u.|> ARGuideInteractorInputProtocol
-ARGuideView .|> UIViewController
-ARGuideView ..|> ARSCNViewDelegate
+ARGuideView ..|> UIViewController
+ARGuideView .|> ARSCNViewDelegate
 
 @enduml

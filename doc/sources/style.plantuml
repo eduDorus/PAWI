@@ -13,6 +13,10 @@ skinparam Class {
 	StereotypeFontSize 10
 	ArrowFontSize 10
 	AttributeIconSize 0
+	HeaderBackgroundColor<<Wireframe>> #46B29D
+	HeaderBackgroundColor<<View>>  #DE5B49
+	HeaderBackgroundColor<<Interactor>> #F0CA4D
+	HeaderBackgroundColor<<Presenter>> #E37B40
 }
 
 skinparam Component {
@@ -23,3 +27,4 @@ skinparam Component {
 hide empty fields
 hide empty methods
 hide circle
+hide stereotype

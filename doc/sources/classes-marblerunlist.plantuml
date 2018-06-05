@@ -4,18 +4,18 @@
 
 ' Interfaces
 
-interface MarbleRunListWireframeProtocol {
+interface MarbleRunListWireframeProtocol <<Wireframe>> {
     {static} createMarbleRunListModule(in: ARInteractionMode) -> UIViewController
     presentARView(from: MarbleRunListViewProtocol, with: MarbleRunEntity)
 }
 
-interface MarbleRunListViewProtocol {
+interface MarbleRunListViewProtocol <<View>> {
     presenter : MarbleRunListPresenterProtocol?
     canAddNew : Bool
     reloadMarbleRunList(with: [MarbleRunEntity])
 }
 
-interface MarbleRunListPresenterProtocol {
+interface MarbleRunListPresenterProtocol <<Presenter>> {
     view : MarbleRunListViewProtocol?
     wireframe : MarbleRunListWireframeProtocol?
     interactor : MarbleRunListInteractorProtocol?
@@ -24,7 +24,7 @@ interface MarbleRunListPresenterProtocol {
     didSelectNew(with: String, on: MarbleRunListViewProtocol)
 }
 
-interface MarbleRunListInteractorProtocol {
+interface MarbleRunListInteractorProtocol <<Interactor>> {
     retrieveMarbleRuns(_: ([MarbleRunEntity]) -> Void)
     createNewMarbleRun(with: String) -> MarbleRunEntity
 }
@@ -40,37 +40,37 @@ interface UICollectionViewDelegate {
 
 ' Classes
 
-class MarbleRunListWireframe {
+class MarbleRunListWireframe <<Wireframe>> {
     {static} mainStoryboard: UIStoryboard
     mode : ARInteractionMode
     init(with: ARInteractionMode)
 }
 
-class MarbleRunListView {
+class MarbleRunListView <<View>> {
     marblerunMarbleRunList: [MarbleRunEntity]
     collectionView: UICollectionView!
     showNewDialogue()
 }
 
-class MarbleRunListPresenter
+class MarbleRunListPresenter <<Presenter>>
 
-class MarbleRunListInteractor 
+class MarbleRunListInteractor <<Interactor>>
 
 ' Relationships
 
 MarbleRunListViewProtocol -r-> MarbleRunListPresenterProtocol
 MarbleRunListPresenterProtocol -l-> MarbleRunListViewProtocol
-MarbleRunListPresenterProtocol -r-> MarbleRunListInteractorProtocol
+MarbleRunListPresenterProtocol --> MarbleRunListInteractorProtocol
 MarbleRunListWireframeProtocol <-u-- MarbleRunListPresenterProtocol
 
 ' Implementations
 
 MarbleRunListWireframe .u.|> MarbleRunListWireframeProtocol
-MarbleRunListView ..u.|> MarbleRunListViewProtocol
-MarbleRunListPresenter .u.|> MarbleRunListPresenterProtocol
+MarbleRunListView ..u..|> MarbleRunListViewProtocol
+MarbleRunListPresenter .u..|> MarbleRunListPresenterProtocol
 MarbleRunListInteractor .u.|> MarbleRunListInteractorProtocol
 
-MarbleRunListView ..|> UICollectionViewDataSource
-MarbleRunListView .|> UICollectionViewDelegate
+MarbleRunListView .|> UICollectionViewDataSource
+MarbleRunListView ..|> UICollectionViewDelegate
 
 @enduml

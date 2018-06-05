@@ -4,17 +4,17 @@
 
 ' Interfaces
 
-interface SelectModeWireframeProtocol {
+interface SelectModeWireframeProtocol <<Wireframe>> {
     navigationController : UINavigationController?
     {static} createSelectModeModule() -> UIViewController
     presentMarbleRunListView(from: SelectModeViewProtocol, with: ARInteractionMode)
 }
 
-interface SelectModeViewProtocol {
+interface SelectModeViewProtocol <<View>> {
     presenter : SelectModePresenterProtocol? 
 }
 
-interface SelectModePresenterProtocol {
+interface SelectModePresenterProtocol <<Presenter>> {
     view : SelectModeViewProtocol? 
     wireframe : SelectModeWireframeProtocol? 
     didPressGuideButton(on: SelectModeViewProtocol)
@@ -23,11 +23,11 @@ interface SelectModePresenterProtocol {
 
 ' Classes
 
-class SelectModeWireframe {
+class SelectModeWireframe <<Wireframe>> {
     {static} mainStoryboard: UIStoryboard
 }
-class SelectModeView
-class SelectModePresenter
+class SelectModeView <<View>>
+class SelectModePresenter <<Presenter>>
 
 ' Relationships
 

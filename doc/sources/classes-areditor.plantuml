@@ -4,14 +4,14 @@
 
 ' Interfaces
 
-interface AREditorWireframeProtocol {
+interface AREditorWireframeProtocol <<Wireframe>> {
     {static} createAREditorModule(of: MarbleRunEntity) -> UIViewController
     presentSelectElement(from: AREditorViewProtocol)
     presentSelectMode()
     changeMode(with: MarbleRunEntity)
 }
 
-interface AREditorViewProtocol {
+interface AREditorViewProtocol <<View>> {
     presenter : AREditorPresenterProtocol?
     subview : ARViewController?
     elementSelected(element: ElementEntity)
@@ -20,13 +20,13 @@ interface AREditorViewProtocol {
     add(elements: [ElementEntity])
     set(elementAt: Triple<Int, Int, Int>, to: ElementState)
     remove(at: Triple<Int, Int, Int>)
-    rotate(at: Triple<Int, Int, Int>, rotation: SCNVector3, completionHandler: ((_ rotation: SCNVector4) -> Void))
+    rotate(at: Triple<Int, Int, Int>, rotation: SCNVector3, _: (_: SCNVector4) -> Void)
     toggleAddCancel()
     addBoundingBoxes(at: Set<Triple<Int, Int, Int>>)
     removeBoundingBoxes()
 }
 
-interface AREditorPresenterProtocol {
+interface AREditorPresenterProtocol <<Presenter>> {
     view : AREditorViewProtocol?
     wireframe : AREditorWireframeProtocol?
     interactor : AREditorInteractorProtocol?
@@ -45,7 +45,7 @@ interface AREditorPresenterProtocol {
     rotateElement(to: UISwipeGestureRecognizerDirection, with: Float)
 }
 
-interface AREditorInteractorProtocol {
+interface AREditorInteractorProtocol <<Interactor>> {
     marbleRun : MarbleRunEntity?
     getPossibleLocations() -> Set<Triple<Int, Int, Int>>
     buildElement(element: ElementEntity)
@@ -70,11 +70,11 @@ interface UIViewController {
 
 ' Classes
 
-class AREditorWireframe {
+class AREditorWireframe <<Wireframe>> {
     {static} mainStoryboard: UIStoryboard
 }
 
-class AREditorView {
+class AREditorView <<View>> {
     marbleRun: MarbleRunNode?
     state : ARModeState
     marbleRunAngle : Float
@@ -96,32 +96,32 @@ class AREditorView {
     updateMarbleRunPosition()
 }
 
-class AREditorPresenter
+class AREditorPresenter <<Presenter>>
 
-class AREditorInteractor {
+class AREditorInteractor <<Interactor>> {
     possibleBaselevelLocations() -> Set<Triple<Int, Int, Int>>
     possibleTopLocations() -> Set<Triple<Int, Int, Int>>
-    hasElementOnTop(of location: Triple<Int, Int, Int>) -> Bool
-    checkRemoveElement(at location: Triple<Int, Int, Int>) -> Bool
-    neighborLocations(from location: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>]
-    getAllBaseElements(except location: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>]?
+    hasElementOnTop(of: Triple<Int, Int, Int>) -> Bool
+    checkRemoveElement(at: Triple<Int, Int, Int>) -> Bool
+    neighborLocations(from: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>]
+    getAllBaseElements(except: Triple<Int, Int, Int>?) -> [Triple<Int, Int, Int>]?
 }
 
 ' Relationships
 
 AREditorViewProtocol -r-> AREditorPresenterProtocol
 AREditorPresenterProtocol -l-> AREditorViewProtocol
-AREditorPresenterProtocol -r-> AREditorInteractorProtocol
+AREditorPresenterProtocol --> AREditorInteractorProtocol
 AREditorWireframeProtocol <-u-- AREditorPresenterProtocol
 
 ' Implementations
 
-AREditorWireframe .u.|> AREditorWireframeProtocol
-AREditorWireframe .u.|> ARWireframeProtocol
-AREditorView .u.|> AREditorViewProtocol
-AREditorPresenter .u.|> AREditorPresenterProtocol
-AREditorInteractor .u.|> AREditorInteractorProtocol
-AREditorView .|> UIViewController
+AREditorWireframe .r.|> AREditorWireframeProtocol
+AREditorWireframe .d.|> ARWireframeProtocol
+AREditorView .u..|> AREditorViewProtocol
+AREditorPresenter .d.|> AREditorPresenterProtocol
+AREditorInteractor .u..|> AREditorInteractorProtocol
+AREditorView .r.|> UIViewController
 AREditorView ..|> ARSCNViewDelegate
 
 @enduml

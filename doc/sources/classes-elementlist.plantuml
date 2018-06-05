@@ -4,17 +4,17 @@
 
 ' Interfaces
 
-interface ElementListWireframeProtocol {
+interface ElementListWireframeProtocol <<Wireframe>> {
 	{static} createElementListModule() -> UIViewController
     dismissModule(from: ElementListViewProtocol, with: ElementEntity)
 }
 
-interface ElementListViewProtocol {
+interface ElementListViewProtocol <<View>> {
     presenter : ElementListPresenterProtocol? 
     reloadElementList(with: [ElementEntity])
 }
 
-interface ElementListPresenterProtocol {
+interface ElementListPresenterProtocol <<Presenter>> {
     view : ElementListViewProtocol? 
     wireframe : ElementListWireframeProtocol? 
     interactor : ElementListInteractorProtocol? 
@@ -22,7 +22,7 @@ interface ElementListPresenterProtocol {
     didSelect(element: ElementEntity, on: ElementListViewProtocol)
 }
 
-interface ElementListInteractorProtocol {
+interface ElementListInteractorProtocol <<Interactor>> {
 	getElements() -> [ElementEntity]
 }
 
@@ -36,28 +36,28 @@ interface UICollectionViewDelegate {
 	collectionView(_: UICollectionView, didSelectItemAt: IndexPath)
 }
 
-class ElementListWireframe
-class ElementListView {
+class ElementListWireframe <<Wireframe>>
+class ElementListView <<View>> {
 	collectionView: UICollectionView
 }
-class ElementListPresenter
-class ElementListInteractor
+class ElementListPresenter <<Presenter>>
+class ElementListInteractor <<Interactor>>
 
 ' Relationships
 
 ElementListViewProtocol --> ElementListPresenterProtocol
 ElementListPresenterProtocol -l> ElementListViewProtocol
-ElementListPresenterProtocol -> ElementListInteractorProtocol
-ElementListWireframeProtocol <-d- ElementListPresenterProtocol
+ElementListPresenterProtocol --> ElementListInteractorProtocol
+ElementListWireframeProtocol <-u-- ElementListPresenterProtocol
 
 ' Implementations
 
 ElementListWireframe .u.|> ElementListWireframeProtocol
-ElementListView .u.|> ElementListViewProtocol
+ElementListView .u...|> ElementListViewProtocol
 ElementListPresenter .u.|> ElementListPresenterProtocol
 ElementListInteractor .u.|> ElementListInteractorProtocol
 
-ElementListView ..|> UICollectionViewDataSource
 ElementListView ..|> UICollectionViewDelegate
+ElementListView .|> UICollectionViewDataSource
 
 @enduml

@@ -3,10 +3,10 @@
 !include style.plantuml
 
 package "A Module in VIPER Architecture" <<Frame>> {
-	class Wireframe
-	class Presenter
-	class View
-	class Interactor
+	class Wireframe <<Wireframe>>
+	class Presenter <<Presenter>>
+	class View <<View>>
+	class Interactor <<Interactor>>
 
 	Wireframe <-- Presenter : 2
 	View -> Presenter : 1
