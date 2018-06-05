@@ -1,0 +1,44 @@
+@startuml classes-selectmode
+
+!include style.plantuml
+
+' Interfaces
+
+interface SelectModeWireframeProtocol {
+    navigationController : UINavigationController?
+    {static} createSelectModeModule() -> UIViewController
+    presentMarbleRunListView(from: SelectModeViewProtocol, with: ARInteractionMode)
+}
+
+interface SelectModeViewProtocol {
+    presenter : SelectModePresenterProtocol? 
+}
+
+interface SelectModePresenterProtocol {
+    view : SelectModeViewProtocol? 
+    wireframe : SelectModeWireframeProtocol? 
+    didPressGuideButton(on: SelectModeViewProtocol)
+    didPressEditorButton(on: SelectModeViewProtocol)
+}
+
+' Classes
+
+class SelectModeWireframe {
+    {static} mainStoryboard: UIStoryboard
+}
+class SelectModeView
+class SelectModePresenter
+
+' Relationships
+
+SelectModeViewProtocol --> SelectModePresenterProtocol
+SelectModePresenterProtocol -l> SelectModeViewProtocol
+SelectModeWireframeProtocol <--u- SelectModePresenterProtocol
+
+' Implementations
+
+SelectModeWireframe .u.|> SelectModeWireframeProtocol
+SelectModeView .u.|> SelectModeViewProtocol
+SelectModePresenter .u.|> SelectModePresenterProtocol
+
+@enduml

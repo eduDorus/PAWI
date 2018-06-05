@@ -1,0 +1,63 @@
+@startuml classes-elementlist
+
+!include style.plantuml
+
+' Interfaces
+
+interface ElementListWireframeProtocol {
+	{static} createElementListModule() -> UIViewController
+    dismissModule(from: ElementListViewProtocol, with: ElementEntity)
+}
+
+interface ElementListViewProtocol {
+    presenter : ElementListPresenterProtocol? 
+    reloadElementList(with: [ElementEntity])
+}
+
+interface ElementListPresenterProtocol {
+    view : ElementListViewProtocol? 
+    wireframe : ElementListWireframeProtocol? 
+    interactor : ElementListInteractorProtocol? 
+    viewDidLoad()
+    didSelect(element: ElementEntity, on: ElementListViewProtocol)
+}
+
+interface ElementListInteractorProtocol {
+	getElements() -> [ElementEntity]
+}
+
+
+interface UICollectionViewDataSource {
+	collectionView(_: UICollectionView, numberOfItemsInSection: Int) -> Int
+	collectionView(_: UICollectionView, cellForItemAt: IndexPath) -> UICollectionViewCell
+}
+
+interface UICollectionViewDelegate {
+	collectionView(_: UICollectionView, didSelectItemAt: IndexPath)
+}
+
+class ElementListWireframe
+class ElementListView {
+	collectionView: UICollectionView
+}
+class ElementListPresenter
+class ElementListInteractor
+
+' Relationships
+
+ElementListViewProtocol --> ElementListPresenterProtocol
+ElementListPresenterProtocol -l> ElementListViewProtocol
+ElementListPresenterProtocol -> ElementListInteractorProtocol
+ElementListWireframeProtocol <-d- ElementListPresenterProtocol
+
+' Implementations
+
+ElementListWireframe .u.|> ElementListWireframeProtocol
+ElementListView .u.|> ElementListViewProtocol
+ElementListPresenter .u.|> ElementListPresenterProtocol
+ElementListInteractor .u.|> ElementListInteractorProtocol
+
+ElementListView ..|> UICollectionViewDataSource
+ElementListView ..|> UICollectionViewDelegate
+
+@enduml

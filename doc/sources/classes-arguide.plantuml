@@ -1,0 +1,123 @@
+@startuml classes-arguide
+
+!include style.plantuml
+
+' Interfaces
+
+interface ARGuideWireframeProtocol {
+    {static} createARGuideModule(of: MarbleRunEntity) -> UIViewController
+    presentSelectMode()
+    changeMode(with: MarbleRunEntity)
+}
+
+interface ARGuideViewProtocol {
+    presenter : ARGuidePresenterProtocol? { get set }
+    subview : ARViewController? { get set }
+    
+    initializeMarbleRun()
+    add(element: ElementEntity)
+    add(elements: [ElementEntity])
+    set(elementAt: Triple<Int, Int, Int>, to: ElementState)
+    setRun(to: ElementState)
+    previousButton(enabled: Bool)
+    nextButton(enabled: Bool)
+}
+
+interface ARGuidePresenterProtocol {
+    view : ARGuideViewProtocol?
+    wireframe : ARGuideWireframeProtocol?
+    interactor : ARGuideInteractorInputProtocol?
+    
+    viewDidLoad()
+    readyForMarbleRun()
+    didPressStart()
+    didPressNext()
+    didPressPrevious()
+    didPressRestartAction()
+    didPressChangeModeAction(from: ARSCNView)
+    didPressLeaveAction()
+}
+
+interface ARGuideInteractorInputProtocol {
+    marbleRun : MarbleRunEntity?
+    output : ARGuideInteractorOutputProtocol?
+    resetGuide()
+    nextStep()
+    previousStep()
+    retrieveMarbleRun() -> [ElementEntity]
+}
+
+interface ARGuideInteractorOutputProtocol {
+    set(elementAt: Triple<Int, Int, Int>, to: ElementState)
+    setAllElements(to: ElementState)
+    buttons(previousEnabled: Bool, nextEnabled: Bool)
+}
+
+interface ARWireframeProtocol {
+    {static} createModule(of: MarbleRunEntity)
+}
+
+interface ARSCNViewDelegate {
+    renderer(_: SCNSceneRenderer, willRenderScene: SCNScene, atTime: TimeInterval)
+}
+
+interface UIViewController {
+    viewDidLoad()
+    touchesBegan(_: Set<UITouch>, with: UIEvent?)
+}
+
+' Classes
+
+class ARGuideWireframe {
+    {static} mainStoryboard: UIStoryboard
+}
+
+class ARGuideView {
+    marbleRun: MarbleRunNode?
+    state : ARModeState
+    previousButton: UIButton!
+    nextButton: UIButton!
+    startButton: UIButton!
+    didPressPrevious(_: Any)
+    didPressNext(_: Any)
+    didPressMenu(_: Any)
+    didPressStart(_: Any)
+    menuAction()
+    updateMarbleRunPosition()
+}
+
+class ARGuidePresenter
+
+class ARGuideInteractor {
+    guide: [Triple<Int,Int,Int>]
+    currentPointer : Int
+    pastElementState : ElementState
+    futureElementState : ElementState
+    hasNext() -> Bool
+    hasPrevious() -> Bool
+    setCurrent(to: ElementState)
+    checkGuideBoundaries()
+}
+
+' Relationships
+
+ARGuideViewProtocol -r-> ARGuidePresenterProtocol
+ARGuidePresenterProtocol -l-> ARGuideViewProtocol
+ARGuidePresenterProtocol -r-> ARGuideInteractorInputProtocol
+ARGuideWireframeProtocol <-u-- ARGuidePresenterProtocol
+ARGuideInteractorInputProtocol --> ARGuideInteractorOutputProtocol
+
+ARGuideInteractor ..> DepthFirstSort
+
+' Implementations
+
+ARGuideWireframe .u.|> ARGuideWireframeProtocol
+ARGuideWireframe .u.|> ARWireframeProtocol
+ARGuideView .u.|> ARGuideViewProtocol
+ARGuidePresenter .u.|> ARGuidePresenterProtocol
+ARGuidePresenter .u.|> ARGuideInteractorOutputProtocol
+ARGuideInteractor .u.|> ARGuideInteractorInputProtocol
+ARGuideView .|> UIViewController
+ARGuideView ..|> ARSCNViewDelegate
+
+@enduml
