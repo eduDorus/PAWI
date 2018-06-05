@@ -29,6 +29,7 @@ class ARGuideInteractor : ARGuideInteractorInputProtocol {
             }
             let builder = DepthFirstSort(pos)
             guide = builder.generate()
+            currentPointer = 0
             output?.setAllElements(to: futureElementState)
             output?.set(elementAt: guide[0], to: .highlighted)
         }
