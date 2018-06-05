@@ -29,6 +29,7 @@
 \usepackage{multirow}
 \usepackage{longtable}
 \usepackage{tocloft} % allows for sources on figures in the list of figures
+\usepackage{pdfpages}
 \setlength{\columnsep}{0.6cm}
 
 \pagestyle{fancy}
@@ -297,12 +298,8 @@
 \renewcommand{\thesubsection}{\thesection\arabic{subsection}}
 
 
-\IfFileExists{99-Appendix}{
-  \input{99-Appendix}
-}
-
-\IfFileExists{90-Architektur}{
-  \input{90-Architektur}
+\IfFileExists{90-Appendix}{
+  \input{90-Appendix}
 }
 
 \end{document}

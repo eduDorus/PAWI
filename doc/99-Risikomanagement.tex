@@ -1,0 +1,67 @@
+\subsection{Risikomanagement}
+
+\begin{longtable}{lp{3.5cm}lllp{3.5cm}p{3.5cm}}
+	\hline
+	\textbf{Nr.} & \textbf{Beschreibung} & \textbf{W} & \textbf{A} & \textbf{W*A} & \textbf{Prävention} & \textbf{Reaktion} \\ 
+	\hline
+	01  & Ausfall eines Projektmitarbeiters & 1 & 2 & 2 & Regelmässiger Wissensaustausch und Projektmeetings, zentrale Dokumentation aller Vorgänge (GitHub) & Betreuenden Dozenten informieren und Anforderungen einschränken \\
+	\hline
+	02  & Projektdaten gehen verloren & 0 & 3 & 0 & Daten regelmässig sichern, Daten versionisiert auf GitHub & Daten wiederherstellen \\
+	\hline
+	03  & GitHub fällt aus & 1 & 1 & 1 & lokale Kopien aller Daten & auf lokalen Kopien arbeiten und auf HSLU GitLab migrieren \\
+	\hline
+	04  & Anforderungen werden nicht erfüllt & 1 & 2 & 2 & regelmässiges Überprüfen / Meetings mit betreuendem Dozenten, realistische Ziele setzen & Rechtzeitige Information an Projektbeteiligte und Anpassung des Projektplans \\
+	\hline
+	05  & Zeitaufwand und Komplexität für Entwicklung zu hoch & 1 & 3 & 3 & eingehende Technologierecherche und Versuche & Betreuenden Dozenten informieren, um Hilfe bei Dozenten suchen, Anforderungen einschränken \\
+	\hline
+	06  & Frameworks weisen nicht die funktionalen Anforderungen auf die im Marketing versprochen werden. & 1 & 3 & 3 & Mittels Problemlösungszyklen die Funktionalität überprüfen und verifizieren & Rücksprache mit dem Auftraggeber und dem Betreuer \\
+	\hline
+	07  & Beschränkte Erfahrung mit iOS und Swift erhöht die Zeit der Evaluation und gefärdet somit den tiefe Grad der Problemlösungszyklen. & 1 & 3 & 3 & Genügend Zeit bei den ersten Problemlösungszyklen definieren & Anpassung der Anforderungen und Rücksprache mit dem Auftraggeber und dem Betreuer \\
+	\hline
+	08  & Betas von ARKit 1.5 oder iOS 11.3 sind instabil oder ändern genutzte Funktionen & 0 & 2 & 0 & Known Issues recherchieren, Verwendung von neuen Funktionen bewusst wählen und Alternativen berücksichtigen & Issue an Apple reporten, an anderen (gleich wichtigen) Aufgaben arbeiten, alternative Methoden suchen, auf stabile Funktionen zurückgreifen \\
+	\hline
+	09  & Leistung der (Test)Geräte nicht ausreichend & 1 & 2 & 2 & Technologische Anforderungen (welche Generation von iPhones/iPads) in der Recherche berücksichtigen, beim Bau von Prototypen Zeit einplanen zu Performance Tests & Code/Methoden optimieren, alternative Lösungen weiterverfolgen \\
+	\hline
+	10  & Präzision des Tracking zu niedrig um das Cuboro Element sicher zu Tracken & 2 & 2 & 4 & Anforderungen mit einem Tolleranzbereich definieren. & Marker anbringen um die präzision des Trackings zu erhöhen. Third party Software zur erkennung des Würfels verwenden. \\
+	\hline
+	11  & Präzision der Hit-Tests zu niedrig um zu ermitteln ob sich ein physisches Objekt in einer augmentierten Bounding Box befindet & 2 & 2 & 4 & Bestätigen mittels einer Tapgeste oder einem Button klick. & Verschiedene Versuche durchführen um die Genauigkeit zu ermitteln. \\
+	\hline
+	12  & Erhalten keine oder nicht verwendbar 3D Daten von cuboro Elemente & 1 & 2 & 2 & Kontakt mit cuboro herstellen & Einfache Würfel als Platzhalter, eigene einfache Elemente mit SceneKit oder Drittanbieter Software (bspw. Blender) erstellen \\
+	\hline
+	13  & Präzision des Worldtrackings ist zu instabil um die Bahn auf der ausgewählten Fläche zu halten & 2 & 2 & 4 & ARKit 1.5 nutzen & Funktion um die Bahm manuell zu korrigieren \\
+	\hline
+	14  & Korrekte Rotation der Elemente zu komplex & 2 & 2 & 4 & - & Anzahl Rotationsachsen verringern \\
+	\hline
+	15  & Worldtracking bei Unterbrüchen zu instabil & 2 & 2 & 4 & Unterbrüche der Szene vermeiden & Popup statt Modal verwenden um keinen Unterbruch zu erzeugen, Benutzer über Relokalisierung informieren \\
+	\hline
+\end{longtable}
+
+\textbf{Legende}
+\begin{itemize}
+	\item \textbf{W:} Wahrscheinlichkeit
+	\item \textbf{A:} Auswirkungen
+\end{itemize}
+
+\subsubsection*{Änderungsprotokoll}
+
+\begin{table}
+	\begin{tabular}{llp{10cm}}
+		\hline
+		\textbf{Datum} & \textbf{Autor} & \textbf{Bemerkungen} \\
+		\hline
+		06.03.2018 & Lucas & Erstellung der Tabelle mit Risiken 01-05 \\
+		10.03.2018 & Dorus & Erweiterung um Risiken 06-07 \\
+		12.03.2018 & Lucas & Erweiterung um Risiken 08-09 \\
+		26.03.2018 & Lucas \& Dorus & Erweiterung um Risiko 10 \\
+		26.03.2018 & Dorus & Risiko 07 W heruntergestuft von 2 auf 1 \\
+		09.04.2018 & Dorus & Erweiterung um Risiko 11 \\
+		09.04.2018 & Lucas & Risiko 08 W heruntergestuft von 1 auf 0, iOS 11.3 / ARKit 1.5 sind veröffentlicht \\
+		22.04.2018 & Lucas & Erweiterung um Risiko 12 \\
+		22.04.2018 & Lucas \& Dorus & Erweiterung um Risiko 13 \\
+		07.05.2018 & Lucas & Risiko 10 heruntergestuft von 3 auf 2 \\
+		07.05.2018 & Lucas & Risiko 12 heruntergestuft von 2 auf 1 \\
+		21.05.2018 & Lucas \& Dorus & Erweiterung um Risiken 14-15 \\
+		\hline
+	\end{tabular}
+\end{table}
+

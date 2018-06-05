@@ -1,0 +1,241 @@
+\subsection{Protokolle}
+
+\setlist[itemize]{noitemsep}
+
+\subsubsection*{22.05.2018 - Sitzung}
+
+Anwesend: Ruedi Arnold, Lucas Schnüriger, Dorus Janssens
+
+\textbf{Fragen}
+\begin{itemize}
+	\item Demo-App: Rotation um nur eine Achse auch akzeptabel?
+	\begin{itemize}
+		\item Noch einmal eine Stunde investieren, um zu sehen, ob die Rotation um alle drei Achsen nicht doch geht, bspw. mit einer Transformationsmatrix
+	\end{itemize}
+	\item Dokumentation:
+	\begin{itemize}
+		\item Wie sollen die (funktionalen) Anforderungen festgehalten werden: Teil des Hauptteil (Problemstellung) oder in Anhang (Architekturdokumentation)?
+		\item Anforderungen können im Anhang gehandhabt werden. Sie sollen aber nicht doppelt aufgeführt werden.
+	\end{itemize}
+	\item Prototypen: die Fragestellungen und Resultate in einer Übersicht sammeln oder Teil der Prototypen Beschreibung oder gar an beiden Stellen?
+	\begin{itemize}
+		\item Kurze Liste mit Beschreib der Unterfangen, allenfalls Erfüllungsgrad visualisieren (bspw. mit Ampelsystem)
+		\item Der bisherige Aufbau zur Beschreibung der Prototypen sonst ist ok
+	\end{itemize}
+	\item Umfang des Testing: Testplan und Testprotokoll oder einfach Anforderungen validieren? Wie dokumentieren: in Hauptteil/Anhang?
+	\begin{itemize}
+		\item Anforderungen validieren anhand der Akzeptanzkriterien, Erfüllungsgrad prüfen und Unvollständigkeiten begründen
+		\item Festhalten im Hauptteil unter "Validierung" passt
+		\item Unit Tests nicht notwendig
+	\end{itemize}
+\end{itemize}
+
+\textbf{Weitere Arbeitsschritte / zu bearbeitende Fragestellungen}
+\begin{itemize}
+	\item Demo-App fertigstellen:
+	\begin{itemize}
+		\item Rotation nochmals überarbeiten und allenfalls darlegen warum es nicht funktioniert
+		\item Löschalgorithmus fertig implementieren, sodass keine "Inseln" gebildet werden können
+		\item Einen "About"-Bereich ergänzen (mit Name, Version)
+		\item Das Schachbrettmuster der Flächenerkennung nach Start Editor/Guide nicht mehr anzeigen, oder transparenter
+		\item Methoden der Klasse zur Persistierung statisch machen, nicht als Objekt benötigt
+	\end{itemize}
+	\item Dokumentation fertigstellen:
+	\begin{itemize}
+		\item Wichtig: Dokumentation muss eine objektive Bewertung und ein persönliches Fazit (pro Student) enthalten
+		\item Die Projektplanung (Grobplan/Meilensteine) kann direkt in den Hauptteil der Dokumentation unter "Problemstellung"
+		\item Protokolle, Arbeitsjournale, Risikomanagement im Anhang der Dokumentation mit abgeben aber nicht ausdrucken
+		\item Aufgabestellung in den Anhang, Einleitung/Ausgangslage mit eigener Formulierung
+		\item Source Dateien im Anhang (nicht nur von Prototypen/App, sondern auch von Bildern, Grafiken und Diagrammen)
+		\item Den Backlog wenn möglich anhängen (vom GitHub Project nach Möglichkeit exportieren)
+	\end{itemize}
+	\item Demo Video erstellen
+\end{itemize}
+
+\textbf{Varia}
+\begin{itemize}
+	\item Zum letzten Statusprotokoll: der 1. und 3. Arbeitsschritt aus "Stand der Arbeit" würde in "Ausgeführte Arbeiten" kommen, "Stand der Arbeit" sollte SOLL-IST vergleichen
+	\item Demo-App wurde vorgeführt, die App wurde zudem auf Herr Arnolds Gerät installiert
+	\item Abgabe nicht auf CD notwendig, kann bspw. auch als Dropbox Link sein
+	\item Arnold ist bis nächste Woche noch per Mail erreichbar, in Kalenderwoche 23 (4.-8. Juni) abwesend
+	\item erhalten, Termin für Präsentation haben wir anschliessend an die Sitzung erhalten: 25. Juni, 14.00 Uhr)
+\end{itemize}
+
+
+\subsubsection*{08.05.2018 - Sitzung}
+
+Anwesend: Ruedi Arnold, Lucas Schnüriger, Dorus Janssens
+
+\textbf{Weitere Arbeitsschritte / zu bearbeitende Fragestellungen}
+\begin{itemize}
+	\item Demo App umsetzen
+	\begin{itemize}
+		\item englische Benutzeroberfläche, Mehrsprachigkeit nicht notwendig
+		\item Architektur auf Basis VIPER ist ok, einfach nicht zuviel "Overhead" erzeugen, ein bottom-up Ansatz wäre auch ausreichend -> am Schluss ist die Funktionalität wichtig
+	\end{itemize}
+	\item Anforderungen in Dokumentation fertigstellen / Korrekturen anbringen:
+	\begin{itemize}
+		\item User Stories fortlaufend, bzw. eindeutig nummerieren
+		\item bei Bauanleitung von "Schritten" nicht "Elementen" reden
+		\item Anzahl integrierte Elemente: "mindestens" 4 schreiben
+		\item Erstellen neuer Kugelbahn: ergänzen, dass man die Kugelbahn benennen kann, unter einem Namen speichert
+		\item Platzieren neuer Element im Editor: präzisieren, wo das Platzieren möglich ist (nur valide Positionen)
+		\item zusätzliche Soll oder Kann Anforderung zur Umbenennung von gespeicherten Kugelbahnen
+		\item Ändern der Ausrichtung eines Element im Editor: spezifizieren, dass nur um 90° entlang der drei Achsen gedreht wird
+		\item allg. Formulierungen kontrollieren und präzisieren wo nötig, darauf achten, dass sie unmissverständlich sind 
+	\end{itemize}
+	\item Mockups (UI):
+	\begin{itemize}
+		\item AR Screen überdenken: bspw. eine Navigationsbar oben inkl. zurück-Button und deutlicher Anzeige welcher Modus aktiv ist, was der nächste Schritt für den User ist (bspw. "Fläche auswählen")
+		\item im Build Mode das aktuelle Element anzeigen, damit klar ist, welcher virtueller Würfel als nächstes gesetzt wird
+	\end{itemize}
+	\item Konzept für Demo Video erstellen
+\end{itemize}
+
+\textbf{Varia}
+\begin{itemize}
+	\item Dokumentation:
+	\begin{itemize}
+		\item Adäquate Deutsche Begriffe Anglizismen vorziehen (bspw. Speicher statt Memory oder Datei statt File)
+		\item Begriffe konsistent/einheitlich verwenden
+	\end{itemize}
+	\item Die beiden Modi der App passender benennen:
+	\begin{itemize}
+		\item bisherigen Editier Modus als Build Modus, da in diesem Modus virtuelle Bahnen gebaut werden
+		\item bisheriger Build Modus als Guide (oder ähnlich), da dies eine Anleitung ist
+	\end{itemize}
+	\item Laut Herrn Arnold hatte Herr Koller kürzlich wieder Kontakt mit cuboro. Sollten wir in den nächsten Tagen nichts hören, soll um ein Statusupdate bei Herr Koller nachgefragt werden
+\end{itemize}
+
+
+\subsubsection*{23.04.2018 - Sitzung}
+
+Anwesend: Ruedi Arnold, Lucas Schnüriger, Dorus Janssens
+
+\textbf{Weitere Arbeitsschritte / zu bearbeitende Fragestellungen}
+\begin{itemize}
+	\item Mockups fertigstellen
+	\item PDF von den neuen Mockups Herr Arnold zukommen lassen
+	\item Min. 4-5 Würfeltypen in die App integrieren
+	\item Fertigstellen Konzept Demo-App
+	\item Start Umsetzung Demo-App
+\end{itemize}
+
+\textbf{Varia}
+\begin{itemize}
+	\item Constraint setzen beim Löschen der Würfel im Editiermodus, damit keine Inseln gemacht werden können
+	\item Demo an Herr Koller zeigen und Nachfragen ob eine Rückmeldung von cuboro eingetroffen ist
+	\item Build- und Editiermodus mit visuellen Elementen für den Benutzer eindeutig identifizierbar machen (z.B Farbe)
+	\item Mögliche Anschlusspunkte der Würfel hinterlegen und Anzeigen ob die Elemente zusammenpassen
+	\item Für das Demo Video kann die Kugel in X- oder Z-Richtung angeschubst werden
+	\item Mocks realistischer darstellen ohne Platzhalter  
+	\item Simulation mit virtueller Kugel vorsehen (SceneKit Physikengine)
+\end{itemize}
+
+\subsubsection*{10.04.2018 - Sitzung}
+
+Anwesend: Ruedi Arnold, Lucas Schnüriger, Dorus Janssens
+
+\textbf{Weitere Arbeitsschritte / zu bearbeitende Fragestellungen}
+\begin{itemize}
+	\item AR Bauanleitung einer Kugelbahn Würfel-für-Würfel (Fortsetzung vom Prototyp zur Bauanleitung)
+	\item Schrittweiser Aufbau einer augmentierten Bahn durch den Benutzer
+	\item Korrektur der Position durch manuelles Verschieben der cuboro Bahn und Würfeln
+	\item Konzept der Demo-Applikation erarbeiten
+\end{itemize}
+
+\textbf{Varia}
+\begin{itemize}
+	\item If-Else Konstrukt zum Drehen der Würfel in ein Enum oder einer Klasse verpacken (Strategie Pattern)
+	\item Hit-Testing dokumentieren und im Ausblick als ein mögliches weiteres Projekt festhalten 
+	\item Herr Koller wird von Dorus Janssens im Modul WebLab eine Demo der aktuellen Prototypen erhalten
+	\item Für die Demo soll eine kleine Bahn verwendet werden (ca. 4 x 4 Grundfläche)
+	\item in 2 Wochen geplantes Ende der explorativen Phase
+	\item Neue Anforderung: Demofilm für die Endabgabe
+\end{itemize}
+
+
+\subsubsection*{27.03.2018 - Sitzung}
+
+Anwesend: Ruedi Arnold, Lucas Schnüriger, Dorus Janssens
+
+\textbf{Weitere Arbeitsschritte / zu bearbeitende Fragestellungen}
+\begin{itemize}
+	\item Vorschlag: Mehrere cuboro Elemente modellieren und eine einfache Bahn vordefinieren und augmentieren. Zweiter Schritt besteht darin mit der augmentierten Bahn zu interagieren.
+	\item zu bearbeitende Themen:
+	\begin{itemize}
+		\item Würfel/Bahn modellieren: lässt sich cuboro-Webkit Export nutzen? Ansonsten cuboro anfragen (via Herr Koller), oder dann selber Wege zur Modellierung finden.
+		\item virtuelles Modell einer Bahn auf einen Tisch projizieren
+		\item AR Bauanleitung einer Bahn mit schrittweisem Aufbau
+		\item erkennen ob sich innerhalb einer Bounding Box ein physischer Würfel befindet
+		\item mittels Touchgesten virtuelle Objekte drehen
+	\end{itemize}
+\end{itemize}
+
+\textbf{Varia}
+\begin{itemize}
+	\item Herr Arnold stets in CC nehmen bei Mails
+	\item Herr Koller anfragen wegen Kontakt zu cuboro: für 3D Modelle der Würfel
+	\item Versuche konkret dokumentieren: detailliert die Erkenntnisse, Versuche und Zwischenschritte festhalten; mit Screenshots, Codeausschnitten, Verweise auf Doku; im Hinterkopf behalten, dass damit jemand daran weiterarbeiten könnte, nachvollziehbar machen wieso welche Schritte genommen wurden; was wäre sonst noch möglich, Ausblick, alternative Möglichkeiten die nicht weiterverfolgt wurden
+	\item Der Haupttreiber dieser Arbeit ist technisch, \textit{nicht} Business-Case
+	\item Mail an Herr Arnold, wenn im GitHub Projects die Versuche erfasst sind
+	\item Verweise auf die Projekte, die als Grundlage dienten, sollen im Repo enthalten sein; an passender Stelle (Readme, direkt im Code) erwähnen
+\end{itemize}
+
+
+\subsubsection*{13.03.2018 - Sitzung}
+
+Anwesend: Ruedi Arnold, Lucas Schnüriger, Dorus Janssens
+
+\textbf{Fragen}
+\begin{itemize}
+	\item Können wir die Einleitung und Aufgabenstellung in der erhaltenen Form verwenden?
+	\begin{itemize}
+		\item Die Einleitung und Aufgabenstellung können aktuell so beibehalten werden und gegen Ende des Projekts genauer spezifiziert werden.
+	\end{itemize}
+	\item Wie werden die funktionalen Anforderungen im explorativen Verfahren gehandhabt?
+	\begin{itemize}
+		\item Z.B. Overlays als Anforderung definieren und im Verlauf des Problemlösungszyklus einzelne Funktionalitäten näher festlegen.
+		\item Somit ergeben sich grobe Anforderungen zu Beginn des Projektes und genauer spezifizierte Anforderungen nach dem Erkenntnisgewinn.
+	\end{itemize}
+	\item Planung / Vorgehen und Dokumentation bei explorativem Verfahren?
+	\begin{itemize}
+		\item Die Phasen Ideenfindung und Ideenauswahl zusammenlegen, sie laufen in kleineren Zeitrahmen immer wieder ab.
+		\item Problemlösungszyklen einzeln dokumentieren und den Erkenntnisgewinn ausführlich formulieren.
+	\end{itemize}
+	\item In welcher Phase läuft der Problemlösungszyklus?
+	\begin{itemize}
+		\item Da die Ideenfindung und Ideenauswahl zusammengelegt wird ist dies ständig der Fall.
+	\end{itemize}
+\end{itemize}
+
+\textbf{Weitere Arbeitsschritte / zu bearbeitende Fragestellungen}
+\begin{itemize}
+	\item Wie kann ein Overlay auf einem physischen Würfel erzeugt werden?
+	\begin{itemize}
+		\item Das SceneKit eignet sich für 3D Objekte und das SpriteKit für 2D Flächen. Welches ist passender?
+	\end{itemize}
+	\item Wie können physische Körper als virtuelle Objekte modeliert werden?
+\end{itemize}
+
+\textbf{Varia}
+\begin{itemize}
+	\item Öfters Prototypen oder ähnliches kommunizieren
+	\item Ein Overlay auf einem Würfel erzeugen ist aktuell priorisiert
+	\item Die Technischenaskpekte und Umsetzung stehen im Vordergrund
+	\item Die Dokumentation soll vor allem die technische Funktionsweise (relevanter, wesentlicher Code) und neue Erkenntnisse aufzeigen
+\end{itemize}
+
+\subsubsection*{27.02.2018 - Kick-Off Meeting}
+
+Anwesend: Ruedi Arnold, Lucas Schnüriger, Dorus Janssens
+
+\begin{itemize}
+	\item Herr Arnold hat uns den Sachverhalt des Projekts erklärt.
+	\item Die Aufgabenstellung ist bewusst offen, es sollen die Möglichkeiten der AR Technologie mit Apples ARKit ausgelotet werden.
+	\item Alle zwei Wochen wird ein Meeting abgehalten. Das Meeting findet jeweils 10:00 bis 11:00 statt.
+	\item Falls benötigt kann ein IOS Gerät zur Verfügung gestellt werden.
+	\item Das Projekt wird im explorativem Verfahren gehandhabt.
+	\item Ein Set einer Cuboro Kugelbahn steht bei Herrn Thomas Koller zur Verfügung.
+\end{itemize}
+
