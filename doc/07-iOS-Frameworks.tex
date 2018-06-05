@@ -32,7 +32,8 @@ Dem Modell können sogenannte Anker vom Typ \texttt{ARAnchor} hinzugefügt werde
 SpriteKit wurde mit iOS 7 eingeführt und bietet im Wesentlichen Werkzeuge für 2D Animationen. Es umfasst zudem eine Physik-Engine und Eventhandling, sodass es für Spiele genutzt werden kann.
 
 
-\subsection{SceneKit}
+\subsection{SceneKit} \label{sub:scene-kit}
 Auf SpriteKit folgend, fügte Apple in iOS 8 mit SceneKit ein high-level Framework für 3D Grafiken hinzu. Das Framework war zuvor bereits in macOS im Einsatz. Wie SpriteKit beinhaltet es eine Physik-Engine, Eventhandling und ein Partikelsystem. Szenen können mit dreidimensionalen Geometrien, Materialien, Lichtern, Animationen und Kameras beschrieben werden. Die Elemente werden in \texttt{SCNScene} in einem Szenengraph hierarchisch verwaltet, mit der \texttt{rootNode} als Wurzelknoten.
 
-% TODO: zur Physics Engine was schreiben
+SceneKit bietet eine interne Physik Engine. Um diese zu verwenden müssen Objekte einen virtuellen physischen Körper zugewiesen werden. Dieser Körper beinhaltet die Oberflächenbschaffenheit, Masse und Reibungskoeffizient usw. und entscheidet wie sich das Objekt in der virtuellen Umgebung verhält. Man unterscheidet zwischen statischer, dynamischer oder kinematischer Körpertypen. Statische Körper sind z.B Wände, Böden und werden nicht von Kräften oder Kollisionen beeinflusst. Dynamische Körper sind können Bälle, Raumschiffe etc. sein und werden direkt von Kräften und Kollisionen beeinflusst. Kinemtische Körper sind wie unsichtbare Körper die helfen mit anderen Objekten zu interagieren, bspw. beim schieben von einem Würfel. Diese Körper können andere Körper beeinflussen jedoch nicht von anderen Körper beieinflusst werden. (\cite{arkit-physics})
+

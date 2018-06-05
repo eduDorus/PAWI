@@ -1,12 +1,19 @@
 \section{Problemstellung}
 
 \subsection{Ausgangslage}
+%TODO: Hier müssen wir noch drüber diskutieren. Es fühlt sich irgenndwie nicht richtig an den originalen Auftrag abzuändern oder anders zu spezifizieren. Dieser wird jedoch im Anhang dabei sein wobei es vermutlich kein problem ist.
 % Welche Problematik führt zu diesem Projekt? Was ist am derzeitigen Zustand unbefriedigend?
-Für die PAWI Arbeit im Frühlingssemester 2018 soll eine iOS-App erstellt werden, welche es erlaubt mit einer physischen cuboro Kugelbahn zu interagieren. Einerseits soll es die zu erstellende App erlauben, physische Kugelbahnen digital zu erfassen. Diese Erfassung kann beispielsweise parallel zum Aufbau einer Kugelbahn geschehen, indem die App Bauteil um Bauteil diese zuerst erkennt (mit passenden Methoden aus dem Bereich Bilderkennung/Computer Vision bzw. dem maschinellen Lernen) und dann dessen relative Position innerhalb von der Kugelbahn aufzeichnet. Es sollen zwingend mehrere unterschiedliche Kugelbahnen in der App erfasst sein, ggf. werden diese in der Software fix hinterlegt bzw. können auf einem anderen Weg als mithilfe der App erfasst werden, z.B. durch einen Import aus dem Cuboro-Webkit.
+%Für die PAWI Arbeit im Frühlingssemester 2018 soll eine iOS-App erstellt werden, welche es erlaubt mit einer physischen cuboro Kugelbahn zu interagieren. Einerseits soll es die zu erstellende App erlauben, physische Kugelbahnen digital zu erfassen. Diese Erfassung kann beispielsweise parallel zum Aufbau einer Kugelbahn geschehen, indem die App Bauteil um Bauteil diese zuerst erkennt (mit passenden Methoden aus dem Bereich Bilderkennung/Computer Vision bzw. dem maschinellen Lernen) und dann dessen relative Position innerhalb von der Kugelbahn aufzeichnet. Es sollen zwingend mehrere unterschiedliche Kugelbahnen in der App erfasst sein, ggf. werden diese in der Software fix hinterlegt bzw. können auf einem anderen Weg als mithilfe der App erfasst werden, z.B. durch einen Import aus dem Cuboro-Webkit.
 
-Erfasste Kugelbahnen sollen nach Möglichkeit in AR-Manier als Echtzeit-Überblendung auf Kamerabildern der physischen Kugelbahn projiziert werden können, z.B. indem Bauteile eingefärbt werden, in Form von angezeigten "`Bounding-Boxes"' oder indem virtuelle Kugeln auf der physischen Kugelbahn simuliert werden können. Oder weiter könnten erfasste Kugelbahnen mittels AR beispielsweise auf einen physischen Tisch "`gestellt"' werden und darauf könnte das Rollen von virtuellen Kugeln simuliert werden. 
+Im Industrieprojekt des Frühlingssemesters 2018 soll eine attraktive Demo-App erstellt werden, die mittels Augmented Reality die physischen cuboro Kugelbahn erweitert. Diese Funktionalität wiederspiegelt sich in einer interaktiven Aufbauanleitung und einem Editiermodus.
 
-In dieser Arbeit gibt es einige Freiheitsgrade, sprich viele funktionale und technische Aspekte gilt es zu erarbeiten, evaluieren und fest zu legen. Damit das Endresultat den Erwartungen von Auftraggeber und Betreuer entspricht, sollen Evaluationen und Entscheidungsfindungen in enger Rücksprache mit dem Auftraggeber und dem Betreuer stattfinden. Wichtige Entscheide (wie z.B. Fixierung von funktionalen Anforderungen, Wahl von Frameworks, usw.) müssen vom Auftraggeber bzw. dem Betreuer genehmigt werden, entsprechend sollen diese möglichst proaktiv in Evaluationen, Bau von Prototypen usw. miteinbezogen, sowie über Vor- und Nachteile, Alternativen usw. informiert werden.
+%Erfasste Kugelbahnen sollen nach Möglichkeit in AR-Manier als Echtzeit-Überblendung auf Kamerabildern der physischen Kugelbahn projiziert werden können, z.B. indem Bauteile eingefärbt werden, in Form von angezeigten "`Bounding-Boxes"' oder indem virtuelle Kugeln auf der physischen Kugelbahn simuliert werden können. Oder weiter könnten erfasste Kugelbahnen mittels AR beispielsweise auf einen physischen Tisch "`gestellt"' werden und darauf könnte das Rollen von virtuellen Kugeln simuliert werden. 
+
+Die interaktive Aufbauanleitung soll es ermöglichen eine virtuell erfasste Bahn in einer Schritt für Schritt Anleitung nachzubauen. Hierbei sollen "`Bounding-Boxes"' verwendet werden, welche die jeweilige Position der hinzuzufügenden Elementen aufzeigt. Hierbei soll eine logisch durchdachte Reihenfolge verwendet werden.
+
+Der Editiermodus soll dass digitalisieren einer physischen Bahn ermöglichen. Diese Bahnen sollen anschliessend auf dem Gerät persistiert werden können. Zusätzlich sollen mit dieser Funktionalität physische Bahnen um neue virtuelle Elemente erweitert werden können.
+
+%In dieser Arbeit gibt es einige Freiheitsgrade, sprich viele funktionale und technische Aspekte gilt es zu erarbeiten, evaluieren und fest zu legen. Damit das Endresultat den Erwartungen von Auftraggeber und Betreuer entspricht, sollen Evaluationen und Entscheidungsfindungen in enger Rücksprache mit dem Auftraggeber und dem Betreuer stattfinden. Wichtige Entscheide (wie z.B. Fixierung von funktionalen Anforderungen, Wahl von Frameworks, usw.) müssen vom Auftraggeber bzw. dem Betreuer genehmigt werden, entsprechend sollen diese möglichst proaktiv in Evaluationen, Bau von Prototypen usw. miteinbezogen, sowie über Vor- und Nachteile, Alternativen usw. informiert werden.
 
 \subsection{Ziele}
 % Was soll mit dem Projekt erreicht werden? Was soll nach dem Projekt „besser“ sein als vorher?
@@ -15,67 +22,3 @@ Das Hauptziel ist es, dass am Schluss eine attraktive und lauffähige Demo-App z
 \subsection{Abgrenzung (Scope)}
 % Welche Sachverhalte sind nicht Bestandteil des Projektes. Welche Restriktionen gibt es im Projekt?
 Nichtbestandteil des Projektes sind Betriebssysteme / Frameworks ausserhalb von iOS. Die iOS-App wird ausschliesslich mit Swift entwickelt. Es werden ausschliesslich native iOS UI Komponente für die Applikation verwendet.
-
-\subsection{Fragestellungen}
-\begin{itemize}
-	\item Das SceneKit eignet sich für 3D Objekte und das SpriteKit für 2D Flächen. Welche der beiden Frameworks kann ein virtuelles Overlay auf einem physischen Würfel erzeugen?
-	\item Wie können physische Körper als virtuelle Objekte modelliert werden?
-	\item Welche Möglichkeiten bestehen mit augmentierten Objekten zu interagieren und diese zu mutieren?
-	\item Wie können virtuelle Objekte ausgerichtet werden?
-	\item Wie werden virtuelle Körper definiert, beschrieben, persistiert?
-	\item Wie stabil verhält sich der AR Referenzpunkt?
-	\item Unter welchen Voraussetzungen kann der Referenzpunkt zuverlässig aufgebaut werden?
-\end{itemize}
-
-\subsection{Anforderungen}
-Im diesem Kapitel sind alle funktionalen und nichtfunktionalen Anforderungen des Projekts festgehalten. Jede Anforderung ist in eine der folgenden drei Kategorien priorisiert:
-\begin{itemize}
-	\item Muss (M): Dies sind Festanforderungen, die zwingend vom Projekt erfüllt werden müssen.
-	\item Soll (S): Dies sind Wunschanforderungen, die umgesetzt werden sollen, sobald die Muss-Anforderungen erfüllt sind oder erfüllt werden können.
-	\item Kann (K): Diese Zusatzanforderungen haben die niedrigste Priorität und können umgesetzt werden, sofern keine anderen (wichtigeren) Anforderungen beeinträchtigt werden und der erfolgreiche Projektablauf nicht gefährdet wird.
-\end{itemize}
-
-Die App soll folgende \textbf{Epics} erfüllen:
-\begin{enumerate}
-	\item \textbf{Bauanleitung:} Der Benutzer kann von einer gewählten Kugelbahn eine Augmented Reality Bauanleitung erhalten, um die Bahn physisch aufbauen zu können.
-	\item \textbf{Editor:} Der Benutzer kann in Augmented Reality eine virtuelle Kugelbahn neu erstellen oder eine bestehende verändern, damit diese als Bauanleitung zur Verfügung stehen.
-\end{enumerate}
-
-\subsubsection{Funktionale Anforderungen}
-In Tabelle \ref{tab:funktionale-anforderungen} sind die funktionalen Anforderungen an die zu entwickelnde App aufgelistet. Diese Anforderungen beschreiben die gewünschten Funktionen und Leistungen der fertigen Anwendung.
-
-\begin{longtable}{l l p{4.7cm} p{8cm}}
-	\hline
-	\textbf{Nr.} & \textbf{Prio.} & \textbf{Bezeichnung} & \textbf{Erläuterungen} \\
-	\hline
-	01 & M & Virtuelle Darstellung einer Kugelbahn & Die App kann eine Kugelbahn virtuell darstellen (VR). \\
-	02 & M & AR Bahn erstellen & Der Benutzer kann eine virtuelle Kugelbahn in AR erstellen. \\
-	03 & M & AR Bahn verändern & Der Benutzer kann eine virtuelle Kugelbahn in AR verändern. \\
-	04 & M & AR Bauanleitung & Der Benutzer kann eine physische Kugelbahn mit Hilfe einer AR Bauanleitung Element für Element aufbauen. \\
-	05 & M & Mehrere Kugelbahnen erfassen & Die App kann mehrere unterschiedliche Kugelbahnen erfasst, bzw. hinterlegt, haben. \\
-	06 & M & Kugelbahn virtuell platzieren & Erfasste virtuelle Kugelbahnen können mittels AR auf eine physische Fläche platziert und betrachtet werden. \\
-	07 & S & Virtuelle Überlagerungen einer Kugelbahn & Ein physisches Modell einer Kugelbahn kann in Echtzeit mit virtuellen Überlagerungen auf der App angereichert werden (AR). \\
-	08 & K & Virtuelle Kugeln simulieren & Es können virtuelle Kugeln auf einer physischen Kugelbahn simuliert werden. \\
-	\hline
-	\caption{Funktionale Anforderungen}
-	\label{tab:funktionale-anforderungen}
-\end{longtable}
-
-\subsubsection{Nichtfunktionale Anforderungen}
-In Tabelle \ref{tab:nichtfunktionale-anforderungen} sind die nichtfunktionalen Anforderungen an das Projekt aufgelistet. Nichtfunktionale Anforderungen betreffen einerseits die Qualität (während und ausserhalb der Laufzeit) sowie die Einschränkungen (aus der Technologie und aus Randbedingungen des Moduls PAWI) des Projekts. Dies betrifft sowohl die Applikation als solches, als auch die Dokumentation.
-
-\begin{longtable}{l l p{4.7cm} p{8cm}}
-	\hline
-	\textbf{Nr.} & \textbf{Prio.} & \textbf{Bezeichnung} & \textbf{Erläuterungen} \\
-	\hline
-	01 & M & iOS und Swift & Die App ist in Swift für iOS programmiert. \\
-	02 & M & Lauffähige App & Die App läuft auf einem iOS Gerät. \\
-	03 & M & Recherche von iOS Frameworks & Die Dokumentation enthält Informationen zu den iOS Frameworks ARKit, Core ML und Vision. \\
-	04 & M & Technologie aufzeigen & Die App zeigt die Möglichkeiten von AR mittels ARKit auf. \\
-	05 & M & Nützlicher Code & Der Sourcecode soll für an der verwendeten Technik interessiert aufschlussreich und hilfreich sein. \\
-	\hline
-	\caption{Nichtfunktionale Anforderungen}
-	\label{tab:nichtfunktionale-anforderungen}
-\end{longtable}
-
-\subsection{Lösungsskizze}

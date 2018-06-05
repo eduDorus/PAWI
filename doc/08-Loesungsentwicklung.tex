@@ -1,9 +1,23 @@
 \section{Lösungsentwicklung}
 
 \subsection{Prototypen}
-\textit{Übersicht über die Prototypen …} % TODO:
 
 In diesem Abschnitt folgen die verschiedenen Prototypen, die während der explorativen Phase dieses Projekts erstellt wurden.
+
+\begin{longtable}{l p{6cm} p{8cm}}
+	\hline
+	\textbf{Nr.} & \textbf{Titel.} & \textbf{Beschreibung} \\
+	\hline
+	\ref{subsub:prot-overlay} & Overlay auf einem Würfel mit SceneKit & Wie kann ein physischer Würfel (ein cuboro Element) mittels AR mit einer Art Overlay hervorgehoben werden? Eignet sich SceneKit dazu? \\
+  \ref{subsub:prot-physische-wuerfel} & Physischen Würfel als virtuelles Objekt erfassen & Wie kann ein physischer Würfel mittels den Frameworks ARKit, Vision oderCoreML als virtuelles Objekt erfassen werden? \\
+  \ref{subsub:prot-kugelbahn} & Virtuelles Modell einer Kugelbahn projizieren & Wie kann eine gesamte Kugelbahn modelliert und als Ganzes in Augmented Reality auf eine Fläche projiziert werden? \\
+  \ref{subsub:prot-kugelbahnaufbau} & Schrittweise augmentierte Bauanleitung einer Kugelbahn & Wie kann eine schrittweise Bauanleitung für eine Kugelbahn umgesetzt/augmen-tiert werden? Es soll Würfel-für-Würfel den Aufbau einer einfache Kugelbahn auf einerFläche angezeigt werden.  \\
+  \ref{subsub:prot-interagieren} & Mittels Touchgesten mit virtuellen Objekten interagieren & Wie kann mit Touch- und Swipe-Gesten mit virtuellen Objekten interagiert werden? \\
+  \ref{subsub:prot-boundingbox} & Konzept zur Erkennung von einem physichen Objekt in einer bounding Box & Wie kann mittels Hit-Tests festgestellt werden ob sich ein physisches Objekt ineiner Bounding Box befindet? \\
+  \ref{subsub:prot-kugelbahnaufbau2} & Elementweise Bauanleitung einer Kugelbahn & Wie kann kann der Prototyp \ref{subsub:prot-kugelbahnaufbau} erweitert werden, damit die BauanleitungWürfel-für-Würfel statt Ebenenweise erfolgt? \\
+  \ref{subsub:prot-kugelbahneditor} & Schrittweiser Aufbau einer Bahn durch Benutzer & Wie kann der Schrittweiser Aufbau einer Bahn durch Benutzer erfolgen? \\
+	\hline
+\end{longtable}
 
 \IfFileExists{51-OverlaySceneKit}{
   \input{51-OverlaySceneKit}
@@ -84,8 +98,7 @@ Die Kugelbahn und ihre einzelnen Elemente müssen zuverlässig erkannt werden.
 
 Auf einer in Augmented Reality platzierten Kugelbahn kann der Lauf einer Kugel simuliert werden.
 Diese Variante kann als Ergänzung verwendet werden.
-Apples SceneKit enthält bereits eine Physik Engine, mit der eine virtuelle Kugel unter Einfluss von Gravitationskraft simuliert werden könnte. 
-% TODO: Referenz auf SceneKit Teil mit Physik Engine
+Apples SceneKit enthält bereits eine Physik Engine, mit der eine virtuelle Kugel unter Einfluss von Gravitationskraft simuliert werden könnte. Ein Beschrieb zur Physik Engine von Scenekit ist im Abschnitt \ref{sub:scene-kit} ersichtlich.
 
 \subsection{Lösungswahl}\label{sub:loesungswahl}
 
