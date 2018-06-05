@@ -1,5 +1,7 @@
 \section{Umsetzung}
 
+In diesem Kapitel wird die Demo-App \textbf{ARMarbleRun} beschrieben, die im Rahmen dieses Projekts erstellt wurde.
+Der Code der App, genauso wie der Prototypen, ist auf GitHub unter \url{https://github.com/eduDorus/PAWI} frei verfügbar.
 
 \subsection{Konzept}
 
@@ -36,24 +38,37 @@ Der Name VIPER ist ein Backronym, das für folgende Komponenten steht (Auflistun
 	\item \textbf{Router/Wireframe:} enthält die Navigationslogik und ist Verbindungsglied zwischen einzelnen Modulen/Bildschirmen
 \end{itemize}
 
-\bild[https://www.objc.io/issues/13-architecture/viper/]{0.8}{viper-diagram-objc}{VIPER Diagramm der Komponenten}
+\bild[https://www.objc.io/issues/13-architecture/viper/]{0.7}{viper-diagram-objc}{VIPER Diagramm der Komponenten}
 
 Abbildung \ref{fig:viper-diagram-objc} zeigt den Zusammenhang der Komponenten in der Grundidee von VIPER.
 Pro Bildschirm wird grundsätzlich ein Modul erstellt, das aus den VIPER Komponenten besteht.
-Über die Wireframes werden die entsprechenden Module aufgerufen.
+Wireframes kennen die jeweils für sie relevanten Wireframes anderer Module, um diese aufzurufen.
 Das erlaubt eine starke Trennung der verschiedenen Module und innerhalb der Module die Trennung von Verantwortlichkeiten.
+
+Basierend darauf wurde die Grundarchitektur für das Projekt wie in Abbildung \ref{fig:project-viper-architecture} dargestellt aufgebaut.
+Für den Wechsel zwischen Modulen ruft das aktive Wireframe die statische \texttt{createModule()} Methode auf dem entsprechenden Ziel-Wireframe auf.
+Das aufgerufene Wireframe instantiiert alle konkreten Implementationen der Komponenten des Moduls (inklusive sich selber) und injiziert die notwendigen Abhängigkeiten.
+Schlussendlich gibt sie die View als Rückgabewert.
+Das aufrufende Wireframe präsentiert die erhaltene View und gibt so die Kontrolle ab.
+Die \texttt{weak} Referenz vom Presenter zur View vermeidet eine zyklische Abhängigkeit, wodurch beide Objekte im Speicher bleiben würden, da der Referenzenzähler bei 1 bliebe (\cite{automatic-reference-counting}).
+
+\bild{1}{project-viper-architecture}{Projekt Architektur nach VIPER}
 
 % TODO: Wahl für VIPER begründen
 % TODO: Verweis auf Architekturdokumentation Teil zum Stil und Sichten
 
-\subsubsection{Aufbau} % TODO: bessere Bezeichnung finden
+\subsubsection{Bestandteile} % TODO: bessere Bezeichnung finden
 
-Es gibt Module (nach VIPER), Common, Entities, Nodes und die unabhängige About Screen.
+\bild{0.3}{xcode-projekt-struktur}{Projektstruktur von ARMarbleRun in Xcode}
 
-\subsection{Module}
+In Xcode wurden das Projekt wie in Abbildung \ref{fig:xcode-projekt-struktur} ersichtlich in verschiedenen Gruppen organisiert.
+Pro Bildschirm wird grundsätzlich ein VIPER \textbf{Modul} erstellt, diese werden folgend in Abschnitt \ref{sub:umsetzung-module} im Detail erläutert.
+Weitere Gruppen sind \textbf{Nodes} und \textbf{Entities}.
+In ersteren sind die in den AR Views benötigten Nodes für die Kugelbahn, Elemente, Bounding Boxen und Flächen enthalten.
+In letzterem sind die beiden zu persistierenden Entitäten für die Kugelbahn und die Elemente.
+In \textbf{Commons} sind Klassen, Protokolle und Enumerationen enthalten, die an mehreren Orten verwendet werden.
 
-\textit{Übersicht der Module in einem Komponentendiagramm oder so. Der Ablauf und Zusammenhang der Module muss hier gezeigt werden, bevor sie im Detail erläutert werden. Pro Modul dann die Klassenübersicht zeichnen und jede Klasse beschreiben.}
-% TODO:
+\subsection{Module}\label{sub:umsetzung-module}
 
 Im Folgenden werden die einzelnen Module der Demo-App einzeln beschrieben.
 Die App besteht aus folgenden VIPER-Modulen:
@@ -73,15 +88,79 @@ Sie zeigt, von wo man zu welchen Modulen gelangt.
 
 \subsubsection{Select Mode}
 
+Das \texttt{SelectMode} Modul ist der Startbildschirm der App.
+Abbildung \ref{fig:classes-selectmode} zeigt das Klassendiagramm des Moduls.
+
+\bild{1}{classes-selectmode}{Klassendiagramm des Moduls "`Select Mode"'}
+
 \subsubsection{Marble Run List}
+
+Im Modul \texttt{MarbleRunList} werden alle gespeicherten Kugelbahnen abgerufen und angezeigt.
+Abbildung \ref{fig:classes-marblerunlist} zeigt das Klassendiagramm des Moduls.
+
+\bild{1}{classes-marblerunlist}{Klassendiagramm des Moduls "`Marble Run List"'}
 
 \subsubsection{AR Guide}
 
+\texttt{ARGuide} ist eines der beiden AR Module und damit Kernstück der App.
+Es beinhaltet die Bauanleitung.
+Abbildung \ref{fig:classes-arguide} zeigt das Klassendiagramm des Moduls.
+
+\bild{1}{classes-arguide}{Klassendiagramm des Moduls "`AR Guide"'}
+
 \subsubsection{AR Editor}
 
+Im \texttt{AREditor} Modul wird die gewählte Kugelbahn in Augmented Reality bearbeitbar gemacht.
+Abbildung \ref{fig:classes-areditor} zeigt das Klassendiagramm des Moduls.
+
+\bild{1}{classes-areditor}{Klassendiagramm des Moduls "`AR Editor"'}
+
 \subsubsection{Element List}
+
+Das \texttt{ElementList} Modul listet alle verfügbaren Elementtypen auf, die der aktuell bearbeiteten Kugelbahn hinzugefügt werden können.
+Es ist ähnlich dem \texttt{MarbleRunList} Modul.
+Abbildung \ref{fig:classes-elementlist} zeigt das Klassendiagramm des Moduls.
+
+\bild{1}{classes-elementlist}{Klassendiagramm des Moduls "`Element List"'}
 
 
 \subsection{Persistenz}
 
-Informationen zum Local Data Manager und den Entities.
+\subsubsection{Data Manager}
+
+Über den \texttt{MarbleRunDataManager}.
+
+\subsubsection{Entitäten}
+
+Über die beiden Entitäten \texttt{MarbleRunEntity} und \texttt{ElementEntity} und ihre Codierung/Decodierung.
+
+
+\subsection{Nodes}
+
+Zu den SceneKit Nodes \texttt{BoundingBoxNode}, \texttt{ElementNode}, \texttt{MarbleRunNode} und \texttt{PlaneNode}. Inklusive dem \texttt{ElementProtocol}.
+
+
+\subsection{Storyboard}
+
+Abbildung \ref{fig:project-storyboard} zeigt das Storyboard des Projekts.
+
+\bild{1}{project-storyboard}{Das Storyboard des Projekts}
+
+
+\subsection{Weitere Bestandteile}
+
+\subsubsection{Triple}
+
+\subsubsection{Enums}
+
+Über \texttt{ARModeState}, \texttt{ARInteractionMode}
+
+\subsubsection{DepthFirstSort}
+
+\subsubsection{ARViewController}
+
+\subsubsection{Initializer}
+
+\subsubsection{Informationsbildschirm}
+
+Kurzer Text zur \texttt{AboutView}.
