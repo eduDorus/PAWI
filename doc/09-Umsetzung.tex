@@ -131,13 +131,34 @@ Schliesslich wird die neue Entität dem \texttt{MarbleRunDataManager} zur Persis
     )
 \end{code}
 
+In beiden Fällen gibt das Wireframe die gewählte (oder erstellte) \texttt{MarbleRunEntity} an das nächste Modul weiter.
+
 \subsubsection{AR Guide}
 
 \texttt{ARGuide} ist eines der beiden AR Module und damit Kernstück der App.
-Es beinhaltet die Bauanleitung.
+Es beinhaltet die interaktive Bauanleitung.
 Abbildung \ref{fig:classes-arguide} zeigt das Klassendiagramm des Moduls.
 
 \bild{1}{classes-arguide}{Klassendiagramm des Moduls "`AR Guide"'}
+
+Das Initialisieren der \texttt{SceneView} und des AR World Tracking übernimmt der \texttt{ARViewController} (siehe \ref{subsub:umsetzung-arviewcontroller}).
+Sobald der Benutzer eine erkannte Fläche gewählt hat, übernimmt die \texttt{ARGuideView} die weiteren Aktionen und teilt dem Presenter mit, dass sie bereits ist, die Kugelbahn darzustellen.
+Der Presenter fragt vom Interactor die Elemente der Kugelbahn an und fügt sie der View zu.
+In \texttt{InitializeMarbleRun} der View wird eine \texttt{MarbleRunNode} erstellt und der Szene hinzugefügt, Elemente werden dann als Kindknoten der Kugelbahn ergänzt.
+Die Positionierung der Kugelbahn erfolgt nach dem in Prototyp \ref{subsub:prot-kugelbahn} erarbeiteten Prinzip.
+
+Ist die Position der Kugelbahn fixiert und der Startbutton wird gedrückt, lässt der Interactor von \texttt{DepthFirstSort} die Bauanleitung erstellen (siehe \ref{subsub:umsetzung-depthfirst}).
+Der Rückgabewert ist ein Array von Koordinaten, in der Reihenfolgen, in der sie abgearbeitet werden sollen.
+Mittels Vor- und Zurück-Buttons kann der Benutzer in der Anleitung navigieren.
+Diese Aktionen erhöhen oder verringern im Interactor den \texttt{currentPointer}, der auf die aktuelle aktive Koordinate im Array \texttt{guide} zeigt.
+
+Die View hat keine Kenntnisse über die Anleitung, sondern erhält als Reaktion auf Benutzerinteraktionen vom Presenter mit der Methode \texttt{set(elementAt:to:)} Anweisungen, welche Elemente der Kugelbahn welchen Status erhalten sollen.
+So wird beispielsweise das aktive Element der Bauanleitung mit \texttt{ElementState.highlighted} hervorgehoben.
+
+Als einziges Modul in diesem Projekt, nutzt der AR Editor für den Interactor ein Eingabe und Ausgabe Protokoll.
+Während das \texttt{ARGuideInteractorInputProtocol} wie bei anderen Modulen vom Presenter genutzt wird um den Interactor anzusprechen, ist \texttt{ARGuideInteractorOutputProtocol} für die umgekehrte Richtung zuständig.
+
+% TODO: Menu Action?
 
 \subsubsection{AR Editor}
 
@@ -161,12 +182,9 @@ Abbildung \ref{fig:classes-elementlist} zeigt das Klassendiagramm des Moduls.
 
 Über den \texttt{MarbleRunDataManager}.
 
-\subsubsection{Entitäten}
+\subsubsection{Entitäten und Nodes}
 
 Über die beiden Entitäten \texttt{MarbleRunEntity} und \texttt{ElementEntity} und ihre Codierung/Decodierung.
-
-
-\subsection{Nodes}
 
 Zu den SceneKit Nodes \texttt{BoundingBoxNode}, \texttt{ElementNode}, \texttt{MarbleRunNode} und \texttt{PlaneNode}. Inklusive dem \texttt{ElementProtocol}.
 
@@ -186,9 +204,9 @@ Abbildung \ref{fig:project-storyboard} zeigt das Storyboard des Projekts.
 
 Über \texttt{ARModeState}, \texttt{ARInteractionMode}
 
-\subsubsection{DepthFirstSort}
+\subsubsection{DepthFirstSort} \label{subsub:umsetzung-depthfirst}
 
-\subsubsection{ARViewController}
+\subsubsection{ARViewController} \label{subsub:umsetzung-arviewcontroller}
 
 \subsubsection{Initializer}
 
