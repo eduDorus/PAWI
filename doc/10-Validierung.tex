@@ -1,6 +1,9 @@
 \section{Validierung}
 
-Die detailierten Anforderungen sind im Kapitel \ref{appendix:user-stories} verfügbar.
+
+\subsection{Funktionale Anforderungen}
+
+Die detailierten funktionalen Anforderungen sind im Kapitel \ref{appendix:user-stories} aufgeführt.
 
 \begin{longtable}{l l p{10cm} l}
 	\hline
@@ -9,29 +12,89 @@ Die detailierten Anforderungen sind im Kapitel \ref{appendix:user-stories} verf�
 	\textbf{1} & & \textbf{Allgemein} & \\
 	\hline
 	1.1 & M & Die erkannte Fläche wird mit einenem augmentierten Gitternetz angezeigt. Durch antippen der Fläche wird diese ausgewählt. Die Position der neu zu setzenden Kugelbahn orientiert sich an der ausgewählten Fläche. & Erfüllt \\
+	\hline
 	1.2 & M & Die Kugelbahn wird auf der ausgewählten Fläche angezeigt. Die Kugelbahn befindet sich zentral im Kamerabild. Mit einem Tap kann die Bahn fixiert werden. & Erfüllt \\
+	\hline
 	1.3 & M & Die Bahn ist parallel zur Kamera ausgerichtet und behält dies auch beim drehen des Gerätes bei. & Erfüllt \\
+	\hline
 	1.4 & M & Auf der AR View wird oben links in schwarzer Schrift der aktuelle Modus visualisiert. & Erfüllt \\
+	\hline
 	1.5 & S & Diese Funktionalität wurde nicht implementiert. Als möglicher Workaround kann der Modus neu gestartet werden. & Nicht Erfüllt \\
+	\hline
 	1.6 & K & Der Modus kann direkt im Menu gewechselt werden. Beim Wechsel bleibt die aktuelle Szene nicht bestehen und muss somit neu ausgerichtet werden. & Teilweise Erfüllt \\
 	\hline
 	\textbf{2} & & \textbf{Guide} & \\
 	\hline
 	2.1 & M & Alle persistierten Bahnen werden mit dem Namen der Kugelbahn in der View MarbleRuns angezeigt. Diese Bahnen können durch antippen ausgewählt werden. Nach erfolgreicher auswahl einer Bahn wird diese der AR View bereitgestellt. & Erfüllt \\
+	\hline
 	2.2 & M & Beim Aufbau der Bahn wird das nächte physisch zu platzierende Element rot transparent angezeigt. Die restlichen Elemente sind weiss transparent ersichtlich. Anhand der transparenten Darstellung wird hervorgehoben, welches Element für den Aufbau verwendet werden muss und in welcher Position es sich befinden soll.  & Erfüllt \\
+	\hline
 	2.3 & M & Falls ein nächster Schritt in der Bauanleitung zur Verfügung stehen, ist auf der AR View unten rechts ein oranger Knopf mit einem Pfeil nach rechts verfügbar. Mit diesem Knopf kann der nächste Schritt angezeigt werden. Sollte ein nächster Schritt verfügbar sein, so wird der Knopf ausgegraut. & Erfüllt \\
+	\hline
 	2.4 & S & Falls ein vorheriger Schritt in der Bauanleitung zur Verfügung steht, ist auf der AR View unten links ein oranger Knopf mit einem Pfeil nach links verfügbar. Mit diesem Knopf kann der vorherige Schritt angezeigt werden. Sollte kein vorheriger Schritt verfügbar sein, so wird der Knopf ausgegraut. & Erfüllt \\
+	\hline
 	2.5 & K & Die Bauanleitung kann über das Menu oben rechts neu gestartet werden. Zuoberst im Menu befindet sich der Knopf unter "'Restart Guide`"'. & Erfüllt \\
 	\hline
 	\textbf{3} & & \textbf{Builder} & \\
 	\hline
 	3.1 & M & Zur Auswahl stehen 13 cuboro Elemente. Diese können mit dem grünen Plus-Knopf in der unteren Mitte selektiert werden. & Erfüllt \\
+	\hline
 	3.2 & M & Wird auf dem Startbildschirm der Editor-Modus ausgewählt so wird eine Liste von gespeicherten Bahnen angezeigt. Das erste Element dieser Liste ist ein Plus, bei dem eine neue Bahn erstellt werden kann. Beim erstellen einer neuen Bahn wird der Namen der Bahn mit einem Popover eingegeben. Die neue Bahn wird unter dem eingegeben Namen persistiert und steht ab diesem Zeitpunkt in der Liste zur Verfügung. & Erfüllt \\
+	\hline
 	3.3 & M & Nach dem bearbeiten einer Kugelbahn, kann diese über das Menu oben links gespeichert werden. Dies geschieht über den Knopf "'Save`". & Erfüllt \\
+	\hline
 	3.4 & M & In der MarbleRuns-Liste kann eine gespeicherte Bahn ausgewählt werden. Diese steht anschliessend zur Positioniertung in der AR View zur verfügung. Sobald die Bahn platziert wurde, kann sie beliebig verändert werden. & Erfüllt \\
-	3.5 & M & Valide Positionen werden nach der Selektion eines Elementes auf der Kugelbahn als Bounding Boxes dargestellt. Die Bounding Boxes werden mit einem Algorithmus nur an Stellen angezeigt, die auf der ersten Ebene direkt an einem bereits erstellten Element angrenzen oder oberhalb platziert werden können. & Erfüllt \\
+	\hline
+	3.5 & M & Valide Positionen werden nach der Selektion eines Elementes auf der Kugelbahn als Bounding Boxes dargestellt. Die Bounding Boxes werden mit einem Algorithmus nur an Stellen angezeigt, die auf der ersten Ebene direkt an einem bereits erstellten Element angrenzen oder darauf platziert werden kann. & Erfüllt \\
+	\hline
 	3.6 & M & Mit dem antippen einer Bounding Box wird ein Element an der jeweiligen Stelle hinzugefügt. Es ist nur möglich Element an den Stellen einer Bounding Box hinzuzufügen. & Erfüllt \\
+	\hline
 	3.7 & M & Durch das antippen von einem Element kann dieses selektiert werden. Bei erfolgreicher Selektion, wird dieses rot transparent hervorgehoben. Anschliessend kann das Element durch Streichgesten in einer der drei Achsen in richtung der Geste um 90° rotiert werden. & Erfüllt \\
+	\hline
 	3.8 & M & Durch das antippen und halten kann ein Element entfehrnt werden. Dies kann jedoch nur gemacht werden, wenn die Kugelbahn zusammenhängend bleibt und physikalisch möglich ist. Es ist somit nicht möglich Elemente unterhalb von Elementen zu entfehrnen (keine schwebende Elemente). & Erfüllt \\
+	\hline
 	3.9 & S & Diese Funktionalität ist nicht implementiert, da die zeitlichen Aufwände andersweitig investiert werden mussten. & Nicht Erfüllt \\
+	\hline
 \end{longtable}
+
+
+\subsection{Nichtfunktionale Anforderungen}
+
+
+Die detailierten nichtfunktionale Anforderungen sind im Kapitel \ref{appendix:nichtfunktionale-anforderungen} aufgeführt.
+
+\begin{longtable}{l l l p{10cm}}
+	\hline
+	\textbf{Nr.} & \textbf{Prio.} & \textbf{Typ} & \textbf{Beschreibung} \\
+	\hline
+	 & & \textbf{Constraints} & \\
+	\hline
+	01 & M & Technologie & Die App wurde in Swift 4.1 programmiert. \\
+	\hline
+	02 & M & Technologie & Die App wurde auf den iPhones 6s und iPhone 7 mit iOS 11.3 getestet. \\
+	\hline
+	03 & M & Technologie & Die App wurde mit ARKit 1.5 entwickelt. \\
+	\hline
+	04 & M & Geschäftlich & Die App zeigt die technologischen Möglichkeiten auf. \\
+	\hline
+	 & & \textbf{Qualitäten}& \\
+	\hline
+	05 & M & Laufzeit & Farben wurden nur unterstützend verwendet. Die interaktionen sind unmissverständlich mit Symbolen oder Beschriftung versehen. \\ 
+	\hline
+	06 & M & Laufzeit & Der Benutzer wird aktuell nicht über den aktuellen Trackingstatus informiert. \\
+	\hline
+	07 & M & Laufzeit & Die Bildwiederholungsfrequenz mit 30 Bilder pro Sekunde kann bei 20 Elementen garantiert werden und wurde getestet. \\
+	\hline
+	08 & M & Laufzeit & Die persistierung der Kugelbahnen erfolgt auf dem Gerät. \\
+	\hline
+	09 & M & Compilier-Zeit & Der Code wurde möglichst klar und sauber geschrieben. \\
+	\hline
+	10 & M & Compilier-Zeit & Schlüsselstellen im Code sind in der Dokumentation festgehalten. Zusätzlich wurde sporadisch auf kurze Kommentare zurückgegriffen, die bei einer Code passage erklären was passiert. \\
+	\hline
+\end{longtable}
+
+
+\subsection{Technisches Fazit}
+Bei der Umsetzung der App wurde zuerst die Architektur diskutiert und erstellt. Dies hat anfangs zwar Zeit gekostet, konnte aber im Verlauf des Projektes seinen Mehrwert präsentieren. Die Viper Architektur hat mit seiner losen Koppelung und klaren Modularisierung überzeugt. Diese Modularisierung verhilft ein schnelles einarbeiten in das Projekt und eine einfache Möglichkeit dieses um neue Funktionalitäten zu erweitern. Der Editiermodus zur Erstellung und Modifikation, sowie die interaktive Aufbauanleitung von virtuellen Kugelbahnen konnte realisiert werden.
+
+Die Erkennung dreidimensionaler Objekte mit den vorgeschlagenen Frameworks konnte nicht erfolgreich getestet werden und wurde in der Umsetztung der Demo-App nicht weiter berücksichtigt.
