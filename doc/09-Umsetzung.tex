@@ -175,6 +175,15 @@ Abbildung \ref{fig:classes-elementlist} zeigt das Klassendiagramm des Moduls.
 
 \bild{1}{classes-elementlist}{Klassendiagramm des Moduls "`Element List"'}
 
+Die \texttt{ElementListView} wird modal vom AR Editor dargestellt.
+Sie meldet ihre Bereitschaft an den Presenter, der vom Interactor die Liste der Elementtypen abfragt.
+Der Interactor greift dann wie folgt auf die SceneKit Scene mit den cuboro Elementen zu:
+\mint[style=xcode,breaklines]{swift}{let cubes = SCNScene(named: "art.scnassets/cuboro-set.scn")?.rootNode}
+Aus den Kindknoten von \texttt{cubes} stellt der Interactor ein Array von \texttt{ElementEntity} zusammen und gibt es als Rückgabewert dem Presenter zurück.
+Dies wird an die View weitergegeben, welche daraus wie \texttt{MarbleRunList} ihre Collection View aufbaut.
+
+Bei der Wahl eines Elementtyps durch den Benutzer ruft die View \texttt{didSelect(element:on:)} beim Presenter auf, was dieser an das Wireframe weitergibt.
+Das Wireframe lässt die View ausblenden und gibt das selektierte Element an den AR Editor weiter.
 
 \subsection{Persistenz}
 
