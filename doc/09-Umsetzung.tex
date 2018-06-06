@@ -167,6 +167,57 @@ Abbildung \ref{fig:classes-areditor} zeigt das Klassendiagramm des Moduls.
 
 \bild{1}{classes-areditor}{Klassendiagramm des Moduls "`AR Editor"'}
 
+Beim Laden der View werden die Gesten "`Tap"', "`Long Press"' und "`Swipe"' mit den jeweiligen Eventhandler hinzugefügt.
+Wie bei \texttt{ARGuide} übernimmt die Initialisierung der \texttt{SceneView} und von ARKit der \texttt{ARViewController}.
+Die Positionierung der Kugelbahn läuft ebenfalls nach dem selben Muster ab.
+
+Nachdem die Position der Kugelbahn fixiert wurde, kann der Editiermodus mit dem Startbutton gestartet werden.
+Damit wird der \texttt{state} auf \texttt{ARModeState.editorMode} gesetzt.
+
+\textbf{Neues Element hinzufügen} \\
+Bei einem Druck des \texttt{addButton} wird das Modul \texttt{ElementList} aufgerufen, von dem die View schliesslich den selektierte Elementtyp durch die Methode \texttt{elementSelected(element:)} erhält.
+Dem Presenter wird diese Information weitergeben und dieser fragt beim Interactor nach den möglichen Positionen, an denen das Element platziert werden kann.
+Der Interactor sucht einerseits nach allen Koordinaten auf der untersten Ebene der Kugelbahn, die an ein existierendes Element angrenzen und noch leer sind (Methode \texttt{possibleBaselevelLocations()}).
+Andererseits wird in \texttt{possibleTopLocations()} nach Elementen gesucht, auf denen noch kein Element steht.
+Diese Kriterien führen dazu, dass die Bahn physikalisch möglich ist (keine schwebeden Elemente) und zusammenhängend ist (nur angrenzende Positionen).
+
+All diese Positionen werden als \texttt{BoundingBoxNode} der View hinzugefügt und dargestellt.
+Tippt der Benutzer auf einer der Boxen, wird diese mit dem zuvor gewählten Elementtyp ersetzt und alle anderen Positions-Boxen werden wieder ausgeblendet.
+Der Presenter gibt dabei die \texttt{ElementEntity} mit aktualisierten Koordination sowohl an den Interactor als auch an die View.
+
+\textbf{Element löschen} \\
+Die Methode \texttt{didLongPress(\_:)} macht auf die SceneKit Szene einen Hittest.
+Wenn das Resultat des Hittests ein Kugelbahn Element ist, wird beim Presenter die Methode \texttt{removeElement(at:)} aufgerufen.
+Damit wird versucht das entsprechende Element beim Interactor zu entfernen.
+Der Interactor überprüft in der Methode \texttt{removeElement(at:)}, ob das Element überhaupt entfernt werden darf.
+Dazu darf sich als erstes kein Element darüber befinden.
+
+Wenn sich das Element auf der untersten Ebene der Kugelbahn befindet, dürfen mit dessen Löschung auch keine "`Inseln"' entstehen, sprich die Kugelbahn soll zusammenhängend bleiben.
+Das wird in \texttt{checkRemoveElement(at:)} überprüft, indem ausgehend von einem beliebigen Element eine Tiefensuche via direkte Nachbarschaften durchgeführt wird.
+Das zu entfernende Element wird dabei ausgelassen.
+So werden angrenzende Elemente so lange zur Liste der besuchten Elemente hinzugefügt, bis keines mehr gefunden wird, das nicht bereits besucht wurde.
+Eine durch die Löschung entstehende Lücke führt dazu, dass nicht alle Elemente der untersten Ebene besucht werden können.
+Deshalb wird am Ende die Anzahl besuchter Elemente mit der Gesamtzahl der verbleibenden Elemente in der untersten Ebene verglichen.
+Sind die beiden Zahlen unterschiedlich, hängt die Kugelbahn nach Entfernung des Elements nicht mehr zusammen und der Interactor gibt ein \texttt{false} an den Presenter zurück, der die Löschung abbricht.
+
+\textbf{Element rotieren} \\
+Wird ein Element durch Antippen ausgewählt, wird es hervorgehoben und der Presenter merkt es sich als \texttt{selectedElement}.
+Ist das Attribut gesetzt und eine Swipe Geste wird ausgeführt, wird das Element in Richtung der Geste rotiert.
+Die View berechnet den Winkel zwischen Kamera und Ausrichtung der Kugelbahn und gibt diesen zusammen mit der Richtung der Geste an die Presenter Methode \texttt{rotateElement(to:with:)}.
+Es wird je nach Swipe-Richtung ein Vektor erstellt, der die Achse und Richtung der Rotation beschreibt.
+Für einen Swipe nach links ist dies beispielsweise der Vektor \texttt{SCNVector3(0, -1, 0)} zur Rotation um die y-Achse.
+Die korrekte Achse für vertikale Swipes ist abhängig vom Betrachtungswinkel.
+Daher wird dort anhand des erhaltenen Winkels entweder die x- oder z-Achse mit einem positiven (1) oder negativen (-1) Wert belegt.
+
+Ist die Rotation berechnet, wird der \texttt{rotation} Vektor in der View genutzt um auf dem ausgewählten Element eine Rotations-Aktion auszuführen, die wie folgt definiert wird:
+\mint[style=xcode,breaklines]{swift}{let action = SCNAction.rotate(by: .pi/2, around: rotation, duration: 0.2)}
+So wird das Element innert 0.2 Sekunden um 90° um die im Vektor definierte Achse rotiert.
+Dabei bleibt das Koordinatensystem erhalten.
+
+Das in Prototyp \ref{subsub:prot-interagieren} erarbeitete Vorgehen mit \texttt{SCNAction.rotateBy(x:y:z:rotation:)} und dem Zurücksetzen der Orientierung mit \texttt{SCNQuaternion}, erwies sich als Trick, der für die Demo-App nicht verwendet werden konnte.
+Für einen Würfel, dessen Seiten alle gleich sind, funktioniert das Vorgehen zwar.
+Aber die hier verwendeten Elemente zeigten, dass sich der Würfel nach der Rotation jeweils in den Originalzustand zurück versetzt. 
+
 \subsubsection{Element List}
 
 Das \texttt{ElementList} Modul listet alle verfügbaren Elementtypen auf, die der aktuell bearbeiteten Kugelbahn hinzugefügt werden können.
