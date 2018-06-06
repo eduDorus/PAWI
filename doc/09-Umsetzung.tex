@@ -76,8 +76,8 @@ Die App besteht aus folgenden VIPER-Modulen:
 \begin{itemize}
 	\item \textbf{SelectMode:} Startbildschirm mit der Auswahl zwischen Editor und Guide
 	\item \textbf{MarbleRunList:} Auflistung der gespeicherten Kugelbahnen zur Auswahl durch den Benutzer, für den Editor wird zusätzlich die Option zum Erstellen einer neuen Bahn angeboten
-	\item \textbf{AREditor:} AR Bildschirm für den Editor
-	\item \textbf{ARGuide:} AR Bildschirm für die Bauanleitung
+	\item \textbf{AREditor:} AR Bildschirm für den Editor Modus
+	\item \textbf{ARGuide:} AR Bildschirm für die Bauanleitung Modus
 	\item \textbf{ElementList:} Auflistung der verfügbaren Elementtypen zur Auswahl durch den Benutzer (vom Editor verwendet)
 \end{itemize}
 
@@ -92,6 +92,12 @@ Das \texttt{SelectMode} Modul ist der Startbildschirm der App.
 Abbildung \ref{fig:classes-selectmode} zeigt das Klassendiagramm des Moduls.
 
 \bild{1}{classes-selectmode}{Klassendiagramm des Moduls "`Select Mode"'}
+
+Der Bildschirm besteht im Wesentlichen aus den beiden Buttons "`Editor"' und "`Guide"' für die entsprechenden Modi.
+Das Drücken auf einen der Buttons wird direkt an den Presenter weitergegeben, welcher die \texttt{presentMarbleRunListView(from:with:)} Methode des Wireframes aufruft.
+Der Parameter \texttt{with} ist vom Enum Typ \texttt{ARInteractionMode}, das zwei Fälle für Editor und Guide hat (mehr dazu unter \ref{sub:umsetzung-module}) und entsprechend dem gedrückten Button mitgegeben wird.
+
+In der Navigationbar des Bildschirms befindet sich ausserdem ein Info-Button, der direkt im Storyboard mit der "`About View"' verbunden ist und diese modal präsentiert. % TODO: ref zu AboutView Abschnitt
 
 \subsubsection{Marble Run List}
 
@@ -151,7 +157,7 @@ Abbildung \ref{fig:project-storyboard} zeigt das Storyboard des Projekts.
 
 \subsubsection{Triple}
 
-\subsubsection{Enums}
+\subsubsection{Enums} \label{subsub:umsetzung-enums}
 
 Über \texttt{ARModeState}, \texttt{ARInteractionMode}
 

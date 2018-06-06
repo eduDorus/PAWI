@@ -26,7 +26,10 @@ interface SelectModePresenterProtocol <<Presenter>> {
 class SelectModeWireframe <<Wireframe>> {
     {static} mainStoryboard: UIStoryboard
 }
-class SelectModeView <<View>>
+class SelectModeView <<View>> {
+    editorButtonPressed(_: UIButton)
+    guideButtonPressed(_: UIButton)
+}
 class SelectModePresenter <<Presenter>>
 
 ' Relationships
