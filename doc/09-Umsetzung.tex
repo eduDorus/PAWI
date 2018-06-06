@@ -47,7 +47,7 @@ Das erlaubt eine starke Trennung der verschiedenen Module und innerhalb der Modu
 
 Basierend darauf wurde die Grundarchitektur für das Projekt wie in Abbildung \ref{fig:project-viper-architecture} dargestellt aufgebaut.
 Für den Wechsel zwischen Modulen ruft das aktive Wireframe die statische \texttt{createModule()} Methode auf dem entsprechenden Ziel-Wireframe auf.
-Das aufgerufene Wireframe instantiiert alle konkreten Implementationen der Komponenten des Moduls (inklusive sich selber) und injiziert die notwendigen Abhängigkeiten.
+Das aufgerufene Wireframe instanziiert alle konkreten Implementationen der Komponenten des Moduls (inklusive sich selber) und injiziert die notwendigen Abhängigkeiten.
 Schlussendlich gibt sie die View als Rückgabewert.
 Das aufrufende Wireframe präsentiert die erhaltene View und gibt so die Kontrolle ab.
 Die \texttt{weak} Referenz vom Presenter zur View vermeidet eine zyklische Abhängigkeit, wodurch beide Objekte im Speicher bleiben würden, da der Referenzenzähler bei 1 bliebe (\cite{automatic-reference-counting}).
@@ -106,6 +106,31 @@ Abbildung \ref{fig:classes-marblerunlist} zeigt das Klassendiagramm des Moduls.
 
 \bild{1}{classes-marblerunlist}{Klassendiagramm des Moduls "`Marble Run List"'}
 
+Für beide Modi wird nach der Moduswahl die Marble Run List angezeigt.
+Das Wireframe erhält die Information zum gewählten Modus über das \texttt{ARInteractionMode} Enum.
+Die View besitzt eine Collection View in der sie die Kugelbahnen anzeigt und adoptiert die entsprechenden Protokolle \texttt{UICollectionViewDataSource} und \texttt{UICollectionViewDelegate}.
+Sobald sie geladen ist, informiert sie den Presenter (\texttt{viewDidLoad()}), der daraufhin vom Interactor die gespeicherten Kugelbahnen anfragt.
+Der Interactor erhält von \texttt{MarbleRunDataManager} (siehe \ref{subsub:umsetzung-datamanager}) die Liste der Kugelbahnen als Array des Typs \texttt{MarbleRunEntity}, welches der Presenter dann über die Methode \texttt{reloadMarbleRunList(with:)} an die View gibt.
+
+Falls der Benutzer den Editor Modus ausgewählt hat, setzt das Wireframe bei der Instanziierung das \texttt{canAddNew} Attribut der View auf \texttt{true}.
+Dadurch wird die View an der ersten Stelle der Collection View eine Zelle zum Erstellen einer neuen Kugelbahn setzen.
+Beide Zelltypen der Collection (normale Kugelbahn Zelle und Zelle zum Erstellen) sind im Storyboard mit den Bezeichnungen "`MarbleRunCell"' und "`NewRunCell"' erstellt.
+Für das Hinzufügen einer neuen Bahn präsentiert die \texttt{showNewDialogue()} einen \texttt{UIAlertCollection} mit Textfeld für den Namen der Bahn.
+Dieser Name wird bei einem "`OK"' des Benutzers dem Presenter mitgeteilt, der den Interactor eine neue Kugelbahn mit diesem Namen erstellen lässt und anschliessend das Wireframe auffordert das nächste Modul zu laden.
+
+Die Interactor Methode \texttt{createNewMarbleRun()} (Code \ref{code:createnewmarblerun}) erstellt eine neue \texttt{MarbleRunEntity} (Zeile 2) und fügt ihr einen soliden Block (Element vom Typ 12) and der Nullkoordinate hinzu (Zeilen 3 und 4).
+Schliesslich wird die neue Entität dem \texttt{MarbleRunDataManager} zur Persistierung übergeben.
+
+\begin{code}{createnewmarblerun}{\texttt{createNewMarbleRun(with:)} Methode des Marble Run List Interactors}
+    func createNewMarbleRun(with name: String) -> MarbleRunEntity {
+        let marbleRun = MarbleRunEntity(name: name)
+        let baseElement = ElementEntity(type: 12, location: Triple(0,0,0))
+        marbleRun.elements.append(baseElement)
+        MarbleRunDataManager.persist(marbleRun)
+        return marbleRun
+    )
+\end{code}
+
 \subsubsection{AR Guide}
 
 \texttt{ARGuide} ist eines der beiden AR Module und damit Kernstück der App.
@@ -132,7 +157,7 @@ Abbildung \ref{fig:classes-elementlist} zeigt das Klassendiagramm des Moduls.
 
 \subsection{Persistenz}
 
-\subsubsection{Data Manager}
+\subsubsection{Data Manager} \label{subsub:umsetzung-datamanager}
 
 Über den \texttt{MarbleRunDataManager}.
 
