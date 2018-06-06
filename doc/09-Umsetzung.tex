@@ -139,7 +139,12 @@ In beiden Fällen gibt das Wireframe die gewählte (oder erstellte) \texttt{Marb
 Es beinhaltet die interaktive Bauanleitung.
 Abbildung \ref{fig:classes-arguide} zeigt das Klassendiagramm des Moduls.
 
-\bild{1}{classes-arguide}{Klassendiagramm des Moduls "`AR Guide"'}
+\begin{figure}[htb!]
+	\centering
+	\includegraphics[width=1\textwidth]{classes-arguide}%
+	\caption{Klassendiagramm des Moduls "`AR Guide"'}%
+	\label{fig:classes-arguide}%
+\end{figure}
 
 Das Initialisieren der \texttt{SceneView} und des AR World Tracking übernimmt der \texttt{ARViewController} (siehe \ref{subsub:umsetzung-arviewcontroller}).
 Sobald der Benutzer eine erkannte Fläche gewählt hat, übernimmt die \texttt{ARGuideView} die weiteren Aktionen und teilt dem Presenter mit, dass sie bereits ist, die Kugelbahn darzustellen.
@@ -165,14 +170,19 @@ Während das \texttt{ARGuideInteractorInputProtocol} wie bei anderen Modulen vom
 Im \texttt{AREditor} Modul wird die gewählte Kugelbahn in Augmented Reality bearbeitbar gemacht.
 Abbildung \ref{fig:classes-areditor} zeigt das Klassendiagramm des Moduls.
 
-\bild{1}{classes-areditor}{Klassendiagramm des Moduls "`AR Editor"'}
-
-Beim Laden der View werden die Gesten "`Tap"', "`Long Press"' und "`Swipe"' mit den jeweiligen Eventhandler hinzugefügt.
+Beim Laden der View werden die Gesten Tap, Long Press und Swipe mit den jeweiligen Eventhandler hinzugefügt.
 Wie bei \texttt{ARGuide} übernimmt die Initialisierung der \texttt{SceneView} und von ARKit der \texttt{ARViewController}.
-Die Positionierung der Kugelbahn läuft ebenfalls nach dem selben Muster ab.
+Auch die Positionierung der Kugelbahn läuft nach dem selben Muster.
 
 Nachdem die Position der Kugelbahn fixiert wurde, kann der Editiermodus mit dem Startbutton gestartet werden.
 Damit wird der \texttt{state} auf \texttt{ARModeState.editorMode} gesetzt.
+
+\begin{figure}[htb!]
+	\centering
+	\includegraphics[width=1\textwidth]{classes-areditor}%
+	\caption{Klassendiagramm des Moduls "`AR Editor"'}%
+	\label{fig:classes-areditor}%
+\end{figure}
 
 \textbf{Neues Element hinzufügen} \\
 Bei einem Druck des \texttt{addButton} wird das Modul \texttt{ElementList} aufgerufen, von dem die View schliesslich den selektierte Elementtyp durch die Methode \texttt{elementSelected(element:)} erhält.
