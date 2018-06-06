@@ -18,7 +18,6 @@
 		7ED4F92620AACA6300A4CAEC /* ElementListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92120AACA6200A4CAEC /* ElementListProtocols.swift */; };
 		7ED4F92720AACA6300A4CAEC /* ElementListWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92220AACA6300A4CAEC /* ElementListWireframe.swift */; };
 		7ED4F92920AAE58D00A4CAEC /* Triple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92820AAE58D00A4CAEC /* Triple.swift */; };
-		7ED4F92B20AAE6AF00A4CAEC /* MarbleRunMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */; };
 		7ED4F92D20AAEB2800A4CAEC /* ElementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92C20AAEB2800A4CAEC /* ElementProtocol.swift */; };
 		7ED4F92F20AAEC9D00A4CAEC /* BoundingBoxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4F92E20AAEC9D00A4CAEC /* BoundingBoxNode.swift */; };
 		A02D8C2C20AD638D001E1D2E /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02D8C2B20AD638D001E1D2E /* ARViewController.swift */; };
@@ -77,7 +76,6 @@
 		7ED4F92120AACA6200A4CAEC /* ElementListProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementListProtocols.swift; sourceTree = "<group>"; };
 		7ED4F92220AACA6300A4CAEC /* ElementListWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementListWireframe.swift; sourceTree = "<group>"; };
 		7ED4F92820AAE58D00A4CAEC /* Triple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triple.swift; sourceTree = "<group>"; };
-		7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleRunMap.swift; sourceTree = "<group>"; };
 		7ED4F92C20AAEB2800A4CAEC /* ElementProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementProtocol.swift; sourceTree = "<group>"; };
 		7ED4F92E20AAEC9D00A4CAEC /* BoundingBoxNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxNode.swift; sourceTree = "<group>"; };
 		A02D8C2B20AD638D001E1D2E /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
@@ -259,7 +257,6 @@
 			children = (
 				A0D8264F209F84FF00C74FD7 /* MarbleRunEntity.swift */,
 				A0D8266120A0ACB200C74FD7 /* ElementEntity.swift */,
-				7ED4F92A20AAE6AF00A4CAEC /* MarbleRunMap.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -414,7 +411,6 @@
 				A0D825FF209F3AA700C74FD7 /* AppDelegate.swift in Sources */,
 				A0D8264B209F5F0C00C74FD7 /* MarbleRunListPresenter.swift in Sources */,
 				A040BE2C20AEAD89002DD292 /* Initializer.swift in Sources */,
-				7ED4F92B20AAE6AF00A4CAEC /* MarbleRunMap.swift in Sources */,
 				7ED4F91820AAB09E00A4CAEC /* AREditorView.swift in Sources */,
 				A0D8265C20A09BB800C74FD7 /* ARGuideView.swift in Sources */,
 				7ED4F92D20AAEB2800A4CAEC /* ElementProtocol.swift in Sources */,
