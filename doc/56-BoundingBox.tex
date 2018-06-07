@@ -1,16 +1,16 @@
 \subsubsection{Konzept zur Erkennung von einem physichen Objekt in einer bounding Box}\label{subsub:prot-boundingbox}
 \begin{description}
-    \item[Fragestellung:] Wie kann mittels Hit-Tests festgestellt werden, ob sich ein physisches Objekt in einer Bounding Box befindet?
+    \item[Fragestellung:] Wie kann festgestellt werden, ob sich ein physisches Objekt in einer Bounding Box befindet?
 	\item[Resultat:] Es wurde ein möglicher Lösungsansatz konzeptionel festgehalten. Es besteht zur Zeit keine eingebaute Funkationalität in ARKit oder SceneKit, die dass erkennen von Objekten ermöglicht. 
-    \item[Versuchsaufbau:] Es wurde Versucht einen Lösungsansatz zu finden, wobei Elemente in einer augmentierten Bounding Box erkannt werden. Dies hätte den Vorteil, dass beim Aufbau der Bahn nicht jedes physisch hinzugefügte Element manuell bestätigt werden muss. 
-    Das ARKit 1.5 sowie SceneKit weisen keine Funktionalität auf, welche diesen Prozess vereinfacht oder unterstützt. Wir haben konzeptionel einen konkreten Lösungsansatz erstellt bei dem der Hit-Test vom ARKit zum einsatz kommt. 
+    \item[Versuchsaufbau:] Es wurde Versucht einen Lösungsansatz zu finden, bei der Elemente in einer augmentierten Bounding Box erkennt werden. Dies hat den Vorteil, dass beim Aufbau der Bahn nicht jedes physisch hinzugefügte Element manuell bestätigt werden muss. 
+    Das ARKit 1.5 sowie SceneKit weisen keine Funktionalität auf, welche diesen Prozess vereinfacht oder unterstützt. Wir haben konzeptionel einen konkreten Lösungsansatz erstellt bei dem der Hit-Test vom ARKit zum Einsatz kommt. 
 
     Es gibt grundsätzlich zwei mögliche Vorgehensweisen. Eine davon beschränkt sich auf das Hit-Testen des Mittelpunkts der Bounding Box. Dies würde jedoch bedeuten, dass auch wenn das Element nicht präzise in der Bounding Box gestellt wurde als erkannt gilt. Rein aus ergonomischer Sicht würde dies kein befriedigendes Ergebnis aufweisen. Der User würde während dem Ausrichten des Elements auf das nächste verwiesen werden. 
     
-    Eine andere Vorgehensweise wäre die oberen vier Eckpunkte der Bounding Box mit Hit-Tests zu versehen. Diese Hit-Tests könnten feststellen ob sich das Element exakt in der vordefinierten Bounding Box gefindet. Der Test könnte einmal pro Sekunde ausgeführt werden und bei einem positiven Ergebnis zur nächsten Bounding Box wechseln.
+    Eine andere Vorgehensweise wäre die oberen vier Eckpunkte der Bounding Box mit Hit-Tests zu versehen. Diese Hit-Tests könnten feststellen, ob sich das Element exakt in der vordefinierten Bounding Box gefindet. Der Test könnte einmal pro Sekunde ausgeführt werden und bei einem positiven Ergebnis zur nächsten Bounding Box wechseln.
     \bild{1}{hit-test}{Vorgehensweisen}
 
-    Es besteht eine hohe Wahrscheinlichkeit, dass in den kommenden ARKit releases eine solche Funktionalität bereitgestellt wird. 
+    Es besteht eine hohe Wahrscheinlichkeit, dass in den kommenden ARKit releases eine solche Funktionalität bereitgestellt wird. Dies Schlussfolgerung konnte gemacht werden, da diese Funktionalität essentiel für AR Anwendungen jeglicher Art ist. 
 
 
 \end{description}
