@@ -95,7 +95,7 @@ Abbildung \ref{fig:classes-selectmode} zeigt das Klassendiagramm des Moduls.
 
 Der Bildschirm besteht im Wesentlichen aus den beiden Buttons "`Editor"' und "`Guide"' für die entsprechenden Modi.
 Das Drücken auf einen der Buttons wird direkt an den Presenter weitergegeben, welcher die \texttt{presentMarbleRunListView(from:with:)} Methode des Wireframes aufruft.
-Der Parameter \texttt{with} ist vom Enum Typ \texttt{ARInteractionMode}, das zwei Fälle für Editor und Guide hat (mehr dazu unter \ref{sub:umsetzung-module}) und entsprechend dem gedrückten Button mitgegeben wird.
+Der Parameter \texttt{with} ist vom Enum Typ \texttt{ARInteractionMode}, das zwei Fälle für Editor und Guide hat und entsprechend dem gedrückten Button mitgegeben wird.
 
 In der Navigationbar des Bildschirms befindet sich ausserdem ein Info-Button, der direkt im Storyboard mit der "`About View"' verbunden ist und diese modal präsentiert. % TODO: ref zu AboutView Abschnitt
 
@@ -132,6 +132,7 @@ Schliesslich wird die neue Entität dem \texttt{MarbleRunDataManager} zur Persis
 \end{code}
 
 In beiden Fällen gibt das Wireframe die gewählte (oder erstellte) \texttt{MarbleRunEntity} an das nächste Modul weiter.
+Über die Methode \texttt{wireframe()} des \texttt{ARInteractionMode} Enums erhält es die konkrete Wireframe Klasse des gewählten Modus.
 
 \subsubsection{AR Guide} \label{subsub:umsetzung-modul-arguide}
 
@@ -300,15 +301,9 @@ Das Struct Triple beinhaltet ein Tupel mit drei Elemente. Tripel adoptiert das H
 
 Das Triple wird dazu verwendet die relativen Koordinaten der Kugelbahn Elemente festzuhalten. Anhand dieser Koordinaten können Berechnungen zwischen den Elementen durchgeführt werden wie z.B. Die benachbarten Elemente gefunden werden.
 
-\subsubsection{Enums} \label{subsub:umsetzung-enums}
-
-Über \texttt{ARModeState}, \texttt{ARInteractionMode}
-
 \subsubsection{DepthFirstSort} \label{subsub:umsetzung-depthfirst}
 
 \subsubsection{ARViewController} \label{subsub:umsetzung-arviewcontroller}
-
-\subsubsection{Initializer}
 
 \subsubsection{Informationsbildschirm}
 Oben rechts auf dem Startbildschirm befindet sich ein Informationsicon mit dem der Informationsbildschirm eingeblendet werden kann. Dieser zeigt die aktuelle Version, Entwickler, Abhängigkeiten und dass die App als Resultat der Industrieprojektarbeit an der Fachhochschule Luzern entstanden ist. Zusätzlich kann der Debug Modus aktiviert werden um Laufzeitinformationen der AR View zu erhalten. Ob der Debug Modus aktiviert ist, wird in den User Defaults gespeichert.
