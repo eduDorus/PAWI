@@ -2,22 +2,14 @@
 
 \subsection{Ausgangslage}
 
-%Mobile Plattformen entwickeln sich stetig weiter und bieten auf der Hardware-Seite mit schnelleren Chips, besseren Sensoren (z.B. Kameras, Gyroskopen usw.) neue Möglichkeiten. Dazu folgen auf der Software-Seite mit neuen Anwendungen und erweiterten Programmierschnittstellen für die Endanwender bzw. die Software-Entwickler. Für letztere hat beispielsweise Apple an der letztjährigen Entwicklerkonferenz WWDC 2017 mit CoreML, Vision und dem ARKit drei neue Frameworks für maschinelles Lernen, Computer Vision und Augmented Reality vorgestellt für das mobile Betriebssystem iOS.
-
 Die grössten Tech-Unternehmen probieren Jahr für Jahr die best mögliche Plattform für Benutzer bereitzustellen. Vorallem die mobilen Plattformen haben in den letzten Jahren, mit der beliebtheit von Smartphones, an potenzial gewonnen. Smartphones bieten immer schnellere Prozessoren und bessere Sensoren. Zusätzlich werden den Entwicklern stetig bessere Frameworks zur Verfügung gestellt, die den Entwicklungsprozess unterstützen und neue Möglichkeiten bieten. Apple hat an der letztjährigen Entwicklerkonferenz WWDC 2017 mit CoreML, Vision und dem ARKit drei neue Frameworks für maschinelles Lernen, Computer Vision und Augmented Reality vorgestellt.
 
 
-% TODO: Erster Satz wurde übernommen
 Die Forschungsgruppe Algorithmic Business (ABIZ) der Hochschule Luzern - Informatik hat verschiedene Forschungsprojekte und viel Know-How im Umfeld von maschinellem Lernen, Computer Vision und Augmented Reality. In dieser Industriearbeit (PAWI) sollen die Möglichkeiten dieser neuen iOS-Frameworks aufgezeigt werden. Zur Veranschaulichung dieser Technologien soll eine attraktive Demo-App entwickelt werden. 
 
 
-Die vorgegebene Anwendungsdomäne sind Holzkugelbahnen, wobei die Forschungsgruppe entsprechende Bausätze der Marke cuboro zur Verfügung stellt. Das Unternehmen cuboro arbeitet ebenfalls an Softwarelösungen, die es ermöglichen mit virtuellen Kugelbahnen zu interagieren. Die Demo-App soll aufzeigen, dass es möglich ist physisch aufgebaute Bahnen digital zu erfassen und das physische Modell durch Überlagerungen anzureichern (AR).
+Die vorgegebene Anwendungsdomäne sind Holzkugelbahnen, wobei die Forschungsgruppe entsprechende Bausätze der Marke cuboro zur Verfügung stellt. Das Unternehmen cuboro arbeitet ebenfalls an Softwarelösungen, die es ermöglichen mit virtuellen Kugelbahnen zu interagieren. Die Demo-App soll aufzeigen, dass es möglich ist physisch aufgebaute Bahnen digital zu erfassen und dass die physischen Elemente durch AR Überlagerungen erweitert werden können.
 
-% TODO: Dieser Abschnitt nochmals besprechen
-Für die PAWI Arbeit im Frühlingssemester 2018 soll eine iOS-App erstellt werden, welche es erlaubt mit einer physischen cuboro Kugelbahn zu interagieren. Einerseits soll es die zu erstellende App erlauben, physische Kugelbahnen digital zu erfassen. Diese Erfassung kann beispielsweise parallel zum Aufbau einer Kugelbahn geschehen, indem die App Bauteil um Bauteil erkennt (mit passenden Methoden aus dem Bereich Bilderkennung/Computer Vision bzw. dem maschinellen Lernen) und dann dessen relative Position innerhalb von der Kugelbahn aufzeichnet. Es sollen zwingend mehrere unterschiedliche Kugelbahnen in der App erfasst sein.
-
-
-Erfasste Kugelbahnen sollen nach Möglichkeit in AR-Manier als Echtzeit-Überblendung auf Kamerabildern der physischen Kugelbahn projiziert werden können, z.B. indem Bauteile eingefärbt werden, in Form von angezeigten "`Bounding-Boxes"' oder indem virtuelle Kugeln auf der physischen Kugelbahn simuliert werden können. Oder weiter könnten erfasste Kugelbahnen mittels AR beispielsweise auf einen physischen Tisch "`gestellt"' werden und darauf könnte das Rollen von virtuellen Kugeln simuliert werden. 
 
 \subsection{Ziele}
 % Was soll mit dem Projekt erreicht werden? Was soll nach dem Projekt „besser“ sein als vorher?
@@ -25,4 +17,78 @@ Das Hauptziel ist es, dass am Schluss eine attraktive und lauffähige Demo-App z
 
 \subsection{Abgrenzung (Scope)}
 % Welche Sachverhalte sind nicht Bestandteil des Projektes. Welche Restriktionen gibt es im Projekt?
-Nichtbestandteil des Projektes sind Betriebssysteme / Frameworks ausserhalb von iOS. Die iOS-App wird ausschliesslich mit Swift entwickelt. Es werden ausschliesslich native iOS UI Komponente für die Applikation verwendet.
+Nicht bestandteil des Projektes sind Systemkomponenten ausserhalb von iOS. Die iOS-App wird ausschliesslich mit Swift entwickelt. Es werden ausschliesslich native iOS UI Komponente für die Applikation verwendet.
+
+\subsection{Resultate}
+Im Rahmen dieser Projektarbeit werden folgende Resultate erarbeitet. Alle erarbeiteten Resultate sind in einem Git Repository auf GitHub unter \url{https://github.com/eduDorus/PAWI} abgelegt.
+ 
+\begin{itemize}
+    \item Dokumentation
+    \begin{itemize}
+        \item Anhang
+        \item Architekturdokumentation
+    \end{itemize}
+    \item Sourcecode
+    \item Demo-App
+    \item Demo Video
+\end{itemize}
+
+\subsection{Grobplan/Meilensteine}
+
+\bild{1}{timeline}{Meilenstein Planung}
+
+\begin{longtable}{l l l}
+	\hline
+	\textbf{MS} & \textbf{Datum} & \textbf{Inhalt} \\
+	\hline
+
+	1	& 27. Februar 	& 
+	\begin{tabular}[t]{@{} l @{}}
+		\tabitem Kick-Off Meeting \\
+		\tabitem Besprechung von Aufgabenstellung \\
+		\tabitem Projektvorgehen und Meetings besprechen \\
+	\end{tabular} \\
+	\hline
+
+	2	& 13. März 		& 
+	\begin{tabular}[t]{@{} l @{}}
+		\tabitem Projekt- und Risikomanagement \\
+		\tabitem Grobplanung Projektablauf (Meilensteine) \\
+		\tabitem Grobkonzept (grobe Erfassung Fragestellungen, Scope, Anforderungen) \\
+		\tabitem Grundaufbau Dokumentation \\
+	\end{tabular} \\
+	\hline
+
+	3	& 8.  Mai 		& 
+	\begin{tabular}[t]{@{} l @{}}
+		\tabitem Besprechung Ideenfindung \\
+		\tabitem Recherche von Swift und den relevanten Frameworks \\
+		\tabitem Technische Grenzen definiert \\
+		\tabitem Mehrere Problemlösungszyklen durchlaufen \\
+		\tabitem Prototypen zu den Problemlösungszyklen \\
+		\tabitem (funktionale) Anforderungen festgelegt \\
+		\tabitem Planung der Umsetzung, Arbeitspakete \\
+	\end{tabular} \\
+	\hline
+
+	4	& 22. Mai 		& 
+	\begin{tabular}[t]{@{} l @{}}
+		\tabitem Testatsitzung \\
+		\tabitem Besprechung erreichter Ziele \\
+		\tabitem funktionierende App, die min. alle Muss-Anforderungen erfüllt \\
+		\tabitem Entwurf der abzugebenden Dokumentation \\
+	\end{tabular} \\
+	\hline
+
+	5	& 8.  Juni 		& 
+	\begin{tabular}[t]{@{} l @{}}
+		\tabitem Abgabe Projekt \\
+		\tabitem fertige Dokumentation \\
+		\tabitem fertige App \\
+		\tabitem Entwurf Schlusspräsentation \\
+	\end{tabular} \\
+
+	\hline
+	\caption{Auflistung der Meilensteine}
+	\label{tab:meilensteine}
+\end{longtable}
