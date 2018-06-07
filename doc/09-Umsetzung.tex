@@ -312,5 +312,10 @@ Diese Suche wird auf jeder Ebene durchgeführt bis alle Elemente erfasst wurden.
 
 \subsubsection{ARViewController} \label{subsub:umsetzung-arviewcontroller}
 
+Im \texttt{ARViewController} werden die für beide AR Modi identischen Initialisierungsabläufe für Augmented Reality behandelt.
+Darin wird die \texttt{ARSession} konfiguriert und die Flächenerkennung und -bestimmung durchgeführt, wie in Prototyp \ref{subsub:prot-overlay} entwickelt.
+Bei aktiviertem Debug Mode wird die Statistiken und weitere Debug Optionen der Scene View aktiviert.
+So wird dann der World Origin (Ursprungspunkt der Weltkoordinaten) und Feature Punkte des Tracking angezeigt.
+
 \subsubsection{Informationsbildschirm}
 Oben rechts auf dem Startbildschirm befindet sich ein Informationsicon mit dem der Informationsbildschirm eingeblendet werden kann. Dieser zeigt die aktuelle Version, Entwickler, Abhängigkeiten und dass die App als Resultat der Industrieprojektarbeit an der Fachhochschule Luzern entstanden ist. Zusätzlich kann der Debug Modus aktiviert werden um Laufzeitinformationen der AR View zu erhalten. Ob der Debug Modus aktiviert ist, wird in den User Defaults gespeichert.
