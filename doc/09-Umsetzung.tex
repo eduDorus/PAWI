@@ -275,7 +275,7 @@ Alle Nodes erben von der Klasse \texttt{SCNNode} und können so direkt in SceneK
 	\item[PlaneNode] ist zur Darstellung von durch ARKit erkannten Flächen. Sie hat eine \texttt{update} Methode, damit sie bei Änderungen der Grösse und Position aktualisiert werden kann.
 	\item[BoundingBoxNode] ist ein einfacher Würfel, wie er als \texttt{BasicCube} in verschiedenen Prototypen verwendet wurde. Objekte dieses Typs werden im AR Editor zur Anzeige möglicher Positionen eines neuen Elements verwendet.
 	\item[ElementNode] ist die Node für einzelne Kugelbahn Elemente. Sie hat eine \texttt{Triple} Location, einen Status vom Typ \texttt{ElementState} und einen Type, der ihre Geometrie definiert. Abhängig vom Status wird das Erscheinungsbild der Node verändert. Bei der Instanziierung wird basierend auf dem Type die Geometrie aus der SceneKit Scene "`cuboro-set.scn"' geladen. Die Position eines Elements wird mit \texttt{Triple} Koordinaten als relative Position zum Kugelbahn Ursprung in Anzahl Elemente definiert (\ref{subsub:umsetzung-triple}). Die reale Position wird durch die Multiplikation mit der Seitenlänge der Elemente berechnet.
-	\item[MarbleRunNode] dient als Basisnode, der \texttt{ElementNode}s hinzugefügt werden. Sie bietet Methoden, um sich mit \texttt{SCNBillboardConstraint} stets zur Kamera auszurichten, wie in Prototyp \ref{subsub:prot-kugelbahn} und in Code \ref{code:prot-kugelbahn-billboardconstraint} gezeigt.
+	\item[MarbleRunNode] dient als Basisnode, der \texttt{ElementNode} Objekte hinzugefügt werden. Sie bietet Methoden, um sich mit \texttt{SCNBillboardConstraint} stets zur Kamera auszurichten, wie in Prototyp \ref{subsub:prot-kugelbahn} und Code \ref{code:prot-kugelbahn-billboardconstraint} gezeigt.
 \end{description}
 
 \textbf{Entities} \\
@@ -308,4 +308,4 @@ Das Triple wird dazu verwendet die relativen Koordinaten der Kugelbahn Elemente 
 \subsubsection{Initializer}
 
 \subsubsection{Informationsbildschirm}
-Oben rechts auf dem Startbildschirm befindet sich ein Informationsicon mit dem der Informationsbildschirm eingeblendet werden kann. Dieser zeigt die aktuelle Version, Entwickler, Abhängigkeiten und dass die App als Resultat der Industrieprojektarbeit an der Fachhochschule Luzern entstanden ist. Zusätzlich kann der Debug Modus aktiviert werden um Laufzeitinformationen der AR View zu erhalten.
+Oben rechts auf dem Startbildschirm befindet sich ein Informationsicon mit dem der Informationsbildschirm eingeblendet werden kann. Dieser zeigt die aktuelle Version, Entwickler, Abhängigkeiten und dass die App als Resultat der Industrieprojektarbeit an der Fachhochschule Luzern entstanden ist. Zusätzlich kann der Debug Modus aktiviert werden um Laufzeitinformationen der AR View zu erhalten. Ob der Debug Modus aktiviert ist, wird in den User Defaults gespeichert.
