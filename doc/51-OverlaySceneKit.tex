@@ -1,11 +1,11 @@
 \subsubsection{Overlay auf einem Würfel mit SceneKit}\label{subsub:prot-overlay}
 \begin{description}
 	\item[Fragestellung:] Wie kann ein physischer Würfel (ein cuboro Element) mittels AR mit einer Art Overlay hervorgehoben werden? Eignet sich SceneKit dazu?
-	\item[Resultat:] Ein mittels SceneKit modellierter Würfel lässt sich an der Stelle eines physischen Würfels platzieren und kann so als eine Art diesen hervorzuheben eingesetzt werden. % TODO: Verweis auf entsprechenden Prototyp (Xcode Projekt) im Repo, bzw. vollständigen Code im Anhang(?)
-	\item[Versuchsaufbau:] Dieser Versuch wurde noch mit ARKit 1.0 umgesetzt. Der Ansatz dieses Prototyps ist es, mittels ARKit einen halbtransparenten SceneKit Würfel an die Stelle eines physischen Würfels zu positionieren. Die Positionierung des Würfels wird in diesem Versuch manuell gemacht. Die Basis dieses Versuchs bildet der Beitrag "`Detecting Planes and Placing Objects"' auf dem Blog Machinethinks (\cite{arkit-dectingplanes-placingobjects}) und dem zugehörigen Projekt auf GitHub. Zuerst soll die richtige Ebene der realen Welt definiert werden und im zweiten Schritt wird dann der Würfel darauf platziert.
+	\item[Resultat:] Ein mittels SceneKit modellierter Würfel lässt sich an der Stelle eines physischen Würfels platzieren und kann so als Möglichkeit diesen hervorzuheben eingesetzt werden. % TODO: Verweis auf entsprechenden Prototyp (Xcode Projekt) im Repo, bzw. vollständigen Code im Anhang(?)
+	\item[Versuchsaufbau:] Dieser Versuch wurde noch mit ARKit 1.0 umgesetzt. Der Ansatz dieses Prototyps ist es, mittels ARKit einen halbtransparenten SceneKit Würfel an die Stelle eines physischen Elements zu positionieren. Die Positionierung wird in diesem Versuch manuell gemacht. Die Basis dieses Versuchs bildet der Beitrag "`Detecting Planes and Placing Objects"' auf dem Blog Machinethinks (\cite{arkit-dectingplanes-placingobjects}) und dem zugehörigen Projekt auf GitHub. Zuerst soll die richtige Ebene der realen Welt definiert werden und im zweiten Schritt wird dann der Würfel darauf platziert.
 
 	\textbf{Flächenerkennung}\\
-	Beim Erstellen eines neuen AR Projekts in Xcode kann die gewünschte Technologie für den Inhalt ausgewählt werden. Zur Verfügung stehen neben SceneKit auch SpriteKit und Metal. Die Basis bildet \texttt{ARSCNView}, ein ViewController, der ARKit mit dem SceneKit vereint. In Code \ref{code:prot-overlay-viewdidload} wird die Konfiguration und der Start der \texttt{ARSession} vorgenommen. Da der Würfel auf eine Fläche gestellt werden soll, wird die horizontale Flächenerkennung (\texttt{PlaneDetection}, Zeile 2) aktiviert.
+	Beim Erstellen eines neuen AR Projekts in Xcode kann die gewünschte Technologie für den Inhalt ausgewählt werden. Zur Verfügung stehen neben SceneKit auch SpriteKit und Metal. Die Basis bildet \texttt{ARSCNView}, ein ViewController, der ARKit mit dem SceneKit vereint. In Code \ref{code:prot-overlay-viewdidload} wird die Konfiguration und der Start der \texttt{ARSession} vorgenommen. Da der Würfel auf eine Fläche gestellt werden soll, wird die horizontale Flächenerkennung (Zeile 2) aktiviert.
 
 	\begin{code}{prot-overlay-viewdidload}{Konfiguration und Start der \texttt{ARSession}}
 		configuration = ARWorldTrackingConfiguration()
@@ -13,8 +13,9 @@
 		sceneView.session.run(configuration!, options: [ARSession.RunOptions.removeExistingAnchors, ARSession.RunOptions.resetTracking])
 	\end{code}
 
-	Sobald ARKit eine Fläche detektiert hat, wird die Methode \texttt{renderer(\_:nodeFor:)} des Protokolls \texttt{ARSCNViewDelegate} aufgerufen, die als Rückgabe eine SceneKit Node (\texttt{SCNNode}) für den gefundenen Anker erwartet. Um die erkannte Fläche in der Szene anzuzeigen, wird eine \texttt{SCNBox} mit den geometrischen Ausmassen der Fläche erstellt. Diese Werte sind als Ausdehnung in den X- und Z-Achsen im Attribut \texttt{planeAnchor.extent} enthalten (Code \ref{code:prot-overlay-renderer}, Zeile 4). So wird jede erkannte Ebene dem Benutzer als halbtransparenten Fläche angezeigt.
+	Sobald ARKit eine Fläche detektiert hat, wird die Methode \texttt{renderer(\_:nodeFor:)} des Protokolls \texttt{ARSCNViewDelegate} aufgerufen, die als Rückgabe eine SceneKit Node (\texttt{SCNNode}) für den gefundenen Anker erwartet. Um die erkannte Fläche in der Szene anzuzeigen, wird eine \texttt{SCNBox} mit den geometrischen Ausmassen der Fläche erstellt. Diese Werte sind als Ausdehnung in den X- und Z-Achsen im Attribut \texttt{planeAnchor.extent} enthalten (Code \ref{code:prot-overlay-renderer}, Zeile 4). 
 
+	%TODO: Maybe remove? Else implement method header
 	\begin{code}{prot-overlay-renderer}{Implementation der \texttt{renderer(\_:nodeFor:)} Methode zur Darstellung von Flächen}
 		var node:  SCNNode?
 		if let planeAnchor = anchor as? ARPlaneAnchor {
@@ -32,17 +33,17 @@
 	\end{code}
 
 	\textbf{Würfel modellieren}\\
-	Jedes SceneKit Element ist eine \texttt{SCNNode} mit einer bestimmten Geometrie und Position. Für Würfelförmige Körper bietet sich als Geometrie eine \texttt{SCNBox} an. Die Definition kann so einfach wie folgt sein:
+	Jedes SceneKit Element ist eine \texttt{SCNNode} mit einer bestimmten Geometrie und Position. Für würfelförmige Körper bietet sich als Geometrie eine \texttt{SCNBox} an. Die Definition kann so einfach wie folgt sein:
 	\mint[style=xcode,breaklines]{swift}{let node = SCNNode(geometry: SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0.0))}
-	Damit der Würfel als Overlay wirken kann, soll er halbtransparent sein, die Ränder aber hervorgehoben. Zur einfacheren Kontrolle über diese Eigenschaften implementieren wir daher in diesem Versuch die Klasse \texttt{BasicCube} vom Typ \texttt{SCNNode}, bestehend aus einem halbtransparenten Würfel und einem Kindknoten mit nur den Kanten als Textur. Die Darstellung nur der Kanten wird mit einem Shader Modifier erzielt (von \cite{so-shader-modifier}).
+	Damit der Würfel als Overlay wirken kann, sollen die Seitenflächen halbtransparent sein, die Kanten aber hervorgehoben. Zur einfacheren Kontrolle über diese Eigenschaften implementieren wir daher in diesem Versuch die Klasse \texttt{BasicCube} vom Typ \texttt{SCNNode}, bestehend aus einem halbtransparenten Würfel und einem ChildNode mit nur den Kanten als Textur. Dieser Effekt wird mit einem speziellen Shader Modifier erzielt (von \cite{so-shader-modifier}).
 
 	\textbf{Würfel platzieren}\\
-	In einem ersten Test wurde beim Erkennen einer Fläche direkt ein \texttt{BasicCube} im Zentrum der Fläche (\texttt{planeAnchor}) gestellt, indem dem \texttt{position} Attribut der Würfel-Node folgendes Statement zugewiesen wurde:
+	In einem ersten Test wurde beim Erkennen einer Fläche direkt ein \texttt{BasicCube} in das Zentrum der Fläche (\texttt{planeAnchor}) gestellt, indem dem \texttt{position} Attribut der Node folgendes Statement zugewiesen wurde:
 	\mint[style=xcode,breaklines]{swift}{SCNVector3Make(planeAnchor.center.x, Float(cubeSize / 2), planeAnchor.center.z)}
-	Der Ausgangspunkt der Node befindet sich in ihrem Zentrum, weshalb die Höhenkoordinate Y auf die halbe Würfelhöhe gesetzt werden muss, um den Würfel direkt auf die Fläche zu stellen.
+	Der Ausgangspunkt von Nodes befindet sich in ihrem Zentrum, weshalb die Höhenkoordinate Y auf die halbe Würfelhöhe gesetzt werden muss. So kommt der Würfel direkt auf der Fläche zu stehen.
 
 	\textbf{Würfel auswählen}\\
-	Aus den so in die Mitte aller erkannten Flächen platzierten Boxen soll eine vom Benutzer ausgewählt werden. Beim Überschreiben der Methode \texttt{touchesBegan(\_:with:)} erhalten wir die Position eines Taps des Benutzers in \texttt{touches.first!.location(in:)} als \texttt{CGPoint}. Mit diesem Wert lässt sich auf die \texttt{ARSCNView} ein SceneKit-Hittest machen:
+	Aus den so in die Mitte aller erkannten Flächen platzierten Nodes soll eine vom Benutzer ausgewählt werden. Beim Überschreiben der Methode \texttt{touchesBegan(\_:with:)} erhalten wir die Position eines Taps des Benutzers in \texttt{touches.first!.location(in:)} als \texttt{CGPoint}. Mit diesem Wert lässt sich auf die \texttt{ARSCNView} ein SceneKit-Hittest machen:
 	\mint[style=xcode,breaklines]{swift}{let hitResults = sceneView.hitTest(location, options: [:])}
 	Die Rückgabe enthält alle Nodes der Szene, die sich an diesem 2D-Punkt auf dem Bildschirm befinden, in der Reihenfolge, wie sie dargestellt sind. Der erste \texttt{BasicCube} entspricht also dem ausgewählten Würfel und so kann dessen Farbe verändert werden um die Auswahl zu visualisieren.
 
