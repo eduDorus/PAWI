@@ -1,7 +1,7 @@
 skinparam Shadowing false
 'skinparam DefaultFontName "Source Sans Pro"
 skinparam DefaultFontName "SF Mono"
-skinparam dpi 150
+skinparam dpi 300
 skinparam partitionBackgroundColor white
 
 skinparam Class {
