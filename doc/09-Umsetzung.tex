@@ -18,8 +18,8 @@ Darin enthalten sind die kompletten Funktionalen Anforderungen als User Stories 
 
 \bild{1}{mockup-flow}{Mockups der Bildschirme und deren Zusammenhänge}
 
-\textit{Beschreibung der Funktionalitäten und des Aufbaus. Übersicht der wesentlichen Use Cases (mit Verweis auf User Stories im Anhang), Mockups usw.}
-% TODO:
+%TODO: Beschreibung der Funktionalitäten und des Aufbaus. Übersicht der wesentlichen Use Cases (mit Verweis auf User Stories im Anhang), Mockups usw.}
+
 
 \subsection{Softwarearchitektur}
 
@@ -33,7 +33,7 @@ Der Name VIPER ist ein Backronym, das für folgende Komponenten steht (Auflistun
 \begin{itemize}
 	\item \textbf{View:} zeigt an, was vom Presenter mitgeteilt wird und leitet Benutzerinteraktionen an diesen weiter
 	\item \textbf{Interactor:} enthält die eigentliche Businesslogik
-	\item \textbf{Presenter:} beinhaltet Logik für die View, um die Daten vom Interactor aufzubereiten und reagiert auf Benutzereingaben
+	\item \textbf{Presenter:} beinhaltet Logik für die View, um Daten vom Interactor aufzubereiten und reagiert auf Benutzereingaben
 	\item \textbf{Entities:} sind grundlegende Datenmodelle, die primär durch den Interactor genutzt werden
 	\item \textbf{Router/Wireframe:} enthält die Navigationslogik und ist Verbindungsglied zwischen einzelnen Modulen/Bildschirmen
 \end{itemize}
@@ -54,7 +54,7 @@ Die \texttt{weak} Referenz vom Presenter zur View vermeidet eine zyklische Abhä
 
 \bild{1}{project-viper-architecture}{Projekt Architektur nach VIPER}
 
-% TODO: Wahl für VIPER begründen
+% TODO: Wahl für VIPER begründen (Vielleicht oben nach der clean code Referenz erwähnen)
 % TODO: Verweis auf Architekturdokumentation Teil zum Stil und Sichten
 
 \subsubsection{Bestandteile} % TODO: bessere Bezeichnung finden
@@ -114,7 +114,7 @@ Der Interactor erhält von \texttt{MarbleRunDataManager} (siehe \ref{subsub:umse
 
 Falls der Benutzer den Editor Modus ausgewählt hat, setzt das Wireframe bei der Instanziierung das \texttt{canAddNew} Attribut der View auf \texttt{true}.
 Dadurch wird die View an der ersten Stelle der Collection View eine Zelle zum Erstellen einer neuen Kugelbahn setzen.
-Beide Zelltypen der Collection (normale Kugelbahn Zelle und Zelle zum Erstellen) sind im Storyboard mit den Bezeichnungen "`MarbleRunCell"' und "`NewRunCell"' erstellt.
+Beide Zelltypen der Collection (Zelle zum Erstellen und normale Kugelbahn Zelle) sind im Storyboard mit den Bezeichnungen "`NewRunCell"' und "`MarbleRunCell"' erstellt.
 Für das Hinzufügen einer neuen Bahn präsentiert die \texttt{showNewDialogue()} einen \texttt{UIAlertCollection} mit Textfeld für den Namen der Bahn.
 Dieser Name wird bei einem "`OK"' des Benutzers dem Presenter mitgeteilt, der den Interactor eine neue Kugelbahn mit diesem Namen erstellen lässt und anschliessend das Wireframe auffordert das nächste Modul zu laden.
 
@@ -137,7 +137,7 @@ In beiden Fällen gibt das Wireframe die gewählte (oder erstellte) \texttt{Marb
 \subsubsection{AR Guide} \label{subsub:umsetzung-modul-arguide}
 
 \texttt{ARGuide} ist eines der beiden AR Module und damit Kernstück der App.
-Es beinhaltet die interaktive Bauanleitung.
+Es beinhaltet die interaktive Bauanleitung die in den Prototypen \ref{subsub:prot-kugelbahnaufbau} und \ref{subsub:prot-kugelbahnaufbau2} entwickelt wurde.
 Abbildung \ref{fig:classes-arguide} zeigt das Klassendiagramm des Moduls.
 
 \begin{figure}[htb!]
@@ -148,7 +148,7 @@ Abbildung \ref{fig:classes-arguide} zeigt das Klassendiagramm des Moduls.
 \end{figure}
 
 Das Initialisieren der \texttt{SceneView} und des AR World Tracking übernimmt der \texttt{ARViewController} (siehe \ref{subsub:umsetzung-arviewcontroller}).
-Sobald der Benutzer eine erkannte Fläche gewählt hat, übernimmt die \texttt{ARGuideView} die weiteren Aktionen und teilt dem Presenter mit, dass sie bereits ist, die Kugelbahn darzustellen.
+Sobald der Benutzer eine erkannte Fläche gewählt hat, übernimmt die \texttt{ARGuideView} die weiteren Aktionen und teilt dem Presenter mit, dass sie bereit ist, die Kugelbahn darzustellen.
 Der Presenter fragt vom Interactor die Elemente der Kugelbahn an und fügt sie der View zu.
 In \texttt{InitializeMarbleRun} der View wird eine \texttt{MarbleRunNode} erstellt und der Szene hinzugefügt, Elemente werden dann als Kindknoten der Kugelbahn ergänzt.
 Die Positionierung der Kugelbahn erfolgt nach dem in Prototyp \ref{subsub:prot-kugelbahn} erarbeiteten Prinzip.

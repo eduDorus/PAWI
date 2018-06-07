@@ -1,10 +1,10 @@
 \subsubsection{Physischen Würfel als virtuelles Objekt erfassen}\label{subsub:prot-physische-wuerfel}
 \begin{description}
-	\item[Fragestellung:] Wie kann ein physischer Würfel mittels den Frameworks ARKit, Vision oder CoreML als virtuelles Objekt erfassen werden?
+	\item[Fragestellung:] Wie kann ein physischer Würfel mittels den Frameworks ARKit, Vision oder Core ML als virtuelles Objekt erfassen werden?
 	\item[Resultat:] ARKit bietet die Erkennung zweidimensionaler Elemente. Es verwendet dabei praktiken wie beim bekannten Bilderkennungsframework OpenCV, wobei ein Referenzbild hinterlegt werden muss.
-	Mit Vision und CoreML kann ein beliebig trainiertes neurales Netzwerk verwenden, um die Klassifikation durchzuführen. Es konnte leider keine solide Möglichkeit gefunden werden 3D Objekte zu erfassen, damit Sie für eine spätere Augmentierung verwendet werden können. 
+	Mit Vision und Core ML kann ein beliebig trainiertes neurales Netzwerk verwenden, um die Klassifikation durchzuführen. Es konnte leider keine solide Möglichkeit gefunden werden 3D Objekte zu erfassen, damit Sie für eine spätere Augmentierung verwendet werden können. 
 	\item[Versuchsaufbau:] Für den Versuchsaufbau wurden zwei Beispielprojekte von der Apple Developer Dokumentation verwendet. Das erste Projekt "`Recognizing Images in an AR Experience"' \cite{arkit-recognize-images} verspricht bekannte 2D Bilder mittels ARKit zu erkennen. Anschliessend können die erkannten Koordinaten verwendet werden um AR Inhalte zu platzieren.
-	Beim zweiten Beispielprojekt handelt es sich um das Thema "`Using Vision in Real Time with ARKit"' \cite{vision-real-time-with-arkit} bei dem die Frameworks Vision und CoreML zum Einsatz kommen.
+	Beim zweiten Beispielprojekt handelt es sich um das Thema "`Using Vision in Real Time with ARKit"' \cite{vision-real-time-with-arkit} bei dem die Frameworks Vision und Core ML zum Einsatz kommen.
 
 	\textbf{Beispielprojekt "`Recognizing Images in an AR Experience"'} \\
 	Das Beispielprojekt kann von der Apple Developer Website heruntergeladen werden. Anschliessend lässt sich das Projekt in Xcode öffnen und muss vor der Verwendung auf dem eigenen Gerät signiert werden. Das Verzeichnis "`Resources"' befinden sich bereits einige Demobilder die als Testversuch verwendet werden können. Um die Genauigkeit und Geschwindigkeit zu testen, wurde ein Versuch gestartet indem die Demobilder am Laptop angezeigt wurden. Anschliessend kann die Kamera des iPhones auf den Laptop ausgerichtet werden um den Erkennungsprozess zu starten. Der Versuch wiederspiegelte, dass die Erkennung schnell und zuverlässig erfolgte. Die erkannte Fläche erhielt eine weiss durchsichtig augmentierte Fläche an der stelle wo sich das Bild befindet. Ebenfalls diese augmentierte Fläche wurde korrekt angezeigt. Es wurde festgestellt, dass beim bewegen des iPhones die Fläche nicht exakt gehalten werden kann.
@@ -60,7 +60,7 @@
 
 
 	\textbf{Beispielprojekt "`Using Vision in Real Time with ARKit"'} \\
-	Das zweite Beispiel bei diesem Versuch beschäftigt sich mit Vision, CoreML und ARKit. Die Bildaufnahmen von ARKit werden an Vision weitergegeben und anschliessend mittels einem trainierten neuralen Netzwerk(Inception v3, \cite{DBLP:journals/corr/SzegedyVISW15}) in CoreML ausgewertet. 
+	Das zweite Beispiel bei diesem Versuch beschäftigt sich mit Vision, Core ML und ARKit. Die Bildaufnahmen von ARKit werden an Vision weitergegeben und anschliessend mittels einem trainierten neuralen Netzwerk(Inception v3, \cite{DBLP:journals/corr/SzegedyVISW15}) in Core ML ausgewertet. 
 
 	Der Code \ref{code:arkit-recognition-session} ausschnitt startet die ARSession sowie den Klassifizierungsprozess. Da dieser Task leistungs intensive ist, können nur eine gewisse Anzahl Bilder analysiert werden. Es wird stets geprüft ob sich bereits ein Bild im Puffer befindet bevor ein neues Bild zur Auswertung freigegeben wird.
 
@@ -74,8 +74,8 @@
 	}
 	\end{code}
 
-	In diesem Code ausschnitt wird eqw bereits trainiertes neurales Netzwerk in das CoreML Framework geladen. Es kann somit auch ein beliebig selbst trainiertes Netwerk verwendet werden.
-	\begin{code}{CoreML-request}{Initialisierung der Klassifizierung mittels CoreML}
+	Im Codeausschnitt \ref{code:CoreML-request} wird ein bereits trainiertes neurales Netzwerk in das Core ML Framework geladen. Es kann somit auch ein beliebig selbst trainiertes Netwerk verwendet werden.
+	\begin{code}{CoreML-request}{Initialisierung der Klassifizierung mittels Core ML}
 	private lazy var classificationRequest: VNCoreMLRequest = {
 		do {
 			let model = try VNCoreMLModel(for: Inceptionv3().model)
