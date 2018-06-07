@@ -250,9 +250,16 @@ Das Wireframe lässt die View ausblenden und gibt das selektierte Element an den
 
 \subsubsection{Data Manager} \label{subsub:umsetzung-datamanager}
 
-Über den \texttt{MarbleRunDataManager}.
+Der Data Manager übernimmt das Lesen und Schreiben von persistierten, bzw. zu persistierenden Daten.
+In dieser Demo-App sind dies die Kugelbahnen, bestehend aus einer \texttt{MarbleRunEntity} und ihrer \texttt{ElementEntity}s.
+Der \texttt{MarbleRunDataManager} bietet statische Methoden zum Lesen aller Kugelbahnen (\texttt{retrieveMarbleRunList()}), Schreiben einer Kugelbahn (\texttt{persist(\_:)}) und einer Überprüfung, ob überhaupt gespeicherte Kugelbahnen vorhanden sind (\texttt{isDirectoryEmpty()}).
 
-\subsubsection{Entitäten und Nodes}
+Als Dateiablage wird der Dokumentenordner des iOS Dateisystem mittels \texttt{FileManager} genutzt.
+Die \texttt{MarbleRunEntity} jeder Kugelbahn wird mittels \texttt{NSKeyedArchiver} in einer eigenen Datei gespeichert:
+\mint[style=xcode,breaklines]{swift}{NSKeyedArchiver.archiveRootObject(run, toFile: filePath.path)}
+Damit dies möglich ist, müssen die Entitäten von \texttt{NSObject} erben und das \texttt{NSCoding} Protokoll adoptieren (Kapitel \ref{subsub:umsetzung-entities-nodes}).
+
+\subsubsection{Entitäten und Nodes} \label{subsub:umsetzung-entities-nodes}
 
 Über die beiden Entitäten \texttt{MarbleRunEntity} und \texttt{ElementEntity} und ihre Codierung/Decodierung.
 
