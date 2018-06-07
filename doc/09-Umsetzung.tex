@@ -303,6 +303,13 @@ Das Triple wird dazu verwendet die relativen Koordinaten der Kugelbahn Elemente 
 
 \subsubsection{DepthFirstSort} \label{subsub:umsetzung-depthfirst}
 
+Die \texttt{DepthFirstSort} Klasse sortiert ein Array von Triple nach dem Prinzip der Tiefensuche so, dass das resultierende Array für die Bauanleitung verwendet werden kann.
+Die grundlegende Methode entspricht der in Prototyp \ref{subsub:prot-kugelbahnaufbau2} erarbeiteten Lösung des \texttt{TrackBuilder}, ist aber in dieser Klasse mit einer rekursiven Methode implementiert.
+
+Dem Konstruktor wird das zu sortierende Array mitgegeben und mit der Methode \texttt{generate} wird das sortierte Array generiert und zurückgegeben.
+Die \texttt{search(from:)} Methode ergänzt das erhaltene Triple zum Resultat und ruft sich rekursiv selber für jedes Nachbarelement auf.
+Diese Suche wird auf jeder Ebene durchgeführt bis alle Elemente erfasst wurden.
+
 \subsubsection{ARViewController} \label{subsub:umsetzung-arviewcontroller}
 
 \subsubsection{Informationsbildschirm}
