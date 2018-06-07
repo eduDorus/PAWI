@@ -11,13 +11,8 @@ Die grössten Tech-Unternehmen probieren Jahr für Jahr die best mögliche Platt
 Die Forschungsgruppe Algorithmic Business (ABIZ) der Hochschule Luzern - Informatik hat verschiedene Forschungsprojekte und viel Know-How im Umfeld von maschinellem Lernen, Computer Vision und Augmented Reality. In dieser Industriearbeit (PAWI) sollen die Möglichkeiten dieser neuen iOS-Frameworks aufgezeigt werden. Zur Veranschaulichung dieser Technologien soll eine attraktive Demo-App entwickelt werden. 
 
 
-Die vorgegebene Anwendungsdomäne sind Holzkugelbahnen, wobei die Forschungsgruppe entsprechende Bausätze der Marke cuboro zur Verfügung stellt. Das Unternehmen cuboro arbeitet ebenfalls an Softwarelösungen, die es ermöglichen mit virtuellen Kugelbahnen zu interagieren. Die Demo-App soll aufzeigen, dass es möglich ist physisch aufgebaute Bahnen digital zu erfassen und das physische Modell durch Überlagerungen anzureichern (AR).
+Die vorgegebene Anwendungsdomäne sind Holzkugelbahnen, wobei die Forschungsgruppe entsprechende Bausätze der Marke cuboro zur Verfügung stellt. Das Unternehmen cuboro arbeitet ebenfalls an Softwarelösungen, die es ermöglichen mit virtuellen Kugelbahnen zu interagieren. Die Demo-App soll aufzeigen, dass es möglich ist physisch aufgebaute Bahnen digital zu erfassen und dass die physischen Elemente durch AR Überlagerungen erweitert werden können.
 
-% TODO: Dieser Abschnitt nochmals besprechen
-Für die PAWI Arbeit im Frühlingssemester 2018 soll eine iOS-App erstellt werden, welche es erlaubt mit einer physischen cuboro Kugelbahn zu interagieren. Einerseits soll es die zu erstellende App erlauben, physische Kugelbahnen digital zu erfassen. Diese Erfassung kann beispielsweise parallel zum Aufbau einer Kugelbahn geschehen, indem die App Bauteil um Bauteil erkennt (mit passenden Methoden aus dem Bereich Bilderkennung/Computer Vision bzw. dem maschinellen Lernen) und dann dessen relative Position innerhalb von der Kugelbahn aufzeichnet. Es sollen zwingend mehrere unterschiedliche Kugelbahnen in der App erfasst sein.
-
-
-Erfasste Kugelbahnen sollen nach Möglichkeit in AR-Manier als Echtzeit-Überblendung auf Kamerabildern der physischen Kugelbahn projiziert werden können, z.B. indem Bauteile eingefärbt werden, in Form von angezeigten "`Bounding-Boxes"' oder indem virtuelle Kugeln auf der physischen Kugelbahn simuliert werden können. Oder weiter könnten erfasste Kugelbahnen mittels AR beispielsweise auf einen physischen Tisch "`gestellt"' werden und darauf könnte das Rollen von virtuellen Kugeln simuliert werden. 
 
 \subsection{Ziele}
 % Was soll mit dem Projekt erreicht werden? Was soll nach dem Projekt „besser“ sein als vorher?
@@ -26,3 +21,33 @@ Das Hauptziel ist es, dass am Schluss eine attraktive und lauffähige Demo-App z
 \subsection{Abgrenzung (Scope)}
 % Welche Sachverhalte sind nicht Bestandteil des Projektes. Welche Restriktionen gibt es im Projekt?
 Nichtbestandteil des Projektes sind Betriebssysteme / Frameworks ausserhalb von iOS. Die iOS-App wird ausschliesslich mit Swift entwickelt. Es werden ausschliesslich native iOS UI Komponente für die Applikation verwendet.
+
+\subsection{Resultate}
+Im Rahmen dieser PAWI werden folgende Resultate erarbeitet:
+\begin{itemize}
+• Dokumentation
+– Fachkonzept
+Besteht aus einer Beschreibung des fachlichen Use Cases der Passenger Prediction,
+den Theoriegrundlagen der eingesetzten Deep Learning Verfahren, speziell die Entwicklung
+von Convolutional Neural Networks, und einem Evaluationsdokument wo
+die Lösung mit dem bestehenden Verfahren verglichen wird.
+– Software-Design-Konzept
+– Benutzerdokumentation
+• Sourcecode
+• Trainiertes Deep Learning-Modell
+
+
+1.4 Randbedingungen
+Sourcecode Verwaltung
+Für die Sourcecode Verwaltung wird von der HSLU eine GitLab Instanz zur Verfügung gestellt.
+https://gitlab.enterpriselab.ch
+Programmiersprachen
+Als Programmiersprache wird grundsätzlich Python 3.X verwendet.
+Technologien
+Es muss das Machine Learning Framework Tensorflow in der Version 1.4 oder höher benutzt
+werden.
+Zielsysteme
+Der Code muss plattformunabhängig lauffähig sein.
+Fremdsoftware
+Es darf nur Fremdsoftware genutzt werden, welche eine kommerzielle Nutzung nicht einschränkt
+und der entstandene Sourcecode nicht veröffentlicht werden muss.
