@@ -3,15 +3,22 @@
 \subsection{Lessons Learned}
 
 \subsubsection{Persönliches Fazit von Dorus Janssens}
+Das Industrieprojekt war für mich ein sehr spannender Einblick in die iOS Welt.
 
 \subsubsection{Persönliches Fazit von Lucas Schnüriger}
 
 
 \subsection{Ausblick}
 
-% mögliche weiterführende, aufbauende Projekte als subsubsections
+Anbei werden mögliche Weiterführungen dieser Arbeit beschrieben.
 
-% Bspw:
-% - die Objektdetektion gem. Konzept im Prototyp zu Bounding Box
-% - Kugelsimulation
-% - ARKit 2 und iOS 12
+\subsubsection{Objekterkennung}
+Im Kapitel \ref{subsub:prot-boundingbox} wird ein Konzept vorgestellt, welches die Erkennung von Elementen beinhaltet. Diese Funktionalität könnte die Demo-App in der Handhabung unterstützen und dem Benutzer ein besseres Erlebnis beschären. Für die Umsetzung muss ausfindig gemacht werden, wie ein automatischer Hit-Test an einer bestimmten stelle gemacht wird und wie diese ausgewertet werden.
+
+\subsubsection{Kugelsimulation}
+Im Kapitel \ref{sub:scene-kit} wird erläutert, dass das SceneKit eine eingebaute physik Engien besitzt. Diese könnte als Erweiterung der Demo-App konfiguriert werden. Es müssen die Beschaffenheiten und Geometrien der Elemente hinterlegt werden. Anschliessend könnte die Funktionalität entwickelt werden eine virtuelle Kugel auf die Bahn zu platzieren. Mit der interaktion einer virtuellen Kugel kann die Bahn die vollständige Funktionalität der physischen Kugelbahn abbilden.
+
+\subsubsection{ARKit 2.0 und iOS 12}
+Kurz vor Ende dieser Arbeit wurde die Entwicklerkonferenz WWDC2018 abgehalten. An der diesjährien Konferenz war Augmented Reality ein ausgeprägtes Thema. Mit dem neuen iOS 12 Release wurde ebenfalls die neue ARKit Version 2.0 vorgestellt. ARKit 2.0 bringt eine eingebaute Funktionalität um dreidimensionale Objekte zu erkennen, bis zu vier Personen gleichzeitig mit der gleichen Augmentierten Welt zu interagieren und eine erhöhte Leistung. Zusätzlich wurde ein neues Dateiformat vorgestellt, dass das einfügen von dreidimensionaler Objekte vereinfacht. 
+
+Mit der neuen ARKit Version 2.0 könnte die Flächenerkennung und dass setzen der virtuellen Bahn mit dem erkennen eines physischen Würfels ersetzt werden. Dies würde zwar bedeuten das es notwendig ist eine Bahn zu besitzen, jedoch kann der Grundstein oder die Bahn physikalisch ausgerichtet werden und denn Prozess für den Endanwender interaktiver gestalten.
