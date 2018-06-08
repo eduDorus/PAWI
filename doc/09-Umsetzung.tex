@@ -196,6 +196,10 @@ All diese Positionen werden als \texttt{BoundingBoxNode} der View hinzugefügt u
 Tippt der Benutzer auf einer der Boxen, wird diese mit dem zuvor gewählten Elementtyp ersetzt und alle anderen Positions-Boxen werden wieder ausgeblendet.
 Der Presenter gibt dabei die \texttt{ElementEntity} mit aktualisierten Koordination sowohl an den Interactor als auch an die View.
 
+Der Ablauf für den Benutzer um ein Element hinzuzufügen wird in Abbildung \ref{fig:armarblerun-screenshots-editor} in den einzelnen Schritten dargestellt.
+
+\bild{1}{armarblerun-screenshots-editor}{Screenshots der Demo-App: Schritte beim Hinzufügen eines Elements}
+
 \textbf{Element löschen} \\
 Die Methode \texttt{didLongPress(\_:)} macht auf die SceneKit Szene einen Hit-Test.
 Wenn das Resultat des Hit-Tests ein Kugelbahn Element ist, wird beim Presenter die Methode \texttt{removeElement(at:)} aufgerufen.
