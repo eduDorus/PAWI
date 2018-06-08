@@ -1,8 +1,8 @@
 \subsubsection{Virtuelles Modell einer Kugelbahn projizieren}\label{subsub:prot-kugelbahn}
 \begin{description}
 	\item[Fragestellung:] Wie kann eine gesamte Kugelbahn modelliert und als Ganzes in Augmented Reality auf eine Fläche projiziert werden?
-	\item[Resultat:] Durch einen hierarchischen Aufbau von SceneKit Nodes, kann eine Bahn aus mehreren einzelnen Blöcken modelliert und als Ganzes modifiziert werden (bspw. verschieben, drehen). Eine \texttt{MarbleTrack} Klasse, die von \texttt{SCNNode} erbt, enthält und verwaltet die \texttt{BasicCube}-Würfel als Kindknoten. Der \texttt{SCNBillboardConstraint} von SceneKit vereinfacht zudem das Orientieren von Objekten zur Kamera hin. % TODO: Verweis auf entsprechenden Prototyp (Xcode Projekt) im Repo, bzw. vollständigen Code im Anhang(?)
-	\item[Versuchsaufbau:] Da zum Zeitpunkt dieses Versuchs keine vollständige 3D Modelle von echten cuboro Elemente vorhanden waren, wurde der Versuch mit einer \texttt{BasicCube} Klasse auf der Grundlage von dem Versuch aus Abschnitt \ref{subsub:prot-overlay} aufgebaut. Dieser Versuch bildete auch die Basis für die hier verwendete Flächenerkennung, -auswahl und das Platzieren der Kugelbahn.
+	\item[Resultat:] Durch einen hierarchischen Aufbau von SceneKit Nodes, kann eine Kugelbahn aus mehreren einzelnen Elementen modelliert und als Ganzes modifiziert werden (bspw. verschieben, drehen). Eine Klasse, die von \texttt{SCNNode} erbt, enthält und verwaltet die Elemente als Kindknoten. Der \texttt{SCNBillboardConstraint} von SceneKit vereinfacht zudem das Orientieren von Objekten zur Kamera hin. % TODO: Verweis auf entsprechenden Prototyp (Xcode Projekt) im Repo, bzw. vollständigen Code im Anhang(?)
+	\item[Versuchsaufbau:] Da zum Zeitpunkt dieses Versuchs keine vollständige 3D Modelle von echten cuboro Elemente vorhanden waren, wurde der Versuch mit einer \texttt{BasicCube} Klasse auf der Grundlage von Prototyp \ref{subsub:prot-overlay} aufgebaut. Dieser Versuch bildete auch die Basis für die hier verwendete Flächenerkennung, -auswahl und das Platzieren der Kugelbahn.
 
 	\textbf{Tracking Statusanzeige} \\ % TODO: dieser Abschnitt war zwar Teil dieses Versuchs, gehört aber Thematisch irgendwie nicht hierher?
 	Die Methode \texttt{session(\_:cameraDidChangeTrackingState:)} wird bei jeder Änderung des Tracking Status durch das Framework aufgerufen. Das erhaltene \texttt{ARCamera} Objekt hat ein Attribut \texttt{trackingState} mit den möglichen Zuständen \texttt{normal}, \texttt{notAvailable} und \texttt{limited}. Für letzteres gibt es zudem eine der folgenden Begründungen:
@@ -15,15 +15,14 @@
 	Um den Tracking State anzuzeigen, wird ein Label mit entsprechendem Text gesetzt. Damit Labels im Interface Builder zusammen mit der Scene View genutzt werden können, müssen die Elemente gegenüber dem Standard AR Projekt von Xcode in einer gemeinsamen \texttt{UIView} als Container gesetzt werden.
 
 	\textbf{Kugelbahn modellieren}\\
-	Eine neue eigene Klasse \texttt{MarbleTrack} hält alle Informationen zu einer Kugelbahn und bietet Methoden zur Manipulation der Bahn an. Die Klasse erbt von \texttt{SCNNode} und kann damit direkt als Node in einer AR Szene genutzt werden. Im wesentlichen soll die Klasse aus ganzzahligen Koordinaten eine Kugelbahn mit \texttt{BasicCube} Nodes als Kindknoten zusammenstellen. Die Koordinaten eines Würfels beschreiben seine Position in Anzahl Würfel, ausgehend von einem Basiswürfel in (0,0,0). Die Achsenrichtungen korrespondieren mit denen der ARKit Session.
+	Eine neue eigene Klasse \texttt{MarbleTrack} hält alle Informationen zu einer Kugelbahn und bietet Methoden zur Manipulation der Kugelbahn an. Die Klasse erbt von \texttt{SCNNode} und kann damit direkt als Node in einer AR Szene genutzt werden. Im Wesentlichen soll die Klasse aus ganzzahligen Koordinaten eine Kugelbahn mit \texttt{BasicCube} Nodes als Kindknoten zusammenstellen. Die Koordinaten eines Elements beschreiben seine Position in Anzahl Würfel, ausgehend von einem Basiselement in (0,0,0). Die Achsenrichtungen korrespondieren mit denen der ARKit Session.
 
-	Ein Array von Tuples mit den Koordinaten der drei Achsen bildet die Struktur für eine Kugelbahn. Folgender Code beschreibt zwei aufeinander stehende Würfel und einen dritten Würfel rechts daneben:
+	Ein Array von Tupeln mit den Koordinaten der drei Achsen bildet die Struktur für eine Kugelbahn. Folgender Code beschreibt zwei aufeinander stehende Elemente und ein drittes Element rechts daneben:
 	\mint[style=xcode,breaklines]{swift}{let track = [(0,0,0), (0,1,0), (1,0,0)]}
 
-	In einem Loop durch das Array wird für jeden Tupel ein \texttt{BasicCube} als Kindknoten hinzugefügt. Zur Positionierung werden die gegebenen Koordinaten mit der Seitenlänge der Würfel multipliziert (Code \ref{code:prot-kugelbahn-addcube}, Zeile 4).
+	Beim Iterieren durch das Array wird für jedes Tupel ein \texttt{BasicCube} als Kindknoten hinzugefügt. Zur Positionierung werden die gegebenen Koordinaten mit der Seitenlänge des Elements multipliziert (Code \ref{code:prot-kugelbahn-addcube}, Zeile 3).
 
 	\begin{code}{prot-kugelbahn-addcube}{Methode \texttt{addCube(x:y:z:)} um einen \texttt{BasicCube} als Kindknoten hinzuzufügen}
-		@discardableResult
 		func addCube(x: Int, y: Int, z: Int) -> BasicCube {
 			let cube = BasicCube()
 			let pos = SCNVector3(CGFloat(x) * cube.sidelength, CGFloat(y) * cube.sidelength, CGFloat(z) * cube.sidelength)
@@ -34,10 +33,9 @@
 	\end{code}
 
 	\textbf{Kugelbahn projizieren}\\
-	Ähnlich dem Vorgehen in Versuch \ref{subsub:prot-overlay}, wird zuerst die Flächenerkennung und -auswahl gemacht. Statt eines Positionierungswürfel wird hier nun aber eine \texttt{MarbleTrack} Node hinzugefügt. Die Verwendung von \texttt{eulerAngle} zur Rotation hatte sich nicht besonders bewährt. Um ein Objekt stets zur Kamera hin zu orientieren, bietet SceneKit entsprechende Constraints. Der Constraint \texttt{SCNBillboardConstraint} macht genau das. Indem nur Y als frei bewegliche Achse gesetzt wird (Code \ref{code:prot-kugelbahn-billboardconstraint}, Zeile 4), bleibt die Kugelbahn in der Horizontalen, dreht sich aber zur Kamera. Die Constraints zu entfernen reicht aus, um die automatische Ausrichtung zu beenden (Zeile 9). Die Node bleibt dann in ihrer aktuellen Position stehen. Die beiden Methoden in Code \ref{code:prot-kugelbahn-billboardconstraint} werden aus dem ViewController bei \texttt{touchesBegan(\_:with:)} abwechslungsweise aufgerufen, wodurch zwischen den beiden Zuständen mittels Toucheingabe gewechselt werden kann.
+	Ähnlich dem Vorgehen in Versuch \ref{subsub:prot-overlay}, wird zuerst die Flächenerkennung und -auswahl gemacht. Statt eines Positionierungswürfel wird hier nun aber eine \texttt{MarbleTrack} Node hinzugefügt. Die Verwendung von \texttt{eulerAngle} zur Rotation hatte sich nicht bewährt. Um ein Objekt stets zur Kamera hin zu orientieren, bietet SceneKit den Constraint \texttt{SCNBillboardConstraint}. Indem nur Y als frei bewegliche Achse gesetzt wird (Code \ref{code:prot-kugelbahn-billboardconstraint}, Zeile 3), bleibt die Kugelbahn in der Horizontalen, dreht sich aber zur Kamera. Die Constraints zu entfernen reicht aus, um die automatische Ausrichtung zu beenden (Zeile 9). Die Node bleibt dann in ihrer aktuellen Position stehen. Die beiden Methoden in Code \ref{code:prot-kugelbahn-billboardconstraint} werden aus dem View Controller bei \texttt{touchesBegan(\_:with:)} abwechslungsweise aufgerufen, wodurch zwischen den beiden Zuständen mittels Toucheingabe gewechselt werden kann.
 
 	\begin{code}{prot-kugelbahn-billboardconstraint}{Verwendung von Constraints um Nodes zur Kamera auszurichten}
-		// Makes the track always facing the camera by rotating around the Y axis
 		func constraintToCamera() {
 			let constraint = SCNBillboardConstraint()
 			constraint.freeAxes = SCNBillboardAxis.Y
