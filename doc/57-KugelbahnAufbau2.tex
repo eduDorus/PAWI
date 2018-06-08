@@ -1,15 +1,14 @@
 \subsubsection{Elementweise Bauanleitung einer Kugelbahn}\label{subsub:prot-kugelbahnaufbau2}
 \begin{description}
 	\item[Fragestellung:] Wie kann kann der Prototyp \ref{subsub:prot-kugelbahnaufbau} erweitert werden, damit die Bauanleitung Würfel-für-Würfel statt Ebenenweise erfolgt?
-	\item[Resultat:] Eine spezifische Klasse \texttt{TrackBuilder} enthält die Logik zur Wahl des nächsten zu setzenden Elements. Die Klasse nutzt die Methoden von \texttt{TrackMap}, um die Bahn zu manipulieren und die richtigen Elemente zu verstecken oder hervorzuheben.
+	\item[Resultat:] Eine spezifische Klasse enthält die Logik zur Wahl des nächsten zu setzenden Elements. Sie nutzt die Methoden einer \texttt{TrackMap}, um die Bahn zu manipulieren und die richtigen Elemente zu verstecken oder hervorzuheben.
 	\item[Versuchsaufbau:] Dieser Versuch baut direkt auf Prototyp \ref{subsub:prot-kugelbahnaufbau} auf, der eine ebenenweise Aufbauanleitung einer Kugelbahn ermöglicht. Dabei werden alle Kugelbahn-Elemente auf der selben Horizontalen hervorgehoben. In diesem Versucht soll die Bauanleitung nun einzelne Würfel in einer angemessenen Reihenfolge hervorheben.
-	% TODO: Diagramm machen zum Aufbau?? Oder den Algorithmus durch Grafik ergänzen?
 
-	\textbf{Übersicht Klassen}
+	\textbf{Übersicht Klassen}\\
 	Bis auf \texttt{TrackBuilder} sind die Klassen im Wesentlichen wie von Prototyp \ref{subsub:prot-kugelbahnaufbau}.
 	\begin{itemize}
 		\item \texttt{BasicCube}: erbt von \texttt{SCNNode}; erstellt einen halbtransparenten SceneKit Würfel; hat einen Status vom Enum \texttt{BasicCubeState} zugeordnet (normal, planned, active oder built), der die Darstellung der Elements bestimmt
-		\item \texttt{MarbleTrack}: erbt von \texttt{SCNNode}, hält Koordinaten verschiedener Kugelbahnen, kann eine solche Bahn mit \texttt{BasicCube} Elementen erstellen, verfügt über Methoden zur Positionierung und Ausrichtung der gesamten Bahn, besitzt Referenzen auf die Elemente der Bahn in einer \texttt{TrackMap}
+		\item \texttt{MarbleTrack}: erbt von \texttt{SCNNode}, hält Koordinaten verschiedener Kugelbahnen und kann diese mit \texttt{BasicCube} Elementen erstellen, hat Methoden zur Positionierung und Ausrichtung der ganzen Kugelbahn, besitzt Referenzen auf die Elemente via \texttt{TrackMap}.
 		\item \texttt{TrackMap}: hält ein Dictionary von Kugelbahn Elementen mit ihren Koordinaten als Schlüssel, bietet Methoden zum Mutieren des Dictionarys und um benachbarte Elemente zu erhalten
 		\item \texttt{TrackBuilder}: nutzt eine \texttt{TrackMap} um den Status von Elementen der Kugelbahn zu verändern, implementierte einen Depth-first Algorithmus mittels eines Arrays als Stack um alle Elemente einer Kugelbahn nacheinander hervorzuheben
 	\end{itemize}
@@ -21,13 +20,13 @@
 		\item Der Status des zuletzt gebauten Element wird von \texttt{active} zu \texttt{built} geändert.
 		\item Das letzte Element des Stacks wird entfernt (\texttt{stack.popLast()}) und als aktuelles Element festgelegt.
 		\item Alle Elemente, die an das aktuelle angrenzen und nicht bereits gebaut wurden und nicht schon im Stack sind, werden hinten an das Stack angehängt (\texttt{stack.append(element)}) und deren Status auf \texttt{planned} gesetzt.
-		\item Falls das Stack an dieser Stelle leer ist, wurden alle Elemente auf dieser Ebene gebaut. Der \texttt{currentLevel} wird um eins erhöht und ein Element der neuen Ebene dem Stack hinzugefügt
+		\item Falls das Stack jetzt leer ist, wurden alle Elemente auf dieser Ebene gebaut. Der \texttt{currentLevel} wird erhöht und ein Element der neuen Ebene dem Stack hinzugefügt.
 	\end{enumerate}
 
-	Jeder dieser fünf Schritte wird in einer entsprechenden Methode abgehandelt. Ein solcher Algorithmus garantiert gegenüber einer zufälligen Wahl, dass (nach dem Setzen des ersten Elements) nur Elemente, die an bereits gebaute anschliessend, ausgewählt werden. Für die Tiefensuche spricht, dass Elemente neben dem zuletzt gesetzten bevorzugt werden und ganze Abschnitte einer Bahn zuerst fertig gebaut werden, bevor mit einem anderen Teil weitergemacht wird. Bei einem Algorithmus auf Basis Breitensuche springt zwischen allen Seiten der Bahn hin und her.
+	Jeder dieser fünf Schritte wird in einer entsprechenden Methode abgehandelt. Ein solcher Algorithmus garantiert gegenüber einer zufälligen Wahl, dass (nach dem Setzen des ersten Elements) nur Elemente, die an bereits gebaute anschliessend, ausgewählt werden. Für die Tiefensuche spricht, dass Elemente neben dem zuletzt gesetzten bevorzugt werden und ganze Abschnitte einer Bahn zuerst fertig gebaut werden, bevor mit einem anderen Teil weitergemacht wird. Ein Algorithmus auf Basis der Breitensuche sprang in Versuchen stark zwischen allen Seiten der Bahn hin und her.
 
 	\textbf{Ablauf der Bauanleitung}\\
-	Sobald die Position einer Kugelbahn im \texttt{ViewController} fixiert wurde, wird ein Button aktiviert, mit dem der Benutzer die Aufbauanleitung starten kann. Dabei wird ein \texttt{TrackBuilder} mit der Map vom \texttt{MarbleTrack} initialisiert und gestartet. Der \texttt{TrackBuilder} bietet nach aussen drei Methoden an: \texttt{start()}, \texttt{step()} und \texttt{stop()}. Bei jedem weiteren Touch auf den Button ruft der Controller die \texttt{step()} Methode auf, welche einen Schritt des oben beschriebenen Algorithmus ausführt und so das nächste Element hervorhebt.
+	Sobald die Position einer Kugelbahn im \texttt{ViewController} fixiert wurde, wird ein Button aktiviert, mit dem der Benutzer die Aufbauanleitung starten kann. Dabei wird ein \texttt{TrackBuilder} mit der Map vom \texttt{MarbleTrack} initialisiert und gestartet. Der \texttt{TrackBuilder} bietet nach aussen drei Methoden an: \texttt{start()}, \texttt{step()} und \texttt{stop()}. Bei jeder weiteren Betätigung des Buttons ruft der Controller die \texttt{step()} Methode auf, welche einen Schritt des oben beschriebenen Algorithmus ausführt und so das nächste Element hervorhebt.
 
-	Sind alle Elemente gebaut, gibt \texttt{step()} \texttt{false} als Rückgabewert und der Controller beendet daraufhin die Bauphase und entfernt die (systemweit einzige) Referenz auf den \texttt{TrackBuilder}.
+	Sind alle Elemente gebaut, gibt \texttt{step()} als Rückgabewert \texttt{false} und der Controller beendet daraufhin die Bauphase.
 \end{description}
