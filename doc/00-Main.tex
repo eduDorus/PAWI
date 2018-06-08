@@ -190,12 +190,15 @@
 %----------------------------------------------------------------------------------------
 %	Vor-Zeugs
 %----------------------------------------------------------------------------------------
-\pagenumbering{Roman}
-\pagestyle{plain}
+\thispagestyle{empty}
 
 \IfFileExists{01-Selbststaendigkeitserklaerung}{
   \input{01-Selbststaendigkeitserklaerung}
 }
+
+\newpage
+\pagenumbering{Roman}
+\pagestyle{plain}
 
 \newpage
 \IfFileExists{02-Abstract}{
