@@ -1,23 +1,40 @@
 \section{Schlussfolgerungen}
 
 \subsection{Lessons Learned}
-Mit der erstellung der VIPER Architektur wurde kostbare Zeit aufgewendet. Diese Architektur ist für grössere Projekte durchaus geeignet jedoch konnten wir beim erstellen des Prototyps auf eine interative Architektur schliessen um mehr Funktionalität zu entwickeln. Zusätzlich wird von Apple das MVC Prinzip bevorzugt, wobei die meisten Beispiele diese Architektur besitzen.
 
-Das Framework ARKit zeigt bereits was die Zukunft bringen könnte, braucht jedoch noch einen gewissen Umfang an Funktionalität.
-% TODO: erweitern. Hab da grad en bissl schreib blockade
+Für die Erstellung der VIPER Architektur wurde kostbare Zeit aufgewendet.
+Diese Architektur ist eher für grössere Projekte geeignet und womöglich wäre für die Demo-App ein Bottom-Up Ansatz angemessener gewesen.
+Die Architektur hat uns aber geholfen, verschiedene Funktionalitäten und Aufgaben zu trennen und eine über alle Module konsistente Struktur einzuhalten.
+
+Augmented Reality ist ein Schlagwort, das immer häufiger anzutreffen ist.
+Die Arbeit mit ARKit hat im Voraus viele Erwartungen an deren Möglichkeiten geweckt, die leider nicht ganz erfüllt wurden (bspw. die 3D Objekterkennung).
+Gerade die WWDC 2018, die in der letzten Projektwoche anstand, zeigte mit Apples Präsentation von ARKit 2, dass es noch eine junge Technologie ist und viele (rasche) Fortschritte und Verbesserungen noch vor uns stehen.
+Es ist bereits klar, dass der selbe Projektauftrag mit ARKit 2 ganz neue Möglichkeiten haben würde.
 
 \subsubsection{Persönliches Fazit von Dorus Janssens}
-Das Industrieprojekt war für mich ein sehr spannender Einblick in die iOS Welt. Es war spannend die Swift Programmiersprache und Xcode als Entwicklungsumgebung kennenzulernen. Die einarbeitung hat aber auch viel Zeit und nerven gebraucht. 
+Das Industrieprojekt war für mich ein sehr spannender Einblick in die iOS Welt. Es war spannend die Swift Programmiersprache und Xcode als Entwicklungsumgebung kennenzulernen. Die Einarbeitung hat aber auch viel Zeit und Nerven gebraucht. 
 
 \subsubsection{Persönliches Fazit von Lucas Schnüriger}
 
+Das Projekt klang von Beginn an spannend und interessant.
+Sich mit den verschiedenen sehr neuen iOS Technologien zu beschäftigen hatte gleich einen grossen Reiz.
+Dank meinen Vorkenntnissen in der iOS Entwicklung fand ich mich zwar schnell zurecht, dennoch konnte ich durch die vertiefte Arbeit mit Swift und den iOS Frameworks sehr viel Neues lernen. % TODO: konkret??
+
+Es war das erste Mal, dass ich ein Projekt im explorativen Vorgehen durchführte.
+Die zweiwöchigen Zyklen zur Entwicklung unterschiedlicher Prototypen boten einen guten zeitlichen Rahmen und erlaubte es sich mit dem betreuenden Dozenten regelmässig abzusprechen.
+
+Das Modul SAQT, das ich parallel zum Projekt besuchte, motivierte mich, mich etwas genauer mit der Architektur einer Software auseinander zu setzen.
+Ich fand es interessant zu sehen, dass man auch für iOS Alternativen hat und durchaus vom vorgegebenen Standardmodell Model-View-Controller abweichen kann.
+Dabei muss man jedoch den einen oder anderen Umweg in Kauf nehmen. % TODO: konkret??
+Die VIPER Architektur hat uns angespornt, die Aufgaben innerhalb der Module klar zu trennen, war aber auch ein zusätzlicher Overhead, den wir etwas unterschätzt hatten.
+Ich bin der Ansicht, dass es sich aber gelohnt hat und wir sonst eine wesentlich unübersichtlichere Struktur erhalten hätten.
 
 \subsection{Ausblick}
 
 Anbei werden mögliche Weiterführungen dieser Arbeit beschrieben.
 
 \subsubsection{Objekterkennung}
-Im Kapitel \ref{subsub:prot-boundingbox} wird ein Konzept vorgestellt, welches die Erkennung von einem Element innerhalb einer Bounding Box beinhaltet. Diese automatische Erkennenung könnte den Ablauf beim Aufbau der Kugelbahn verbessern. Um diese Funktionalität umzusetzen muss recherchiert werden, wie solche Hit-Tests durchgeführt werden können. Zusätzlich muss die Genauigkeit der Hit-Tests evaluiert werden damit das Element in der Bounding Box richtig erkannt wird.
+Im Kapitel \ref{subsub:prot-boundingbox} wird ein Konzept vorgestellt, welches die Erkennung von einem Element innerhalb einer Bounding Box beinhaltet. Diese automatische Erkennung könnte den Ablauf beim Aufbau der Kugelbahn verbessern. Um diese Funktionalität umzusetzen muss recherchiert werden, wie solche Hit-Tests durchgeführt werden können. Zusätzlich muss die Genauigkeit der Hit-Tests evaluiert werden damit das Element in der Bounding Box richtig erkannt wird.
 
 \subsubsection{Kugelsimulation}
 Im Kapitel \ref{sub:scene-kit} wird erläutert, dass das SceneKit eine eingebaute physik Engien besitzt. Diese könnte als weiterführende Arbeit an der Demo-App implementiert werden. Dazu müssen die Beschaffenheiten und Geometrie der Elemente hinterlegt werden. Anschliessend kann die Funktionalität entwickelt werden eine virtuelle Kugel auf die Bahn zu platzieren. Mit der Interaktion einer virtuellen Kugel kann die Bahn die vollständige Funktionalität der physischen Kugelbahn abbilden.
