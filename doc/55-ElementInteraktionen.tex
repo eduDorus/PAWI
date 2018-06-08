@@ -2,20 +2,19 @@
 \begin{description}
 	\item[Fragestellung:] Wie kann mit Tap- und Swipe-Gesten mit virtuellen Objekten interagiert werden?
 	\item[Resultat:] Es konnte erfolgreich ein Prototyp entwickelt werden, bei dem mittels Tap- und Swipe-Gesten mit einem virtuellen Objekt interagiert werden kann. Eine besondere Schwierigkeit bestand darin ein Element zu kippen, da je nach Kameraperspektive um die Z- oder X-Achse gedreht werden muss. 
-    \item[Versuchsaufbau:] Für diesen Versuch wurde ein neues Xcode Projekt initialisiert. Anschliessend wurde die Logik implementiert um einen Würfel auf einer Fläche zu augmentieren. Es wurde die Funktionalität entwickelt mittels verschiedenen Gesten mit dem Würfel zu interagieren. Zu den funktionalitäten gehören:
-    
+    \item[Versuchsaufbau:] Für diesen Versuch wurde ein neues Xcode Projekt initialisiert. Anschliessend wurde die Logik implementiert, um einen Würfel auf einer Fläche zu augmentieren. Es wurde die Funktionalität entwickelt mittels verschiedenen Gesten mit dem Würfel zu interagieren. Zu den Funktionalitäten gehören:
 
     \begin{itemize}
         \item \texttt{UITapGestureRecognizer} mit einmaligem Tippen
         \item \texttt{UITapGestureRecognizer} mit zweimaligem Tippen
-        \item \texttt{UILongPressGestureRecognizer} für langes antippen eines Objektes
+        \item \texttt{UILongPressGestureRecognizer} für langes Antippen eines Objektes
         \item \texttt{UISwipeGestureRecognizer} für die Rotationen
     \end{itemize}
 
-
     \textbf{\texttt{UITapGestureRecognizer} mit einmaligem Tippen}\\
-    Um mit Touchgesten zu arbeiten, müssen diese der SceneView hinzugefügt werden (Code \ref{code:prot-gesture-addTapGestureToSceneView}). Für einzelne Taps können wir den \texttt{UITapGestureRecognizer} initialisieren und als action parameter eine Methode angeben. Wir geben hierfür die Methode \texttt{ViewController.didTap(withGestureRecognizer:)}. Zusätzlich sollte die Anzahl benötigter Taps mit \texttt{tapGestureRecognizer.numberOfTapsRequired} auf Eins gesetzt werden, da wir auch einen DoubleTap erkennen wollen. 
-    \begin{code}{prot-gesture-addTapGestureToSceneView}{Methode \texttt{addTapGestureToSceneView()} um das einmalige antippen der \texttt{SceneView} hinzuzufügen}
+    Um mit Gesten zu arbeiten, müssen diese der Scene View hinzugefügt werden (Code \ref{code:prot-gesture-addTapGestureToSceneView}). Für einzelne Tippgesten kann man den \texttt{UITapGestureRecognizer} initialisieren und als Action Parameter eine Methode angeben (Zeile 2). Zusätzlich sollte die Anzahl benötigter Tippe auf Eins gesetzt werden (Zeile 3), da hier kein doppeltes Antippen berücksichtigt werden soll. 
+
+    \begin{code}{prot-gesture-addTapGestureToSceneView}{Methode \texttt{addTapGestureToSceneView()} für das einmalige Antippen}
     func addTapGestureToSceneView() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(\_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
@@ -23,10 +22,9 @@
     }
     \end{code}
 
-    Sollte erfolgreich ein Tap auf der SceneView registriert werden, so wird die Methode \texttt{didTap(\_ recognizer: UIGestureRecognizer)} im Code \ref{code:prot-gesture-didTap} ausgeführt. Bei dieser Methode werden die 2D Koordinaten des Taps ausgelesen und anschliessend an einem \texttt{hitTest(\_:types:)} im 3D Raum weitergegeben. Dieser Hit-Test prüft ob es sich um ein SceneKit Node handelt. Falls dies der Fall ist wird dieses Element selektiert und als interagierbares Objekt gesetzt. Dies geschieht mir der Methode \texttt{updateSelectedObject(node: node)} aus dem Code \ref{code:prot-gesture-updateSelectedObject}. In diesem Code abschnitt werden auch zwei \texttt{SCNTransaction} ausgeführt damit der Benutzer anhand einer visuellen Animation erkennt, welches das aktuell selektierte Objekt ist. Mit \texttt{SCNTransaction} können komplexe Animationen erstellt werden und innerhalb einer Transaktion ausgeführt werden.
+    Sollte erfolgreich eine Tippgeste auf der Scene View registriert werden, so wird die Methode \texttt{didTap(\_:)} im Code \ref{code:prot-gesture-didTap} ausgeführt. Bei dieser Methode werden die 2D Koordinaten der Tippgeste ausgelesen und in einem Hit-Test verwendet. Dieser Hit-Test prüft ob es sich um eine SceneKit Node handelt. Falls dies der Fall ist, wird dieses Element selektiert und als interagierbares Objekt gesetzt. Dies geschieht mit der Methode \texttt{updateSelectedObject(node:)}. Darin werden auch zwei \texttt{SCNTransaction} ausgeführt damit der Benutzer anhand einer visuellen Animation erkennt, welches das aktuell selektierte Objekt ist. Mit \texttt{SCNTransaction} können komplexe Animationen erstellt und innerhalb einer Transaktion ausgeführt werden.
 
-    \begin{code}{prot-gesture-didTap}{Methode \texttt{didTap(\_ recognizer: UIGestureRecognizer)} die beim einmaligen antippen der \texttt{SceneView} ausgeführt wird}
-    @objc
+    \begin{code}{prot-gesture-didTap}{Methode \texttt{didTap(\_:)}, die beim einmaligen Antippen ausgeführt wird}
     func didTap(_ recognizer: UIGestureRecognizer) {
         let tapLocation = recognizer.location(in: sceneView)
         let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
@@ -36,33 +34,13 @@
     }
     \end{code}
 
-    \begin{code}{prot-gesture-updateSelectedObject}{Methode \texttt{updateSelectedObject(node: node)} zur aktualisierung des ausgewählten Objekts}
-    func updateSelectedObject(node: SCNNode) {
-        // reset color of old selected object
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.5
-        selectedObject?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 182.0 / 255.0, green: 155.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
-        SCNTransaction.commit()
-        
-        // Set new selected node
-        selectedObject = node
-        
-        // Set selected color
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.5
-        selectedObject?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 130.0 / 255.0, green: 82.0 / 255.0, blue: 1.0 / 255.0, alpha: 1)
-        SCNTransaction.commit()
-    }
-    \end{code}
-
     \textbf{\texttt{UITapGestureRecognizer} mit zweimaligem Tippen}\\
-    Das zweimalige Antippen der SceneView setzt einen neuen Würfel. Das Prinzip um dass zweimalige Antippen zu registrieren ist gleich wie im obigen Abschnitt "`\texttt{UITapGestureRecognizer} mit einmaligem Tippen"', ausser dass wir die \texttt{doubleTapGestureRecognizer.numberOfTapsRequired} auf zwei erhöhen:
+    Das zweimalige Antippen der Scene View setzt einen neuen Würfel. Das Prinzip um dass zweimalige Antippen zu registrieren ist gleich wie im obigen Abschnitt, ausser dass die Anzahl der Tippesten auf zwei erhöht wird:
     \mint[style=xcode,breaklines]{swift}{doubleTapGestureRecognizer.numberOfTapsRequired = 2}
 
-    Als auszuführende Methode wird \texttt{didDoubleTap(\_ recognizer: UIGestureRecognizer)} gesetzt. Bei der Methode (Code \ref{code:prot-gesture-didDoubleTap}) wird wie beim einfachen Antippen geprüft, ob das SceneKit Objekt beim Hit-Test getroffen wird. Ist dies nicht der Fall können wir den neuen Würfel platzieren. Dies wird mit der Methode \texttt{addBox(x: translation.x, y: translation.y, z: translation.z)} gemacht. Die Koordinaten des Hit-Test werden hierfür von einer Matrix zu x, y, z konvertiert. Dies wurde anhand einer Extension gemacht (Code \ref{code:prot-gesture-extension}).
+    Als auszuführende Methode wird \texttt{didDoubleTap(\_:)} gesetzt. Bei der Methode (Code \ref{code:prot-gesture-didDoubleTap}) wird wie beim einfachen Antippen geprüft, ob ein SceneKit Objekt beim Hit-Test getroffen wird. Ist dies nicht der Fall können wir den neuen Würfel platzieren. Dies wird mit der Methode \texttt{addBox(x:y:z:)} gemacht. Die Koordinaten des Hit-Test werden hierfür von einer Matrix zu x, y, z konvertiert. Dies wurde anhand einer Extension gemacht (Code \ref{code:prot-gesture-extension}).
 
-    \begin{code}{prot-gesture-didDoubleTap}{Methode \texttt{didDoubleTap(\_ recognizer: UIGestureRecognizer)} die beim zweimaligen Antippen der \texttt{SceneView} ausgeführt wird}
-    @objc
+    \begin{code}{prot-gesture-didDoubleTap}{Methode \texttt{didDoubleTap(\_:)}, die beim einmaligen Antippen ausgeführt wird}
     func didDoubleTap(_ recognizer: UIGestureRecognizer) {
         let tapLocation = recognizer.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(tapLocation)
@@ -77,8 +55,7 @@
     }
     \end{code}
 
-    \begin{code}{prot-gesture-extension}{Extension funktion einer float4x4 Matrize um die Koordinaten in x, y und z zurückzugeben}
-    // Helper function to convert a matrix to float3 -> x,y,z
+    \begin{code}{prot-gesture-extension}{Extension einer float4x4 Matrize um die Koordinaten in x, y und z zurückzugeben}
     extension float4x4 {
         var translation: float3 {
             let translation = self.columns.3
@@ -87,11 +64,10 @@
     }
     \end{code}
 
-    \textbf{\texttt{UILongPressGestureRecognizer} für langes antippen eines Objektes}\\
-    Die neu erstellten Würfel sollen auch wieder entfernt werden können. Um diese Funktionalität möglichst nutzerfreundlich zu gestalten, geschieht dies mit dem langen Antippen eines Würfels. Die Umsetzung erfolgt mit dem \texttt{UILongPressGestureRecognizer}. Der \texttt{UILongPressGestureRecognizer} muss wie bei den obigen Beispielen der SceneView hinzugefügt werden. Anschliessend wird ein \texttt{UILongPressGestureRecognizer} Event registriert, wobei bei einem Event die Funktion \texttt{didLongPress(\_:)} (Code \ref{code:prot-gesture-didLongPress}) aufgerufen wird. Hier findet wie bei den obigen Beispielen ein Hit-Test statt. Es wird geprüft ob sich an der lang angetippten Stelle ein Würfel befindt, sollte dies der Fall sein so wird die Methode \texttt{node.removeFromParentNode()} aufgerufen und das Element von der SceneView entfernt.
+    \textbf{\texttt{UILongPressGestureRecognizer} für langes Antippen eines Objektes}\\
+    Die neu erstellten Würfel sollen auch wieder entfernt werden können. Dies wird als langes Antippen eines Würfels mit \texttt{UILongPressGestureRecognizer} realisiert. Dieser muss wie bei den obigen Beispielen der Scene View hinzugefügt werden. Anschliessend wird ein \texttt{UILongPressGestureRecognizer} registriert mit der Funktion \texttt{didLongPress(\_:)} (Code \ref{code:prot-gesture-didLongPress}), die bei einem langen Antippen aufgerufen wird. Hier findet wie bei den obigen Beispielen ein Hit-Test statt. Es wird geprüft ob sich an der lang angetippten Stelle ein Würfel befindet. Sollte dies der Fall sein, wird die Methode \texttt{removeFromParentNode()} aufgerufen und das Element von der Scene View entfernt (Zeile 6).
 
     \begin{code}{prot-gesture-didLongPress}{Methode \texttt{didLongPress()}, die bei einem langen Antippen ausgeführt wird}
-    @objc
     func didLongPress(\_ recognizer: UILongPressGestureRecognizer) {
         let longPressLocation = recognizer.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(longPressLocation)
@@ -99,73 +75,42 @@
         node.removeFromParentNode()
     }
     \end{code}
-    
-    \textbf{\texttt{UISwipeGestureRecognizer} für die Rotationen}\\
-    Die Rotation eines Würfels sollte mit einer Wischgeste ermöglicht werden. Die Wischgeste für links, rechts, oben und unten funktioniert mit dem \texttt{UISwipeGestureRecognizer}. Im Code \ref{code:prot-gesture-addSwipeGestureToSceneView} werden die vier \texttt{UISwipeGestureRecognizer} initialisiert. Wichtig hierbei ist, dass jeweils die Richtig der Wischgeste mittels \texttt{swipeRightGesture.direction} gesetzt wird. Als auszuführende Aktion kann anschliessen die gewünschte Methode \texttt{didSwipe(\_:)} angegeben werden.
 
-    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{addSwipeGestureToSceneView()} um die Wischgesten nach links, rechts, unten und oben der \texttt{SceneView} hinzuzufügen}
+    \textbf{\texttt{UISwipeGestureRecognizer} für die Rotationen}\\
+    Die Rotation eines Würfels sollte mit einer Wischgeste ermöglicht werden. Die Wischgeste für links, rechts, oben und unten funktioniert mit dem \texttt{UISwipeGestureRecognizer}. Im Code \ref{code:prot-gesture-addSwipeGestureToSceneView} wird eine der Gesten initialisiert. Wichtig hierbei ist, dass jeweils die Richtung der Wischgeste mittels \texttt{swipeRightGesture.direction} gesetzt wird. Als auszuführende Aktion kann anschliessend die Methode \texttt{didSwipe(\_:)} angegeben werden.
+
+    \begin{code}{prot-gesture-addSwipeGestureToSceneView}{Methode \texttt{addSwipeGestureToSceneView()} um die Wischgesten hinzuzufügen}
         func addSwipeGestureToSceneView() {
             let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
             swipeRightGesture.direction = .right
-            
-            let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
-            swipeLeftGesture.direction = .left
-            
-            let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
-            swipeUpGesture.direction = .up
-            
-            let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
-            swipeDownGesture.direction = .down
-            
-            // Append gestures to the scene view
-            sceneView.addGestureRecognizer(swipeLeftGesture)
             sceneView.addGestureRecognizer(swipeRightGesture)
-            sceneView.addGestureRecognizer(swipeUpGesture)
-            sceneView.addGestureRecognizer(swipeDownGesture)
+            // ...
         }
     \end{code}
 
     \textbf{Drehen von Würfeln anhand der akutellen Kameraposition}\\
-    Beim Drehen der Würfel bestehen zwei Schwierigkeiten. Einerseits muss der Würfel immer relativ zur Kamera nach ob oder unten gekippt werden. Es muss also entschieden werden ob die Rotation zur X-Achse oder Z-Achse erfolgt. Zusätzlich dreht beim rotieren eines Würfels das relative Koordinatensystem mit. Dies bedeutet, dass nach dem Kippen eines Elements sein relatives Koordinatensystem ebenfalls anders Positioniert ist und beim nächsten Kippen um die Y-Achse rotiert werden muss. 
+    Beim Drehen der Würfel bestehen zwei Schwierigkeiten. Einerseits soll der Würfel immer relativ zur Kamera nach oben oder unten gekippt werden. Es muss also entschieden werden, ob die Rotation zur X-Achse oder Z-Achse erfolgt. Zusätzlich dreht beim Rotieren eines Würfels das relative Koordinatensystem mit. Dies bedeutet, dass nach dem Kippen eines Elements sein relatives Koordinatensystem ebenfalls anders positioniert ist und beim nächsten Kippen um eine andere Achse rotiert werden muss. 
 
-    Das erste Problem kann gelöst werden indem anhand der aktuellen Kameraposition die Y-Achse ausgewertet wird. Je nach Winkel kann somit entschieden werden um welche Achse der Würfel sich drehen sollte. %TODO: HIER NOCH EIN BILD EINFÜGEN
+    Das erste Problem kann gelöst werden indem anhand der aktuellen Kameraposition die Y-Achse ausgewertet wird. Je nach Winkel kann somit entschieden werden um welche Achse der Würfel sich drehen sollte (Code \ref{code:prot-gesture-didSwipe}, Zeile 5).
 
-    Das zweite Problem kann mittels Überschreiben des relativen Würfelkoordinatensystems gelöst werden. Nach der Rotation muss das relative Koordinatensystem des Würfels zurückgesetzt werden (Code \ref{code:prot-gesture-didSwipe} Zeile 29).
+    Das zweite Problem kann mittels Überschreiben des relativen Würfelkoordinatensystems gelöst werden. Nach der Rotation muss das relative Koordinatensystem des Würfels zurückgesetzt werden (Zeile 13).
 
-    \begin{code}{prot-gesture-didSwipe}{Methode \texttt{didSwipe(\_ gesture: UISwipeGestureRecognizer)} die bei Wischgesten nach links, rechts, unten und oben ausgeführt wird}
-    @objc
+    \begin{code}{prot-gesture-didSwipe}{Methode \texttt{didSwipe(\_:)} die bei Wischgesten ausgeführt wird}
     func didSwipe(_ gesture: UISwipeGestureRecognizer) {
         let currentAngle = sceneView.session.currentFrame?.camera.eulerAngles.y
         var action: SCNAction!
-        
-        if gesture.direction == .right {
-            action = SCNAction.rotateBy(x: 0, y: CGFloat(Double.pi/2), z: 0, duration: 0.5)
-        }
-        else if gesture.direction == .left {
-            action = SCNAction.rotateBy(x: 0, y: CGFloat(-(Double.pi/2)), z: 0, duration: 0.5)
-        }
-        else if gesture.direction == .up {
+        if gesture.direction == .up {
             if (currentAngle! > Float(0.785) && currentAngle! < Float(2.356)) {
                 action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(Double.pi/2), duration: 0.5)
             }
-            else if (currentAngle! > Float(2.356) || currentAngle! < Float(-2.356)) {
-                action = SCNAction.rotateBy(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0.5)
-            }
-            else if (currentAngle! > Float(-2.356) && currentAngle! < Float(-0.785)) {
-                action = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(-(Double.pi/2)), duration: 0.5)
-            }
-            else if (currentAngle! > Float(-0.785) && currentAngle! < Float(0.785)) {
-                action = SCNAction.rotateBy(x: CGFloat(-(Double.pi/2)), y: 0, z: 0, duration: 0.5)
-            }
+            // ...
         }
-        ...
+        // ...
         if action != nil {
             selectedObject?.runAction(action, forKey: "rotate")
             selectedObject?.orientation = SCNQuaternion(x: 0.0, y: 0.0, z: 0.0, w: 1.0)
         }
     }
     \end{code} 
-
-    Bei der Demo-Applikation sollte darauf geachtet werden, dass die Funktionalität dieser Funktionen mit dem Strategy-Pattern umgesetzt werden. Dies würde die komplexität der einzelnen Funktionen verringern und eine einfachere Erweiterbarkeit schaffen.
 
 \end{description}    
