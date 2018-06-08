@@ -1,28 +1,28 @@
 \subsubsection{Physischen Würfel als virtuelles Objekt erfassen}\label{subsub:prot-physische-wuerfel}
 \begin{description}
-	\item[Fragestellung:] Wie kann ein physischer Würfel mittels den Frameworks ARKit, Vision oder Core ML als virtuelles Objekt erfassen werden?
-	\item[Resultat:] ARKit bietet die Erkennung zweidimensionaler Elemente. Es verwendet dabei praktiken wie beim bekannten Bilderkennungsframework OpenCV, wobei ein Referenzbild hinterlegt werden muss.
-	Mit Vision und Core ML kann ein beliebig trainiertes neurales Netzwerk verwenden, um die Klassifikation durchzuführen. Es konnte leider keine solide Möglichkeit gefunden werden 3D Objekte zu erfassen, damit Sie für eine spätere Augmentierung verwendet werden können. 
-	\item[Versuchsaufbau:] Für den Versuchsaufbau wurden zwei Beispielprojekte von der Apple Developer Dokumentation verwendet. Das erste Projekt "`Recognizing Images in an AR Experience"' \cite{arkit-recognize-images} verspricht bekannte 2D Bilder mittels ARKit zu erkennen. Anschliessend können die erkannten Koordinaten verwendet werden um AR Inhalte zu platzieren.
-	Beim zweiten Beispielprojekt handelt es sich um das Thema "`Using Vision in Real Time with ARKit"' \cite{vision-real-time-with-arkit} bei dem die Frameworks Vision und Core ML zum Einsatz kommen.
+	\item[Fragestellung:] Wie kann ein physischer Würfel mittels den Frameworks ARKit, Vision oder Core ML als virtuelles Objekt erfasst werden?
+	\item[Resultat:] ARKit bietet die Erkennung zweidimensionaler Elemente. Dazu muss ein Referenzbild hinterlegt werden.
+	Mit Vision und Core ML kann ein beliebig trainiertes neurales Netzwerk verwendet werden, um die Klassifikation durchzuführen. Es konnte leider keine solide Möglichkeit gefunden werden 3D Objekte zu erfassen, damit Sie für eine spätere Augmentierung verwendet werden können. 
+	\item[Versuchsaufbau:] Für diesen Versuch wurden zwei Beispielprojekte von der Apple Developer Dokumentation verwendet. Das erste Projekt "`Recognizing Images in an AR Experience"' (\cite{arkit-recognize-images}) verspricht bekannte 2D Bilder mittels ARKit zu erkennen. Anschliessend können die erkannten Koordinaten verwendet werden um AR Inhalte zu platzieren.
+	Beim zweiten Beispielprojekt handelt es sich um das Thema "`Using Vision in Real Time with ARKit"' (\cite{vision-real-time-with-arkit}) bei dem die Frameworks Vision und Core ML zum Einsatz kommen.
 
 	\textbf{Beispielprojekt "`Recognizing Images in an AR Experience"'} \\
-	Das Beispielprojekt kann von der Apple Developer Website heruntergeladen werden. Anschliessend lässt sich das Projekt in Xcode öffnen und muss vor der Verwendung auf dem eigenen Gerät signiert werden. Das Verzeichnis "`Resources"' befinden sich bereits einige Demobilder die als Testversuch verwendet werden können. Um die Genauigkeit und Geschwindigkeit zu testen, wurde ein Versuch gestartet indem die Demobilder am Laptop angezeigt wurden. Anschliessend kann die Kamera des iPhones auf den Laptop ausgerichtet werden um den Erkennungsprozess zu starten. Der Versuch wiederspiegelte, dass die Erkennung schnell und zuverlässig erfolgte. Die erkannte Fläche erhielt eine weiss durchsichtig augmentierte Fläche an der stelle wo sich das Bild befindet. Ebenfalls diese augmentierte Fläche wurde korrekt angezeigt. Es wurde festgestellt, dass beim bewegen des iPhones die Fläche nicht exakt gehalten werden kann.
+	Das Beispielprojekt kann von der Apple Developer Website heruntergeladen werden. Im Verzeichnis "`Resources"' befinden sich bereits einige Demobilder die als Testversuch verwendet werden können. Um die Genauigkeit und Geschwindigkeit zu testen, wurde ein Versuch gestartet in dem die Demobilder am Laptop angezeigt wurden. Anschliessend wurde die Kamera des iPhones auf den Laptop ausgerichtet, um den Erkennungsprozess zu starten. Der Versuch wiederspiegelte, dass die Erkennung schnell und zuverlässig erfolgte. Der erkannte Bereich erhielt eine halbtransparente weisse augmentierte Fläche an der Stelle wo sich das Bild befindet. Es wurde festgestellt, dass beim Bewegen des iPhones die Fläche nicht exakt über dem Bild gehalten werden konnte.
 
-	Darauf Folgend wurde ein eigenes Bild für die Erkennung eines cuboro Elements hinterlegt. Der Prozess wie ein eigenes Bild beigefügt werden kann wird im README.md des Beispielprojektes "`Using Vision in Real Time with ARKit"' detailliert Erklärt. Beim Versuch wurden folgende Schritte durchlaufen:
+	Darauffolgend wurde ein eigenes Bild für die Erkennung eines cuboro Elements hinterlegt. Der Prozess wie ein eigenes Bild beigefügt werden kann wird im README.md des Beispielprojektes detailliert erklärt. Beim Versuch wurden folgende Schritte durchlaufen:
 
 	\begin{enumerate}
-		\item Ein frontal Bild des cuboro Elements aufnehmen. 
-		\item Das Bild bearbeitet dass nur die Würfelfläche beibehalten bleibt.
-		\item Das Bild der ressourcen Gruppe im Xcode hinzufügen.
-		\item Neue Version compilieren und auf das Testgerät geladen.
+		\item Ein Frontalbild des cuboro Elements aufnehmen.
+		\item Das Bild bearbeiten, dass nur die Würfelfläche beibehalten bleibt (Abbildung \ref{fig:cuboro-element-frontal}).
+		\item Das Bild der Ressourcen Gruppe im Xcode hinzufügen.
+		\item Neue Version compilieren und auf das Testgerät laden.
 		\item Erkennung des Elements starten.  
 	\end{enumerate}
 
 	\bild{0.4}{cuboro-element-frontal}{Frontal Ansicht vom einem cuboro Element}
 
+	Die Implementation der Erkennung wird im Code \ref{code:arkit-recognition-configuration} konfiguriert. ARKit stellt die Erkennung der Referenzbilder zur Verfügung. Die Referenz auf das Bild wird der \texttt{ARWorldTrackingConfiguration} mitgegeben (Zeile 6).
 
-	Die Implementation der Erkennung wird in den folgenden Zeilen konfiguriert. ARKit stellt die Erkennung der Referenzbilder zur Verfügung, wobei keine weiteren Implementationsschritte notwendig sind. Es wird zuerst eine Referenz auf das Ressourcenverzeichnis erstellt. Anschliessend wird diese Referenz der \texttt{ARWorldTrackingConfiguration} mitgegeben mittels \texttt{.detectionImages}.
 	\begin{code}{arkit-recognition-configuration}{Implementation der Erkennung von Referenzbilder mit ARKit}
 	guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
 		fatalError("Missing expected asset catalog resources.")
@@ -33,10 +33,10 @@
 	session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
 	\end{code}
 
-	Wenn ein Bild aus dem Ressourcenverzeichnis erkennt wurde, wird ein \texttt{ARImageAnchor} zurückgegeben. Ein \texttt{ARImageAnchor} enthält diverse informationen z.B über die Position im Koordinatensystem. Dies wird in diesem Beispiel verwendet um das augmentierte Fläche zu erzeugen. 
+	Wenn ein Bild aus dem Ressourcenverzeichnis erkannt wurde, wird ein \texttt{ARImageAnchor} zurückgegeben. Ein \texttt{ARImageAnchor} enthält diverse Informationen, zum Beispiel über die Position im Koordinatensystem. Dies wird in diesem Versuch benötigt um die augmentierte Fläche zu erzeugen. 
 
 	%TODO: Code muss an der richtigen Stelle platziert werden.
-	\begin{code}{augmentierte Fläche-renderer}{Implementation der \texttt{renderer(\_:nodeFor:)} Methode zur Darstellung von Flächen}
+	\begin{code}{augmentierte-flaeche-renderer}{Implementation der \texttt{renderer(\_:didAdd:for:)} Methode zur Darstellung von Flächen}
 		func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 			guard let imageAnchor = anchor as? ARImageAnchor else { return }
 			let referenceImage = imageAnchor.referenceImage
@@ -58,11 +58,12 @@
 		}
 	\end{code}
 
+	Da das cuboro Element wenig Features aufweist, ist die Erkennung mit diesem Vorgehen nicht zuverlässig. Es benötigte meist mehrere Anläufe bis die Erkennung erfolgreich war. Damit ist dieses Verfahren für den Einsatz mit Kugelbahnen nicht geeignet.
 
 	\textbf{Beispielprojekt "`Using Vision in Real Time with ARKit"'} \\
-	Das zweite Beispiel bei diesem Versuch beschäftigt sich mit Vision, Core ML und ARKit. Die Bildaufnahmen von ARKit werden an Vision weitergegeben und anschliessend mittels einem trainierten neuralen Netzwerk(Inception v3, \cite{DBLP:journals/corr/SzegedyVISW15}) in Core ML ausgewertet. 
+	Das zweite Beispiel beschäftigt sich mit den Frameworks Vision, Core ML und ARKit. Die Bildaufnahmen werden an Vision weitergegeben und anschliessend mittels dem neuralen Netzwerk Inception v3 (\cite{DBLP:journals/corr/SzegedyVISW15}) in Core ML ausgewertet. 
 
-	Der Code \ref{code:arkit-recognition-session} ausschnitt startet die ARSession sowie den Klassifizierungsprozess. Da dieser Task leistungs intensive ist, können nur eine gewisse Anzahl Bilder analysiert werden. Es wird stets geprüft ob sich bereits ein Bild im Puffer befindet bevor ein neues Bild zur Auswertung freigegeben wird.
+	Der Codeausschnitt \ref{code:arkit-recognition-session} startet die \texttt{ARSession} sowie den Klassifizierungsprozess. Da die Klassifizierung mit neuralen Netzen sehr leistungsintensiv ist, kann nur eine beschränkte Anzahl an Bildern analysiert werden. Es wird stets geprüft, ob sich bereits ein Bild im Puffer befindet, bevor ein weiteres Bild dem Puffer hinzugefügt wird.
 
 	\begin{code}{arkit-recognition-session}{Startet die ARSession und den Klassifizierungsprozess}	
 	func session(_ session: ARSession, didUpdate frame: ARFrame) {
@@ -74,8 +75,8 @@
 	}
 	\end{code}
 
-	Im Codeausschnitt \ref{code:CoreML-request} wird ein bereits trainiertes neurales Netzwerk in das Core ML Framework geladen. Es kann somit auch ein beliebig selbst trainiertes Netwerk verwendet werden.
-	\begin{code}{CoreML-request}{Initialisierung der Klassifizierung mittels Core ML}
+	Im Codeausschnitt \ref{code:coreml-request} wird in der Zeile 3 ein neurales Netzwerk-Model in das Core ML Framework geladen. Es können auch eigene Netwerk-Modelle verwendet werden.
+	\begin{code}{coreml-request}{Initialisierung der Klassifizierung mittels Core ML}
 	private lazy var classificationRequest: VNCoreMLRequest = {
 		do {
 			let model = try VNCoreMLModel(for: Inceptionv3().model)
@@ -91,20 +92,6 @@
 	}()
 	\end{code}
 
-	Das Antippen eines klassifizierten Objektes erstellt ein Label mit SpriteKit. Dies erfolgt mittels einem Hit Test der die genauen Koordinaten ausfindig macht und an dieser Stelle ein \texttt{ARAnchor} setzt. Dieser \texttt{ARAnchor} wird dazu verwendet das Label and dieser Stelle einzublenden und im Weltkoordinatensystem zu festigen.
-	\begin{code}{hit-test-klassifizierte-objekte}{Erstellt ein Label beim Antippen von klassifizierten Objekten}
-	@IBAction func placeLabelAtLocation(sender: UITapGestureRecognizer) {
-		let hitLocationInView = sender.location(in: sceneView)
-		let hitTestResults = sceneView.hitTest(hitLocationInView, types: [.featurePoint, .estimatedHorizontalPlane])
-		if let result = hitTestResults.first {
-			
-			let anchor = ARAnchor(transform: result.worldTransform)
-			sceneView.session.add(anchor: anchor)
-			
-			// Track anchor ID to associate text with the anchor after ARKit creates a corresponding SKNode.
-			anchorLabels[anchor.identifier] = identifierString
-		}
-	}
-	\end{code}
+	Beim Antippen eines klassifizierten Objektes wird ein Label mit SpriteKit erstellt. Das Label wird beim \texttt{WorldOrigin} hinzugefügt und behält seine Position im realen Raum. Das Label richtet sich stets zur Kamera aus.
 
 \end{description}

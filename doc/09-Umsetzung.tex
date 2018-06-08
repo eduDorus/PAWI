@@ -197,8 +197,8 @@ Tippt der Benutzer auf einer der Boxen, wird diese mit dem zuvor gewählten Elem
 Der Presenter gibt dabei die \texttt{ElementEntity} mit aktualisierten Koordination sowohl an den Interactor als auch an die View.
 
 \textbf{Element löschen} \\
-Die Methode \texttt{didLongPress(\_:)} macht auf die SceneKit Szene einen Hittest.
-Wenn das Resultat des Hittests ein Kugelbahn Element ist, wird beim Presenter die Methode \texttt{removeElement(at:)} aufgerufen.
+Die Methode \texttt{didLongPress(\_:)} macht auf die SceneKit Szene einen Hit-Test.
+Wenn das Resultat des Hit-Tests ein Kugelbahn Element ist, wird beim Presenter die Methode \texttt{removeElement(at:)} aufgerufen.
 Damit wird versucht das entsprechende Element beim Interactor zu entfernen.
 Der Interactor überprüft in der Methode \texttt{removeElement(at:)}, ob das Element überhaupt entfernt werden darf.
 Dazu darf sich als erstes kein Element darüber befinden.
