@@ -1,23 +1,13 @@
 \subsubsection{Schrittweise augmentierte Bauanleitung einer Kugelbahn}\label{subsub:prot-kugelbahnaufbau}
 \begin{description}
-	\item[Fragestellung:] Wie kann eine schrittweise Bauanleitung für eine Kugelbahn umgesetzt/augmentiert werden? Es soll Würfel-für-Würfel den Aufbau einer einfache Kugelbahn auf einer Fläche angezeigt werden.
-	\item[Resultat:] Mit einem Dictionary, das als Schlüssel die Koordinaten und die Kugelbahn-Elemente als Werte verwendet, lassen sich die einzelnen Würfel problemlos verändern. Ein Algorithmus, der anhand der Koordinaten durch die Elemente geht, kann in diesem Setting eine Würfel-für-Würfel Anleitung erzeugen. In diesem Versuch wurde dies mit einem ebenenweisen Aufbau vereinfacht. ARKit hat die Angewohnheit, sich mit der Zeit aus bislang unklaren Gründen zu verschieben. Oftmals betragen die Verschiebungen bloss 1-2 Zentimeter, was bei Würfeln mit 5 cm Seitenlänge beträchtlich ist. Dies müsste mit weiteren Versuchen genauer beobachtet werden.
-	\item[Versuchsaufbau:] Dieser Versuch baut direkt auf \ref{subsub:prot-kugelbahn} auf und erweitert diesen. Der View wurde zusätzlich ein Button hinzugefügt, um die verschiedenen Schritte des Aufbaus zu bestätigen. Sobald die Kugelbahn platziert wird, ist der Button aktiviert und die Aufbauanleitung wird mit einem Tap darauf gestartet.
+	\item[Fragestellung:] Wie kann eine schrittweise Bauanleitung für eine Kugelbahn umgesetzt/augmentiert werden? Es soll Element für Element den Aufbau einer einfache Kugelbahn auf einer Fläche angezeigt werden.
+	\item[Resultat:] Mit einem Dictionary, das als Schlüssel die Koordinaten und die Kugelbahn-Elemente als Werte verwendet, lassen sich die einzelnen Elemente problemlos verändern. Ein Algorithmus, der anhand der Koordinaten durch die Elemente iteriert, kann in diesem Rahmen eine Element für Element Anleitung erzeugen. In diesem Versuch wurde das mit einem ebenenweisen Aufbau vereinfacht. ARKit hat die Angewohnheit, sich mit der Zeit zu verschieben. Oftmals betragen die Verschiebungen bloss 1-2 Zentimeter, was bei Würfeln mit 5 cm Seitenlänge jedoch beträchtlich ist. Dies müsste mit weiteren Versuchen genauer beobachtet werden.
+	\item[Versuchsaufbau:] Dieser Versuch baut direkt auf \ref{subsub:prot-kugelbahn} auf und erweitert diesen. Der View wurde zusätzlich ein Button hinzugefügt, um die verschiedenen Schritte des Aufbaus zu bestätigen. Sobald die Kugelbahn platziert ist, wird der Button aktiviert und die Aufbauanleitung kann durch Antippen gestartet werden.
 
 	\textbf{Variante 1: Rekonstruktion der Bahn}\\
-	Als erster Versuch soll jede horizontale Ebene der Bahn als Schritt des Aufbauens separat hervorgehoben werden. In der Node Hierarchie gibt es keine Struktur, welche die Positionen der Elemente abbildet. Daher müsste beim Auswählen von bestimmten Würfeln immer durch alle Kindknoten iteriert werden. Beim Start der Bauanleitung werden aber zunächst alle Würfel entfernt. In der Folge wird die Kugelbahn wieder neu aus dem Array von Tuples erstellt. Dabei werden nur die Würfel erstellt, die sich auf der aktuellen Ebene des Aufbaus befinden (Code \ref{code:prot-kugelbahnaufbau-loadcurrentlevel1}, Zeile 3-4). All diese Würfel werden rot hervorgehoben (Zeile 4).
+	Als erster Versuch soll jede horizontale Ebene der Bahn als Schritt des Aufbauens separat hervorgehoben werden. In der Node Hierarchie gibt es keine Struktur, welche die Positionen der Elemente abbildet. Daher müsste beim Auswählen von bestimmten Elementen immer durch alle Kindknoten iteriert werden. Beim Start der Bauanleitung werden aber zunächst alle Elemente entfernt. In der Folge wird die Kugelbahn wieder neu aus dem Array von Tuples erstellt. Dabei werden nur die Element erstellt, die sich auf der aktuellen Ebene des Aufbaus befinden. All diese Elemente werden zudem hervorgehoben.
 
-	\begin{code}{prot-kugelbahnaufbau-loadcurrentlevel1}{Hinzufügen der Würfel, die sich auf der aktuellen Aufbau-Ebene befinden}
-	private func loadTrackCurrentBuildingLayer() {
-		for block in track {
-			if block.1 == currentBuildingStep - 1 {
-				addCube(x: block.0, y: block.1, z: block.2).set(color: UIColor.red)
-			}
-		}
-	}
-	\end{code}
-
-	Ab der zweiten Ebene werden vor dem Hinzufügen alle bisherigen Würfel weiss gefärbt, damit schlussendlich nur die aktuelle Ebene hervorgehoben ist. Dazu wird die \texttt{SCNNode} Methode \texttt{enumerateChildNodes(\_:)} zur Hilfe genommen (Code \ref{code:prot-kugelbahnaufbau-removehighlight1}).
+	Ab der zweiten Ebene werden vor dem Hinzufügen alle bisherigen Elemente weiss gefärbt, damit schlussendlich nur die aktuelle Ebene hervorgehoben ist. Dazu wird die \texttt{SCNNode} Methode \texttt{enumerateChildNodes(\_:)} zur Hilfe genommen (Code \ref{code:prot-kugelbahnaufbau-removehighlight1}).
 
 	\begin{code}{prot-kugelbahnaufbau-removehighlight1}{Iteration durch Kindknoten zur Änderung der Farbe}
 		private func clearHighlights() {
@@ -29,27 +19,20 @@
 		}
 	\end{code}
 
-	Mit jedem Tap auf den Button wird \texttt{currentBuildingStep} inkrementiert und die beiden Methoden \texttt{clearHighlights()} und \texttt{loadTrackCurrentBuildingLayer()} ausgeführt (Code \ref{code:prot-kugelbahnaufbau-loadcurrentlevel1} und \ref{code:prot-kugelbahnaufbau-removehighlight1}). Ein Ende des Aufbaus gibt es nicht, da die Höhe der Bahn nicht geprüft wird.
+	Mit jedem Antippen des Buttons wird der nächste Schritt ausgeführt. Ein Ende des Aufbaus gibt es in diesem Prototyp nicht, da die Höhe der Bahn nicht geprüft wird.
 
 	\textbf{Variante 2: Informationen über die Position von Elementen erhalten}\\
-	Es wäre eine deutliche Vereinfachung des Vorgehens, wenn man direkt über die Koordinaten auf ein Element, einen Würfel, zugreifen könnte. Dazu müssen die Würfel in einer Datenstruktur referenziert werden. Ein dreidimensionales Array ist aufgrund der negativen Koordinatenwerte im momentanen Aufbau nicht geeignet. In diesem Versuch wird probiert dies mit einem Dictionary zu lösen. Hierbei soll ein Koordinaten-Tuple als Schlüssel und die \texttt{BasicCube} als Werte dienen.
+	Es wäre eine deutliche Vereinfachung des Vorgehens, wenn man direkt über die Koordinaten auf ein Element zugreifen könnte. Dazu müssen die Elemente in einer Datenstruktur referenziert werden. Ein dreidimensionales Array ist aufgrund negativer Koordinatenwerte im momentanen Aufbau nicht geeignet. In diesem Versuch wird probiert dies mit einem Dictionary zu lösen. Hierbei soll ein Koordinaten-Tuple als Schlüssel und die \texttt{BasicCube} als Werte dienen.
 	
 	Der Schlüssel eines Dictionaries muss das Protokoll \texttt{Hashable} adoptieren, was Swift Tuple nicht machen. Deswegen übernimmt dies ein neues Struct \texttt{Triple<T,U,V>}, mit einem Tuple von drei Werten als Attribut. So kann das Dictionary für die dreidimensionale "`Karte"' der Kugelbahn wie folgt erstellt werden:
 
 	\mint[style=xcode,breaklines]{swift}{var map : [Triple<Int,Int,Int> : BasicCube] = [:]}
 
-	Damit die Operationen an der Karte von übrigen Aktionen auf der gesamten Kugelbahn getrennt ist, verwaltet die Klasse \texttt{TrackMap<E>} das Dictionary als privates Attribut. Sie bietet Methoden an um Elemente hinzuzufügen, zu entfernen und um bestimmte Elemente anhand der Koordinaten und umgekehrt zu erhalten.
+	Damit die Operationen an der Karte von übrigen Aktionen auf der gesamten Kugelbahn getrennt sind, verwaltet die Klasse \texttt{TrackMap<E>} das Dictionary als privates Attribut und bietet entsprechende Methoden an.
 
-	\texttt{MarbleTrack} hält nun eine \texttt{TrackMap<BasicCube>} und nutzt deren Methoden für die Operationen aus der vorherigen Variante 1 (Code \ref{code:prot-kugelbahnaufbau-trackmapoperationen}). Da im Gegensatz zur Iteration über Kindknoten die Elemente im Dictionary bereits als \texttt{BasicCube} Typ definiert sind, entfällt zudem das Downcasting von \texttt{SCNNode} auf \texttt{BasicCube} (wie in Code \ref{code:prot-kugelbahnaufbau-removehighlight1}, Zeile 3 notwendig).
+	\texttt{MarbleTrack} hält nun eine \texttt{TrackMap<BasicCube>} und nutzt deren Methoden für die Operation aus der vorherigen Variante 1 (Code \ref{code:prot-kugelbahnaufbau-removehighlight1}). Da im Gegensatz zur Iteration über Kindknoten die Elemente im Dictionary bereits als \texttt{BasicCube} Typ definiert sind, entfällt zudem das Downcasting von \texttt{SCNNode} auf \texttt{BasicCube} (wie in Code \ref{code:prot-kugelbahnaufbau-removehighlight1}, Zeile 3 notwendig).
 
-	\begin{code}{prot-kugelbahnaufbau-trackmapoperationen}{Methoden aus Code \ref{code:prot-kugelbahnaufbau-loadcurrentlevel1} und \ref{code:prot-kugelbahnaufbau-removehighlight1} mit \texttt{map : TrackMap<BasicCube>}}
-		private func loadTrackCurrentBuildingLayer() {
-			map.getElements(atLevel: currentBuildingStep-1).forEach { (_, cube) in
-				cube.show()
-				cube.set(color: UIColor.red)
-			}
-		}
-
+	\begin{code}{prot-kugelbahnaufbau-trackmapoperationen}{Methode aus Code \ref{code:prot-kugelbahnaufbau-removehighlight1} mit \texttt{map : TrackMap<BasicCube>}}
 		private func clearHighlights() {
 			map.forEach { (_, cube) in
 				cube.set(color: UIColor.white)
@@ -57,19 +40,14 @@
 		}
 	\end{code}
 
-	Statt dass alle Würfel beim Beginn der Aufbauanleitung entfernt werden, werden sie nun bloss über Verändern der Transparenz ausgeblendet. Der Aufbau der Bahn geht weiterhin Ebene für Ebene.
+	Statt dass alle Elemente beim Beginn der Aufbauanleitung entfernt werden, werden sie nun bloss über Verändern der Transparenz ausgeblendet. Der Aufbau der Bahn geht weiterhin Ebene für Ebene.
 
 	\textbf{Genauigkeit und Stabilität der Augmentierung}\\
-	Während der Entwicklung fiel auf, dass sich das virtuelle Modell der Kugelbahn gegenüber der realen Welt oftmals verschob. Wenn sich die Szene durch den Aufbau physischer Würfel verändert, könnte das diesen Effekt erheblich verstärken. Zumal ARKit mit einer Kombination aus Beschleunigungssensoren und dem Kamerabild – das sich durch den Aufbau eben verändert – arbeitet.
+	Während der Entwicklung fiel auf, dass sich das virtuelle Modell der Kugelbahn gegenüber der realen Welt oftmals verschob. Wenn sich die reale Welt durch den Aufbau physischer Elemente verändert, könnte das diesen Effekt erheblich verstärken. Zumal ARKit mit einer Kombination aus Sensoren und dem Kamerabild, das sich durch den Aufbau einer Kugelbahn verändert, arbeitet.
 
-	In einem Test wurde auf einem Tisch mit vielen deutlichen Features die virtuelle Kugelbahn platziert. Ein einzelner physischer Würfel wurde als Messpunkt genau an eine Stelle der Bahn gesetzt. Die ganze Fläche des Tisches wurde anschliessend vollständig abgedeckt, ohne dass sich die Kugelbahn wesentlich verschob. Nachdem die Abdeckung wieder entfernt wurde, wurde die Verschiebung anhand des gesetzten Würfels sichtbar. In mehreren Durchläufen hat sich die AR Kugelbahn meistens um rund einen Zentimeter verschoben. Oftmals war die Verschiebung vertikal.
+	In einem Test wurde auf einem Tisch mit vielen deutlichen Features die virtuelle Kugelbahn platziert. Ein einzelner physischer Elemente wurde als Messpunkt genau an eine Stelle der Bahn gesetzt. Die ganze Fläche des Tisches wurde anschliessend vollständig abgedeckt, ohne dass sich die Kugelbahn wesentlich verschob. Nachdem die Abdeckung wieder entfernt wurde, wurde die Verschiebung anhand des gesetzten Elements sichtbar. In mehreren Durchläufen hat sich die AR Kugelbahn meistens um rund einen Zentimeter verschoben. Oftmals war die Verschiebung vertikal.
 
-	Die beobachteten Verschiebungen passieren teilweise auch ohne Veränderung der Szene. Weitere Tests sind notwendig, um festzustellen, ob mit diesen Ungenauigkeiten auch bei idealen Bedingungen gerechnet werden müssen.
-
-	% TODO: Versuch genauer beschreiben, mit Fotos am besten.
-	% Folgende Tests (as a reminder):
-	% - der ganze Tisch abgedeckt wird und keine Fläche mehr vorhanden ist.
-	% - nahe an das Modell heran gehen
-
+	Die beobachteten Verschiebungen passieren teilweise aber auch ohne Veränderung der realen Welt.
+	Um die Genauigkeit und Stabilität von ARKit abschliessend beurteilen zu können, bedarf es aber weiterer systematischer Testversuche.
 
 \end{description}
