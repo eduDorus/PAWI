@@ -3,7 +3,7 @@
 \subsection{Lessons Learned}
 
 Für die Erstellung der VIPER Architektur wurde kostbare Zeit aufgewendet.
-Diese Architektur ist eher für grössere Projekte geeignet und womöglich wäre für die Demo-App ein Bottom-Up Ansatz angemessener gewesen.
+Diese Architektur ist eher für grössere Projekte geeignet und womöglich wäre für die Demo-App ein Bottom-Up Ansatz angemessener, respektive effizienter, gewesen.
 Die Architektur hat uns aber geholfen, verschiedene Funktionalitäten und Aufgaben zu trennen und eine über alle Module konsistente Struktur einzuhalten.
 
 Augmented Reality ist ein Schlagwort, das immer häufiger anzutreffen ist.
@@ -18,20 +18,25 @@ Das Industrieprojekt war für mich ein sehr spannender Einblick in die iOS Welt.
 
 Das Projekt klang von Beginn an spannend und interessant.
 Sich mit den verschiedenen sehr neuen iOS Technologien zu beschäftigen hatte gleich einen grossen Reiz.
-Dank meinen Vorkenntnissen in der iOS Entwicklung fand ich mich zwar schnell zurecht, dennoch konnte ich durch die vertiefte Arbeit mit Swift und den iOS Frameworks sehr viel Neues lernen. % TODO: konkret??
+Dank meinen grundlegenden Vorkenntnissen in der iOS Entwicklung fand ich mich zwar schnell zurecht, dennoch konnte ich durch die vertiefte Arbeit mit Swift und den iOS Frameworks sehr viel Neues lernen.
 
 Es war das erste Mal, dass ich ein Projekt im explorativen Vorgehen durchführte.
+Dabei habe ich gelernt, dass man zwar viele Freiheiten hat, aber trotzdem systematisch und diszipliniert vorgehen muss.
 Die zweiwöchigen Zyklen zur Entwicklung unterschiedlicher Prototypen boten einen guten zeitlichen Rahmen und erlaubte es sich mit dem betreuenden Dozenten regelmässig abzusprechen.
 
-Das Modul SAQT, das ich parallel zum Projekt besuchte, motivierte mich, mich etwas genauer mit der Architektur einer Software auseinander zu setzen.
-Ich fand es interessant zu sehen, dass man auch für iOS Alternativen hat und durchaus vom vorgegebenen Standardmodell Model-View-Controller abweichen kann.
-Dabei muss man jedoch den einen oder anderen Umweg in Kauf nehmen. % TODO: konkret??
-Die VIPER Architektur hat uns angespornt, die Aufgaben innerhalb der Module klar zu trennen, war aber auch ein zusätzlicher Overhead, den wir etwas unterschätzt hatten.
+Das Modul SAQT, das ich parallel besuchte, motivierte mich, mich etwas genauer mit der Architektur auseinander zu setzen.
+Ich fand es interessant zu sehen, dass man auch für iOS Alternativen hat und durchaus vom vorgegebenen MVC Standardmodell abweichen kann, jedoch Kompromisse in Kauf nehmen muss.
+Die VIPER Architektur hat uns angespornt, Verantwortlichkeiten zu trennen, war aber auch ein zusätzlicher Overhead, den wir etwas unterschätzt hatten.
 Ich bin der Ansicht, dass es sich aber gelohnt hat und wir sonst eine wesentlich unübersichtlichere Struktur erhalten hätten.
+
+Alles in Allem ziehe ich ein sehr positives Fazit.
+Das Projekt war interessant, herausfordernd und abwechslungsreich.
+Die Zusammenarbeit im Team funktionierte von Beginn an bestens.
 
 \subsection{Ausblick}
 
-Anbei werden mögliche Weiterführungen dieser Arbeit beschrieben.
+Nachfolgend werden, basierend auf den Erkenntnissen dieses Projekts, mögliche Weiterführungen dieser Arbeit beschrieben.
+ARKit hat ein grosses Potential, auch im Anwendungsbereich von Holzkugelbahnen.
 
 \subsubsection{Objekterkennung}
 Im Kapitel \ref{subsub:prot-boundingbox} wird ein Konzept vorgestellt, welches die Erkennung von einem Element innerhalb einer Bounding Box beinhaltet. Diese automatische Erkennung könnte den Ablauf beim Aufbau der Kugelbahn verbessern. Um diese Funktionalität umzusetzen muss recherchiert werden, wie solche Hit-Tests durchgeführt werden können. Zusätzlich muss die Genauigkeit der Hit-Tests evaluiert werden damit das Element in der Bounding Box richtig erkannt wird.
@@ -40,6 +45,6 @@ Im Kapitel \ref{subsub:prot-boundingbox} wird ein Konzept vorgestellt, welches d
 Im Kapitel \ref{sub:scene-kit} wird erläutert, dass das SceneKit eine eingebaute physik Engien besitzt. Diese könnte als weiterführende Arbeit an der Demo-App implementiert werden. Dazu müssen die Beschaffenheiten und Geometrie der Elemente hinterlegt werden. Anschliessend kann die Funktionalität entwickelt werden eine virtuelle Kugel auf die Bahn zu platzieren. Mit der Interaktion einer virtuellen Kugel kann die Bahn die vollständige Funktionalität der physischen Kugelbahn abbilden.
 
 \subsubsection{ARKit 2.0 und iOS 12}
-Kurz vor Ende dieser Arbeit wurde die Entwicklerkonferenz WWDC2018 abgehalten. An dieser Konferenz war Augmented Reality ein ausgeprägtes Thema. Mit dem neuen iOS 12 Release wurde ebenfalls die neue ARKit Version 2.0 vorgestellt. ARKit 2.0 bringt eine eingebaute Funktionalität um dreidimensionale Objekte zu erkennen, bis zu vier Personen simultan mit der gleichen augmentierten Welt zu interagieren und eine verbesserte Leistung bei der Erkennung von horizontalen sowie vertikalen Flächen. Zusätzlich wurde ein neues Dateiformat vorgestellt, dass das Einfügen, Bearbeiten und Austauschen von dreidimensionalen Objekten vereinfacht. 
+Kurz vor Ende dieses Projekts wurde die Entwicklerkonferenz WWDC 2018 abgehalten. An dieser Konferenz war Augmented Reality ein ausgeprägtes Thema. Mit dem neuen iOS 12 Release wurde ebenfalls die neue ARKit Version 2 vorgestellt. ARKit 2 bringt eine eingebaute Funktionalität um dreidimensionale Objekte zu erkennen, bis zu vier Personen simultan mit der gleichen augmentierten Welt zu interagieren und eine verbesserte Leistung bei der Erkennung von horizontalen sowie vertikalen Flächen. Zusätzlich wurde ein neues Dateiformat vorgestellt, welches das Einfügen, Bearbeiten und Austauschen von dreidimensionalen Objekten vereinfacht. 
 
-Mit der neuen ARKit Version 2.0 könnte das setzen der virtuellen Bahn mit dem Erkennen eines physischen Elements ersetzt werden. Dies würde zwar bedeuten, dass es notwendig ist eine Bahn zu besitzen jedoch kann der Grundstein oder die Bahn physikalisch ausgerichtet werden und denn Prozess für den Endanwender interaktiver gestalten.
+Mit der neuen ARKit Version 2 könnte das Bauen einer virtuellen Bahn womöglich mit dem Erkennen physischer Elements umgesetzt werden. Dies würde zwar bedeuten, dass es notwendig ist eine Bahn zu besitzen, jedoch kann der Grundstein oder die Bahn physikalisch ausgerichtet werden und so den Prozess für den Endanwender interaktiver gestalten.
